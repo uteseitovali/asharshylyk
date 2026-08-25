@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Картография коллапса · Казахстан 1926–1939</title>
+<meta name="description" content="Интерактивный историко-географический анализ Ашаршылыка 1930–1933 гг. средствами HGIS: переписи 1926 и 1939 годов, проблема MAUP, карта откочёвок, историографические линзы.">
+<style>
+:root{
+  --bg:#080b13; --bg2:#0d1322; --panel:#111a2d; --panel2:#16203a; --panel3:#1c2743;
+  --ink:#f4f2ec; --ink-soft:#c6ccd9; --ink-mute:#7d8598;
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.18);
+  --carmine:#991b1b; --carmine2:#c9403f; --gold:#d97706; --gold2:#f0b429;
+  --neon:#38bdf8; --violet:#8b7cf0; --good:#1baf7a;
+  --no-data:#39415a;
+  --s26:#2a78d6; --s39:#eb6834;
+  --land:#243252; --land-line:#3c4d72; --ocean:#0c1424;
+  --shadow:0 20px 60px rgba(0,0,0,.5);
+  --r:12px;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#f5f2e9; --bg2:#ece7d9; --panel:#fffdf8; --panel2:#f8f3e7; --panel3:#f1ead9;
+  --ink:#1e1a11; --ink-soft:#4a4231; --ink-mute:#867c62;
+  --line:rgba(20,15,0,.11); --line2:rgba(20,15,0,.24);
+  --carmine:#a5211f; --carmine2:#c9433f; --gold:#a3620a; --gold2:#c9860f;
+  --neon:#0d7ba4; --violet:#6a58c9; --good:#12764f;
+  --no-data:#d8d2c2;
+  --land:#e3dcc9; --land-line:#b9ae91; --ocean:#f7f4ec;
+  --shadow:0 16px 44px rgba(60,45,10,.16);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:
+    radial-gradient(1100px 620px at 78% -12%, rgba(153,27,27,.16), transparent 60%),
+    radial-gradient(900px 520px at 8% 4%, rgba(56,189,248,.10), transparent 62%),
+    var(--bg);
+  color:var(--ink);
+  font:14px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;
+  min-height:100vh;
+}
+:root[data-theme="light"] body{
+  background:
+    radial-gradient(1100px 620px at 78% -12%, rgba(165,33,31,.10), transparent 60%),
+    radial-gradient(900px 520px at 8% 4%, rgba(13,123,164,.09), transparent 62%),
+    var(--bg);
+}
+h1,h2,h3,h4{margin:0;font-weight:650;letter-spacing:-.01em}
+a{color:var(--neon)}
+::selection{background:rgba(217,119,6,.35)}
+
+/* ══ ШАПКА ══ */
+.hdr{
+  position:sticky; top:0; z-index:97; backdrop-filter:blur(14px);
+  background:color-mix(in srgb, var(--bg) 96%, transparent);
+  border-bottom:1px solid var(--line);
+}
+.hdr-in{max-width:1560px;margin:0 auto;padding:9px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px;min-width:0}
+.seal{
+  width:38px;height:38px;border-radius:10px;flex:none;display:grid;place-items:center;
+  background:linear-gradient(145deg,var(--carmine),#5e1010);
+  border:1px solid rgba(255,255,255,.16); box-shadow:inset 0 1px 0 rgba(255,255,255,.2);
+  font-size:19px;
+}
+.brand b{display:block;font-size:14.5px;line-height:1.2;letter-spacing:-.015em}
+.brand span{display:block;font-size:11px;color:var(--ink-mute);letter-spacing:.03em}
+nav.tabs{display:flex;gap:3px;flex-wrap:wrap;margin-left:auto}
+.tab{
+  border:1px solid transparent;background:none;color:var(--ink-soft);
+  padding:7px 13px;border-radius:9px;cursor:pointer;font:inherit;font-size:13px;
+  white-space:nowrap;transition:.15s;
+}
+.tab:hover{background:var(--panel2);color:var(--ink)}
+.tab.on{background:var(--panel2);border-color:var(--line2);color:var(--ink);font-weight:600}
+.tab.on::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold2);margin-right:7px;vertical-align:middle}
+.hdr-act{display:flex;gap:6px;margin-left:auto}
+.langwrap{position:relative}
+.langmenu{
+  position:absolute;top:calc(100% + 6px);right:0;z-index:60;min-width:132px;
+  max-width:min(132px, calc(100vw - 24px));
+  background:var(--panel);border:1px solid var(--line2);border-radius:10px;box-shadow:var(--shadow);
+  padding:5px;display:none;flex-direction:column;gap:2px;
+}
+.langmenu.on{display:flex;animation:fade .15s}
+.langopt{
+  border:none;background:none;color:var(--ink-soft);text-align:left;padding:8px 10px;border-radius:7px;
+  cursor:pointer;font:inherit;font-size:12.5px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.langopt:hover{background:var(--panel2);color:var(--ink)}
+.langopt.on{color:var(--gold2);font-weight:600}
+
+/* ══ КНОПКИ ══ */
+.btn{
+  border:1px solid var(--line2); background:var(--panel2); color:var(--ink);
+  padding:8px 13px; border-radius:9px; cursor:pointer; font:inherit; font-size:12.5px;
+  display:inline-flex;align-items:center;gap:7px;transition:.15s;
+}
+.btn:hover{background:var(--panel3);border-color:var(--ink-mute)}
+.btn:active{transform:translateY(1px)}
+.btn.gold{background:linear-gradient(140deg,var(--gold),#a2560a);border-color:rgba(255,255,255,.2);color:#fff;font-weight:600}
+.btn.gold:hover{filter:brightness(1.1)}
+.btn.ghost{background:none}
+.btn.sm{padding:6px 10px;font-size:11.5px}
+.btn.ico{padding:8px 10px;font-size:14px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.tab:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
+
+/* ══ РАСКЛАДКА ══ */
+main{max-width:1560px;margin:0 auto;padding:16px 18px 60px}
+section.view{display:none;animation:fade .28s ease}
+section.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.split{display:grid;grid-template-columns:284px 1fr;gap:16px;align-items:start}
+@media(max-width:1080px){.split{grid-template-columns:1fr}.split>aside.side{order:2}.split>div{order:1}}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.card.pad{padding:15px}
+.card h3{font-size:13px;margin-bottom:9px}
+.sec-t{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 8px;font-weight:600}
+.side{display:flex;flex-direction:column;gap:12px;position:sticky;top:70px}
+@media(max-width:1080px){.side{position:static}}
+
+/* ══ СЕГМЕНТЫ И ЧИПЫ ══ */
+.seg{display:flex;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:3px;gap:3px}
+.seg button{
+  flex:1;border:none;background:none;color:var(--ink-soft);padding:7px 6px;border-radius:7px;
+  cursor:pointer;font:inherit;font-size:12px;transition:.15s;
+}
+.seg button:hover{color:var(--ink)}
+.seg button.on{background:var(--panel3);color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.chips{display:flex;flex-direction:column;gap:5px}
+.chip{
+  display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;cursor:pointer;
+  border:1px solid var(--line);background:var(--panel2);font-size:12.3px;transition:.15s;user-select:none;
+}
+.chip:hover{border-color:var(--line2)}
+.chip.on{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 15%,var(--panel2))}
+.chip input{accent-color:var(--gold);margin:0;flex:none}
+.chip .dot{width:9px;height:9px;border-radius:3px;flex:none}
+.hint{font-size:11.2px;color:var(--ink-mute);line-height:1.45;margin-top:7px}
+
+/* ══ КАРТА ══ */
+.stage{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.stage svg{display:block;width:100%;height:auto;touch-action:none}
+.mapwrap{position:relative}
+.region{cursor:pointer;transition:filter .15s, opacity .2s;stroke:var(--bg);stroke-width:.55;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.region:hover{filter:brightness(1.22)}
+.region.dim{opacity:.2}
+.region.hi{stroke:var(--gold2);stroke-width:2.2}
+.region.sel{stroke:var(--gold2);stroke-width:2.6}
+.lbl{font-size:8px;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:2.4px;stroke-linejoin:round;pointer-events:none;text-anchor:middle;font-weight:600}
+.off{display:none}
+.camp{fill:none;stroke:#f0b429;stroke-width:1.3;vector-effect:non-scaling-stroke}
+.campdot{fill:#f0b429;stroke:#3a2400;stroke-width:.4}
+.revolt{fill:#e34948;stroke:#fff;stroke-width:.35;opacity:.92}
+.grat{fill:none;stroke:var(--line);stroke-width:.5;vector-effect:non-scaling-stroke}
+.ctry{fill:var(--land);stroke:var(--land-line);stroke-width:.7;vector-effect:non-scaling-stroke;transition:fill .2s}
+.ocean{fill:var(--ocean)}
+.flow{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.flowhit{fill:none;stroke:transparent;stroke-width:9;cursor:pointer;vector-effect:non-scaling-stroke}
+.node{cursor:pointer}
+
+.bar{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:9px 13px;
+  border-top:1px solid var(--line);background:var(--panel2);font-size:11.5px;
+}
+.legend{display:flex;align-items:center;gap:0}
+.legend i{width:26px;height:11px;display:block}
+.legend i:first-of-type{border-radius:3px 0 0 3px}
+.legend i:last-of-type{border-radius:0 3px 3px 0}
+.legend b{font-weight:500;color:var(--ink-mute);margin:0 7px;font-size:11px}
+.zoomer{display:flex;gap:4px;margin-left:auto}
+
+.tip{
+  position:fixed;z-index:80;pointer-events:none;opacity:0;transition:opacity .12s;
+  background:var(--panel);border:1px solid var(--line2);border-radius:9px;padding:9px 11px;
+  box-shadow:var(--shadow);max-width:280px;font-size:12px;
+}
+.tip.on{opacity:1}
+.tip b{display:block;margin-bottom:3px;font-size:12.5px}
+.tip .v{color:var(--gold2);font-weight:650;font-size:15px}
+.tip .s{color:var(--ink-mute);font-size:11px;margin-top:3px;line-height:1.4}
+
+/* ══ STORYMAP ══ */
+.story{
+  position:fixed;left:20px;bottom:20px;width:min(400px,calc(100vw - 40px));z-index:85;
+  background:color-mix(in srgb,var(--panel) 96%,transparent);border:1px solid var(--line2);
+  border-radius:var(--r);padding:14px 15px;box-shadow:var(--shadow);display:none;
+}
+.story.on{display:block;animation:fade .3s}
+.story .n{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);font-weight:600}
+.story h4{font-size:15.5px;margin:5px 0 7px}
+.story p{margin:0;font-size:12.6px;color:var(--ink-soft);line-height:1.55}
+.story .c{margin-top:9px;font-size:11px;color:var(--ink-mute);border-left:2px solid var(--gold);padding-left:8px;font-style:italic}
+.story .nav{display:flex;gap:6px;align-items:center;margin-top:11px}
+.prog{height:3px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:10px}
+.prog i{display:block;height:100%;background:var(--gold2);width:0;transition:width .3s}
+
+/* ══ СПЛИТ ══ */
+.divider{
+  position:absolute;top:0;bottom:0;width:2px;background:var(--gold2);z-index:15;
+  cursor:ew-resize;display:none;box-shadow:0 0 14px rgba(240,180,41,.6);
+}
+.divider.on{display:block}
+.divider::after{
+  content:'⇔';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:32px;height:32px;border-radius:50%;background:var(--gold2);color:#2a1900;
+  display:grid;place-items:center;font-size:15px;font-weight:700;box-shadow:0 3px 12px rgba(0,0,0,.4);
+}
+.sidelbl{
+  position:absolute;top:12px;z-index:16;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  background:color-mix(in srgb,var(--panel) 92%,transparent);border:1px solid var(--line2);
+  padding:4px 9px;border-radius:20px;display:none;font-weight:600;
+}
+.sidelbl.on{display:block}
+
+/* ══ СТАТИСТИКА ══ */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:9px}
+.stat{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 11px}
+.stat u{display:block;font-size:10.3px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);text-decoration:none;line-height:1.3}
+.stat b{display:block;font-size:20px;font-weight:650;margin-top:3px;letter-spacing:-.02em}
+.stat s{display:block;font-size:10.8px;color:var(--ink-mute);text-decoration:none;margin-top:1px}
+
+/* ══ ТАБЛИЦА ══ */
+.tw{overflow:auto;max-height:520px;border-radius:10px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th{position:sticky;top:0;background:var(--panel2);z-index:2;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-mute);cursor:pointer;user-select:none}
+th:hover{color:var(--ink)}
+th:first-child,td:first-child{text-align:left}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--panel2)}
+td.pos{color:var(--good)} td.neg{color:var(--carmine2)}
+
+/* ══ ИСТОРИОГРАФИЯ ══ */
+.biblio{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.biblio-card a{text-decoration:none}
+.schools{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:16px}
+.school{padding:16px;cursor:pointer;transition:.18s;border-top:3px solid transparent}
+.school:hover{transform:translateY(-2px)}
+.school.on{border-top-color:var(--sc);box-shadow:0 0 0 1px var(--sc),var(--shadow)}
+.school h4{font-size:15px;margin-bottom:2px}
+.school .w{font-size:11.3px;color:var(--ink-mute);margin-bottom:9px}
+.school .th{font-size:12.6px;color:var(--ink-soft);line-height:1.5}
+.school .ln{margin-top:9px;font-size:11.8px;padding:8px 10px;background:var(--panel2);border-radius:8px;border-left:2px solid var(--sc)}
+
+/* ══ КВИЗ ══ */
+.quiz{max-width:780px;margin:0 auto}
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:12px;color:var(--ink-mute)}
+.qcard{padding:22px}
+.qtag{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);border:1px solid var(--gold);padding:2px 8px;border-radius:20px;margin-bottom:11px}
+.qq{font-size:17px;line-height:1.45;margin-bottom:16px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  text-align:left;padding:12px 14px;border-radius:10px;border:1px solid var(--line);
+  background:var(--panel2);color:var(--ink);cursor:pointer;font:inherit;font-size:13.5px;
+  transition:.15s;display:flex;gap:11px;align-items:flex-start;
+}
+.opt:hover:not([disabled]){border-color:var(--gold);background:var(--panel3)}
+.opt .k{
+  flex:none;width:22px;height:22px;border-radius:6px;background:var(--panel3);
+  display:grid;place-items:center;font-size:11.5px;font-weight:700;color:var(--ink-mute);
+}
+.opt.ok{border-color:var(--good);background:color-mix(in srgb,var(--good) 16%,var(--panel2))}
+.opt.ok .k{background:var(--good);color:#fff}
+.opt.no{border-color:var(--carmine2);background:color-mix(in srgb,var(--carmine2) 14%,var(--panel2))}
+.opt.no .k{background:var(--carmine2);color:#fff}
+.expl{margin-top:15px;padding:13px 15px;border-radius:10px;background:var(--panel2);border-left:3px solid var(--gold);font-size:12.8px;line-height:1.55;color:var(--ink-soft);display:none}
+.expl.on{display:block;animation:fade .25s}
+.qbar{height:5px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.qbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));width:0;transition:width .35s}
+.score{text-align:center;padding:34px 22px}
+.score .big{font-size:56px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.review{margin-top:20px;text-align:left;display:flex;flex-direction:column;gap:9px}
+.rv{padding:11px 13px;border-radius:9px;background:var(--panel2);border-left:3px solid var(--carmine2);font-size:12.3px}
+.rv b{display:block;margin-bottom:4px}
+.rv s{display:block;color:var(--ink-mute);text-decoration:none;margin-top:4px;font-size:11.6px}
+
+/* ══ АССИСТЕНТ ══ */
+.ai{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.chat{height:min(50vh,440px);overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:11px}
+.msg{max-width:82%;padding:10px 13px;border-radius:13px;font-size:13.2px;line-height:1.55;white-space:pre-wrap;word-wrap:break-word}
+.msg.u{align-self:flex-end;background:linear-gradient(140deg,var(--gold),#a2560a);color:#fff;border-bottom-right-radius:4px}
+.msg.a{align-self:flex-start;background:var(--panel2);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg .src{margin-top:8px;padding-top:7px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-mute)}
+.composer{display:flex;gap:8px;padding:11px;border-top:1px solid var(--line)}
+.composer input{
+  flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:9px;
+  padding:11px 13px;color:var(--ink);font:inherit;font-size:13.2px;
+}
+.aistat{display:flex;align-items:center;gap:9px;font-size:11.8px;color:var(--ink-mute);flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;border:1px solid var(--line2);background:var(--panel2);font-size:11.3px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--ink-mute);display:block}
+.pill.ok i{background:var(--good)} .pill.load i{background:var(--gold2);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.dlbar{height:4px;background:var(--line);border-radius:3px;overflow:hidden;flex:1;min-width:110px}
+.dlbar i{display:block;height:100%;background:var(--gold2);width:0;transition:width .3s}
+.sugg{display:flex;gap:7px;flex-wrap:wrap;padding:0 11px 11px}
+.sugg button{
+  border:1px solid var(--line);background:var(--panel2);color:var(--ink-soft);border-radius:20px;
+  padding:6px 12px;font:inherit;font-size:11.8px;cursor:pointer;transition:.15s;
+}
+.sugg button:hover{border-color:var(--gold);color:var(--ink)}
+select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;color:var(--ink);font:inherit;font-size:12.3px;width:100%}
+
+/* ══ ВЫДВИЖНАЯ ПАНЕЛЬ ══ */
+.ov{position:fixed;inset:0;background:rgba(3,5,10,.62);backdrop-filter:blur(3px);z-index:90;opacity:0;pointer-events:none;transition:.24s}
+.ov.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:60px;right:0;bottom:0;width:min(430px,100%);z-index:95;
+  background:var(--panel);border-left:1px solid var(--line2);box-shadow:var(--shadow);
+  transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;padding:20px;
+}
+.drawer.on{transform:none}
+.modal{
+  position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;
+  background:rgba(3,5,10,.66);backdrop-filter:blur(4px);
+}
+.modal.on{display:flex;animation:fade .2s}
+.modal .box{
+  background:var(--panel);border:1px solid var(--line2);border-radius:16px;box-shadow:var(--shadow);
+  max-width:660px;width:100%;max-height:86vh;overflow-y:auto;padding:24px;position:relative;
+}
+.x{position:absolute;top:14px;right:14px}
+.note{
+  font-size:11.3px;color:var(--ink-mute);line-height:1.5;padding:10px 12px;
+  background:var(--panel2);border-radius:9px;border-left:2px solid var(--carmine2);
+}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);font-size:12.4px}
+.kv:last-child{border:none}
+.kv span{color:var(--ink-mute)}
+.kv b{font-variant-numeric:tabular-nums}
+.badge{display:inline-block;font-size:10.3px;padding:3px 9px;border-radius:20px;border:1px solid var(--line2);color:var(--ink-soft);margin:0 4px 4px 0}
+
+.toast{
+  position:fixed;bottom:22px;left:50%;transform:translate(-50%,80px);z-index:110;
+  background:var(--panel);border:1px solid var(--line2);border-radius:11px;padding:11px 17px;
+  box-shadow:var(--shadow);font-size:12.5px;opacity:0;transition:.3s;max-width:min(460px,92vw);
+}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+.prose{font-size:13.2px;line-height:1.65;color:var(--ink-soft)}
+.prose h4{color:var(--ink);font-size:13.5px;margin:16px 0 6px}
+.prose p{margin:0 0 10px}
+.prose ul{margin:0 0 10px;padding-left:19px}
+.prose li{margin-bottom:5px}
+.prose code{background:var(--panel2);padding:2px 6px;border-radius:5px;font-size:12px}
+
+#print{display:none}
+@media print{
+  body>*{display:none!important}
+  #print{display:block!important;color:#000;background:#fff;font-family:Georgia,serif;padding:18mm}
+  #print h1{font-size:21px;margin-bottom:3px}
+  #print .m{color:#666;font-size:11px;margin-bottom:16px;border-bottom:1px solid #ccc;padding-bottom:8px}
+  #print table{width:100%;font-size:12px;border-collapse:collapse}
+  #print td,#print th{border:1px solid #999;padding:6px 9px;text-align:left}
+  #print .f{margin-top:20px;font-size:10px;color:#777;border-top:1px solid #ccc;padding-top:8px}
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<header class="hdr"><div class="hdr-in">
+  <div class="brand">
+    <div class="seal">⚱</div>
+    <div><b data-i18n="brandTitle">Картография коллапса</b><span data-i18n="brandSub">Ашаршылык · HGIS · 1926–1939</span></div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab on" data-v="kz" data-i18n="tabKz">Карта Казахстана</button>
+    <button class="tab" data-v="world" data-i18n="tabWorld">Карта мира</button>
+    <button class="tab" data-v="schools" data-i18n="tabSchools">Историография</button>
+    <button class="tab" data-v="biblio" data-i18n="tabBiblio">Библиография</button>
+    <button class="tab" data-v="data" data-i18n="tabData">Данные и MAUP</button>
+    <button class="tab" data-v="quiz" data-i18n="tabQuiz">Квиз</button>
+    <button class="tab" data-v="ai" data-i18n="tabAi">ИИ-ассистент</button>
+  </nav>
+  <div class="hdr-act">
+    <div class="langwrap">
+      <button class="btn ico" id="bLang" data-i18n-title="btnLangTitle" title="Язык интерфейса">🌐 <span id="bLangLabel">RU</span></button>
+      <div class="langmenu" id="langMenu">
+        <button class="langopt on" data-lang="ru">Русский</button>
+        <button class="langopt" data-lang="en">English</button>
+      </div>
+    </div>
+    <button class="btn ico ghost" id="bAbout" data-i18n-title="btnAboutTitle" title="О проекте и методология">ⓘ</button>
+    <button class="btn ico ghost" id="bTheme" data-i18n-title="btnThemeTitle" title="Светлая / тёмная тема">◐</button>
+  </div>
+</div></header>
+
+<main>
+
+<!-- ══════ КАРТА КАЗАХСТАНА ══════ -->
+<section class="view on" id="v-kz"><div class="split">
+  <aside class="side">
+    <div class="card pad">
+      <p class="sec-t" data-i18n="secGrid">Административная сетка</p>
+      <div class="seg" id="segPeriod">
+        <button data-p="1926" class="on" data-i18n="seg1926">1926 — 8 округов</button>
+        <button data-p="1939" data-i18n="seg1939">1939 — 12 областей</button>
+      </div>
+      <p class="hint" id="periodHint"></p>
+    </div>
+
+    <div class="card pad">
+      <p class="sec-t" data-i18n="secMetric">Показатель</p>
+      <div class="chips" id="metrics"></div>
+      <p class="hint" id="metricHint"></p>
+    </div>
+
+    <div class="card pad">
+      <p class="sec-t" data-i18n="secLayers">Дополнительные слои</p>
+      <div class="chips">
+        <label class="chip" data-l="camps"><input type="checkbox"><span class="dot" style="background:#f0b429"></span><span data-i18n="layerCamps">Лагеря и стройки</span></label>
+        <label class="chip" data-l="revolts"><input type="checkbox"><span class="dot" style="background:#e34948"></span><span data-i18n="layerRevolts">Восстания 1929–1931</span></label>
+        <label class="chip on" data-l="labels"><input type="checkbox" checked><span class="dot" style="background:var(--ink-mute)"></span><span data-i18n="layerLabels">Подписи регионов</span></label>
+      </div>
+    </div>
+
+    <div class="card pad">
+      <p class="sec-t" data-i18n="secModes">Режимы</p>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <button class="btn gold" id="bStory" style="justify-content:center" data-i18n="btnStoryStart">▶ StoryMap: сценарий защиты</button>
+        <button class="btn" id="bSplit" style="justify-content:center" data-i18n="btnSplit">⇔ Сплит 1926 / 1939</button>
+      </div>
+      <p class="hint" data-i18n="hintStory">StoryMap ведёт по шести шагам исследования — от степи 1926 года до методологического вывода о MAUP.</p>
+    </div>
+  </aside>
+
+  <div>
+    <div class="stage">
+      <div class="mapwrap" id="wrapKz">
+        <svg id="svgKz" viewBox="0 0 1000 560" role="img" aria-label="Карта Казахстана" data-i18n-aria="ariaMapKz">
+          <g id="gKz">
+            <g id="lBase"></g>
+            <g id="lSplit"></g>
+            <g id="lLabels"></g>
+            <g id="lCamps" class="off"></g>
+            <g id="lRevolts" class="off"></g>
+          </g>
+        </svg>
+        <div class="sidelbl" id="lblL" style="left:14px" data-i18n="sidelblL">1926 · округа</div>
+        <div class="sidelbl" id="lblR" style="right:14px" data-i18n="sidelblR">1939 · области</div>
+        <div class="divider" id="divider"></div>
+      </div>
+      <div class="bar">
+        <div class="legend" id="legend"></div>
+        <div class="zoomer">
+          <button class="btn sm ico" id="zIn" data-i18n-title="zoomInTitle" title="Приблизить">+</button>
+          <button class="btn sm ico" id="zOut" data-i18n-title="zoomOutTitle" title="Отдалить">−</button>
+          <button class="btn sm" id="zRst" data-i18n="zoomReset">Сброс</button>
+        </div>
+      </div>
+    </div>
+    <div class="stats" id="statsKz" style="margin-top:12px"></div>
+    <div class="card pad" style="margin-top:12px">
+      <p class="note" id="disclaimer"></p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ══════ КАРТА МИРА ══════ -->
+<section class="view" id="v-world"><div class="split">
+  <aside class="side">
+    <div class="card pad">
+      <p class="sec-t" data-i18n="secWorldLayer">Слой карты мира</p>
+      <div class="seg" id="segWorld">
+        <button data-w="flows" class="on" data-i18n="segFlows">Откочёвки</button>
+        <button data-w="famines" data-i18n="segFamines">Голод 1930-х</button>
+      </div>
+      <p class="hint" id="worldHint"></p>
+    </div>
+    <div class="card pad" id="worldCtl">
+      <p class="sec-t" data-i18n="secDirections">Направления</p>
+      <div class="chips">
+        <label class="chip on" data-f="abroad"><input type="checkbox" checked><span class="dot" style="background:#eb6834"></span><span data-i18n="dirAbroad">За границу</span></label>
+        <label class="chip on" data-f="soviet"><input type="checkbox" checked><span class="dot" style="background:#38bdf8"></span><span data-i18n="dirSoviet">В республики СССР</span></label>
+      </div>
+      <p class="hint" data-i18n="hintFlows">Толщина линии — оценочный масштаб потока. Наведите на линию или точку, чтобы увидеть диапазон и пояснение.</p>
+    </div>
+    <div class="card pad">
+      <p class="sec-t" data-i18n="secFlowSummary">Итог откочёвок</p>
+      <div class="kv"><span data-i18n="kvLeft">Покинули республику</span><b>≈ 1 130 000</b></div>
+      <div class="kv"><span data-i18n="kvReturned">Вернулись позднее</span><b>≈ 454 000</b></div>
+      <div class="kv"><span data-i18n="kvPermanent">Безвозвратно</span><b>≈ 676 000</b></div>
+      <div class="kv"><span data-i18n="kvAbroadStayed">Остались за границей</span><b>≈ 200 000</b></div>
+      <p class="note" style="margin-top:10px" data-i18n="noteFlowsDiscuss">Разбивка по конкретным направлениям — дискуссионная оценка. С. Кэмерон прямо называет точный подсчёт по странам открытым исследовательским вопросом.</p>
+    </div>
+  </aside>
+  <div>
+    <div class="stage">
+      <div class="mapwrap">
+        <svg id="svgW" viewBox="0 0 1000 470" role="img" aria-label="Карта мира" data-i18n-aria="ariaMapWorld">
+          <g id="gW">
+            <rect id="wOcean" class="ocean" x="-3" y="-1.6" width="6" height="3.2"></rect>
+            <g id="wGrat"></g>
+            <g id="wCtry"></g>
+            <g id="wFlow"></g>
+            <g id="wNode"></g>
+            <g id="wLbl"></g>
+          </g>
+        </svg>
+      </div>
+      <div class="bar">
+        <div class="legend" id="wLegend"></div>
+        <div class="zoomer">
+          <button class="btn sm ico" id="wIn" data-i18n-title="zoomInTitle">+</button>
+          <button class="btn sm ico" id="wOut" data-i18n-title="zoomOutTitle">−</button>
+          <button class="btn sm" id="wRst" data-i18n="zoomReset">Сброс</button>
+        </div>
+      </div>
+    </div>
+    <div class="stats" id="statsW" style="margin-top:12px"></div>
+    <div class="card pad" style="margin-top:12px">
+      <p class="note" data-i18n="noteProjection">Проекция Equal Earth (равновеликая), центральный меридиан 65° в.д. Равновеликая проекция выбрана намеренно: она не искажает соотношение площадей, поэтому сравнение территорий на карте корректно. Границы стран — современные (Natural Earth, 110 м), приведены как географическая привязка, а не как политическая карта 1930-х годов.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ══════ ИСТОРИОГРАФИЯ ══════ -->
+<section class="view" id="v-schools">
+  <div class="card pad" style="margin-bottom:14px">
+    <h3 data-i18n="schoolsHeading">Три линзы на одну катастрофу</h3>
+    <p class="prose" style="margin:8px 0 0" data-i18n="schoolsIntro">Историки расходятся не в том, был ли голод, а в том, что считать его механизмом. Выберите школу — карта подсветит регионы, которые оказываются в центре именно её объяснения. Это и есть смысл историографического раздела: одни и те же данные, разные вопросы к ним, разная география ответа.</p>
+  </div>
+  <div class="schools" id="schools"></div>
+  <div class="split">
+    <aside class="side">
+      <div class="card pad" id="schoolDetail">
+        <p class="sec-t" data-i18n="chooseSchool">Выберите школу</p>
+        <p class="hint" data-i18n="chooseSchoolHint">Нажмите на карточку выше, чтобы увидеть развёрнутый тезис и подсветку на карте.</p>
+      </div>
+    </aside>
+    <div class="stage">
+      <div class="mapwrap">
+        <svg id="svgS" viewBox="0 0 1000 520" role="img" aria-label="Карта историографических линз" data-i18n-aria="ariaMapSchools">
+          <g id="gS"><g id="sBase"></g><g id="sMark"></g><g id="sLbl"></g></g>
+        </svg>
+      </div>
+      <div class="bar"><span id="sCaption" style="color:var(--ink-mute)" data-i18n="schoolCaptionDefault">Карта потерь казахского населения по областям 1939 года</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ БИБЛИОГРАФИЯ ══════ -->
+<section class="view" id="v-biblio">
+  <div class="card pad" style="margin-bottom:14px">
+    <h3 data-i18n="biblioHeading">Библиография и источники</h3>
+    <p class="prose" style="margin:8px 0 0" data-i18n="biblioIntro">Подборка работ, на которых основаны историографические интерпретации, демографический контекст и методологические решения атласа. Ссылки открываются в новой вкладке.</p>
+  </div>
+  <div class="biblio" id="biblio"></div>
+</section>
+
+<!-- ══════ ДАННЫЕ И MAUP ══════ -->
+<section class="view" id="v-data">
+  <div class="card pad" style="margin-bottom:14px">
+    <h3 data-i18n="dataHeading">Главный результат: сетка меняет вывод</h3>
+    <div class="stats" style="margin-top:11px">
+      <div class="stat"><u data-i18n="statShiftSum">Суммарный сдвиг долей</u><b style="color:var(--gold2)">42,46</b><s data-i18n="statShiftUnit">процентных пункта</s></div>
+      <div class="stat"><u data-i18n="statDissim">Индекс несходства</u><b style="color:var(--carmine2)">21,2 %</b><s data-i18n="statDissimSub">пятая часть распределения</s></div>
+      <div class="stat"><u data-i18n="statIntersections">Пересечений полигонов</u><b>96</b><s data-i18n="statIntersectionsSub">8 округов × 12 областей</s></div>
+      <div class="stat"><u data-i18n="statCoverage">Покрытие площади</u><b style="color:var(--good)">100 %</b><s data-i18n="statCoverageSub">сетки совпадают по территории</s></div>
+    </div>
+    <p class="prose" style="margin:13px 0 0" data-i18n="dataIntro">Одна территория, одни люди, две административные сетки. При переносе казахского населения 1926 года с сетки 8 округов на сетку 12 областей суммарный сдвиг долей составляет 42,46 п.п., а индекс несходства — 21,2 %. Практический смысл: если бы исследователь работал только с сеткой 1939 года, он получил бы другую карту эпицентра катастрофы, чем работая с сеткой 1926 года. Граница определяет вывод — это и есть Modifiable Areal Unit Problem.</p>
+  </div>
+
+  <div class="split">
+    <aside class="side">
+      <div class="card pad">
+        <p class="sec-t" data-i18n="calcHeading">Калькулятор ареальной интерполяции</p>
+        <label style="font-size:11.5px;color:var(--ink-mute)" data-i18n="calcSrcLabel">Округ 1926 года (источник)</label>
+        <select id="mSrc" style="margin:4px 0 10px"></select>
+        <label style="font-size:11.5px;color:var(--ink-mute)" data-i18n="calcTgtLabel">Область 1939 года (приёмник)</label>
+        <select id="mTgt" style="margin:4px 0 10px"></select>
+        <button class="btn gold" id="mCalc" style="width:100%;justify-content:center" data-i18n="calcBtn">Рассчитать</button>
+        <div id="mOut" style="margin-top:11px"></div>
+      </div>
+      <div class="card pad">
+        <p class="sec-t" data-i18n="exportHeading">Экспорт данных</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <button class="btn sm" id="eCsv" data-i18n="exportCsv">CSV — таблица показателей</button>
+          <button class="btn sm" id="eGeo" data-i18n="exportGeo">GeoJSON — границы и атрибуты</button>
+          <button class="btn sm" id="eMaup" data-i18n="exportMaup">CSV — матрица пересечений</button>
+        </div>
+        <p class="hint" data-i18n="exportHint">Все данные открыты. GeoJSON открывается в QGIS, ArcGIS и geojson.io.</p>
+      </div>
+    </aside>
+    <div>
+      <div class="card pad">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap">
+          <h3 style="margin:0" data-i18n="tableHeading">Таблица показателей</h3>
+          <div class="seg" style="width:auto" id="segTable">
+            <button data-p="1926" class="on">1926</button>
+            <button data-p="1939">1939</button>
+          </div>
+        </div>
+        <div class="tw"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+        <p class="hint" data-i18n="tableHint">Нажмите на заголовок столбца для сортировки, на строку — чтобы открыть карточку региона.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ КВИЗ ══════ -->
+<section class="view" id="v-quiz"><div class="quiz">
+  <div class="card qcard" id="qStart">
+    <div class="qtag" data-i18n="quizTag">Для школьников</div>
+    <h3 style="font-size:20px;margin-bottom:8px" data-i18n="quizHeading">Проверьте, что вы поняли</h3>
+    <p class="prose" data-i18n="quizIntro">Квиз по материалам сайта: карта, данные переписей, историография и методология HGIS. После каждого ответа — объяснение со ссылкой на источник. В конце — разбор ошибок.</p>
+    <div class="stats" style="margin:15px 0">
+      <div class="stat"><u data-i18n="quizStatQuestions">Вопросов</u><b id="qCount">0</b></div>
+      <div class="stat"><u data-i18n="quizStatFormat">Формат</u><b style="font-size:15px" data-i18n="quizStatFormatVal">4 варианта</b><s data-i18n="quizStatFormatSub">один верный</s></div>
+      <div class="stat"><u data-i18n="quizStatTime">Время</u><b style="font-size:15px" data-i18n="quizStatTimeVal">Без лимита</b></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn gold" id="qGo" data-i18n="quizGo">Начать квиз</button>
+      <button class="btn" id="qShuffle" data-i18n="quizShuffle">Перемешать вопросы</button>
+    </div>
+  </div>
+
+  <div id="qPlay" style="display:none">
+    <div class="qhead"><span id="qPos"></span><span id="qScore"></span></div>
+    <div class="qbar"><i id="qBar"></i></div>
+    <div class="card qcard">
+      <div class="qtag" id="qTag"></div>
+      <div class="qq" id="qQ"></div>
+      <div class="opts" id="qOpts"></div>
+      <div class="expl" id="qExpl"></div>
+      <div style="margin-top:15px;display:flex;justify-content:flex-end">
+        <button class="btn gold" id="qNext" style="display:none" data-i18n="quizNext">Далее ›</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card score" id="qDone" style="display:none">
+    <div class="big" id="qBig"></div>
+    <p style="color:var(--ink-mute);margin:6px 0 0" id="qMsg"></p>
+    <div id="qReview" class="review"></div>
+    <div style="margin-top:22px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button class="btn gold" id="qAgain" data-i18n="quizAgain">Пройти заново</button>
+      <button class="btn" id="qBack" data-i18n="quizBack">К материалам</button>
+    </div>
+  </div>
+</div></section>
+
+<!-- ══════ ИИ-АССИСТЕНТ ══════ -->
+<section class="view" id="v-ai"><div class="ai">
+  <div class="card pad">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div>
+        <h3 style="margin-bottom:3px" data-i18n="aiHeading">ИИ-ассистент по материалам сайта</h3>
+        <p style="margin:0;font-size:12.3px;color:var(--ink-mute)" data-i18n="aiSub">Модель работает прямо в браузере — данные никуда не отправляются</p>
+      </div>
+      <div class="pill" id="aiPill"><i></i><span id="aiState" data-i18n="aiOffline">Офлайн-режим</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:13px;align-items:end">
+      <div>
+        <label style="font-size:11.5px;color:var(--ink-mute)" data-i18n="aiModelLabel">Модель</label>
+        <select id="aiModel" style="margin-top:4px"></select>
+      </div>
+      <button class="btn gold" id="aiLoad" data-i18n="aiLoadBtn">Загрузить модель</button>
+    </div>
+    <div class="aistat" style="margin-top:11px" id="aiProg">
+      <div class="dlbar"><i id="aiBar"></i></div><span id="aiProgTxt" data-i18n="aiNotLoaded">Модель не загружена</span>
+    </div>
+    <p class="note" style="margin-top:11px" id="aiNote"></p>
+  </div>
+
+  <div class="card">
+    <div class="chat" id="chat"></div>
+    <div class="sugg" id="sugg"></div>
+    <div class="composer">
+      <input id="aiIn" data-i18n-placeholder="aiPlaceholder" placeholder="Спросите про регион, цифру, историка или метод…" autocomplete="off">
+      <button class="btn gold" id="aiSend" data-i18n="aiSend">Спросить</button>
+    </div>
+  </div>
+</div></section>
+
+</main>
+
+<div class="story" id="story">
+          <div class="n" id="stN"></div>
+          <h4 id="stT"></h4>
+          <p id="stP"></p>
+          <div class="c" id="stC"></div>
+          <div class="prog"><i id="stBar"></i></div>
+          <div class="nav">
+            <button class="btn sm" id="stPrev" data-i18n="storyPrev">‹ Назад</button>
+            <button class="btn sm" id="stNext" data-i18n="storyNext">Далее ›</button>
+            <button class="btn sm ghost" id="stStop" style="margin-left:auto" data-i18n="storyExit">Выйти</button>
+          </div>
+</div>
+
+<div class="ov" id="ov"></div>
+<aside class="drawer" id="drawer"><div id="drawerBody"></div></aside>
+
+<div class="modal" id="mAbout"><div class="box">
+  <button class="btn ico ghost x" data-close="mAbout">✕</button>
+  <h3 style="font-size:19px;margin-bottom:4px" data-i18n="aboutTitle">О проекте</h3>
+  <p style="color:var(--ink-mute);font-size:12px;margin:0 0 14px" data-i18n="aboutSub">Пространственно-демографический анализ Ашаршылыка средствами исторической ГИС</p>
+  <div class="prose" id="aboutBody"></div>
+</div></div>
+
+<div class="tip" id="tip"></div>
+<div class="toast" id="toast"></div>
+<div id="print"></div>
+
+<script src="/data.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
