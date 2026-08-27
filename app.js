@@ -134,6 +134,7 @@ aiNoteNoGpu: "В этом браузере нет поддержки WebGPU, п�
 aiGreeting: "Здравствуйте! Я отвечаю по материалам этого исследования: карты, переписи 1926 и 1939 годов, откочёвки, историография и метод HGIS. Задайте вопрос или выберите подсказку ниже.\n\nЧтобы ответы генерировала языковая модель прямо в вашем браузере — нажмите «Загрузить модель». Без неё я отвечаю точными выдержками из базы знаний.",
 aiSourceLabel: "Источник в материалах сайта: ",
 aiNoHits: "Не нашёл в материалах сайта ничего по этому запросу. Попробуйте спросить про конкретный регион (например, «Карагандинская область»), про цифру (потери, откочёвки, скот), про историка (Кэмерон, Пьянчола, Омарбеков) или про метод (MAUP, ареальная интерполяция).",
+aiIdentity: "Я — ИИ-ассистент проекта «Картография коллапса»: языковая модель, которая работает прямо в вашем браузере (данные никуда не отправляются) и отвечает на вопросы по материалам этого сайта — картам, переписям 1926 и 1939 годов, откочёвкам, историографии Ашаршылыка и методу HGIS. Спросите про регион, историка, цифру или метод.",
 toastWebgpuMissing: "WebGPU недоступен в этом браузере: включён офлайн-режим",
 toastModelLoaded: "Модель загружена: ответы теперь генерируются в вашем браузере",
 toastModelFailed: "Модель не загрузилась. Ассистент отвечает выдержками из базы знаний.",
@@ -349,6 +350,7 @@ aiNoteNoGpu: "This browser doesn’t support WebGPU, so the language model can�
 aiGreeting: "Hello! I answer using this research’s material: the maps, the 1926 and 1939 censuses, the migrations, the historiography, and the HGIS method. Ask a question or pick a suggestion below.\n\nTo have a language model generate answers right in your browser — click “Load model”. Without it I answer with precise excerpts from the knowledge base.",
 aiSourceLabel: "Source in the site’s material: ",
 aiNoHits: "I couldn’t find anything on the site about this. Try asking about a specific region (e.g. “Karaganda Oblast”), a figure (losses, migrations, livestock), a historian (Cameron, Pianciola, Omarbekov), or a method (MAUP, areal interpolation).",
+aiIdentity: "I'm the AI assistant for \"Cartography of Collapse\": a language model that runs right in your browser (nothing is sent anywhere) and answers questions using this site's material — the maps, the 1926 and 1939 censuses, the migrations, the historiography of Asharshylyk, and the HGIS method. Ask about a region, a historian, a figure, or a method.",
 toastWebgpuMissing: "WebGPU is unavailable in this browser: offline mode is active",
 toastModelLoaded: "Model loaded: answers are now generated in your browser",
 toastModelFailed: "The model failed to load. The assistant is answering with excerpts from the knowledge base.",
@@ -3161,12 +3163,17 @@ return AI.loading = !1, $("#aiLoad").disabled = !1, AI.engine;
 
 const SYS_RU = "Ты — научный ассистент школьного исследовательского проекта «Картография коллапса»: историко-географический анализ Ашаршылыка (голода в Казахстане 1930–1933 гг.) средствами HGIS. Ты — программа, языковая модель, работающая в браузере, а не человек: у тебя нет возраста, имени, тела или личной биографии, никогда не выдумывай и не сообщай такие детали о себе.\n\nПравила:\n1. Если приведённый ниже КОНТЕКСТ отвечает на вопрос — отвечай строго на его основе и никогда не выдумывай цифры, имена и даты, которых там нет.\n2. Если контекста нет или он не по вопросу, но вопрос по смыслу связан с темой (казахи, история Казахстана, СССР 1920–1930-х годов, кочевники, коллективизация, голод, историография) — ответь кратко из общих исторических знаний и прямо отметь, что это общие сведения, а не данные сайта.\n3. Если вопрос совсем не по теме проекта — вежливо скажи об этом и предложи спросить про регион, историка, цифру или метод.\n4. Если оценка дискуссионная — назови диапазон и скажи, что он дискуссионный.\n5. Отвечай по-русски, кратко и по существу: 2–5 предложений связным текстом, не более 90 слов всего, БЕЗ нумерованных и маркированных списков (если явно не просят список) и без вступлений вроде «Возможно, вы имеете в виду…» — сразу отвечай по делу и заканчивай мысль до конца.\n6. Тема тяжёлая — пиши уважительно и без сенсационности.", SYS_EN = "You are the research assistant for \"Cartography of Collapse\": a historical-geographic analysis of Asharshylyk (the 1930–1933 famine in Kazakhstan) using HGIS. You are a piece of software, a language model running in the browser, not a human: you have no age, name, body, or personal biography — never invent or state such details about yourself.\n\nRules:\n1. If the CONTEXT below answers the question, base your answer strictly on it and never invent numbers, names, or dates that aren't there.\n2. If there is no context, or it doesn't address the question, but the question is meaningfully related to the topic (Kazakhs, the history of Kazakhstan, the 1920s–1930s USSR, nomadic life, collectivization, famine, historiography), answer briefly using general historical knowledge and clearly note that this is general background, not data from the site.\n3. If the question is entirely unrelated to the project's topic, say so politely and suggest asking about a region, a historian, a figure, or a method instead.\n4. If an estimate is debated, state the range and say that it is debated.\n5. Answer in English, briefly and to the point: 2–5 sentences as flowing prose, no more than 90 words total, with NO numbered or bulleted lists (unless a list is explicitly requested) and no preambles like \"You might mean...\" — get straight to the point and finish the thought.\n6. This is a heavy topic — write respectfully and without sensationalism.";
 
+const IDENTITY_RE = /^[\s?!.]*(кто\s+ты|ты\s+кто|что\s+ты(\s+такое)?|ты\s+что\s+такое|представьс[яи]|расскажи(\s+мне)?\s+о\s+себе|who\s+are\s+you|what\s+are\s+you|introduce\s+yourself)[\s?!.]*$/i;
+
 async function ask(query) {
 if (AI.busy || !query.trim()) return;
 AI.busy = !0, $("#aiSend").disabled = !0, chatAdd("user", query), $("#aiIn").value = "";
+if (IDENTITY_RE.test(query.trim())) {
+return chatAdd("bot", t("aiIdentity")), AI.busy = !1, void ($("#aiSend").disabled = !1);
+}
 const hits = retrieve(query, 4), ctx = hits.map(h => `[${h.title}]\n${h.text}`).join("\n\n");
-const meaningfulWords = tokens(query).filter(w => !stopwords().has(w));
-if (!AI.engine || (!hits.length && meaningfulWords.length < 2)) {
+const hasRealWords = tokens(query).length > 0;
+if (!AI.engine || (!hits.length && !hasRealWords)) {
 const a = offlineAnswer(query);
 return chatAdd("bot", a.text, a.src), AI.busy = !1, void ($("#aiSend").disabled = !1);
 }
