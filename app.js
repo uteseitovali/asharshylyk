@@ -3080,7 +3080,7 @@ loading: !1,
 model: MODELS[0].id,
 busy: !1,
 history: []
-}, stem = w => w.toLowerCase().replace(/[ёë]/g, "е").slice(0, 6), tokens = s => (s.toLowerCase().match(/[a-zа-яё0-9]{3,}/gi) || []).map(stem), STOP_RU = new Set([ "что", "как", "это", "для", "при", "все", "был", "быть", "esc", "ктo", "где", "поче", "какой", "кака", "какие", "скол", "расс", "why", "the" ]), STOP_EN = new Set([ "what", "how", "this", "that", "for", "with", "are", "was", "were", "the", "and", "who", "why", "which", "about", "does", "did", "when", "where" ]);
+}, stem = w => w.toLowerCase().replace(/[ёë]/g, "е").slice(0, 5), tokens = s => (s.toLowerCase().match(/[a-zа-яё0-9]{3,}/gi) || []).map(stem), STOP_RU = new Set([ "что", "как", "это", "для", "при", "все", "был", "быть", "esc", "ктo", "где", "поче", "какой", "кака", "какие", "скол", "расс", "why", "the" ]), STOP_EN = new Set([ "what", "how", "this", "that", "for", "with", "are", "was", "were", "the", "and", "who", "why", "which", "about", "does", "did", "when", "where" ]);
 
 function stopwords() {
 return "en" === LANG ? STOP_EN : STOP_RU;
@@ -3159,13 +3159,14 @@ $("#aiBar").style.width = "0%", toast(t("toastModelFailed"));
 return AI.loading = !1, $("#aiLoad").disabled = !1, AI.engine;
 }
 
-const SYS_RU = "Ты — научный ассистент школьного исследовательского проекта «Картография коллапса»: историко-географический анализ Ашаршылыка (голода в Казахстане 1930–1933 гг.) средствами HGIS.\n\nПравила:\n1. Отвечай ТОЛЬКО на основе приведённого ниже КОНТЕКСТА из материалов проекта. Если в контексте нет ответа — прямо скажи, что этих данных на сайте нет.\n2. Никогда не выдумывай цифры, имена и даты. Если оценка дискуссионная — назови диапазон и скажи, что он дискуссионный.\n3. Отвечай по-русски, кратко и научно точно: 2–5 предложений, без списков, если не просят иначе.\n4. Тема тяжёлая — пиши уважительно и без сенсационности.", SYS_EN = "You are the research assistant for \"Cartography of Collapse\": a historical-geographic analysis of Asharshylyk (the 1930–1933 famine in Kazakhstan) using HGIS.\n\nRules:\n1. Answer ONLY based on the CONTEXT from the project's material given below. If the context has no answer, say plainly that this data isn't on the site.\n2. Never invent numbers, names, or dates. If an estimate is debated, state the range and say that it is debated.\n3. Answer in English, briefly and with scholarly precision: 2–5 sentences, no lists unless asked otherwise.\n4. This is a heavy topic — write respectfully and without sensationalism.";
+const SYS_RU = "Ты — научный ассистент школьного исследовательского проекта «Картография коллапса»: историко-географический анализ Ашаршылыка (голода в Казахстане 1930–1933 гг.) средствами HGIS.\n\nПравила:\n1. Если приведённый ниже КОНТЕКСТ отвечает на вопрос — отвечай строго на его основе и никогда не выдумывай цифры, имена и даты, которых там нет.\n2. Если контекста нет или он не по вопросу, но вопрос по смыслу связан с темой (казахи, история Казахстана, СССР 1920–1930-х годов, кочевники, коллективизация, голод, историография) — ответь кратко из общих исторических знаний и прямо отметь, что это общие сведения, а не данные сайта.\n3. Если вопрос совсем не по теме проекта — вежливо скажи об этом и предложи спросить про регион, историка, цифру или метод.\n4. Если оценка дискуссионная — назови диапазон и скажи, что он дискуссионный.\n5. Отвечай по-русски, кратко и по существу: 2–5 предложений, без списков, если не просят иначе.\n6. Тема тяжёлая — пиши уважительно и без сенсационности.", SYS_EN = "You are the research assistant for \"Cartography of Collapse\": a historical-geographic analysis of Asharshylyk (the 1930–1933 famine in Kazakhstan) using HGIS.\n\nRules:\n1. If the CONTEXT below answers the question, base your answer strictly on it and never invent numbers, names, or dates that aren't there.\n2. If there is no context, or it doesn't address the question, but the question is meaningfully related to the topic (Kazakhs, the history of Kazakhstan, the 1920s–1930s USSR, nomadic life, collectivization, famine, historiography), answer briefly using general historical knowledge and clearly note that this is general background, not data from the site.\n3. If the question is entirely unrelated to the project's topic, say so politely and suggest asking about a region, a historian, a figure, or a method instead.\n4. If an estimate is debated, state the range and say that it is debated.\n5. Answer in English, briefly and to the point: 2–5 sentences, no lists unless asked otherwise.\n6. This is a heavy topic — write respectfully and without sensationalism.";
 
 async function ask(query) {
 if (AI.busy || !query.trim()) return;
 AI.busy = !0, $("#aiSend").disabled = !0, chatAdd("user", query), $("#aiIn").value = "";
 const hits = retrieve(query, 4), ctx = hits.map(h => `[${h.title}]\n${h.text}`).join("\n\n");
-if (!AI.engine || !hits.length) {
+const meaningfulWords = tokens(query).filter(w => !stopwords().has(w));
+if (!AI.engine || (!hits.length && meaningfulWords.length < 2)) {
 const a = offlineAnswer(query);
 return chatAdd("bot", a.text, a.src), AI.busy = !1, void ($("#aiSend").disabled = !1);
 }
