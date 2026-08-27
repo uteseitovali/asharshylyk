@@ -3165,7 +3165,7 @@ async function ask(query) {
 if (AI.busy || !query.trim()) return;
 AI.busy = !0, $("#aiSend").disabled = !0, chatAdd("user", query), $("#aiIn").value = "";
 const hits = retrieve(query, 4), ctx = hits.map(h => `[${h.title}]\n${h.text}`).join("\n\n");
-if (!AI.engine) {
+if (!AI.engine || !hits.length) {
 const a = offlineAnswer(query);
 return chatAdd("bot", a.text, a.src), AI.busy = !1, void ($("#aiSend").disabled = !1);
 }
