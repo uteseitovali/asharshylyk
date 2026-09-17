@@ -1,0 +1,1559 @@
+From b2b451e3f61962ba68d9cd5ecaa59d805ad08e60 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 17 Sep 2026 05:09:28 +0000
+Subject: [PATCH] Add Kazakh (kz) as a full third interface language
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+- Add complete kz translation block to I18N (214 keys, full parity with ru/en)
+- Generalize pName/pDesc/pType/shortName to work with any LANG suffix
+- Add name_kz/type_kz/desc_kz fields to all 20 regions in data.js (1926 okrugs + 1939 oblasts)
+- Add kz translations to SCHOOLS, CAMPS, REVOLTS, FLOWS, FAMINES, STORY, QUIZ, BIBLIOGRAPHY
+- Add kz to MODELS labels and OPT_LETTERS
+- Convert ~39 scattered "en"===LANG two-way ternaries to three-way (table headers,
+  CSV/GeoJSON export strings, calculator text, quiz counters, locale codes, About modal)
+- Wire up Kazakh support in the offline AI assistant: KB_KZ knowledge base (15 static +
+  3 dynamic entries), STOP_KZ stopwords, Kazakh-aware tokenizer regex, SYS_KZ system
+  prompt, and kz branches for context/no-context message templates
+- Add Қазақша language switcher button to index.html
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01N1eFfP7CPRznqEZ957XMFc
+---
+ app.js     | 650 +++++++++++++++++++++++++++++++++++++++++++++++++----
+ data.js    |  40 ++--
+ index.html |   1 +
+ 3 files changed, 624 insertions(+), 67 deletions(-)
+
+diff --git a/app.js b/app.js
+index d4593f0..9e48cca 100644
+--- a/app.js
++++ b/app.js
+@@ -436,6 +436,222 @@ tipUprising: "uprising",
+ tipUprisingYear: ". One of more than 380 uprisings of 1929–1931.",
+ worldToRegion: "To region",
+ worldWhole: "Whole world"
++},
++kz: {
++pageTitle: "Күйреу картографиясы · Қазақстан 1926–1939",
++pageDesc: "Ашаршылықтың (1930–1933 жж.) HGIS құралдарымен жасалған интерактивті тарихи-географиялық талдауы: 1926 және 1939 жылдардағы санақтар, MAUP мәселесі, көші-қон картасы, тарихнамалық көзқарастар.",
++brandTitle: "Күйреу картографиясы",
++brandSub: "Ашаршылық · HGIS · 1926–1939",
++tabKz: "Қазақстан картасы",
++tabWorld: "Әлем картасы",
++tabSchools: "Тарихнама",
++tabBiblio: "Библиография",
++tabData: "Деректер және MAUP",
++tabQuiz: "Викторина",
++tabAi: "ЖИ-көмекші",
++btnAboutTitle: "Жоба және әдіснама туралы",
++btnThemeTitle: "Ашық / қара тақырып",
++btnLangTitle: "Интерфейс тілі",
++secGrid: "Әкімшілік бөліну торы",
++seg1926: "1926 · 8 округ",
++seg1939: "1939 · 12 облыс",
++hintGrid1926: "1926 жылғы санақ: Қазақ АКСР-інің 8 ірі округі. Ірі бірліктер деректерді көбірек орташалайды — бұл MAUP-тағы масштаб әсері.",
++hintGrid1939: "1939 жылғы санақ: 12 облыс. Ұсақтау тор 1926 жылғы торда көрінбейтін қайшылықтарды көрсетеді.",
++secMetric: "Көрсеткіш",
++secLayers: "Қосымша қабаттар",
++layerCamps: "Лагерьлер мен құрылыстар",
++layerRevolts: "1929–1931 көтерілістері",
++layerLabels: "Аймақ атаулары",
++secModes: "Режимдер",
++btnStoryStart: "▶ StoryMap: қорғау сценарийі",
++btnStoryStop: "⏸ Турды тоқтату",
++btnSplit: "⇔ Салыстыру 1926 / 1939",
++hintStory: "StoryMap зерттеудің алты қадамынан өткізеді: 1926 жылғы даладан бастап MAUP туралы әдіснамалық қорытындыға дейін.",
++zoomInTitle: "Жақындату",
++zoomOutTitle: "Алыстату",
++zoomReset: "Бастапқы қалып",
++sidelblL: "1926 · округтер",
++sidelblR: "1939 · облыстар",
++ariaMapKz: "Қазақстан картасы",
++ariaMapWorld: "Әлем картасы",
++ariaMapSchools: "Тарихнамалық көзқарастар картасы",
++disclaimer1926: "1926 жылғы округ шекаралары — тірек реконструкция: тарихи бірліктерге сәйкес біріктірілген қазіргі әкімшілік геометрия (geoBoundaries). Бұл мұрағаттық кадастрлық shapefile емес. Демографиялық атрибуттар геометриядан бөлек сақталады.",
++disclaimer1939: "1939 жылғы облыс шекаралары — қазіргі геометрияға негізделген тірек реконструкция. 1926 және 1939 жылдардың атрибуттары әртүрлі көздерден алынған әрі базалық қорытындылары бөлек, сондықтан абсолютті сандарды емес, үлестерді салыстырған дұрысырақ.",
++secWorldLayer: "Әлем картасының қабаты",
++segFlows: "Көші-қон",
++segFamines: "1930 жж. ашаршылық",
++secDirections: "Бағыттар",
++dirAbroad: "Шетелге",
++dirSoviet: "КСРО республикаларына",
++hintFlows: "Сызық қалыңдығы — ағынның болжамды көлемі. Диапазон мен түсініктемені көру үшін сызыққа немесе нүктеге тінтуірді апарыңыз.",
++hintFamines: "Шеңбер өлшемі — аймақ халқына шаққандағы қаза болғандар үлесі. Қазақстан КСРО халықтары арасында ең үлкен салыстырмалы шығынды көрсетеді.",
++secFlowSummary: "Көші-қон қорытындысы",
++kvLeft: "Республикадан кеткендер",
++kvReturned: "Кейін оралғандар",
++kvPermanent: "Қайтпай кеткендер",
++kvAbroadStayed: "Шетелде қалғандар",
++noteFlowsDiscuss: "Нақты бағыттар бойынша бөліну — пікірталастық баға. С. Кэмерон елдер бойынша дәл санақты ашық зерттеу мәселесі деп тікелей атайды.",
++noteProjection: "Equal Earth проекциясы (тең аумақты), орталық меридиан 65° ш.б. Тең аумақты проекция әдейі таңдалды: ол аудандар арақатынасын бұрмаламайды, сондықтан картадағы аумақтарды салыстыру дұрыс болады. Мемлекет шекаралары — қазіргі заманғы (Natural Earth, 110 м), олар саяси карта емес, тек географиялық бағдар ретінде берілген.",
++schoolsHeading: "Бір апатқа үш көзқарас",
++schoolsIntro: "Тарихшылардың пікірі ашаршылық болды ма деген мәселеде емес, оның механизмі не деген мәселеде алшақтайды. Мектепті таңдаңыз, карта сол түсініктеменің орталығындағы аймақтарды бөліп көрсетеді. Тарихнама бөлімінің мәні осында: бірдей деректер, оларға қойылған әртүрлі сұрақтар, жауаптың әртүрлі географиясы.",
++chooseSchool: "Мектепті таңдаңыз",
++chooseSchoolHint: "Толық тезис пен картадағы белгілеуді көру үшін жоғарыдағы карточканы басыңыз.",
++focusRegions: "Осы көзқарас назардағы аймақтар",
++askAssistantSchool: "Осы мектеп туралы көмекшіден сұрау",
++schoolCaptionDefault: "1939 жылғы облыстар бойынша қазақ халқының шығын картасы. Жоғарыдан мектепті таңдаңыз.",
++biblioHeading: "Библиография және дереккөздер",
++biblioIntro: "Атластың тарихнамалық түсіндірмелері, демографиялық контексі және әдіснамалық шешімдері негізделген еңбектер жинағы. Сілтемелер жаңа қойындыда ашылады.",
++biblioOpen: "Дереккөзді ашу ↗",
++biblioAccessNote: "Кітапхана немесе институционалдық жазылым арқылы қолжетімділік қажет болуы мүмкін.",
++dataHeading: "Басты нәтиже: тор қорытындыны өзгертеді",
++statShiftSum: "Үлестердің жиынтық ауытқуы",
++statShiftUnit: "пайыздық тармақ",
++statDissim: "Ұқсамау индексі",
++statDissimSub: "үлестірімнің бестен бірі",
++statIntersections: "Полигон қиылыстары",
++statIntersectionsSub: "8 округ × 12 облыс",
++statCoverage: "Аумақ қамтуы",
++statCoverageSub: "торлар аумақ бойынша сәйкес келеді",
++dataIntro: "Бір аумақ, бір халық, екі әкімшілік тор. 1926 жылғы қазақ халқын 8 округтік тордан 12 облыстық торға ауыстырғанда, үлестердің жиынтық ауытқуы 42,46 п.т. құрайды, ал ұқсамау индексі — 21,2 %. Практикалық мәні: егер зерттеуші тек 1939 жылғы тормен жұмыс істесе, ол 1926 жылғы тормен жұмыс істегеннен өзгеше апат эпицентрі картасын алар еді. Шекара қорытындыны анықтайды — бұл дәл Modifiable Areal Unit Problem.",
++calcHeading: "Ареалдық интерполяция калькуляторы",
++calcSrcLabel: "1926 жылғы округ (көз)",
++calcTgtLabel: "1939 жылғы облыс (қабылдаушы)",
++calcBtn: "Есептеу",
++exportHeading: "Деректерді экспорттау",
++exportCsv: "CSV · көрсеткіштер кестесі",
++exportGeo: "GeoJSON · шекаралар мен атрибуттар",
++exportMaup: "CSV · қиылысу матрицасы",
++exportHint: "Барлық деректер ашық. GeoJSON файлы QGIS, ArcGIS және geojson.io бағдарламаларында ашылады.",
++tableHeading: "Көрсеткіштер кестесі",
++tableHint: "Сұрыптау үшін баған тақырыбын, аймақ карточкасын ашу үшін жолды басыңыз.",
++quizTag: "Оқушыларға арналған",
++quizHeading: "Түсінгеніңізді тексеріңіз",
++quizIntro: "Сайт материалдары бойынша викторина: карта, санақ деректері, тарихнама және HGIS әдіснамасы. Әр жауаптан кейін дереккөзге сілтемесі бар түсініктеме беріледі, ал соңында қателерге талдау жасалады.",
++quizStatQuestions: "Сұрақтар",
++quizStatFormat: "Формат",
++quizStatFormatSub: "бір дұрыс жауап",
++quizStatFormatVal: "4 нұсқа",
++quizStatTime: "Уақыт",
++quizStatTimeVal: "Шектеусіз",
++quizGo: "Викторинаны бастау",
++quizShuffle: "Сұрақтарды араластыру",
++quizShuffleOn: "Сұрақтар мен нұсқалар араластырылады",
++quizShuffleOff: "Сұрақтар реті — банктегідей",
++quizNext: "Келесі ›",
++quizFinish: "Нәтиже",
++quizAgain: "Қайта тапсыру",
++quizBack: "Материалдарға оралу",
++quizCorrect: "✓ Дұрыс",
++quizWrong: "✕ Дұрыс емес",
++quizReview: "Қателерге талдау",
++quizYourAnswer: "Сіздің жауабыңыз:",
++quizCorrectAnswer: "Дұрысы:",
++quizMsg100: "Мінсіз. Материал толық меңгерілді.",
++quizMsg80: "Тамаша нәтиже: негізгісін дұрыс түсіндіңіз.",
++quizMsg50: "Жаман емес. Төмендегі қателерді талдап, қайта көріңіз.",
++quizMsgLow: "«Тарихнама» және «Деректер және MAUP» бөлімдеріне қайта оралған жөн.",
++aiHeading: "Сайт материалдары бойынша ЖИ-көмекші",
++aiSub: "Модель тікелей браузерде жұмыс істейді: деректер еш жерге жіберілмейді",
++aiOffline: "Офлайн режим",
++aiReady: "Модель дайын",
++aiLoading: "Модель жүктелуде…",
++aiModelLabel: "Модель",
++aiLoadBtn: "Модельді жүктеу",
++aiNotLoaded: "Модель жүктелмеген",
++aiLoadedNote: "Модель жүктелді және жергілікті жұмыс істейді",
++aiPlaceholder: "Аймақ, сан, тарихшы немесе әдіс туралы сұраңыз…",
++aiSend: "Сұрау",
++aiNoteGpu: "Модель бір рет жүктеледі және браузерде кэштеледі, содан кейін интернетсіз жұмыс істейді. Ол жүктелгенге дейін көмекші кірістірілген білім қорынан үзінділермен жауап береді. Жауаптар әрқашан тек осы сайттың материалдарына негізделеді, сондықтан оларды «Деректер және MAUP» бөлімі бойынша тексеріңіз.",
++aiNoteNoGpu: "Бұл браузерде WebGPU қолдауы жоқ, сондықтан тілдік модель іске қосылмайды. Сайттың білім қоры бойынша кірістірілген офлайн іздеу жұмыс істейді. Толық модель үшін сайтты компьютердегі Chrome, Edge немесе Firefox-тың жаңа нұсқасында ашыңыз.",
++aiGreeting: "Сәлеметсіз бе! Мен осы зерттеудің материалдары бойынша жауап беремін: карталар, 1926 және 1939 жылдардағы санақтар, көші-қон, тарихнама және HGIS әдісі. Сұрақ қойыңыз немесе төмендегі ұсыныстардың бірін таңдаңыз.\n\nЖауаптарды тілдік модель тікелей сіздің браузеріңізде жасауы үшін «Модельді жүктеу» түймесін басыңыз. Ол болмаса, мен білім қорынан дәл үзінділермен жауап беремін.",
++aiSourceLabel: "Сайт материалдарындағы дереккөз: ",
++aiNoHits: "Бұл сұрау бойынша сайт материалдарынан ештеңе таппадым. Нақты аймақ туралы (мысалы, «Қарағанды облысы»), сан туралы (шығындар, көші-қон, мал басы), тарихшы туралы (Кэмерон, Пьянчола, Омарбеков) немесе әдіс туралы (MAUP, ареалдық интерполяция) сұрап көріңіз.",
++aiIdentity: "Мен — «Күйреу картографиясы» жобасының ЖИ-көмекшісімін: сіздің браузеріңізде тікелей жұмыс істейтін (деректер еш жерге жіберілмейді) тілдік модельмін және осы сайттың материалдары — карталар, 1926 және 1939 жылдардағы санақтар, көші-қон, Ашаршылық тарихнамасы және HGIS әдісі бойынша сұрақтарға жауап беремін. Аймақ, тарихшы, сан немесе әдіс туралы сұраңыз.",
++toastWebgpuMissing: "Бұл браузерде WebGPU қолжетімсіз: офлайн режим қосылды",
++toastModelLoaded: "Модель жүктелді: жауаптар енді сіздің браузеріңізде жасалады",
++toastModelFailed: "Модель жүктелмеді. Көмекші білім қорынан үзінділермен жауап береді.",
++aiAsk: "Мынаны айтып бер: ",
++storyPrev: "‹ Артқа",
++storyNext: "Келесі ›",
++storyFinish: "Аяқтау",
++storyExit: "Шығу",
++storyStep: "Қадам",
++storyOf: "/",
++toastSplitHint: "Сол жақта — 1926 ж. 8 округтік тор, оң жақта — 1939 ж. 12 облыс. Бөлгішті сүйреңіз.",
++toastThemeDark: "Қараңғы тақырып",
++toastThemeLight: "Ашық тақырып",
++toastDownloaded: "{n} файлы сақталды",
++toastDownloadFailed: "Файлды сақтау мүмкін болмады",
++toastExportUnavailableHere: "Файлдарды экспорттау осы қарау терезесінде қолжетімсіз. Чатта жіберілген сайттың толық файлын жүктеп алыңыз: онда экспорт жұмыс істейді.",
++toastLangChanged: "Интерфейс тілі: Қазақша",
++aboutTitle: "Жоба туралы",
++aboutSub: "Тарихи ГАЖ құралдарымен жасалған Ашаршылықтың кеңістіктік-демографиялық талдауы",
++gridUnitOkrug: "округ",
++gridUnitOblast: "облыс",
++printGenerated: "Жасалған уақыты",
++okrugsCount: "Округтер",
++totalPopulation: "Жалпы халық",
++kazakhsWord: "Қазақтар",
++livestockCount: "Мал басы",
++oblastsCount: "Облыстар",
++kazakhLoss: "Қазақтардың шығыны",
++maxLoss: "Ең үлкен шығын",
++anomalyGrowth: "Аномальды өсім",
++ofOblasts: "12-нің",
++grewOverall: "облыс жалпы халық саны бойынша өсті",
++byOkrugsGrid: "1926 жылғы тор",
++byOblastsGrid: "1939 жылғы тор",
++toKazakhsShare: "% халық",
++toThousandKm: "1933 ж. — шамамен 1/10",
++abroadDest: "Шетелдік бағыттар",
++sovietDest: "Одақ ішіндегі",
++biggestDest: "Ең үлкен бағыт",
++returnedShare: "Оралғандар үлесі",
++relLoss: "Салыстырмалы шығын",
++absMax: "Абсолютті максимум",
++deathEstimates: "ҚазАКСР-дегі құрбандар саны бағасы",
++kazakhShareRepublic: "Республикадағы қазақтар үлесі",
++regionGridLabel: "Тор",
++regionOf: "ж.",
++lossOfKazPop: "қазақ халқының 1926 → 1939 жж. шығыны",
++kazakhs1926: "Қазақтар, 1926",
++kazakhs1939: "Қазақтар, 1939",
++total1926: "Барлығы, 1926",
++total1939: "Барлығы, 1939",
++generalPopChange: "Жалпы халық санының өзгеруі",
++kazShareChange: "Қазақтар үлесі 1926 → 1939",
++maupShift: "MAUP бойынша үлес ауытқуы",
++shareKazPop: "округ халқындағы қазақтар үлесі, 1926",
++totalPop: "Жалпы халық саны",
++kazakhPop: "Қазақ халқы",
++otherPop: "Басқа халық",
++formedFrom: "Облыс қай округтерден құралды (1926)",
++ofArea: "% аумақ",
++maupNote: "Ареалдық интерполяция бұл облыс үшін 1926 ж. {a} қазақ береді, ал атрибут бойынша {b} — алшақтық {c} %. Бұл MAUP-тың тікелей мысалы.",
++savePdf: "🖨 PDF етіп сақтау",
++askAssistant: "Көмекшіден сұрау",
++tagNomadic: "Көшпелі мал шаруашылығы",
++tagGulag: "Лагерьлер мен құрылыстар",
++tagUnrest: "Көтеріліс ошағы",
++chartHint: "Карточканы ашу үшін басыңыз",
++flowRange: "мың",
++flowAbroadLabel: "Шетелдік",
++flowSovietLabel: "Одақ ішіндегі",
++flowEstimate: "бағыт · баға",
++legendFlowsAbroad: "шетелге",
++legendFlowsSoviet: "КСРО республикаларына",
++legendFlowsThickness: "қалыңдық — ағынның болжамды көлемі",
++legendFamineKz: "Қазақ АКСР-і",
++legendFamineOther: "КСРО-ның басқа аймақтары",
++legendFamineNon: "КСРО сыртында, басқа себептер",
++famineDeathShare: "аймақ халқынан қаза болғандар",
++famineVictims: "Құрбандар:",
++faminePop: "халық",
++kzAssrLabel: "Қазақ АКСР-і",
++tipUprising: "көтеріліс",
++tipUprisingYear: " жыл. 1929–1931 жж. 380-нен астам толқулардың бірі.",
++worldToRegion: "Аймаққа",
++worldWhole: "Бүкіл әлем"
+ }
+ };
+ 
+@@ -455,15 +671,15 @@ return obj && (obj[LANG] || obj.ru) || obj;
+ }
+ 
+ function pName(p) {
+-return "en" === LANG && p.name_en ? p.name_en : p.name;
++return p["name_" + LANG] || p.name;
+ }
+ 
+ function pDesc(p) {
+-return "en" === LANG && p.desc_en ? p.desc_en : p.desc;
++return p["desc_" + LANG] || p.desc;
+ }
+ 
+ function pType(p) {
+-return "en" === LANG && p.type_en ? p.type_en : p.type;
++return p["type_" + LANG] || p.type;
+ }
+ 
+ function applyStaticI18n() {
+@@ -542,6 +758,13 @@ work: '"The Hungry Steppe" (2018)',
+ thesis: "The famine is the result of violent sedentarization: the destruction of nomadic husbandry as a way of life, not merely grain requisitioning.",
+ lens: "Maximum losses occurred where the share of nomadic and semi-nomadic pastoralism was highest.",
+ detail: "Cameron shows that Kazakhs died not from a grain shortfall, but from the destruction of livestock — the foundation of the nomadic economy. The state demanded meat-procurement quotas from a republic where livestock was not a commodity but a condition of survival. That is why the epicenter of the catastrophe lies in the pastoral districts, not the farming ones."
++},
++kz: {
++name: "Сара Кэмерон",
++work: "«The Hungry Steppe» (2018)",
++thesis: "Ашаршылық — күштеп отырықшыландырудың нәтижесі: тек астық тәркілеу емес, көшпелі шаруашылықтың өмір салты ретінде құрып кетуі.",
++lens: "Ең үлкен шығындар көшпелі және жартылай көшпелі мал шаруашылығының үлесі ең жоғары жерлерде болды.",
++detail: "Кэмерон қазақтардың астық тапшылығынан емес, көшпелі экономиканың негізі болған малдың жойылуынан қырылғанын көрсетеді. Мемлекет мал үшін тауар емес, өмір сүру шарты болған республикадан ет дайындау нормасын талап етті. Сондықтан апаттың эпицентрі — егіншілік аудандары емес, мал шаруашылығы аудандары."
+ }
+ }, {
+ id: "pianciola",
+@@ -560,6 +783,13 @@ work: "Studies on the colonial hierarchy (2001–2020)",
+ thesis: "The famine is a consequence of an imperial hierarchy of priorities: resources were extracted from the periphery to benefit industrial centers.",
+ lens: "Looks at the contrast: districts with GULAG camps and industrial construction grow in total population while losing their indigenous population.",
+ detail: 'Pianciola explains the "anomalous growth": Karaganda, Balkhash, and Ridder receive an influx of special settlers and workers, so the oblast’s total population grows — while its Kazakh population falls by half in the same oblast. Administrative statistics on total population mask the ethno-demographic collapse.'
++},
++kz: {
++name: "Никколо Пьянчола",
++work: "Отарлық иерархия туралы еңбектер (2001–2020)",
++thesis: "Ашаршылық — империялық басымдықтар иерархиясының салдары: ресурстар шет аймақтардан өнеркәсіп орталықтарының пайдасына тартып алынды.",
++lens: "Қарама-қайшылыққа назар аударады: ГУЛАГ пен өнеркәсіп құрылысы бар аудандарда жалпы халық саны өседі, ал байырғы халық азаяды.",
++detail: "Пьянчола «аномальды өсімді» түсіндіреді: Қарағанды, Балқаш, Риддерге арнайы қоныс аударушылар мен жұмысшылар легі келеді, сондықтан облыстың жалпы халық саны өседі — сол уақытта сол облыстағы қазақ халқы екі есе азаяды. Жалпы халық бойынша әкімшілік статистика этнодемографиялық күйреуді жасырады."
+ }
+ }, {
+ id: "omarbekov",
+@@ -578,6 +808,13 @@ work: "The Kazakhstani national school",
+ thesis: "The famine was a deliberate policy against the Kazakh people; the emphasis is on resistance and its suppression.",
+ lens: "Maps the connection between the centers of the 1929–1931 uprisings and the subsequent depth of losses.",
+ detail: "Omarbekov and the Kazakhstani historiography place Kazakh agency at the center: more than 380 uprisings and disturbances in 1929–1931 (Suzak, Irgiz, Batpakkara, Adai). The suppression of the uprisings and punitive cordons on migration routes intensified mortality in the same districts."
++},
++kz: {
++name: "Талас Омарбеков",
++work: "Қазақстандық ұлттық мектеп",
++thesis: "Ашаршылық — қазақ халқына қарсы бағытталған мақсатты саясат; басты назар қарсылық пен оны басып-жаншуда.",
++lens: "1929–1931 жж. көтеріліс ошақтары мен кейінгі шығын тереңдігі арасындағы байланысты көрсетеді.",
++detail: "Омарбеков және қазақстандық тарихнама қазақтардың субъектілігін орталыққа қояды: 1929–1931 жж. 380-нен астам көтеріліс пен толқу болды (Созақ, Ырғыз, Батпаққара, Адай). Көтерілістерді басу және көші-қон жолдарындағы жазалау бекеттері сол аудандардағы өлім-жітімді күшейтті."
+ }
+ } ], LENS_TAGS = {
+ west_kz: {
+@@ -650,6 +887,10 @@ t: "Карагандинский ИТЛ, один из крупнейших в 
+ en: {
+ n: "Karlag",
+ t: "Karaganda corrective labor camp, one of the largest in the USSR"
++},
++kz: {
++n: "Карлаг",
++t: "Қарағанды түзеу-еңбек лагері, КСРО-дағы ең ірілерінің бірі"
+ }
+ }, {
+ lon: 67.7,
+@@ -661,6 +902,10 @@ t: "Особый лагерь, Джезказган"
+ en: {
+ n: "Steplag",
+ t: "Special camp, Dzhezkazgan"
++},
++kz: {
++n: "Степлаг",
++t: "Арнайы лагерь, Жезқазған"
+ }
+ }, {
+ lon: 71,
+@@ -672,6 +917,10 @@ t: "Акмолинский лагерь жён «изменников родин
+ en: {
+ n: "ALZHIR",
+ t: 'Akmola camp for wives of "traitors to the motherland"'
++},
++kz: {
++n: "АЛЖИР",
++t: "«Отан сатқындарының» әйелдеріне арналған Ақмола лагері"
+ }
+ }, {
+ lon: 74.9,
+@@ -683,6 +932,10 @@ t: "Медеплавильный комбинат, труд спецпересе
+ en: {
+ n: "Balkhashstroy",
+ t: "Copper-smelting plant, built with special-settler labor"
++},
++kz: {
++n: "Балқашстрой",
++t: "Мыс қорыту комбинаты, арнайы қоныс аударушылардың еңбегімен салынған"
+ }
+ }, {
+ lon: 83.5,
+@@ -694,6 +947,10 @@ t: "Полиметаллический комбинат, Рудный Алтай
+ en: {
+ n: "Ridder",
+ t: "Polymetallic plant, Rudny Altai"
++},
++kz: {
++n: "Риддер",
++t: "Полиметалл комбинаты, Кенді Алтай"
+ }
+ } ], REVOLTS = [ {
+ lon: 68.6,
+@@ -704,6 +961,9 @@ n: "Сузакское"
+ },
+ en: {
+ n: "Suzak"
++},
++kz: {
++n: "Созақ"
+ }
+ }, {
+ lon: 61.3,
+@@ -714,6 +974,9 @@ n: "Иргизское"
+ },
+ en: {
+ n: "Irgiz"
++},
++kz: {
++n: "Ырғыз"
+ }
+ }, {
+ lon: 64.3,
+@@ -724,6 +987,9 @@ n: "Батпаккаринское"
+ },
+ en: {
+ n: "Batpakkara"
++},
++kz: {
++n: "Батпаққара"
+ }
+ }, {
+ lon: 54,
+@@ -734,6 +1000,9 @@ n: "Адаевское"
+ },
+ en: {
+ n: "Adai"
++},
++kz: {
++n: "Адай"
+ }
+ }, {
+ lon: 65.5,
+@@ -744,6 +1013,9 @@ n: "Каракумское"
+ },
+ en: {
+ n: "Karakum"
++},
++kz: {
++n: "Қарақұм"
+ }
+ }, {
+ lon: 77.5,
+@@ -754,6 +1026,9 @@ n: "Абралинское"
+ },
+ en: {
+ n: "Abralin"
++},
++kz: {
++n: "Абыралы"
+ }
+ } ], FLOWS = [ {
+ id: "xinjiang",
+@@ -772,6 +1047,11 @@ en: {
+ to: "Xinjiang (China)",
+ short: "Xinjiang",
+ note: "The largest foreign destination. Crossing via the Dzungarian Gate and Tarbagatai. Some descendants returned only in 1955–1962."
++},
++kz: {
++to: "Шыңжаң (Қытай)",
++short: "Шыңжаң",
++note: "Ең ірі шетелдік бағыт. Жоңғар қақпасы мен Тарбағатай арқылы өту. Ұрпақтарының бір бөлігі тек 1955–1962 жж. оралды."
+ }
+ }, {
+ id: "mongolia",
+@@ -790,6 +1070,11 @@ en: {
+ to: "Mongolia",
+ short: "Mongolia",
+ note: "Bayan-Ölgii aimag — a permanent Kazakh community formed there and still exists today."
++},
++kz: {
++to: "Моңғолия",
++short: "Моңғолия",
++note: "Баян-Өлгий аймағы — тұрақты қазақ қауымдастығы қалыптасты, ол бүгінге дейін бар."
+ }
+ }, {
+ id: "afghanistan",
+@@ -808,6 +1093,11 @@ en: {
+ to: "Afghanistan",
+ short: "Afghanistan",
+ note: "Via Turkmenistan and Uzbekistan. By 1935, Kazakh communities are recorded in the north of the country."
++},
++kz: {
++to: "Ауғанстан",
++short: "Ауғанстан",
++note: "Түрікменстан мен Өзбекстан арқылы. 1935 жылға қарай елдің солтүстігінде қазақ қауымдастықтары тіркелген."
+ }
+ }, {
+ id: "iran",
+@@ -826,6 +1116,11 @@ en: {
+ to: "Iran",
+ short: "Iran",
+ note: "Small groups, mostly from Mangystau and the Caspian coast."
++},
++kz: {
++to: "Иран",
++short: "Иран",
++note: "Шағын топтар, негізінен Маңғыстау мен Каспий жағалауынан."
+ }
+ }, {
+ id: "turkey",
+@@ -845,6 +1140,11 @@ en: {
+ to: "Turkey",
+ short: "Turkey",
+ note: "Secondary migration of the 1950s–60s from Xinjiang, already after the famine."
++},
++kz: {
++to: "Түркия",
++short: "Түркия",
++note: "1950–60 жж. Шыңжаңнан қайталама көші-қон, ашаршылықтан кейін болған."
+ }
+ }, {
+ id: "westsib",
+@@ -863,6 +1163,11 @@ en: {
+ to: "West Siberian Krai",
+ short: "W. Siberia",
+ note: "Omsk Oblast, Novosibirsk, Barnaul. The main destination within the union from the north of the republic."
++},
++kz: {
++to: "Батыс Сібір өлкесі",
++short: "Батыс Сібір",
++note: "Омбы облысы, Новосібір, Барнаул. Республиканың солтүстігінен одақ ішіндегі негізгі бағыт."
+ }
+ }, {
+ id: "volga",
+@@ -881,6 +1186,11 @@ en: {
+ to: "Middle Volga, Saratov, Stalingrad",
+ short: "Middle Volga",
+ note: "Via Uralsk and Orenburg. Blocking cordons on the roads were also placed here."
++},
++kz: {
++to: "Орта Еділ, Саратов, Сталинград",
++short: "Орта Еділ",
++note: "Орал мен Орынбор арқылы. Жолдарда жазалау бекеттері де осында орналасқан."
+ }
+ }, {
+ id: "uzbek",
+@@ -899,6 +1209,11 @@ en: {
+ to: "Uzbek SSR",
+ short: "Uzbekistan",
+ note: "Tashkent and the Fergana Valley. The largest southern destination."
++},
++kz: {
++to: "Өзбек КСР-і",
++short: "Өзбекстан",
++note: "Ташкент пен Ферғана аңғары. Ең үлкен оңтүстік бағыт."
+ }
+ }, {
+ id: "kirghiz",
+@@ -917,6 +1232,11 @@ en: {
+ to: "Kirghiz ASSR",
+ short: "Kirghizia",
+ note: "The Chuy Valley and Issyk-Kul — the geographically nearest refuge for Jetysu."
++},
++kz: {
++to: "Қырғыз АКСР-і",
++short: "Қырғызстан",
++note: "Шу аңғары мен Ыстықкөл — Жетісу үшін географиялық жағынан ең жақын пана."
+ }
+ }, {
+ id: "turkmen",
+@@ -935,6 +1255,11 @@ en: {
+ to: "Turkmen SSR",
+ short: "Turkmenia",
+ note: "Adai migrations from Mangystau and the Ustyurt plateau."
++},
++kz: {
++to: "Түрікмен КСР-і",
++short: "Түрікменстан",
++note: "Маңғыстау мен Үстірттен Адай қазақтарының көшуі."
+ }
+ }, {
+ id: "karakalpak",
+@@ -953,6 +1278,11 @@ en: {
+ to: "Karakalpak ASSR",
+ short: "Karakalpakia",
+ note: "The Aral Sea region, the Amu Darya delta."
++},
++kz: {
++to: "Қарақалпақ АКСР-і",
++short: "Қарақалпақстан",
++note: "Арал маңы, Амудария атырауы."
+ }
+ }, {
+ id: "urals",
+@@ -971,6 +1301,11 @@ en: {
+ to: "Urals: Chelyabinsk, Orenburg, Bashkiria",
+ short: "Urals",
+ note: "2,700 Kazakh households are recorded in Bashkiria (R. Kindler, 2017)."
++},
++kz: {
++to: "Орал: Челябі, Орынбор, Башқұртстан",
++short: "Орал",
++note: "Башқұртстанда 2,7 мың қазақ шаруашылығы тіркелген (Р. Киндлер, 2017)."
+ }
+ } ], FAMINES = [ {
+ lon: 68,
+@@ -988,6 +1323,12 @@ n: "Kazak ASSR",
+ deaths: "1.3–2.3 million",
+ pop: "≈6.2 million",
+ t: "The largest RELATIVE loss among the peoples of the USSR: 38–42% of all Kazakhs died."
++},
++kz: {
++n: "Қазақ АКСР-і",
++deaths: "1,3–2,3 млн",
++pop: "≈6,2 млн",
++t: "КСРО халықтары арасында ең үлкен САЛЫСТЫРМАЛЫ шығын: барлық қазақтардың 38–42 %-ы қаза тапты."
+ }
+ }, {
+ lon: 31,
+@@ -1004,6 +1345,12 @@ n: "Ukrainian SSR",
+ deaths: "3.5–5 million",
+ pop: "≈31 million",
+ t: "The Holodomor of 1932–33. The largest ABSOLUTE number of victims in the USSR."
++},
++kz: {
++n: "Украин КСР-і",
++deaths: "3,5–5 млн",
++pop: "≈31 млн",
++t: "1932–33 жж. Голодомор. КСРО-дағы ең үлкен АБСОЛЮТТІ құрбандар саны."
+ }
+ }, {
+ lon: 47,
+@@ -1020,6 +1367,12 @@ n: "Volga region (RSFSR)",
+ deaths: "0.4–1 million",
+ pop: "≈11 million",
+ t: "The Lower and Middle Volga, grain-growing districts subject to procurement quotas."
++},
++kz: {
++n: "Еділ бойы (РКФСР)",
++deaths: "0,4–1 млн",
++pop: "≈11 млн",
++t: "Төменгі және Орта Еділ, астық дайындау нормасына жататын егіншілік аудандары."
+ }
+ }, {
+ lon: 40,
+@@ -1036,6 +1389,12 @@ n: "North Caucasus, Kuban",
+ deaths: "0.3–0.5 million",
+ pop: "≈9 million",
+ t: 'Kuban stanitsas, the "black board" blacklist regime.'
++},
++kz: {
++n: "Солтүстік Кавказ, Кубань",
++deaths: "0,3–0,5 млн",
++pop: "≈9 млн",
++t: "Кубань станицалары, «қара тақта» тізім режимі."
+ }
+ }, {
+ lon: 75,
+@@ -1052,6 +1411,12 @@ n: "Western Siberia, Urals",
+ deaths: "0.1–0.3 million",
+ pop: "≈13 million",
+ t: "Simultaneously a region of exile and a destination for special settlers."
++},
++kz: {
++n: "Батыс Сібір, Орал",
++deaths: "0,1–0,3 млн",
++pop: "≈13 млн",
++t: "Сонымен бірге жер аудару және арнайы қоныс аударушыларды қабылдау аймағы."
+ }
+ }, {
+ lon: 106,
+@@ -1069,6 +1434,12 @@ n: "China: Gansu, Shaanxi",
+ deaths: "3–10 million",
+ pop: "≈40 million",
+ t: "The famine of 1928–1930. Different causes (drought, warlord conflict), included for scale."
++},
++kz: {
++n: "Қытай: Ганьсу, Шэньси",
++deaths: "3–10 млн",
++pop: "≈40 млн",
++t: "1928–1930 жж. ашаршылық. Себептері басқа (құрғақшылық, милитаристер соғысы), масштабты көрсету үшін берілген."
+ }
+ } ], STORY = [ {
+ p: "1926",
+@@ -1083,6 +1454,11 @@ en: {
+ t: "The steppe before the catastrophe",
+ text: "The 1926 census. The Kazak ASSR is divided into 8 large okrugs. Kazakhs form the majority almost everywhere: from 62% in Kustanai Okrug to 77% in Semipalatinsk Okrug. The economy is nomadic and semi-nomadic pastoralism, with around 40 million head of livestock.",
+ cite: "All-Union Census of 1926"
++},
++kz: {
++t: "Апатқа дейінгі дала",
++text: "1926 жылғы санақ. Қазақ АКСР-і 8 ірі округке бөлінген. Қазақтар барлық жерде дерлік басым: Қостанай округінде 62 %-дан Семей округінде 77 %-ға дейін. Шаруашылық — көшпелі және жартылай көшпелі мал шаруашылығы, шамамен 40 млн бас мал.",
++cite: "1926 жылғы Бүкілодақтық халық санағы"
+ }
+ }, {
+ p: "1939",
+@@ -1097,6 +1473,11 @@ en: {
+ t: "Rupture: collectivization and sedentarization",
+ text: "From 1929 — forced settlement and meat-procurement quotas. Livestock is seized in a republic where it is not a commodity but a condition of survival. By 1933, of 40 million head, about one-tenth remains. It is precisely the pastoral west and center that show the largest relative losses.",
+ cite: 'S. Cameron, "The Hungry Steppe" (2018)'
++},
++kz: {
++t: "Күйреу: ұжымдастыру және отырықшыландыру",
++text: "1929 жылдан бастап — мәжбүрлі отырықшыландыру және ет дайындау нормасы. Мал тауар емес, өмір сүру шарты болған республикада тәркіленеді. 1933 жылға қарай 40 млн бастан шамамен оннан бір бөлігі қалады. Дәл мал шаруашылығы басым батыс пен орталық ең үлкен салыстырмалы шығынды береді.",
++cite: "С. Кэмерон, «The Hungry Steppe» (2018)"
+ }
+ }, {
+ p: "1939",
+@@ -1112,6 +1493,11 @@ en: {
+ t: "Resistance",
+ text: "In 1929–1931 — more than 380 uprisings and disturbances: Suzak, Irgiz, Batpakkara, Adai, Karakum. Suppression and blocking cordons along migration routes increased mortality in the same districts.",
+ cite: "T. Omarbekov, the Kazakhstani national school"
++},
++kz: {
++t: "Қарсылық",
++text: "1929–1931 жж. — 380-нен астам көтеріліс пен толқу: Созақ, Ырғыз, Батпаққара, Адай, Қарақұм. Оларды басу және көші-қон жолдарындағы жазалау бекеттері сол аудандардағы өлім-жітімді күшейтті.",
++cite: "Т. Омарбеков, қазақстандық ұлттық мектеп"
+ }
+ }, {
+ p: "1939",
+@@ -1127,6 +1513,11 @@ en: {
+ t: "Anomalous growth",
+ text: "A paradox invisible in aggregate statistics: in Karaganda Oblast the total population GROWS, because special settlers, Karlag prisoners, and workers arrive. Yet the Kazakh population of that same oblast falls by more than half. The aggregate figure masks the ethno-demographic collapse.",
+ cite: "N. Pianciola: an imperial hierarchy of priorities"
++},
++kz: {
++t: "Аномальды өсім",
++text: "Жиынтық статистикада көрінбейтін парадокс: Қарағанды облысында жалпы халық саны ӨСЕДІ, себебі арнайы қоныс аударушылар, Карлаг тұтқындары және жұмысшылар келеді. Ал сол облыстың қазақ халқы екі еседен астам азаяды. Жиынтық сан этнодемографиялық күйреуді жасырады.",
++cite: "Н. Пьянчола: империялық басымдықтар иерархиясы"
+ }
+ }, {
+ p: "1939",
+@@ -1142,6 +1533,11 @@ en: {
+ t: "Exodus",
+ text: "About 1.13 million people leave the republic. Later, 454,000 return; about 200,000 remain abroad permanently — in Xinjiang, Mongolia, Afghanistan, Iran, and later Turkey. This is how the modern Kazakh diaspora forms.",
+ cite: "Archival data, APRK; S. Cameron"
++},
++kz: {
++t: "Көш",
++text: "Республикадан шамамен 1,13 млн адам кетеді. Кейін 454 мың адам оралады; шамамен 200 мың адам шетелде мәңгілікке қалады — Шыңжаңда, Моңғолияда, Ауғанстанда, Иранда, кейінірек Түркияда. Осылайша қазіргі қазақ диаспорасы қалыптасады.",
++cite: "ҚР ПМА мұрағат деректері; С. Кэмерон"
+ }
+ }, {
+ p: "1939",
+@@ -1157,6 +1553,11 @@ en: {
+ t: "The problem of scale: MAUP",
+ text: "The study’s central methodological conclusion. The same territory, the same people — but moving from the 8-okrug grid of 1926 to the 12-oblast grid of 1939 shifts the spatial distribution of the Kazakh population by a total of 42.5 percentage points. The dissimilarity index is 21.2%. This is the Modifiable Areal Unit Problem: the boundary determines the conclusion.",
+ cite: "Original calculation: areal interpolation across 96 polygon intersections"
++},
++kz: {
++t: "Масштаб мәселесі: MAUP",
++text: "Зерттеудің басты әдіснамалық қорытындысы. Аумақ бір, адамдар бір — бірақ 1926 жылғы 8 округтік тордан 1939 жылғы 12 облыстық торға көшкенде қазақ халқының кеңістіктік үлестірімі жиынтығында 42,5 пайыздық тармаққа ауысады. Ұқсамау индексі — 21,2 %. Бұл — Modifiable Areal Unit Problem: шекара қорытындыны анықтайды.",
++cite: "Меншікті есептеу: 96 полигон қиылысы бойынша ареалдық интерполяция"
+ }
+ } ], QUIZ = [ {
+ c: 1,
+@@ -1171,6 +1572,12 @@ q: "How many okrugs did the Kazak ASSR have according to the 1926 census, on thi
+ a: [ "6", "8", "12", "14" ],
+ e: "Eight okrugs: Uralsk, Aktyubinsk, Kustanai, Petropavlovsk, Akmola, Semipalatinsk, Syr-Darya, and Jetisu. By 1939 the territory is already divided into 12 oblasts — and this very difference is what creates MAUP.",
+ tag: "Map"
++},
++kz: {
++q: "Осы зерттеудің картасында 1926 жылғы санақ бойынша Қазақ АКСР-інде неше округ болды?",
++a: [ "6", "8", "12", "14" ],
++e: "Сегіз округ: Орал, Ақтөбе, Қостанай, Петропавл, Ақмола, Семей, Сырдария және Жетісу. 1939 жылға қарай аумақ 12 облысқа бөлінеді — дәл осы айырмашылық MAUP-ты тудырады.",
++tag: "Карта"
+ }
+ }, {
+ c: 1,
+@@ -1185,6 +1592,12 @@ q: "What does the acronym MAUP stand for?",
+ a: [ "Model of Urbanization and Density Analysis", "Modifiable Areal Unit Problem", "Method of Archival Census Unification", "International Atlas of Established Periods" ],
+ e: "Modifiable Areal Unit Problem: the result of a statistical analysis changes depending on which boundaries the data is grouped by.",
+ tag: "Methodology"
++},
++kz: {
++q: "MAUP аббревиатурасы нені білдіреді?",
++a: [ "Урбанизация мен тығыздықты талдау моделі", "Модификацияланатын аумақтық бірліктер мәселесі", "Санақтарды мұрағаттық біріздендіру әдісі", "Белгіленген кезеңдердің халықаралық атласы" ],
++e: "Modifiable Areal Unit Problem — модификацияланатын аумақтық бірліктер мәселесі: статистикалық талдау нәтижесі деректер қандай шекаралар бойынша топтастырылғанына байланысты өзгереді.",
++tag: "Әдіснама"
+ }
+ }, {
+ c: 1,
+@@ -1199,6 +1612,12 @@ q: "Which region in the study is the main example of “anomalous growth”?",
+ a: [ "Kzyl-Orda Oblast", "Karaganda Oblast", "Uralsk Okrug", "South Kazakhstan Oblast" ],
+ e: "In Karaganda Oblast the total population grew due to special settlers, Karlag prisoners, and workers on industrial construction sites, while the Kazakh population fell by more than half. The oblast’s aggregate figure masks the catastrophe.",
+ tag: "Historiography"
++},
++kz: {
++q: "Зерттеуде қай аймақ «аномальды өсімнің» басты мысалы болып табылады?",
++a: [ "Қызылорда облысы", "Қарағанды облысы", "Орал округі", "Оңтүстік Қазақстан облысы" ],
++e: "Қарағанды облысында жалпы халық саны арнайы қоныс аударушылар, Карлаг тұтқындары және өнеркәсіп құрылысындағы жұмысшылар есебінен өсті, ал қазақ халқы екі еседен астам азайды. Облыс бойынша жиынтық сан апатты жасырады.",
++tag: "Тарихнама"
+ }
+ }, {
+ c: 1,
+@@ -1213,6 +1632,12 @@ q: "Why did pastoral districts suffer more than farming ones?",
+ a: [ "There was a drought there, but not in farming districts", "Livestock was seized by the state, and for the nomadic economy it was not a commodity but a condition of survival", "Pastoral districts were farther from railways", "Pastoral districts had fewer doctors" ],
+ e: "Sarah Cameron’s thesis: the republic fulfilled meat-procurement quotas, but for the nomadic and semi-nomadic economy livestock was the foundation of the entire subsistence system. Its seizure meant not a loss of income, but a loss of the means of survival.",
+ tag: "Historiography"
++},
++kz: {
++q: "Неге мал шаруашылығы аудандары егіншілік аудандарынан көбірек зардап шекті?",
++a: [ "Онда құрғақшылық болды, ал егіншілік аудандарда болмады", "Малды мемлекет тәркіледі, ал көшпелі шаруашылық үшін ол тауар емес, өмір сүру шарты болды", "Мал шаруашылығы аудандары теміржолдан алыс болды", "Мал шаруашылығы аудандарында дәрігер аз болды" ],
++e: "Сара Кэмерон тезисі: республика ет дайындау нормасын орындады, бірақ көшпелі және жартылай көшпелі шаруашылық үшін мал бүкіл өмір сүру жүйесінің негізі болды. Оны тәркілеу кіріс жоғалту емес, күнкөріс құралын жоғалту дегенді білдірді.",
++tag: "Тарихнама"
+ }
+ }, {
+ c: 1,
+@@ -1227,6 +1652,12 @@ q: "Roughly how many people left Kazakhstan during the migrations?",
+ a: [ "about 300 thousand", "about 1.13 million", "about 3 million", "about 5 million" ],
+ e: "About 1.13 million people. Later, about 454,000 returned; about 200,000 remained abroad permanently — in Xinjiang, Mongolia, Afghanistan, Iran, and later Turkey.",
+ tag: "Data"
++},
++kz: {
++q: "Көші-қон кезінде Қазақстаннан шамамен қанша адам кетті?",
++a: [ "шамамен 300 мың", "шамамен 1,13 миллион", "шамамен 3 миллион", "шамамен 5 миллион" ],
++e: "Шамамен 1,13 млн адам. Кейін шамамен 454 мың адам оралды; шамамен 200 мың адам шетелде мәңгілікке қалды — Шыңжаңда, Моңғолияда, Ауғанстанда, Иранда, кейінірек Түркияда.",
++tag: "Деректер"
+ }
+ }, {
+ c: 1,
+@@ -1241,6 +1672,12 @@ q: "Which foreign destination of the migrations was the largest?",
+ a: [ "Turkey", "Xinjiang (China)", "Iran", "Afghanistan" ],
+ e: "Xinjiang: crossing via the Dzungarian Gate and Tarbagatai. Estimates run around 100,000–200,000 people, but the exact breakdown by destination remains debated: S. Cameron calls it an open research question.",
+ tag: "World map"
++},
++kz: {
++q: "Көші-қонның қай шетелдік бағыты ең ірісі болды?",
++a: [ "Түркия", "Шыңжаң (Қытай)", "Иран", "Ауғанстан" ],
++e: "Шыңжаң: Жоңғар қақпасы мен Тарбағатай арқылы өту. Бағалар шамамен 100–200 мың адамды құрайды, бірақ бағыттар бойынша дәл бөлу пікірталастық болып қалады: С. Кэмерон оны ашық зерттеу мәселесі деп атайды.",
++tag: "Әлем картасы"
+ }
+ }, {
+ c: 1,
+@@ -1255,6 +1692,12 @@ q: "How does the Kazakh famine differ from the Holodomor in demographic terms?",
+ a: [ "Kazakhstan had more victims in absolute numbers", "Kazakhstan had the largest RELATIVE loss — the share of deaths relative to the size of the people", "The famine in Kazakhstan lasted one year", "There is no statistical difference between them" ],
+ e: "In absolute numbers, the Ukrainian SSR saw the most victims (3.5–5 million). But by the share of deaths relative to their own population, Kazakhs suffered the greatest loss among the peoples of the USSR: 38–42%.",
+ tag: "World map"
++},
++kz: {
++q: "Қазақ ашаршылығы демографиялық көрсеткіштер бойынша Голодомордан немен ерекшеленеді?",
++a: [ "Қазақстанда абсолютті сандар бойынша құрбандар көп болды", "Қазақстанда халық санына қатысты САЛЫСТЫРМАЛЫ шығын ең үлкен болды", "Қазақстанда ашаршылық бір жыл ғана болды", "Олардың арасында статистикалық айырмашылық жоқ" ],
++e: "Абсолютті сандар бойынша ең көп құрбан Украин КСР-інде болды (3,5–5 млн). Бірақ өз халқына қатысты шығын үлесі бойынша қазақтар КСРО халықтары арасында ең үлкен шығынды көрді: 38–42 %.",
++tag: "Әлем картасы"
+ }
+ }, {
+ c: 2,
+@@ -1269,6 +1712,12 @@ q: "What happened to the livestock herd between 1928 and 1933?",
+ a: [ "It shrank by roughly a quarter", "It shrank by roughly half", "Of 40 million head, about one-tenth remained", "It remained almost unchanged" ],
+ e: "Of roughly 40 million head, by 1933 about 4.5 million remained — around one-tenth. This destroyed the material foundation of the nomadic economy.",
+ tag: "Data"
++},
++kz: {
++q: "1928–1933 жж. аралығында мал басына не болды?",
++a: [ "Шамамен төрттен бірге азайды", "Шамамен екі есе азайды", "40 млн бастан шамамен оннан бір бөлігі қалды", "Дерлік өзгеріссіз қалды" ],
++e: "Шамамен 40 млн бастан 1933 жылға қарай шамамен 4,5 млн қалды — оннан бір бөлігі шамасында. Бұл көшпелі шаруашылықтың материалдық негізін құртты.",
++tag: "Деректер"
+ }
+ }, {
+ c: 1,
+@@ -1283,6 +1732,12 @@ q: "How does the areal interpolation used in this study work?",
+ a: [ "The okrug’s population is split evenly among all oblasts", "The okrug’s population is distributed in proportion to the area of intersection with each oblast", "The population of the nearest city is used", "The data is copied from the 1939 census" ],
+ e: "The formula: P_fragment = P_1926 × (intersection area ÷ 1926 okrug area). The assumption is uniform population density within the okrug. This is a simplification, and it is itself a source of part of the error.",
+ tag: "Methodology"
++},
++kz: {
++q: "Осы зерттеуде қолданылған ареалдық интерполяция қалай жұмыс істейді?",
++a: [ "Округ халқы барлық облыстар арасында тең бөлінеді", "Округ халқы әр облыспен қиылысу ауданына пропорционал бөлінеді", "Ең жақын қаланың халық саны алынады", "Деректер 1939 жылғы санақтан көшіріледі" ],
++e: "Формула: P_фрагмент = P_1926 × (Қиылысу ауданы ÷ 1926 округ ауданы). Болжам — округ ішінде тығыздық бірдей. Бұл жеңілдету, және дәл осы қателіктің бір бөлігін береді.",
++tag: "Әдіснама"
+ }
+ }, {
+ c: 1,
+@@ -1297,6 +1752,12 @@ q: "The dissimilarity index between the 1926 grid and the 1939 grid in this stud
+ a: [ "2.1%", "21.2%", "42.5%", "68.0%" ],
+ e: "The total share shift is 42.46 percentage points; the dissimilarity index is half of that, i.e. 21.2%. In other words, changing the grid “relocates” a fifth of the entire spatial distribution of the population.",
+ tag: "Methodology"
++},
++kz: {
++q: "Осы зерттеуде 1926 жылғы тор мен 1939 жылғы тор арасындағы ұқсамау индексі неге тең болды?",
++a: [ "2,1 %", "21,2 %", "42,5 %", "68,0 %" ],
++e: "Үлестердің жиынтық ауытқуы — 42,46 пайыздық тармақ, ұқсамау индексі — осының жартысы, яғни 21,2 %. Басқаша айтқанда, тор өзгергенде халықтың бүкіл кеңістіктік үлестірімінің бестен бірі «көшіп кетеді».",
++tag: "Әдіснама"
+ }
+ }, {
+ c: 1,
+@@ -1311,6 +1772,12 @@ q: "In T. Omarbekov’s interpretation, the uprisings of 1929–1931 (Suzak, Irg
+ a: [ "Spontaneous looting with no political content", "An expression of Kazakh agency and organized resistance", "Operations by foreign states", "Conflicts among the nomadic clans themselves" ],
+ e: "The Kazakhstani national school places Kazakh agency at the center: more than 380 uprisings and disturbances, whose suppression and the cordons placed on migration routes increased mortality in the same districts.",
+ tag: "Historiography"
++},
++kz: {
++q: "Т. Омарбековтың түсіндірмесінде 1929–1931 жж. көтерілістер (Созақ, Ырғыз, Батпаққара, Адай) ең алдымен нені білдіреді?",
++a: [ "Саяси мазмұны жоқ стихиялық тонаушылық", "Қазақтардың субъектілігі мен ұйымдасқан қарсылығының көрінісі", "Сыртқы мемлекеттердің операциялары", "Көшпелі рулардың өзара қақтығысы" ],
++e: "Қазақстандық ұлттық мектеп қазақтардың субъектілігін орталыққа қояды: 380-нен астам көтеріліс пен толқу, оларды басу және көші-қон жолдарындағы бекеттер сол аудандардағы өлім-жітімді күшейтті.",
++tag: "Тарихнама"
+ }
+ }, {
+ c: 1,
+@@ -1325,6 +1792,12 @@ q: "Why can aggregate statistics on an oblast’s total population be misleading
+ a: [ "No censuses were conducted at all", "An influx of special settlers and workers can conceal the decline of the indigenous population", "Total population was always counted more accurately", "The oblasts were too small" ],
+ e: "This is N. Pianciola’s key thesis. Karaganda Oblast’s total population grew while its Kazakh population fell by half. One must look at the ethnic breakdown, not the bottom-line total.",
+ tag: "Historiography"
++},
++kz: {
++q: "Неге облыстың жалпы халқы бойынша жиынтық статистика адастыруы мүмкін?",
++a: [ "Санақ мүлде жүргізілмеген", "Арнайы қоныс аударушылар мен жұмысшылар легі байырғы халықтың азаюын жасыруы мүмкін", "Жалпы халық әрқашан дәлірек саналған", "Облыстар тым кіші болған" ],
++e: "Бұл Н. Пьянчоланың басты тезисі. Қарағанды облысының жалпы халқы өсті, ал қазақ халқы екі есе азайды. Түпкі жолды емес, этникалық бөліністі қарау керек.",
++tag: "Тарихнама"
+ }
+ }, {
+ c: 1,
+@@ -1339,6 +1812,12 @@ q: "The boundaries on this site’s maps are:",
+ a: [ "Exact archival cadastral boundaries from 1926 and 1939", "A reference reconstruction on modern geometry, not an archival cadastre", "Randomly generated polygons", "The boundaries of Kazakhstan’s modern oblasts, unchanged" ],
+ e: "The project’s honest caveat: the geometry is built as a reference reconstruction based on modern administrative outlines (geoBoundaries), merged under the historical units. It is not an archival cadastral shapefile, and this should be stated plainly in a defense.",
+ tag: "Methodology"
++},
++kz: {
++q: "Осы сайттың карталарындағы шекаралар — бұл:",
++a: [ "1926 және 1939 жылдардың дәл мұрағаттық кадастрлық шекаралары", "Қазіргі геометрияға негізделген тірек реконструкция, мұрағаттық кадастр емес", "Кездейсоқ жасалған полигондар", "Қазақстанның қазіргі облыстарының өзгеріссіз шекаралары" ],
++e: "Жобаның адал ескертуі: геометрия тарихи бірліктерге сәйкес біріктірілген қазіргі әкімшілік контурлар (geoBoundaries) негізінде тірек реконструкция ретінде құрылған. Бұл мұрағаттық кадастрлық shapefile емес, және қорғауда бұл туралы тікелей айту керек.",
++tag: "Әдіснама"
+ }
+ }, {
+ c: 1,
+@@ -1353,6 +1832,12 @@ q: "Estimates of the death toll in the Kazakh famine range from 1.26 to 4 millio
+ a: [ "That the topic is unscientific and the data cannot be used", 'That one should state the range and attribute each estimate, rather than giving one "correct" figure', "That one should take the arithmetic mean", "That the largest estimate is always correct" ],
+ e: "The spread reflects different methods and sources: the Ptukha Institute — 1.258 million; Abylkhozhin, Kozybaev, Tatimov — 3.25 million; Conquest — 2.3 million. Correct scholarly practice is to give the range with attribution, not to pick one figure.",
+ tag: "Methodology"
++},
++kz: {
++q: "Қазақ ашаршылығындағы қаза болғандар саны бағасы 1,26-дан 4 млн-ға дейін алшақтайды. Бұл зерттеуші үшін нені білдіреді?",
++a: [ "Тақырып ғылыми емес және деректерді пайдалануға болмайды", "Диапазон мен бағалардың атрибуциясын көрсету керек, бір «дұрыс» санды емес", "Арифметикалық ортаны алу керек", "Әрқашан ең үлкен баға дұрыс" ],
++e: "Алшақтық әртүрлі әдістер мен көздерді көрсетеді: Птуха институты — 1,258 млн; Әбілхожин, Қозыбаев, Тәтімов — 3,25 млн; Конквест — 2,3 млн. Дұрыс ғылыми тәжірибе — кімге тиесілі екенін көрсетіп, диапазонды беру.",
++tag: "Әдіснама"
+ }
+ }, {
+ c: 2,
+@@ -1367,8 +1852,14 @@ q: "According to the most common estimates, what share of the Kazakh population
+ a: [ "about 10%", "about 20%", "about 38–42%", "about 70%" ],
+ e: "About 38–42% of all Kazakhs died — the largest relative loss among the ethnic groups of the USSR during the period of Soviet famines.",
+ tag: "Data"
++},
++kz: {
++q: "Ең кең таралған бағалар бойынша 1930–1933 жж. қазақ халқының қанша үлесі қаза тапты?",
++a: [ "шамамен 10 %", "шамамен 20 %", "шамамен 38–42 %", "шамамен 70 %" ],
++e: "Барлық қазақтардың шамамен 38–42 %-ы қаза тапты — бұл КСРО-дағы кеңестік ашаршылықтар кезеңінде этникалық топтар арасындағы ең үлкен салыстырмалы шығын.",
++tag: "Деректер"
+ }
+-} ], KB_RU = [], KB_EN = [], kbRu = (title, text, tag) => KB_RU.push({
++} ], KB_RU = [], KB_EN = [], KB_KZ = [], kbRu = (title, text, tag) => KB_RU.push({
+ title: title,
+ text: text,
+ tag: tag
+@@ -1376,53 +1867,75 @@ tag: tag
+ title: title,
+ text: text,
+ tag: tag
++}), kbKz = (title, text, tag) => KB_KZ.push({
++title: title,
++text: text,
++tag: tag
+ });
+ 
+ function KBcur() {
+-return "en" === LANG ? KB_EN : KB_RU;
++return "kz" === LANG ? KB_KZ : "en" === LANG ? KB_EN : KB_RU;
+ }
+ 
+ kbRu("Что такое Ашаршылык", "Ашаршылык — голод в Казахстане 1930–1933 годов, вызванный насильственной коллективизацией, седентаризацией (принудительным оседанием кочевников) и мясозаготовками. Погибло по разным оценкам от 1,26 до 4 млн человек. Доля погибших от численности казахского народа — около 38–42 %, наибольшая относительная потеря среди народов СССР. Оценки числа жертв: Институт демографии им. Птухи НАН Украины — 1,258 млн; Р. Конквест — 2,3 млн; Ж. Абылхожин, М. Козыбаев, М. Татимов — 3,25 млн; проф. Х. М. Абжанов — до 4 млн.", "основное"), 
+ kbEn("What Asharshylyk is", "Asharshylyk is the 1930–1933 famine in Kazakhstan, caused by forced collectivization, sedentarization (the forced settlement of nomads), and meat-procurement quotas. Estimates of the death toll range from 1.26 to 4 million people. The share of deaths relative to the Kazakh population was about 38–42%, the largest relative loss among the peoples of the USSR. Estimates of victims: the Ptukha Institute of Demography of the National Academy of Sciences of Ukraine — 1.258 million; R. Conquest — 2.3 million; Zh. Abylkhozhin, M. Kozybaev, M. Tatimov — 3.25 million; Prof. Kh. M. Abzhanov — up to 4 million.", "core"), 
++kbKz("Ашаршылық деген не", "Ашаршылық — 1930–1933 жылдары Қазақстанда болған, күштеп ұжымдастыру, отырықшыландыру (көшпенділерді мәжбүрлеп қоныстандыру) және ет дайындау нормалары тудырған ашаршылық. Әртүрлі бағалар бойынша 1,26-дан 4 млн-ға дейін адам қаза тапты. Қазақ халқы санынан қаза болғандар үлесі — шамамен 38–42 %, бұл КСРО халықтары арасындағы ең үлкен салыстырмалы шығын. Құрбандар саны бағалары: Украина ҰҒА Птуха атындағы Демография институты — 1,258 млн; Р. Конквест — 2,3 млн; Ж. Абылхожин, М. Қозыбаев, М. Тәтімов — 3,25 млн; проф. Х. М. Әбжанов — 4 млн-ға дейін.", "негізгі"), 
+ kbRu("Тема и цель исследования", "Проект «Картография коллапса» — пространственно-демографический анализ Ашаршылыка средствами исторической ГИС (HGIS). Данные переписей 1926 и 1939 годов накладываются на разные административные сетки: 8 округов 1926 года и 12 областей 1939 года. Цель — показать, что вывод о географии катастрофы зависит от выбранной сетки агрегирования, то есть продемонстрировать Modifiable Areal Unit Problem на историческом материале.", "основное"), 
+ kbEn("The topic and goal of the study", '"Cartography of Collapse" is a spatial-demographic analysis of Asharshylyk using historical GIS (HGIS). Data from the 1926 and 1939 censuses is overlaid on different administrative grids: 8 okrugs in 1926 and 12 oblasts in 1939. The goal is to show that a conclusion about the geography of the catastrophe depends on the chosen aggregation grid — that is, to demonstrate the Modifiable Areal Unit Problem on historical material.', "core"), 
++kbKz("Зерттеудің тақырыбы мен мақсаты", "«Күйреу картографиясы» жобасы — Ашаршылықтың тарихи ГАЖ (HGIS) құралдарымен жасалған кеңістіктік-демографиялық талдауы. 1926 және 1939 жылдардың санақ деректері әртүрлі әкімшілік торларға салынады: 1926 жылғы 8 округ және 1939 жылғы 12 облыс. Мақсат — апат географиясы туралы қорытынды таңдалған топтастыру торына тәуелді екенін көрсету, яғни тарихи материалда Modifiable Areal Unit Problem-ды көрсету.", "негізгі"), 
+ kbRu("MAUP: проблема модифицируемых пространственных единиц", "MAUP (Modifiable Areal Unit Problem) — эффект, при котором результат статистического анализа меняется в зависимости от того, по каким территориальным единицам сгруппированы данные. У MAUP два аспекта: эффект масштаба (меняется размер единиц) и эффект зонирования (меняется нарезка при том же числе единиц). В этом исследовании проявлены оба: 8 округов против 12 областей на одной и той же территории.", "методология"), 
+ kbEn("MAUP: the Modifiable Areal Unit Problem", "MAUP (Modifiable Areal Unit Problem) is an effect in which the result of a statistical analysis changes depending on which territorial units the data is grouped by. MAUP has two aspects: the scale effect (the size of the units changes) and the zoning effect (the layout changes while the number of units stays the same). Both appear in this study: 8 okrugs versus 12 oblasts on the same territory.", "methodology"), 
++kbKz("MAUP: модификацияланатын аумақтық бірліктер мәселесі", "MAUP (Modifiable Areal Unit Problem) — статистикалық талдау нәтижесі деректер қандай аумақтық бірліктер бойынша топтастырылғанына байланысты өзгеретін эффект. MAUP-тың екі аспектісі бар: масштаб эффектісі (бірліктер өлшемі өзгереді) және аймақтандыру эффектісі (бірліктер саны бірдей болғанда бөліну өзгереді). Бұл зерттеуде екеуі де көрінеді: бір аумақтағы 8 округ пен 12 облыс.", "әдіснама"), 
+ kbRu("Ареальная интерполяция: формула", "Чтобы перенести данные с сетки 1926 года на сетку 1939 года, применяется ареальная интерполяция: P_фрагмент = P_1926 × (Площадь пересечения ÷ Площадь округа 1926). Население округа распределяется между областями пропорционально площади геометрического пересечения. Ключевое допущение — равномерная плотность населения внутри округа. Для кочевого населения это упрощение, и оно само по себе вносит погрешность. Всего в проекте рассчитано 96 пересечений (8 округов × 12 областей).", "методология"), 
+ kbEn("Areal interpolation: the formula", "To carry data from the 1926 grid onto the 1939 grid, areal interpolation is used: P_fragment = P_1926 × (intersection area ÷ 1926 okrug area). The okrug’s population is distributed among the oblasts in proportion to the area of geometric intersection. The key assumption is uniform population density within the okrug. For a nomadic population this is a simplification, and it introduces error on its own. In total, the project computed 96 intersections (8 okrugs × 12 oblasts).", "methodology"), 
++kbKz("Ареалдық интерполяция: формула", "1926 жылғы тордағы деректерді 1939 жылғы торға көшіру үшін ареалдық интерполяция қолданылады: P_фрагмент = P_1926 × (Қиылысу ауданы ÷ 1926 округ ауданы). Округ халқы облыстар арасында геометриялық қиылысу ауданына пропорционал бөлінеді. Негізгі болжам — округ ішінде халық тығыздығы бірдей. Көшпелі халық үшін бұл жеңілдету, және ол өзі қателік тудырады. Жобада барлығы 96 қиылысу есептелді (8 округ × 12 облыс).", "әдіснама"), 
+ kbRu("Главный количественный результат", "При переносе казахского населения 1926 года с сетки 8 округов на сетку 12 областей суммарный сдвиг долей составил 42,46 процентных пункта, индекс несходства (половина суммы модулей сдвигов) — 21,2 %. Это означает, что при смене административной сетки «переезжает» примерно пятая часть всего пространственного распределения населения. Наибольший сдвиг вверх — Восточно-Казахстанская область (+165 % относительно исходной доли), наибольший сдвиг вниз — Акмолинская область (−60 %).", "результаты"), 
+ kbEn("The main quantitative result", 'When the 1926 Kazakh population is reallocated from the 8-okrug grid onto the 12-oblast grid, the total share shift is 42.46 percentage points, and the dissimilarity index (half the sum of the absolute shifts) is 21.2%. This means that changing the administrative grid "relocates" roughly a fifth of the entire spatial distribution of the population. The largest upward shift is East Kazakhstan Oblast (+165% relative to its original share); the largest downward shift is Akmola Oblast (−60%).', "results"), 
++kbKz("Басты сандық нәтиже", "1926 жылғы қазақ халқын 8 округтік тордан 12 облыстық торға ауыстырғанда, үлестердің жиынтық ауытқуы 42,46 пайыздық тармақты, ал ұқсамау индексі (ауытқулар модульдерінің қосындысының жартысы) — 21,2 %-ды құрады. Бұл әкімшілік тор өзгергенде халықтың бүкіл кеңістіктік үлестірімінің шамамен бестен бірі «көшетінін» білдіреді. Ең үлкен жоғары ауытқу — Шығыс Қазақстан облысы (бастапқы үлеске қатысты +165 %), ең үлкен төмен ауытқу — Ақмола облысы (−60 %).", "нәтижелер"), 
+ kbRu("Аномальный рост населения", "Аномальный рост — ситуация, когда общее население области растёт, а коренное (казахское) население той же области резко сокращается. Классический пример — Карагандинская область: приток спецпереселенцев, заключённых Карлага и рабочих индустриальных строек увеличивал общую численность, тогда как казахское население упало более чем вдвое. Поэтому сводная статистика по общему населению маскирует этнодемографический коллапс, и анализировать нужно этнический разрез.", "результаты"), 
+ kbEn("Anomalous population growth", "Anomalous growth is a situation where an oblast’s total population grows while its indigenous (Kazakh) population sharply declines. The classic example is Karaganda Oblast: an influx of special settlers, Karlag prisoners, and industrial-construction workers increased the total count, while the Kazakh population fell by more than half. So aggregate statistics on total population mask the ethno-demographic collapse, and one needs to analyze the ethnic breakdown.", "results"), 
++kbKz("Халық санының аномальды өсуі", "Аномальды өсім — облыстың жалпы халқы өсіп жатқанда, сол облыстың байырғы (қазақ) халқы күрт азаятын жағдай. Классикалық мысал — Қарағанды облысы: арнайы қоныс аударушылар, Карлаг тұтқындары және өнеркәсіп құрылысы жұмысшыларының легі жалпы санды арттырды, ал қазақ халқы екі еседен астам азайды. Сондықтан жалпы халық бойынша жиынтық статистика этнодемографиялық күйреуді жасырады, этникалық бөліністі талдау керек.", "нәтижелер"), 
+ kbRu("Откочёвки: масштаб и направления", "Республику покинули около 1,13 млн человек. Безвозвратно — около 676 тыс.; вернулись впоследствии около 454 тыс.; порядка 200 тыс. остались за границей навсегда. Зарубежные направления: Синьцзян (Китай) — крупнейшее, Монголия (Баян-Улгий), Афганистан, Иран, позже Турция (уже вторичная миграция 1950–60-х из Синьцзяна). Внутрисоюзные направления: Западно-Сибирский край, Средняя Волга и Сталинград, Узбекская ССР, Киргизская АССР, Туркменская ССР, Каракалпакская АССР, Урал и Башкирия. ВАЖНО: разбивка по конкретным направлениям — дискуссионная оценка. Сара Кэмерон прямо называет точный подсчёт по направлениям открытым исследовательским вопросом, требующим работы с архивами других республик и Синьцзяна.", "откочёвки"), 
+ kbEn("Migrations: scale and destinations", "About 1.13 million people left the republic. Permanently — about 676,000; about 454,000 later returned; around 200,000 remained abroad for good. Foreign destinations: Xinjiang (China) — the largest, Mongolia (Bayan-Ölgii), Afghanistan, Iran, and later Turkey (a secondary migration of the 1950s–60s from Xinjiang). Destinations within the union: West Siberian Krai, the Middle Volga and Stalingrad, the Uzbek SSR, the Kirghiz ASSR, the Turkmen SSR, the Karakalpak ASSR, the Urals and Bashkiria. IMPORTANT: the breakdown by specific destination is a debated estimate. Sarah Cameron explicitly calls an exact count by destination an open research question requiring work with the archives of other republics and Xinjiang.", "migrations"), 
++kbKz("Көші-қон: ауқымы мен бағыттары", "Республикадан шамамен 1,13 млн адам кетті. Қайтпай кеткендер — шамамен 676 мың; кейін шамамен 454 мың адам оралды; шамамен 200 мың адам шетелде мәңгілікке қалды. Шетелдік бағыттар: Шыңжаң (Қытай) — ең ірісі, Моңғолия (Баян-Өлгий), Ауғанстан, Иран, кейінірек Түркия (1950–60 жж. Шыңжаңнан қайталама көші-қон). Одақ ішіндегі бағыттар: Батыс Сібір өлкесі, Орта Еділ мен Сталинград, Өзбек КСР-і, Қырғыз АКСР-і, Түрікмен КСР-і, Қарақалпақ АКСР-і, Орал мен Башқұртстан. МАҢЫЗДЫ: нақты бағыттар бойынша бөліну — пікірталастық баға. Сара Кэмерон бағыттар бойынша дәл санақты басқа республикалар мен Шыңжаң мұрағаттарымен жұмысты талап ететін ашық зерттеу мәселесі деп тікелей атайды.", "көші-қон"), 
+ kbRu("Потери скота", "Скот был не товаром, а основой всей системы жизнеобеспечения кочевого и полукочевого хозяйства. От примерно 40 млн голов в 1928 году к 1933 году осталось около 4,5 млн — порядка одной десятой. Разрушение поголовья означало разрушение самой возможности вести привычный образ жизни, и именно поэтому скотоводческие районы пострадали сильнее земледельческих.", "данные"), 
+ kbEn("Livestock losses", "Livestock was not a commodity but the foundation of the entire subsistence system of the nomadic and semi-nomadic economy. Of roughly 40 million head in 1928, by 1933 about 4.5 million remained — around one-tenth. The destruction of the herd meant the destruction of the very possibility of the customary way of life, and that is exactly why pastoral districts suffered more than farming ones.", "data"), 
++kbKz("Мал шығыны", "Мал тауар емес, көшпелі және жартылай көшпелі шаруашылықтың бүкіл өмір сүру жүйесінің негізі болды. 1928 жылы шамамен 40 млн бастан 1933 жылға қарай шамамен 4,5 млн қалды — оннан бір бөлігі шамасында. Мал басының құрып кетуі әдеттегі өмір салтын жүргізу мүмкіндігінің құрып кетуін білдірді, дәл сондықтан мал шаруашылығы аудандары егіншілік аудандарынан көбірек зардап шекті.", "деректер"), 
+ kbRu("Сара Кэмерон: тезис", "Сара Кэмерон, «The Hungry Steppe: Famine, Violence, and the Making of Soviet Kazakhstan» (2018). Тезис: голод — результат насильственной седентаризации и уничтожения кочевого хозяйства как способа жизни, а не только следствие зерновых изъятий. Казахи гибли из-за уничтожения скота. Картографическая линза Кэмерон: максимальные потери там, где доля кочевого и полукочевого скотоводства была наибольшей.", "историография"), 
+ kbEn("Sarah Cameron: thesis", 'Sarah Cameron, "The Hungry Steppe: Famine, Violence, and the Making of Soviet Kazakhstan" (2018). Thesis: the famine is the result of violent sedentarization and the destruction of nomadic husbandry as a way of life, not merely a consequence of grain requisitioning. Kazakhs died from the destruction of livestock. Cameron’s cartographic lens: maximum losses where the share of nomadic and semi-nomadic pastoralism was highest.', "historiography"), 
++kbKz("Сара Кэмерон: тезисі", "Сара Кэмерон, «The Hungry Steppe: Famine, Violence, and the Making of Soviet Kazakhstan» (2018). Тезис: ашаршылық — тек астық тәркілеудің салдары ғана емес, көшпелі шаруашылықтың өмір салты ретінде күштеп отырықшыландыру мен құрып кетуінің нәтижесі. Қазақтар малдың жойылуынан қырылды. Кэмеронның картографиялық көзқарасы: ең үлкен шығындар көшпелі және жартылай көшпелі мал шаруашылығының үлесі ең жоғары жерлерде.", "тарихнама"), 
+ kbRu("Никколо Пьянчола: тезис", "Никколо Пьянчола объясняет голод через имперскую иерархию приоритетов: ресурсы изымались с периферии в пользу индустриальных центров. Его линза объясняет феномен аномального роста — районы с ГУЛАГом и промышленным строительством (Караганда, Балхаш, Риддер) прибавляют в общем населении, теряя коренное. Административная статистика по общему населению при этом маскирует этнодемографический коллапс.", "историография"), 
+ kbEn("Niccolò Pianciola: thesis", "Niccolò Pianciola explains the famine through an imperial hierarchy of priorities: resources were extracted from the periphery to benefit industrial centers. His lens explains the phenomenon of anomalous growth — districts with GULAG camps and industrial construction (Karaganda, Balkhash, Ridder) gain in total population while losing their indigenous population. Administrative statistics on total population mask the ethno-demographic collapse.", "historiography"), 
++kbKz("Никколо Пьянчола: тезисі", "Никколо Пьянчола ашаршылықты империялық басымдықтар иерархиясы арқылы түсіндіреді: ресурстар шет аймақтардан өнеркәсіп орталықтарының пайдасына тартып алынды. Оның көзқарасы аномальды өсім құбылысын түсіндіреді — ГУЛАГ пен өнеркәсіп құрылысы бар аудандар (Қарағанды, Балқаш, Риддер) жалпы халық санында ұтады, ал байырғы халқын жоғалтады. Жалпы халық бойынша әкімшілік статистика бұл кезде этнодемографиялық күйреуді жасырады.", "тарихнама"), 
+ kbRu("Талас Омарбеков: тезис", "Талас Омарбеков и казахстанская национальная историографическая школа ставят в центр субъектность казахов и трактуют голод как целенаправленную политику против народа. Акцент на сопротивлении: свыше 380 восстаний и волнений в 1929–1931 годах — Сузакское, Иргизское, Батпаккаринское, Адаевское, Каракумское, Абралинское. Подавление восстаний и заградительные заслоны на путях откочёвок усиливали смертность в тех же районах.", "историография"), 
+ kbEn("Talas Omarbekov: thesis", "Talas Omarbekov and the Kazakhstani national historiographic school place Kazakh agency at the center and treat the famine as a deliberate policy against the people. The emphasis is on resistance: more than 380 uprisings and disturbances in 1929–1931 — Suzak, Irgiz, Batpakkara, Adai, Karakum, Abralin. The suppression of the uprisings and blocking cordons on migration routes intensified mortality in the same districts.", "historiography"), 
++kbKz("Талас Омарбеков: тезисі", "Талас Омарбеков және қазақстандық ұлттық тарихнамалық мектеп қазақтардың субъектілігін орталыққа қояды және ашаршылықты халыққа қарсы бағытталған мақсатты саясат ретінде түсіндіреді. Басты назар қарсылықта: 1929–1931 жж. 380-нен астам көтеріліс пен толқу болды — Созақ, Ырғыз, Батпаққара, Адай, Қарақұм, Абыралы. Көтерілістерді басу және көші-қон жолдарындағы жазалау бекеттері сол аудандардағы өлім-жітімді күшейтті.", "тарихнама"), 
+ kbRu("Сравнение с другими голодами 1930-х", "По абсолютному числу жертв наибольшие потери дала Украинская ССР — Голодомор 1932–33 гг., 3,5–5 млн при населении около 31 млн, то есть порядка 13 %. По ОТНОСИТЕЛЬНОЙ потере лидирует Казахская АССР: 38–42 % численности казахского народа. Также пострадали Поволжье, Северный Кавказ и Кубань, Западная Сибирь и Урал. Для масштаба на карте приведён голод в Китае (Ганьсу, Шэньси) 1928–1930 гг. — 3–10 млн, но у него иные причины: засуха и война милитаристов.", "сравнение"), 
+ kbEn("Comparison with other 1930s famines", "By absolute number of victims, the Ukrainian SSR saw the greatest losses — the Holodomor of 1932–33, 3.5–5 million out of a population of about 31 million, i.e. around 13%. By RELATIVE loss, the Kazak ASSR leads: 38–42% of the Kazakh people. The Volga region, the North Caucasus and Kuban, and Western Siberia and the Urals also suffered. For scale, the map includes the famine in China (Gansu, Shaanxi) of 1928–1930 — 3–10 million — but it had different causes: drought and warlord conflict.", "comparison"), 
++kbKz("1930 жж. басқа ашаршылықтармен салыстыру", "Абсолютті құрбандар саны бойынша ең үлкен шығынды Украин КСР-і берді — 1932–33 жж. Голодомор, халқы шамамен 31 млн болғанда 3,5–5 млн, яғни шамамен 13 %. САЛЫСТЫРМАЛЫ шығын бойынша Қазақ АКСР-і алда: қазақ халқының 38–42 %-ы. Сондай-ақ Еділ бойы, Солтүстік Кавказ бен Кубань, Батыс Сібір мен Орал да зардап шекті. Масштабты көрсету үшін картада 1928–1930 жж. Қытайдағы (Ганьсу, Шэньси) ашаршылық — 3–10 млн берілген, бірақ оның себептері басқа: құрғақшылық пен милитаристер соғысы.", "салыстыру"), 
+ kbRu("Переписи 1926 и 1939 годов", "По Всесоюзной переписи 1926 года казахов насчитывалось около 3,968 млн, по переписи 1939 года — около 3,1 млн. Убыль между переписями — порядка 867 тыс. человек. Но прямое вычитание занижает потери: перепись 1937 года (2,18 млн казахов) была объявлена «вредительской» и засекречена, а перепись 1939 года проводилась с политическим давлением на итоговые цифры. Кроме того, между переписями действуют одновременно смертность, откочёвки и возвращение части откочевников, поэтому разложить убыль на компоненты по одним лишь итогам переписей невозможно.", "данные"), 
+ kbEn("The 1926 and 1939 censuses", 'The 1926 All-Union Census counted about 3.968 million Kazakhs; the 1939 census counted about 3.1 million. The decline between the censuses is about 867,000 people. But simple subtraction understates the losses: the 1937 census (2.18 million Kazakhs) was declared "sabotage" and suppressed, and the 1939 census was conducted under political pressure on the final figures. Moreover, mortality, migration, and the return of some migrants all occur simultaneously between censuses, so the decline cannot be decomposed into components from census totals alone.', "data"), 
++kbKz("1926 және 1939 жылдардағы санақтар", "1926 жылғы Бүкілодақтық санақ бойынша шамамен 3,968 млн қазақ, ал 1939 жылғы санақ бойынша шамамен 3,1 млн қазақ саналды. Санақтар арасындағы кему — шамамен 867 мың адам. Бірақ жай ғана азайту шығынды төмендетіп көрсетеді: 1937 жылғы санақ (2,18 млн қазақ) «зиянкестік» деп жарияланып, құпияланды, ал 1939 жылғы санақ түпкі сандарға саяси қысым астында жүргізілді. Сонымен қатар, санақтар арасында өлім, көші-қон және кейбір көшкендердің оралуы бір мезгілде жүреді, сондықтан кемуді тек санақ қорытындылары бойынша құрамдас бөліктерге жіктеу мүмкін емес.", "деректер"), 
+ kbRu("Ограничения проекта: честные оговорки", "Границы на картах — опорная реконструкция: современная административная геометрия (geoBoundaries), объединённая под исторические единицы 1926 и 1939 годов. Это НЕ архивный кадастровый shapefile, и реальные исторические границы отличались. Демографические атрибуты хранятся отдельно от геометрии. Наборы атрибутов 1926 и 1939 годов происходят из разных источников и имеют разные базовые итоги, поэтому сравнивать корректнее доли, а не абсолютные суммы. Ареальная интерполяция предполагает равномерную плотность внутри единицы, что для кочевого населения является упрощением. Всё это нужно проговаривать на защите прямо — это не слабость работы, а часть её методологической рефлексии.", "методология"), 
+ kbEn("Project limitations: honest caveats", "The boundaries on the maps are a reference reconstruction: modern administrative geometry (geoBoundaries) merged under the 1926 and 1939 historical units. This is NOT an archival cadastral shapefile, and the real historical boundaries differed. Demographic attributes are stored separately from the geometry. The 1926 and 1939 attribute sets come from different sources and have different base totals, so it is more accurate to compare shares rather than absolute sums. Areal interpolation assumes uniform density within a unit, which is a simplification for a nomadic population. All of this should be stated plainly in a defense — it is not a weakness of the work but part of its methodological reflection.", "methodology"), 
++kbKz("Жобаның шектеулері: адал ескертулер", "Карталардағы шекаралар — тірек реконструкция: 1926 және 1939 жылдардың тарихи бірліктеріне сәйкес біріктірілген қазіргі әкімшілік геометрия (geoBoundaries). Бұл мұрағаттық кадастрлық shapefile ЕМЕС, нақты тарихи шекаралар өзгеше болған. Демографиялық атрибуттар геометриядан бөлек сақталады. 1926 және 1939 жылдардың атрибут жиынтықтары әртүрлі көздерден алынған және базалық қорытындылары бөлек, сондықтан абсолютті сомаларды емес, үлестерді салыстырған дұрысырақ. Ареалдық интерполяция бірлік ішінде тығыздықтың бірдей болуын болжайды, бұл көшпелі халық үшін жеңілдету. Мұның бәрін қорғауда тікелей айту керек — бұл жұмыстың кемшілігі емес, оның әдіснамалық рефлексиясының бөлігі.", "әдіснама"), 
+ kbRu("Как пользоваться сайтом", "Разделы: «Карта Казахстана» — хороплет по сеткам 1926 и 1939 годов с переключением метрик, слоями лагерей и восстаний, сплит-сравнением и режимом StoryMap. «Карта мира» — потоки откочёвок и сравнительный слой голода 1930-х. «Историография» — три исследовательские линзы с подсветкой соответствующих регионов. «Библиография» — научные источники, на которых основан атлас. «Данные и MAUP» — таблица, калькулятор ареальной интерполяции и экспорт GeoJSON/CSV. «Квиз» — проверка знаний. Клик по региону открывает карточку с графиком и экспортом в PDF.", "навигация"), 
+ kbEn("How to use the site", 'Sections: "Map of Kazakhstan" — a choropleth over the 1926 and 1939 grids with switchable metrics, camp and uprising layers, a split comparison, and a StoryMap mode. "World Map" — migration flows and a comparative layer of 1930s famines. "Historiography" — three research lenses that highlight the corresponding regions. "Bibliography" — the scholarly sources underlying the atlas. "Data & MAUP" — a table, an areal-interpolation calculator, and GeoJSON/CSV export. "Quiz" — a knowledge check. Clicking a region opens a card with a chart and PDF export.', "navigation"), 
++kbKz("Сайтты қалай пайдалану керек", "Бөлімдер: «Қазақстан картасы» — 1926 және 1939 жылдардың торлары бойынша хороплет, көрсеткіштерді ауыстыру, лагерь мен көтеріліс қабаттары, сплит-салыстыру және StoryMap режимі. «Әлем картасы» — көші-қон ағындары және 1930 жж. ашаршылықтардың салыстырмалы қабаты. «Тарихнама» — сәйкес аймақтарды бөліп көрсететін үш зерттеу көзқарасы. «Библиография» — атластың негізіндегі ғылыми дереккөздер. «Деректер және MAUP» — кесте, ареалдық интерполяция калькуляторы және GeoJSON/CSV экспорты. «Викторина» — білімді тексеру. Аймаққа басу графигі мен PDF экспорты бар карточканы ашады.", "навигация"), 
+ KZ[1939].forEach(f => {
+ const p = f.p;
+ kbRu("Область: " + p.name, `${p.name} (сетка 1939 г.). Казахское население: 1926 г. — ${p.kazakh_1926.toLocaleString("ru")}, 1939 г. — ${p.kazakh_1939.toLocaleString("ru")}. Общее население: 1926 г. — ${p.total_1926.toLocaleString("ru")}, 1939 г. — ${p.total_1939.toLocaleString("ru")}. Потеря казахского населения: ${p.loss_percent} %. ${p.desc}`, "регион"), 
+-kbEn("Oblast: " + (p.name_en || p.name), `${p.name_en || p.name} (1939 grid). Kazakh population: 1926 — ${p.kazakh_1926.toLocaleString("en-US")}, 1939 — ${p.kazakh_1939.toLocaleString("en-US")}. Total population: 1926 — ${p.total_1926.toLocaleString("en-US")}, 1939 — ${p.total_1939.toLocaleString("en-US")}. Kazakh population loss: ${p.loss_percent}%. ${p.desc_en || p.desc}`, "region");
++kbEn("Oblast: " + (p.name_en || p.name), `${p.name_en || p.name} (1939 grid). Kazakh population: 1926 — ${p.kazakh_1926.toLocaleString("en-US")}, 1939 — ${p.kazakh_1939.toLocaleString("en-US")}. Total population: 1926 — ${p.total_1926.toLocaleString("en-US")}, 1939 — ${p.total_1939.toLocaleString("en-US")}. Kazakh population loss: ${p.loss_percent}%. ${p.desc_en || p.desc}`, "region"),
++kbKz("Облыс: " + (p.name_kz || p.name), `${p.name_kz || p.name} (1939 торы). Қазақ халқы: 1926 ж. — ${p.kazakh_1926.toLocaleString("kk")}, 1939 ж. — ${p.kazakh_1939.toLocaleString("kk")}. Жалпы халық: 1926 ж. — ${p.total_1926.toLocaleString("kk")}, 1939 ж. — ${p.total_1939.toLocaleString("kk")}. Қазақ халқының шығыны: ${p.loss_percent} %. ${p.desc_kz || p.desc}`, "аймақ");
+ }), KZ[1926].forEach(f => {
+ const p = f.p;
+-kbRu("Округ: " + p.name, `${p.name} (сетка 1926 г.). Всего населения: ${p.population_total.toLocaleString("ru")}. Доля казахов: ${p.kazakh_percent} %. ${p.desc}`, "регион"), 
+-kbEn("Okrug: " + (p.name_en || p.name), `${p.name_en || p.name} (1926 grid). Total population: ${p.population_total.toLocaleString("en-US")}. Kazakh share: ${p.kazakh_percent}%. ${p.desc_en || p.desc}`, "region");
++kbRu("Округ: " + p.name, `${p.name} (сетка 1926 г.). Всего населения: ${p.population_total.toLocaleString("ru")}. Доля казахов: ${p.kazakh_percent} %. ${p.desc}`, "регион"),
++kbEn("Okrug: " + (p.name_en || p.name), `${p.name_en || p.name} (1926 grid). Total population: ${p.population_total.toLocaleString("en-US")}. Kazakh share: ${p.kazakh_percent}%. ${p.desc_en || p.desc}`, "region"),
++kbKz("Округ: " + (p.name_kz || p.name), `${p.name_kz || p.name} (1926 торы). Жалпы халық: ${p.population_total.toLocaleString("kk")}. Қазақтар үлесі: ${p.kazakh_percent} %. ${p.desc_kz || p.desc}`, "аймақ");
+ }), FLOWS.forEach(fl => {
+-kbRu("Направление откочёвки: " + fl.ru.to, `${fl.ru.to} — ${"abroad" === fl.kind ? "зарубежное" : "внутрисоюзное"} направление откочёвок. Оценочный диапазон: ${fl.lo}–${fl.hi} тыс. человек (дискуссионная оценка). ${fl.ru.note}`, "откочёвки"), 
+-kbEn("Migration destination: " + fl.en.to, `${fl.en.to} — a ${"abroad" === fl.kind ? "foreign" : "within-USSR"} migration destination. Estimated range: ${fl.lo}–${fl.hi} thousand people (a debated estimate). ${fl.en.note}`, "migrations");
++kbRu("Направление откочёвки: " + fl.ru.to, `${fl.ru.to} — ${"abroad" === fl.kind ? "зарубежное" : "внутрисоюзное"} направление откочёвок. Оценочный диапазон: ${fl.lo}–${fl.hi} тыс. человек (дискуссионная оценка). ${fl.ru.note}`, "откочёвки"),
++kbEn("Migration destination: " + fl.en.to, `${fl.en.to} — a ${"abroad" === fl.kind ? "foreign" : "within-USSR"} migration destination. Estimated range: ${fl.lo}–${fl.hi} thousand people (a debated estimate). ${fl.en.note}`, "migrations"),
++kbKz("Көші-қон бағыты: " + fl.kz.to, `${fl.kz.to} — ${"abroad" === fl.kind ? "шетелдік" : "одақ ішіндегі"} көші-қон бағыты. Бағалау аралығы: ${fl.lo}–${fl.hi} мың адам (пікірталастық баға). ${fl.kz.note}`, "көші-қон");
+ });
+ 
+ const D2R = Math.PI / 180, ALB = (() => {
+@@ -1572,7 +2085,7 @@ const arr = t < 0 ? DIVERGE.neg : DIVERGE.pos, i = Math.min(arr.length - 1, Math
+ return t < 0 ? arr[arr.length - 1 - i] : arr[i];
+ }
+ 
+-const fmtN = n => Math.round(n).toLocaleString("en" === LANG ? "en-US" : "ru-RU"), fmtP = (n, d = 1) => (n > 0 ? "+" : "") + n.toFixed(d), METRICS_DEF = {
++const fmtN = n => Math.round(n).toLocaleString("kz" === LANG ? "kk-KZ" : "en" === LANG ? "en-US" : "ru-RU"), fmtP = (n, d = 1) => (n > 0 ? "+" : "") + n.toFixed(d), METRICS_DEF = {
+ 1939: [ {
+ id: "loss",
+ ramp: "orange",
+@@ -1946,10 +2459,19 @@ semipalatinsk: "Semipalatinsk",
+ kzyl_orda: "Kzyl-Orda",
+ petropavlovsk_1926: "Petropavlovsk",
+ semipalatinsk_1926: "Semipalatinsk"
++}, SHORT_KZ_KZ = {
++west_kz: "Батыс Қаз.",
++north_kz: "Солт. Қаз.",
++east_kz: "Шығ. Қаз.",
++south_kz: "Оңт. Қаз.",
++semipalatinsk: "Семей",
++kzyl_orda: "Қызылорда",
++petropavlovsk_1926: "Петропавл",
++semipalatinsk_1926: "Семей"
+ };
+ 
+ function shortName(f) {
+-return "en" === LANG ? SHORT_KZ_EN[f.p.id] || pName(f.p).replace(/\s*(Okrug|Oblast)$/i, "") : SHORT_KZ[f.p.id] || f.p.name.replace(/\s*(округ|область)$/i, "");
++return "kz" === LANG ? SHORT_KZ_KZ[f.p.id] || pName(f.p).replace(/\s*(округі|облысы)$/i, "") : "en" === LANG ? SHORT_KZ_EN[f.p.id] || pName(f.p).replace(/\s*(Okrug|Oblast)$/i, "") : SHORT_KZ[f.p.id] || f.p.name.replace(/\s*(округ|область)$/i, "");
+ }
+ 
+ function renderKz() {
+@@ -1998,10 +2520,10 @@ function renderStats(per, m) {
+ const box = $("#statsKz");
+ if ("1926" === per) {
+ const tot = KZ[1926].reduce((s, f) => s + f.p.pop, 0), kaz = KZ[1926].reduce((s, f) => s + f.p.kazAbs, 0);
+-box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("totalPopulation"))}</u><b>${fmtN(tot)}</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhsWord"))}</u><b>${fmtN(kaz)}</b><s>${(kaz / tot * 100).toFixed(1)} ${esc(t("toKazakhsShare"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}</u><b>≈ 40 ${"en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
++box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("totalPopulation"))}</u><b>${fmtN(tot)}</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhsWord"))}</u><b>${fmtN(kaz)}</b><s>${(kaz / tot * 100).toFixed(1)} ${esc(t("toKazakhsShare"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
+ } else {
+ const k26 = KZ[1939].reduce((s, f) => s + f.p.kazakh_1926, 0), k39 = KZ[1939].reduce((s, f) => s + f.p.kazakh_1939, 0), worst = KZ[1939].slice().sort((a, b) => b.p.loss - a.p.loss)[0], grew = KZ[1939].filter(f => f.p.growth > 0).length;
+-box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLoss"))}</u><b style="color:var(--carmine2)">−${((k26 - k39) / k26 * 100).toFixed(1)} %</b><s>${fmtN(k26 - k39)} ${"en" === LANG ? "people" : "человек"}</s></div>\n      <div class="stat"><u>${esc(t("maxLoss"))}</u><b style="font-size:15px">${esc(shortName(worst))}</b><s>${worst.p.loss.toFixed(1)} %</s></div>\n      <div class="stat"><u>${esc(t("anomalyGrowth"))}</u><b>${grew} ${esc(t("ofOblasts"))}</b><s>${esc(t("grewOverall"))}</s></div>`;
++box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLoss"))}</u><b style="color:var(--carmine2)">−${((k26 - k39) / k26 * 100).toFixed(1)} %</b><s>${fmtN(k26 - k39)} ${"kz" === LANG ? "адам" : "en" === LANG ? "people" : "человек"}</s></div>\n      <div class="stat"><u>${esc(t("maxLoss"))}</u><b style="font-size:15px">${esc(shortName(worst))}</b><s>${worst.p.loss.toFixed(1)} %</s></div>\n      <div class="stat"><u>${esc(t("anomalyGrowth"))}</u><b>${grew} ${esc(t("ofOblasts"))}</b><s>${esc(t("grewOverall"))}</s></div>`;
+ }
+ }
+ 
+@@ -2095,7 +2617,7 @@ fill: metricColor("1939", m, f.p),
+ "data-nodrag": "1"
+ });
+ p.addEventListener("mouseenter", e => {
+-tipShow(`<b>${esc(pName(f.p))}</b><span class="v">${m.fmt(m.get(f.p))}</span>\n        <div class="s">${esc(m.label)} · ${"en" === LANG ? "1939 grid" : "сетка 1939 г."}</div>`), 
++tipShow(`<b>${esc(pName(f.p))}</b><span class="v">${m.fmt(m.get(f.p))}</span>\n        <div class="s">${esc(m.label)} · ${"kz" === LANG ? "1939 ж. торы" : "en" === LANG ? "1939 grid" : "сетка 1939 г."}</div>`),
+ tipMove(e);
+ }), p.addEventListener("mousemove", tipMove), p.addEventListener("mouseleave", tipHide), 
+ p.addEventListener("click", () => {
+@@ -2133,7 +2655,7 @@ S.selected = p.id;
+ let html = `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">\n    <div><h3 style="font-size:18px">${esc(pName(p))}</h3>\n    <p style="color:var(--ink-mute);font-size:11.5px;margin:3px 0 0">${esc(t("regionGridLabel"))} ${per} ${esc(t("regionOf"))} · ${esc(pType(p))}</p></div>\n    <button class="btn ico ghost" onclick="drawerClose()">✕</button></div>`;
+ if ("1939" === per) {
+ const tags = LENS_TAGS[p.id] || {};
+-html += `<div style="margin:13px 0">\n      ${tags.nomadic ? `<span class="badge">${esc(t("tagNomadic"))}</span>` : ""}\n      ${tags.gulag ? `<span class="badge">${esc(t("tagGulag"))}</span>` : ""}\n      ${tags.unrest ? `<span class="badge">${esc(t("tagUnrest"))}</span>` : ""}</div>\n    <div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin-bottom:13px">\n      <div style="font-size:42px;font-weight:700;color:var(--carmine2);line-height:1">−${p.loss.toFixed(1)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("lossOfKazPop"))}</div>\n    </div>\n    <div class="kv"><span>${esc(t("kazakhs1926"))}</span><b>${fmtN(p.kazakh_1926)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhs1939"))}</span><b>${fmtN(p.kazakh_1939)}</b></div>\n    <div class="kv"><span>${esc(t("total1926"))}</span><b>${fmtN(p.total_1926)}</b></div>\n    <div class="kv"><span>${esc(t("total1939"))}</span><b>${fmtN(p.total_1939)}</b></div>\n    <div class="kv"><span>${esc(t("generalPopChange"))}</span><b style="color:${p.growth >= 0 ? "var(--good)" : "var(--carmine2)"}">${fmtP(p.growth)} %</b></div>\n    <div class="kv"><span>${esc(t("kazShareChange"))}</span><b>${p.share1926.toFixed(1)} % → ${p.share1939.toFixed(1)} %</b></div>\n    <div class="kv"><span>${esc(t("maupShift"))}</span><b>${fmtP(p.shareShift, 2)} ${"en" === LANG ? "pp" : "п.п."}</b></div>`;
++html += `<div style="margin:13px 0">\n      ${tags.nomadic ? `<span class="badge">${esc(t("tagNomadic"))}</span>` : ""}\n      ${tags.gulag ? `<span class="badge">${esc(t("tagGulag"))}</span>` : ""}\n      ${tags.unrest ? `<span class="badge">${esc(t("tagUnrest"))}</span>` : ""}</div>\n    <div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin-bottom:13px">\n      <div style="font-size:42px;font-weight:700;color:var(--carmine2);line-height:1">−${p.loss.toFixed(1)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("lossOfKazPop"))}</div>\n    </div>\n    <div class="kv"><span>${esc(t("kazakhs1926"))}</span><b>${fmtN(p.kazakh_1926)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhs1939"))}</span><b>${fmtN(p.kazakh_1939)}</b></div>\n    <div class="kv"><span>${esc(t("total1926"))}</span><b>${fmtN(p.total_1926)}</b></div>\n    <div class="kv"><span>${esc(t("total1939"))}</span><b>${fmtN(p.total_1939)}</b></div>\n    <div class="kv"><span>${esc(t("generalPopChange"))}</span><b style="color:${p.growth >= 0 ? "var(--good)" : "var(--carmine2)"}">${fmtP(p.growth)} %</b></div>\n    <div class="kv"><span>${esc(t("kazShareChange"))}</span><b>${p.share1926.toFixed(1)} % → ${p.share1939.toFixed(1)} %</b></div>\n    <div class="kv"><span>${esc(t("maupShift"))}</span><b>${fmtP(p.shareShift, 2)} ${"kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п."}</b></div>`;
+ } else html += `<div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin:13px 0">\n      <div style="font-size:42px;font-weight:700;color:var(--s26);line-height:1">${p.kazShare.toFixed(1)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("shareKazPop"))}</div>\n    </div>\n    <div class="kv"><span>${esc(t("totalPop"))}</span><b>${fmtN(p.pop)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhPop"))}</span><b>${fmtN(p.kazAbs)}</b></div>\n    <div class="kv"><span>${esc(t("otherPop"))}</span><b>${fmtN(p.pop - p.kazAbs)}</b></div>`;
+ if (html += `<div style="margin:15px 0 0"><canvas id="rChart" height="150"></canvas></div>\n    <p class="prose" style="margin-top:13px">${esc(pDesc(p))}</p>`, 
+ "1939" === per) {
+@@ -2258,7 +2780,7 @@ rChart && (rChart.destroy(), rChart = null);
+ function printRegion(per, id) {
+ const f = KZ[per].find(x => x.p.id === id);
+ if (!f) return;
+-const p = f.p, rows = "1939" === per ? [ [ t("kazakhs1926"), fmtN(p.kazakh_1926) ], [ t("kazakhs1939"), fmtN(p.kazakh_1939) ], [ t("total1926"), fmtN(p.total_1926) ], [ t("total1939"), fmtN(p.total_1939) ], [ t("kazakhLoss"), p.loss.toFixed(1) + " %" ], [ t("generalPopChange"), fmtP(p.growth) + " %" ], [ t("maupShift"), fmtP(p.shareShift, 2) + " " + ("en" === LANG ? "pp" : "п.п.") ] ] : [ [ t("totalPop"), fmtN(p.pop) ], [ t("kazakhPop"), fmtN(p.kazAbs) ], [ t("shareKazPop").replace(/^./, c => c.toUpperCase()), p.kazShare.toFixed(1) + " %" ] ], locale = "en" === LANG ? "en-US" : "ru-RU";
++const p = f.p, rows = "1939" === per ? [ [ t("kazakhs1926"), fmtN(p.kazakh_1926) ], [ t("kazakhs1939"), fmtN(p.kazakh_1939) ], [ t("total1926"), fmtN(p.total_1926) ], [ t("total1939"), fmtN(p.total_1939) ], [ t("kazakhLoss"), p.loss.toFixed(1) + " %" ], [ t("generalPopChange"), fmtP(p.growth) + " %" ], [ t("maupShift"), fmtP(p.shareShift, 2) + " " + ("kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п.") ] ] : [ [ t("totalPop"), fmtN(p.pop) ], [ t("kazakhPop"), fmtN(p.kazAbs) ], [ t("shareKazPop").replace(/^./, c => c.toUpperCase()), p.kazShare.toFixed(1) + " %" ] ], locale = "kz" === LANG ? "kk-KZ" : "en" === LANG ? "en-US" : "ru-RU";
+ $("#print").innerHTML = `<h1>${esc(pName(p))}</h1>\n    <div class="m">${t("brandTitle")} · Asharshylyk 1930–1933 · ${esc(t("regionGridLabel"))} ${per} ${esc(t("regionOf"))}</div>\n    <table>${rows.map(r => `<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join("")}</table>\n    <p style="margin-top:14px">${esc(pDesc(p))}</p>\n    <div class="f">${esc(t("disclaimer1939"))} ${t("printGenerated")} ${(new Date).toLocaleDateString(locale)}.</div>`, 
+ window.print();
+ }
+@@ -2579,7 +3101,7 @@ const box = $("#statsW");
+ if ("flows" === WS.layer) {
+ const ab = FLOWS.filter(f => "abroad" === f.kind), sv = FLOWS.filter(f => "soviet" === f.kind), rng = a => `${a.reduce((s, f) => s + f.lo, 0)}–${a.reduce((s, f) => s + f.hi, 0)} ${t("flowRange")}`;
+ box.innerHTML = `\n      <div class="stat"><u>${esc(t("abroadDest"))}</u><b>${ab.length}</b><s>${rng(ab)}</s></div>\n      <div class="stat"><u>${esc(t("sovietDest"))}</u><b>${sv.length}</b><s>${rng(sv)}</s></div>\n      <div class="stat"><u>${esc(t("biggestDest"))}</u><b style="font-size:15px">${esc(tr(FLOWS[0]).short)}</b><s>100–200 ${t("flowRange")}</s></div>\n      <div class="stat"><u>${esc(t("returnedShare"))}</u><b>40 %</b><s>454 / 1130 ${t("flowRange")}</s></div>`;
+-} else box.innerHTML = `\n      <div class="stat"><u>${esc(t("relLoss"))}</u><b style="color:var(--carmine2)">38–42 %</b><s>${esc(tr(FAMINES[0]).n)}</s></div>\n      <div class="stat"><u>${esc(t("absMax"))}</u><b style="font-size:15px">${esc(tr(FAMINES[1]).n)}</b><s>${esc(tr(FAMINES[1]).deaths)}</s></div>\n      <div class="stat"><u>${esc(t("deathEstimates"))}</u><b>1,3–4 ${"en" === LANG ? "million" : "млн"}</b></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}</u><b>60 % → 38 %</b><s>1926 → 1939</s></div>`;
++} else box.innerHTML = `\n      <div class="stat"><u>${esc(t("relLoss"))}</u><b style="color:var(--carmine2)">38–42 %</b><s>${esc(tr(FAMINES[0]).n)}</s></div>\n      <div class="stat"><u>${esc(t("absMax"))}</u><b style="font-size:15px">${esc(tr(FAMINES[1]).n)}</b><s>${esc(tr(FAMINES[1]).deaths)}</s></div>\n      <div class="stat"><u>${esc(t("deathEstimates"))}</u><b>1,3–4 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}</u><b>60 % → 38 %</b><s>1926 → 1939</s></div>`;
+ }
+ 
+ $("#segWorld").addEventListener("click", e => {
+@@ -2725,6 +3247,11 @@ en: {
+ cat: "Article",
+ title: 'Sarah Cameron — "The Kazakh Famine of 1930–33: Current Research and New Directions"',
+ role: "A contemporary survey of research and historiographic context."
++},
++kz: {
++cat: "Мақала",
++title: "Сара Кэмерон — «The Kazakh Famine of 1930–33: Current Research and New Directions»",
++role: "Зерттеулердің заманауи шолуы және тарихнамалық контекст."
+ }
+ }, {
+ url: "https://books.google.kz/books?hl=en&lr=&id=mEVQDwAAQBAJ&oi=fnd&pg=PT6&redir_esc=y",
+@@ -2737,6 +3264,11 @@ en: {
+ cat: "Monograph",
+ title: 'Sarah Cameron — "The Hungry Steppe: Famine, Violence, and the Making of Soviet Kazakhstan"',
+ role: "The key monograph on the famine and the making of Soviet Kazakhstan — the primary source for Cameron’s historiographic lens on this site."
++},
++kz: {
++cat: "Монография",
++title: "Сара Кэмерон — «The Hungry Steppe: Famine, Violence, and the Making of Soviet Kazakhstan»",
++role: "Ашаршылық және кеңестік Қазақстанның қалыптасуы туралы негізгі монография — осы сайттағы Кэмерон көзқарасының басты дереккөзі."
+ }
+ }, {
+ url: "https://journals.openedition.org/monderusse/8681",
+@@ -2749,6 +3281,11 @@ en: {
+ cat: "Article",
+ title: 'Niccolò Pianciola — "Famine in the Steppe: The Collectivization of Agriculture and the Kazak Herdsmen, 1928–1934"',
+ role: "Collectivization, pastoralism, and state policy in the steppe."
++},
++kz: {
++cat: "Мақала",
++title: "Никколо Пьянчола — «Famine in the Steppe: The Collectivization of Agriculture and the Kazak Herdsmen, 1928–1934»",
++role: "Далада ұжымдастыру, мал шаруашылығы және мемлекет саясаты."
+ }
+ }, {
+ url: "https://www.jstor.org/stable/41036834",
+@@ -2761,6 +3298,11 @@ en: {
+ cat: "Article",
+ title: 'Niccolò Pianciola — "The Collectivization Famine in Kazakhstan, 1931–1933"',
+ role: "The mechanisms of collectivization and the regional specifics of the Kazakh famine."
++},
++kz: {
++cat: "Мақала",
++title: "Никколо Пьянчола — «The Collectivization Famine in Kazakhstan, 1931–1933»",
++role: "Ұжымдастыру механизмдері және қазақ ашаршылығының өңірлік ерекшеліктері."
+ }
+ }, {
+ url: "https://karolinum.cz/data/clanek/26/96643.pdf",
+@@ -2773,6 +3315,11 @@ en: {
+ cat: "Demography",
+ title: 'A. Saparbekova, J. Kocourková, T. Kučera — "Sweeping Ethno-Demographic Changes in Kazakhstan During the 20th Century"',
+ role: "Demographic change and migration waves across the 20th century."
++},
++kz: {
++cat: "Демография",
++title: "A. Saparbekova, J. Kocourková, T. Kučera — «Sweeping Ethno-Demographic Changes in Kazakhstan During the 20th Century»",
++role: "XX ғасырдағы демографиялық өзгерістер мен көші-қон толқындары."
+ }
+ }, {
+ url: "https://ieres.elliott.gwu.edu/project/remembering-kazakhstans-great-famine-of-the-1930s/",
+@@ -2785,6 +3332,11 @@ en: {
+ cat: "Public history",
+ title: 'GWU IERES — "Remembering Kazakhstan\'s Great Famine of the 1930s"',
+ role: "An educational resource with documents, testimonies, and the context of memory."
++},
++kz: {
++cat: "Қоғамдық тарих",
++title: "GWU IERES — «Remembering Kazakhstan's Great Famine of the 1930s»",
++role: "Құжаттары, куәліктері және есте сақтау контексі бар білім беру ресурсы."
+ }
+ } ];
+ 
+@@ -2798,7 +3350,7 @@ return new URL(b.url).hostname.replace(/^www\./, "");
+ return "";
+ }
+ })();
+-return `<div class="card pad biblio-card">\n      <p class="sec-t">${esc(L.cat)}</p>\n      <h4 style="font-size:14.5px;line-height:1.4;margin-bottom:7px">${esc(L.title)}</h4>\n      <p style="font-size:12px;color:var(--ink-soft);margin:0 0 3px"><b style="color:var(--ink-mute);font-weight:600">${"en" === LANG ? "Role in the atlas:" : "Роль в атласе:"}</b> ${esc(L.role)}</p>\n      <p class="hint" style="margin:2px 0 10px">${esc(domain)} · ${esc(t("biblioAccessNote"))}</p>\n      <a class="btn sm" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(t("biblioOpen"))}</a>\n    </div>`;
++return `<div class="card pad biblio-card">\n      <p class="sec-t">${esc(L.cat)}</p>\n      <h4 style="font-size:14.5px;line-height:1.4;margin-bottom:7px">${esc(L.title)}</h4>\n      <p style="font-size:12px;color:var(--ink-soft);margin:0 0 3px"><b style="color:var(--ink-mute);font-weight:600">${"kz" === LANG ? "Атластағы рөлі:" : "en" === LANG ? "Role in the atlas:" : "Роль в атласе:"}</b> ${esc(L.role)}</p>\n      <p class="hint" style="margin:2px 0 10px">${esc(domain)} · ${esc(t("biblioAccessNote"))}</p>\n      <a class="btn sm" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(t("biblioOpen"))}</a>\n    </div>`;
+ }).join(""));
+ }
+ 
+@@ -2811,7 +3363,7 @@ dir: 1
+ function columns(period) {
+ return "1926" === period ? [ {
+ k: "name",
+-t: "en" === LANG ? "Okrug" : "Округ",
++t: "kz" === LANG ? "Округ" : "en" === LANG ? "Okrug" : "Округ",
+ get: p => pName(p),
+ txt: 1
+ }, {
+@@ -2831,7 +3383,7 @@ get: p => p.kazShare,
+ f: v => v.toFixed(1) + " %"
+ } ] : [ {
+ k: "name",
+-t: "en" === LANG ? "Oblast" : "Область",
++t: "kz" === LANG ? "Облыс" : "en" === LANG ? "Oblast" : "Область",
+ get: p => pName(p),
+ txt: 1
+ }, {
+@@ -2852,13 +3404,13 @@ f: v => "−" + v.toFixed(1) + " %",
+ cls: () => "neg"
+ }, {
+ k: "growth",
+-t: "en" === LANG ? "Total pop." : "Общее нас.",
++t: "kz" === LANG ? "Жалпы халық" : "en" === LANG ? "Total pop." : "Общее нас.",
+ get: p => p.growth,
+ f: v => fmtP(v) + " %",
+ cls: v => v >= 0 ? "pos" : "neg"
+ }, {
+ k: "interpKaz",
+-t: "en" === LANG ? "MAUP est. 1926" : "MAUP-оценка 1926",
++t: "kz" === LANG ? "MAUP-баға 1926" : "en" === LANG ? "MAUP est. 1926" : "MAUP-оценка 1926",
+ get: p => p.interpKaz,
+ f: fmtN
+ }, {
+@@ -2878,7 +3430,7 @@ if (TS.sort) {
+ const c = cols.find(x => x.k === TS.sort);
+ rows.sort((a, b) => {
+ const va = c.get(a.p), vb = c.get(b.p);
+-return (c.txt ? String(va).localeCompare(String(vb), "en" === LANG ? "en" : "ru") : va - vb) * TS.dir;
++return (c.txt ? String(va).localeCompare(String(vb), "kz" === LANG ? "kk" : "en" === LANG ? "en" : "ru") : va - vb) * TS.dir;
+ });
+ }
+ tb.innerHTML = rows.map(f => '<tr data-id="' + f.p.id + '">' + cols.map(c => {
+@@ -2904,8 +3456,8 @@ KZ[1939].forEach((f, i) => tgt.appendChild(new Option(pName(f.p), i))), "" !== c
+ }
+ 
+ function calcMaup() {
+-const i = +$("#mSrc").value, j = +$("#mTgt").value, a = KZ[1926][i], b = KZ[1939][j], inter = MAUP.m[i][j], areaSrc = MAUP.a26[i], w = inter / areaSrc, pop = a.p.kazAbs, frag = pop * w, out = $("#mOut"), sqDeg = "en" === LANG ? "sq.°" : "кв.°";
+-out.innerHTML = inter <= 1e-4 ? "en" === LANG ? `<p class="note">“${esc(pName(a.p))}” and “${esc(pName(b.p))}” do not intersect: the okrug contributed no population to this oblast. Choose another pair — the region card shows which okrugs formed each oblast.</p>` : `<p class="note">«${esc(pName(a.p))}» и «${esc(pName(b.p))}» не пересекаются: округ не внёс населения в эту область. Выберите другую пару — в карточке области указано, из каких округов она сложилась.</p>` : `\n    <div class="kv"><span>${"en" === LANG ? "1926 okrug area" : "Площадь округа 1926"}</span><b>${areaSrc.toFixed(2)} ${sqDeg}</b></div>\n    <div class="kv"><span>${"en" === LANG ? "Intersection area" : "Площадь пересечения"}</span><b>${inter.toFixed(2)} ${sqDeg}</b></div>\n    <div class="kv"><span>${"en" === LANG ? "Weight coefficient" : "Весовой коэффициент"}</span><b>${(100 * w).toFixed(1)} %</b></div>\n    <div class="kv"><span>${"en" === LANG ? "Kazakhs in the 1926 okrug" : "Казахи в округе 1926"}</span><b>${fmtN(pop)}</b></div>\n    <div style="margin-top:11px;padding:12px;background:var(--panel2);border-radius:9px;text-align:center">\n      <div style="font-size:10.5px;color:var(--ink-mute);letter-spacing:.05em">P<sub>${"en" === LANG ? "fragment" : "фрагмент"}</sub> = P<sub>1926</sub> × (S<sub>${"en" === LANG ? "inter." : "пересеч."}</sub> ÷ S<sub>${"en" === LANG ? "okrug" : "округа"}</sub>)</div>\n      <div style="font-size:12px;color:var(--ink-soft);margin:6px 0">${fmtN(pop)} × ${w.toFixed(4)} =</div>\n      <div style="font-size:27px;font-weight:700;color:var(--gold2);line-height:1.1">${fmtN(frag)}</div>\n      <div style="font-size:10.8px;color:var(--ink-mute);margin-top:3px">${"en" === LANG ? "Kazakhs allocated to “" + pName(b.p) + "”" : "казахов переносится в «" + pName(b.p) + "»"}</div>\n    </div>\n    <p class="note" style="margin-top:11px">${"en" === LANG ? "The assumption is uniform population density within the okrug. For a nomadic population this is a simplification, and part of the error comes from exactly this. Summed over all 96 pairs, this procedure shifts the distribution by 42.46 percentage points." : "Допущение — равномерная плотность населения внутри округа. Для кочевого населения это упрощение, и часть погрешности берётся именно отсюда. Суммарно по всем 96 парам эта процедура даёт сдвиг распределения на 42,46 п.п."}</p>`;
++const i = +$("#mSrc").value, j = +$("#mTgt").value, a = KZ[1926][i], b = KZ[1939][j], inter = MAUP.m[i][j], areaSrc = MAUP.a26[i], w = inter / areaSrc, pop = a.p.kazAbs, frag = pop * w, out = $("#mOut"), sqDeg = "kz" === LANG ? "шаршы °" : "en" === LANG ? "sq.°" : "кв.°";
++out.innerHTML = inter <= 1e-4 ? "kz" === LANG ? `<p class="note">«${esc(pName(a.p))}» мен «${esc(pName(b.p))}» қиылыспайды: округ бұл облысқа халық қоспаған. Басқа жұпты таңдаңыз — аймақ карточкасында облыс қай округтерден құралғаны көрсетілген.</p>` : "en" === LANG ? `<p class="note">“${esc(pName(a.p))}” and “${esc(pName(b.p))}” do not intersect: the okrug contributed no population to this oblast. Choose another pair — the region card shows which okrugs formed each oblast.</p>` : `<p class="note">«${esc(pName(a.p))}» и «${esc(pName(b.p))}» не пересекаются: округ не внёс населения в эту область. Выберите другую пару — в карточке области указано, из каких округов она сложилась.</p>` : `\n    <div class="kv"><span>${"kz" === LANG ? "1926 ж. округ аумағы" : "en" === LANG ? "1926 okrug area" : "Площадь округа 1926"}</span><b>${areaSrc.toFixed(2)} ${sqDeg}</b></div>\n    <div class="kv"><span>${"kz" === LANG ? "Қиылысу аумағы" : "en" === LANG ? "Intersection area" : "Площадь пересечения"}</span><b>${inter.toFixed(2)} ${sqDeg}</b></div>\n    <div class="kv"><span>${"kz" === LANG ? "Салмақ коэффициенті" : "en" === LANG ? "Weight coefficient" : "Весовой коэффициент"}</span><b>${(100 * w).toFixed(1)} %</b></div>\n    <div class="kv"><span>${"kz" === LANG ? "1926 ж. округтегі қазақтар" : "en" === LANG ? "Kazakhs in the 1926 okrug" : "Казахи в округе 1926"}</span><b>${fmtN(pop)}</b></div>\n    <div style="margin-top:11px;padding:12px;background:var(--panel2);border-radius:9px;text-align:center">\n      <div style="font-size:10.5px;color:var(--ink-mute);letter-spacing:.05em">P<sub>${"kz" === LANG ? "фрагмент" : "en" === LANG ? "fragment" : "фрагмент"}</sub> = P<sub>1926</sub> × (S<sub>${"kz" === LANG ? "қиыл." : "en" === LANG ? "inter." : "пересеч."}</sub> ÷ S<sub>${"kz" === LANG ? "округ" : "en" === LANG ? "okrug" : "округа"}</sub>)</div>\n      <div style="font-size:12px;color:var(--ink-soft);margin:6px 0">${fmtN(pop)} × ${w.toFixed(4)} =</div>\n      <div style="font-size:27px;font-weight:700;color:var(--gold2);line-height:1.1">${fmtN(frag)}</div>\n      <div style="font-size:10.8px;color:var(--ink-mute);margin-top:3px">${"kz" === LANG ? "қазақтар «" + pName(b.p) + "» облысына ауыстырылады" : "en" === LANG ? "Kazakhs allocated to “" + pName(b.p) + "”" : "казахов переносится в «" + pName(b.p) + "»"}</div>\n    </div>\n    <p class="note" style="margin-top:11px">${"kz" === LANG ? "Допущение: округ ішінде халық тығыздығы бірдей деп есептеледі. Көшпелі халық үшін бұл жеңілдету, және қателіктің бір бөлігі дәл осыдан туындайды. Барлық 96 жұп бойынша қосындыланғанда, бұл процедура үлестірімді 42,46 пайыздық тармаққа ауыстырады." : "en" === LANG ? "The assumption is uniform population density within the okrug. For a nomadic population this is a simplification, and part of the error comes from exactly this. Summed over all 96 pairs, this procedure shifts the distribution by 42.46 percentage points." : "Допущение — равномерная плотность населения внутри округа. Для кочевого населения это упрощение, и часть погрешности берётся именно отсюда. Суммарно по всем 96 парам эта процедура даёт сдвиг распределения на 42,46 п.п."}</p>`;
+ }
+ 
+ $("#segTable").addEventListener("click", e => {
+@@ -2921,14 +3473,14 @@ v > bv && (bv = v, bi = i, bj = j);
+ })), src.value = bi, tgt.value = bj, $("#mCalc").addEventListener("click", calcMaup), 
+ calcMaup();
+ }(), $("#eCsv").addEventListener("click", () => {
+-let csv = "en" === LANG ? "\ufeffGrid year;Unit;Type;Total population;Kazakhs;Kazakh share %;Kazakhs 1939;Loss %;Total pop. change %;MAUP estimate 1926;Share shift pp\n" : "\ufeffГод сетки;Единица;Тип;Население всего;Казахи;Доля казахов %;Казахи 1939;Потеря %;Изм. общего %;MAUP-оценка 1926;Сдвиг доли п.п.\n";
++let csv = "en" === LANG ? "\ufeffGrid year;Unit;Type;Total population;Kazakhs;Kazakh share %;Kazakhs 1939;Loss %;Total pop. change %;MAUP estimate 1926;Share shift pp\n" : "kz" === LANG ? "﻿Тор жылы;Бірлік;Түрі;Жалпы халық;Қазақтар;Қазақтар үлесі %;Қазақтар 1939;Шығын %;Жалпы өзгеріс %;MAUP-баға 1926;Үлес ауытқысы п.т.\n" : "\ufeffГод сетки;Единица;Тип;Население всего;Казахи;Доля казахов %;Казахи 1939;Потеря %;Изм. общего %;MAUP-оценка 1926;Сдвиг доли п.п.\n";
+ KZ[1926].forEach(f => {
+ const p = f.p;
+ csv += `1926;${pName(p)};${pType(p)};${p.pop};${p.kazAbs};${p.kazShare};;;;;\n`;
+ }), KZ[1939].forEach(f => {
+ const p = f.p;
+ csv += `1939;${pName(p)};${pType(p)};${p.total_1939};${p.kazakh_1926};${p.share1926.toFixed(1)};${p.kazakh_1939};${p.loss};${p.growth.toFixed(1)};${p.interpKaz};${p.shareShift}\n`;
+-}), download("ashargylyq_" + ("en" === LANG ? "indicators" : "pokazateli") + ".csv", csv, "text/csv;charset=utf-8");
++}), download("ashargylyq_" + ("kz" === LANG ? "korsetkishter" : "en" === LANG ? "indicators" : "pokazateli") + ".csv", csv, "text/csv;charset=utf-8");
+ }), $("#eGeo").addEventListener("click", () => {
+ const feats = [];
+ [ "1926", "1939" ].forEach(per => KZ[per].forEach(f => {
+@@ -2937,21 +3489,21 @@ type: "Feature",
+ properties: {
+ ...f.p,
+ grid: per,
+-geometry_status: "en" === LANG ? "a reference reconstruction on modern administrative geometry, not an archival cadastre" : "опорная реконструкция на современной административной геометрии, не архивный кадастр",
++geometry_status: "kz" === LANG ? "қазіргі әкімшілік геометрияға негізделген тірек реконструкция, мұрағаттық кадастр емес" : "en" === LANG ? "a reference reconstruction on modern administrative geometry, not an archival cadastre" : "опорная реконструкция на современной административной геометрии, не архивный кадастр",
+ source: "Cartography of Collapse · HGIS Asharshylyk"
+ },
+ geometry: f.g
+ });
+-})), download("ashargylyq_" + ("en" === LANG ? "boundaries" : "granicy") + ".geojson", JSON.stringify({
++})), download("ashargylyq_" + ("kz" === LANG ? "shekaralar" : "en" === LANG ? "boundaries" : "granicy") + ".geojson", JSON.stringify({
+ type: "FeatureCollection",
+ features: feats
+ }), "application/geo+json");
+ }), $("#eMaup").addEventListener("click", () => {
+-let csv = "\ufeff" + ("en" === LANG ? "1926 okrug \\ 1939 oblast" : "Округ 1926 \\ Область 1939") + ";" + KZ[1939].map(f => pName(f.p)).join(";") + ";" + ("en" === LANG ? "Okrug area" : "Площадь округа") + "\n";
++let csv = "\ufeff" + ("kz" === LANG ? "1926 ж. округ \\ 1939 ж. облыс" : "en" === LANG ? "1926 okrug \\ 1939 oblast" : "Округ 1926 \\ Область 1939") + ";" + KZ[1939].map(f => pName(f.p)).join(";") + ";" + ("kz" === LANG ? "Округ аумағы" : "en" === LANG ? "Okrug area" : "Площадь округа") + "\n";
+ MAUP.m.forEach((row, i) => {
+ csv += pName(KZ[1926][i].p) + ";" + row.join(";") + ";" + MAUP.a26[i] + "\n";
+-}), csv += ("en" === LANG ? "Oblast area" : "Площадь области") + ";" + MAUP.a39.join(";") + ";\n", 
+-download("ashargylyq_" + ("en" === LANG ? "intersection_matrix" : "matrica_peresechenij") + ".csv", csv, "text/csv;charset=utf-8");
++}), csv += ("kz" === LANG ? "Облыс аумағы" : "en" === LANG ? "Oblast area" : "Площадь области") + ";" + MAUP.a39.join(";") + ";\n",
++download("ashargylyq_" + ("kz" === LANG ? "qiylysu_matricasy" : "en" === LANG ? "intersection_matrix" : "matrica_peresechenij") + ".csv", csv, "text/csv;charset=utf-8");
+ });
+ 
+ const Q = {
+@@ -2995,13 +3547,14 @@ $("#qPlay").style.display = "", quizRender();
+ 
+ const OPT_LETTERS = {
+ ru: "АБВГ",
+-en: "ABCD"
++en: "ABCD",
++kz: "АБВГ"
+ };
+ 
+ function quizRender() {
+ const q = Q.list[Q.i];
+-Q.answered = !1, $("#qPos").textContent = `${"en" === LANG ? "Question" : "Вопрос"} ${Q.i + 1} ${"en" === LANG ? "of" : "из"} ${Q.list.length}`, 
+-$("#qScore").textContent = `${"en" === LANG ? "Correct:" : "Верных:"} ${Q.score}`, 
++Q.answered = !1, $("#qPos").textContent = `${"kz" === LANG ? "Сұрақ" : "en" === LANG ? "Question" : "Вопрос"} ${Q.i + 1} ${"kz" === LANG ? "/" : "en" === LANG ? "of" : "из"} ${Q.list.length}`,
++$("#qScore").textContent = `${"kz" === LANG ? "Дұрыс:" : "en" === LANG ? "Correct:" : "Верных:"} ${Q.score}`,
+ $("#qBar").style.width = Q.i / Q.list.length * 100 + "%", $("#qTag").textContent = q.tag, 
+ $("#qQ").textContent = q.q, $("#qExpl").classList.remove("on"), $("#qNext").style.display = "none";
+ const letters = OPT_LETTERS[LANG] || OPT_LETTERS.ru, box = $("#qOpts");
+@@ -3027,7 +3580,7 @@ b.disabled = !0, idx === q.correct ? b.classList.add("ok") : idx === i && b.clas
+ });
+ const ex = $("#qExpl");
+ ex.innerHTML = `<b style="color:${ok ? "var(--good)" : "var(--carmine2)"}">${esc(t(ok ? "quizCorrect" : "quizWrong"))}.</b> ${esc(q.e)}`, 
+-ex.classList.add("on"), $("#qScore").textContent = `${"en" === LANG ? "Correct:" : "Верных:"} ${Q.score}`, 
++ex.classList.add("on"), $("#qScore").textContent = `${"kz" === LANG ? "Дұрыс:" : "en" === LANG ? "Correct:" : "Верных:"} ${Q.score}`,
+ $("#qNext").style.display = "", $("#qNext").textContent = Q.i === Q.list.length - 1 ? t("quizFinish") : t("quizNext"), 
+ ok && window.confetti && Q.i === Q.list.length - 1 && 0 === Q.wrong.length && confetti({
+ particleCount: 90,
+@@ -3067,25 +3620,28 @@ Q.shuffle = !Q.shuffle, $("#qShuffle").classList.toggle("gold", Q.shuffle), toas
+ const MODELS = [ {
+ id: "Qwen2.5-1.5B-Instruct-q4f16_1-MLC",
+ ru: "Qwen 2.5 · 1.5B — быстрая (~1,1 ГБ)",
+-en: "Qwen 2.5 · 1.5B — fast (~1.1 GB)"
++en: "Qwen 2.5 · 1.5B — fast (~1.1 GB)",
++kz: "Qwen 2.5 · 1.5B — жылдам (~1,1 ГБ)"
+ }, {
+ id: "Qwen2.5-3B-Instruct-q4f16_1-MLC",
+ ru: "Qwen 2.5 · 3B — точнее (~2,0 ГБ)",
+-en: "Qwen 2.5 · 3B — more accurate (~2.0 GB)"
++en: "Qwen 2.5 · 3B — more accurate (~2.0 GB)",
++kz: "Qwen 2.5 · 3B — дәлірек (~2,0 ГБ)"
+ }, {
+ id: "Llama-3.2-3B-Instruct-q4f16_1-MLC",
+ ru: "Llama 3.2 · 3B (~2,3 ГБ)",
+-en: "Llama 3.2 · 3B (~2.3 GB)"
++en: "Llama 3.2 · 3B (~2.3 GB)",
++kz: "Llama 3.2 · 3B (~2,3 ГБ)"
+ } ], AI = {
+ engine: null,
+ loading: !1,
+ model: MODELS[0].id,
+ busy: !1,
+ history: []
+-}, stem = w => w.toLowerCase().replace(/[ёë]/g, "е").slice(0, 5), tokens = s => (s.toLowerCase().match(/[a-zа-яё0-9]{3,}/gi) || []).map(stem), STOP_RU = new Set([ "что", "как", "это", "для", "при", "все", "был", "быть", "esc", "ктo", "где", "поче", "какой", "кака", "какие", "скол", "расс", "why", "the" ]), STOP_EN = new Set([ "what", "how", "this", "that", "for", "with", "are", "was", "were", "the", "and", "who", "why", "which", "about", "does", "did", "when", "where" ]);
++}, stem = w => w.toLowerCase().replace(/[ёë]/g, "е").slice(0, 5), tokens = s => (s.toLowerCase().match(/[a-zа-яёәғқңөұүһі0-9]{3,}/gi) || []).map(stem), STOP_RU = new Set([ "что", "как", "это", "для", "при", "все", "был", "быть", "esc", "ктo", "где", "поче", "какой", "кака", "какие", "скол", "расс", "why", "the" ]), STOP_EN = new Set([ "what", "how", "this", "that", "for", "with", "are", "was", "were", "the", "and", "who", "why", "which", "about", "does", "did", "when", "where" ]), STOP_KZ = new Set([ "деген", "қалай", "үшін", "бірақ", "кезде", "арқылы", "туралы", "барлық", "болды", "және", "немесе", "қанша", "қандай", "неге", "мынау", "сонда", "дейін", "бұл", "сол" ]);
+ 
+ function stopwords() {
+-return "en" === LANG ? STOP_EN : STOP_RU;
++return "kz" === LANG ? STOP_KZ : "en" === LANG ? STOP_EN : STOP_RU;
+ }
+ 
+ function retrieve(query, k = 4) {
+@@ -3161,7 +3717,7 @@ $("#aiBar").style.width = "0%", toast(t("toastModelFailed"));
+ return AI.loading = !1, $("#aiLoad").disabled = !1, AI.engine;
+ }
+ 
+-const SYS_RU = "Ты — научный ассистент школьного исследовательского проекта «Картография коллапса»: историко-географический анализ Ашаршылыка (голода в Казахстане 1930–1933 гг.) средствами HGIS. Ты — программа, языковая модель, работающая в браузере, а не человек: у тебя нет возраста, имени, тела или личной биографии, никогда не выдумывай и не сообщай такие детали о себе.\n\nПравила:\n1. Если приведённый ниже КОНТЕКСТ отвечает на вопрос — отвечай строго на его основе и никогда не выдумывай цифры, имена и даты, которых там нет.\n2. Если контекста нет или он не по вопросу, но вопрос по смыслу связан с темой (казахи, история Казахстана, СССР 1920–1930-х годов, кочевники, коллективизация, голод, историография) — ответь кратко из общих исторических знаний и прямо отметь, что это общие сведения, а не данные сайта.\n3. Если вопрос совсем не по теме проекта — вежливо скажи об этом и предложи спросить про регион, историка, цифру или метод.\n4. Если оценка дискуссионная — назови диапазон и скажи, что он дискуссионный.\n5. Отвечай по-русски, кратко и по существу: 2–5 предложений связным текстом, не более 90 слов всего, БЕЗ нумерованных и маркированных списков (если явно не просят список) и без вступлений вроде «Возможно, вы имеете в виду…» — сразу отвечай по делу и заканчивай мысль до конца.\n6. Тема тяжёлая — пиши уважительно и без сенсационности.", SYS_EN = "You are the research assistant for \"Cartography of Collapse\": a historical-geographic analysis of Asharshylyk (the 1930–1933 famine in Kazakhstan) using HGIS. You are a piece of software, a language model running in the browser, not a human: you have no age, name, body, or personal biography — never invent or state such details about yourself.\n\nRules:\n1. If the CONTEXT below answers the question, base your answer strictly on it and never invent numbers, names, or dates that aren't there.\n2. If there is no context, or it doesn't address the question, but the question is meaningfully related to the topic (Kazakhs, the history of Kazakhstan, the 1920s–1930s USSR, nomadic life, collectivization, famine, historiography), answer briefly using general historical knowledge and clearly note that this is general background, not data from the site.\n3. If the question is entirely unrelated to the project's topic, say so politely and suggest asking about a region, a historian, a figure, or a method instead.\n4. If an estimate is debated, state the range and say that it is debated.\n5. Answer in English, briefly and to the point: 2–5 sentences as flowing prose, no more than 90 words total, with NO numbered or bulleted lists (unless a list is explicitly requested) and no preambles like \"You might mean...\" — get straight to the point and finish the thought.\n6. This is a heavy topic — write respectfully and without sensationalism.";
++const SYS_RU = "Ты — научный ассистент школьного исследовательского проекта «Картография коллапса»: историко-географический анализ Ашаршылыка (голода в Казахстане 1930–1933 гг.) средствами HGIS. Ты — программа, языковая модель, работающая в браузере, а не человек: у тебя нет возраста, имени, тела или личной биографии, никогда не выдумывай и не сообщай такие детали о себе.\n\nПравила:\n1. Если приведённый ниже КОНТЕКСТ отвечает на вопрос — отвечай строго на его основе и никогда не выдумывай цифры, имена и даты, которых там нет.\n2. Если контекста нет или он не по вопросу, но вопрос по смыслу связан с темой (казахи, история Казахстана, СССР 1920–1930-х годов, кочевники, коллективизация, голод, историография) — ответь кратко из общих исторических знаний и прямо отметь, что это общие сведения, а не данные сайта.\n3. Если вопрос совсем не по теме проекта — вежливо скажи об этом и предложи спросить про регион, историка, цифру или метод.\n4. Если оценка дискуссионная — назови диапазон и скажи, что он дискуссионный.\n5. Отвечай по-русски, кратко и по существу: 2–5 предложений связным текстом, не более 90 слов всего, БЕЗ нумерованных и маркированных списков (если явно не просят список) и без вступлений вроде «Возможно, вы имеете в виду…» — сразу отвечай по делу и заканчивай мысль до конца.\n6. Тема тяжёлая — пиши уважительно и без сенсационности.", SYS_EN = "You are the research assistant for \"Cartography of Collapse\": a historical-geographic analysis of Asharshylyk (the 1930–1933 famine in Kazakhstan) using HGIS. You are a piece of software, a language model running in the browser, not a human: you have no age, name, body, or personal biography — never invent or state such details about yourself.\n\nRules:\n1. If the CONTEXT below answers the question, base your answer strictly on it and never invent numbers, names, or dates that aren't there.\n2. If there is no context, or it doesn't address the question, but the question is meaningfully related to the topic (Kazakhs, the history of Kazakhstan, the 1920s–1930s USSR, nomadic life, collectivization, famine, historiography), answer briefly using general historical knowledge and clearly note that this is general background, not data from the site.\n3. If the question is entirely unrelated to the project's topic, say so politely and suggest asking about a region, a historian, a figure, or a method instead.\n4. If an estimate is debated, state the range and say that it is debated.\n5. Answer in English, briefly and to the point: 2–5 sentences as flowing prose, no more than 90 words total, with NO numbered or bulleted lists (unless a list is explicitly requested) and no preambles like \"You might mean...\" — get straight to the point and finish the thought.\n6. This is a heavy topic — write respectfully and without sensationalism.", SYS_KZ = "Сен — «Күйреу картографиясы» атты ғылыми-зерттеу жобасының ассистентісің: бұл Ашаршылықтың (1930–1933 жж. Қазақстандағы ашаршылық) HGIS құралдарымен жасалған тарихи-географиялық талдауы. Сен — браузерде жұмыс істейтін бағдарлама, тілдік модельсің, адам емессің: сенің жасың, атың, денең немесе жеке өмірбаяның жоқ, мұндай мәліметтерді өзің туралы ешқашан ойдан шығарма және айтпа.\n\nЕрежелер:\n1. Егер төмендегі КОНТЕКСТ сұраққа жауап беретін болса — тек соған сүйеніп жауап бер, онда жоқ сандарды, есімдерді, күндерді ешқашан ойдан шығарма.\n2. Егер контекст жоқ болса немесе сұраққа сәйкес келмесе, бірақ сұрақ тақырыпқа мағыналық жағынан қатысты болса (қазақтар, Қазақстан тарихы, 1920–1930 жж. КСРО, көшпенділер, ұжымдастыру, ашаршылық, тарихнама) — жалпы тарихи білім негізінде қысқаша жауап бер және мұның сайт деректері емес, жалпы мәлімет екенін тікелей айт.\n3. Егер сұрақ жобаның тақырыбына мүлде қатысы жоқ болса — сыпайы түрде осыны айт және аймақ, тарихшы, сан немесе әдіс туралы сұрауды ұсын.\n4. Егер баға пікірталастық болса — диапазонды атап, оның пікірталастық екенін айт.\n5. Қазақ тілінде, қысқа әрі нақты жауап бер: 2–5 сөйлем үзіліссіз мәтін түрінде, барлығы 90 сөзден аспасын, нөмірленген немесе таңбаланған тізімдерсіз (тізім арнайы сұралмаса) және «Мүмкін, сіз мынаны айтқыңыз келді...» деген кіріспелерсіз — бірден мәселеге көш және ойды толық аяқта.\n6. Тақырып ауыр — құрметпен және сенсацияға салынбай жаз.";
+ 
+ const IDENTITY_RE = /^[\s?!.]*(кто\s+ты|ты\s+кто|что\s+ты(\s+такое|\s+знаешь|\s+умеешь)?|ты\s+что\s+такое|представьс[яи]|расскажи(\s+мне)?\s+о\s+себе|расскажи[,]?\s+что\s+ты(\s+в\s+целом)?\s+знаешь|who\s+are\s+you|what\s+are\s+you|what\s+do\s+you\s+know(\s+about\s+yourself)?|introduce\s+yourself)[\s?!.]*$/i, SELF_BIO_RE = [ /\bмне\s+\d{1,3}\s*(лет|года?)\b[.,;]?\s*/gi, /\bя\s+(являюсь\s+)?[а-яё]*\s*\d{1,3}[-\s]?(летн\w*)\b[.,;]?\s*/gi, /\b(i'?m|i\s+am)\s+\d{1,3}\s*(years?\s*old)\b[.,;]?\s*/gi ];
+ 
+@@ -3179,10 +3735,10 @@ return chatAdd("bot", a.text, a.src), AI.busy = !1, void ($("#aiSend").disabled
+ }
+ const node = chatAdd("bot", "…");
+ try {
+-const noCtxNote = "en" === LANG ? "No matching excerpts were found on the site for this question. Follow rule 2 or 3 above — do not mention or quote this note itself." : "По этому вопросу на сайте не нашлось подходящих материалов. Следуй правилу 2 или 3 выше — не упоминай и не цитируй саму эту пометку.", userMsg = ctx ? ("en" === LANG ? `CONTEXT FROM THE PROJECT'S MATERIAL:\n${ctx}\n\nQUESTION: ${query}` : `КОНТЕКСТ ИЗ МАТЕРИАЛОВ ПРОЕКТА:\n${ctx}\n\nВОПРОС: ${query}`) : ("en" === LANG ? `${noCtxNote}\n\nQUESTION: ${query}` : `${noCtxNote}\n\nВОПРОС: ${query}`), stream = await AI.engine.chat.completions.create({
++const noCtxNote = "kz" === LANG ? "Бұл сұрақ бойынша сайттан сәйкес материалдар табылмады. Жоғарыдағы 2 немесе 3-ережені орында — осы ескертпені өзін айтпа немесе келтірме." : "en" === LANG ? "No matching excerpts were found on the site for this question. Follow rule 2 or 3 above — do not mention or quote this note itself." : "По этому вопросу на сайте не нашлось подходящих материалов. Следуй правилу 2 или 3 выше — не упоминай и не цитируй саму эту пометку.", userMsg = ctx ? ("kz" === LANG ? `ЖОБА МАТЕРИАЛДАРЫНАН АЛЫНҒАН КОНТЕКСТ:\n${ctx}\n\nСҰРАҚ: ${query}` : "en" === LANG ? `CONTEXT FROM THE PROJECT'S MATERIAL:\n${ctx}\n\nQUESTION: ${query}` : `КОНТЕКСТ ИЗ МАТЕРИАЛОВ ПРОЕКТА:\n${ctx}\n\nВОПРОС: ${query}`) : ("kz" === LANG ? `${noCtxNote}\n\nСҰРАҚ: ${query}` : "en" === LANG ? `${noCtxNote}\n\nQUESTION: ${query}` : `${noCtxNote}\n\nВОПРОС: ${query}`), stream = await AI.engine.chat.completions.create({
+ messages: [ {
+ role: "system",
+-content: "en" === LANG ? SYS_EN : SYS_RU
++content: "kz" === LANG ? SYS_KZ : "en" === LANG ? SYS_EN : SYS_RU
+ }, {
+ role: "user",
+ content: userMsg
+@@ -3230,11 +3786,11 @@ b.textContent = q, b.addEventListener("click", () => ask(q)), box.appendChild(b)
+ }
+ 
+ function aiSuggestions() {
+-return "en" === LANG ? [ "What is MAUP in simple terms?", "Why did the population grow in Karaganda Oblast?", "Where did Kazakhs migrate to?", "How does Cameron differ from Omarbekov?", "How many died, and why do estimates differ?" ] : [ "Что такое MAUP простыми словами?", "Почему в Карагандинской области росло население?", "Куда откочёвывали казахи?", "Чем Кэмерон расходится с Омарбековым?", "Сколько погибло и почему оценки разные?" ];
++return "kz" === LANG ? [ "MAUP деген не, қарапайым тілмен айтқанда?", "Неге Қарағанды облысында халық саны өсті?", "Қазақтар қайда көшіп кетті?", "Кэмерон мен Омарбеков пікірлері неімен ерекшеленеді?", "Қанша адам қаза тапты және неге бағалар әртүрлі?" ] : "en" === LANG ? [ "What is MAUP in simple terms?", "Why did the population grow in Karaganda Oblast?", "Where did Kazakhs migrate to?", "How does Cameron differ from Omarbekov?", "How many died, and why do estimates differ?" ] : [ "Что такое MAUP простыми словами?", "Почему в Карагандинской области росло население?", "Куда откочёвывали казахи?", "Чем Кэмерон расходится с Омарбековым?", "Сколько погибло и почему оценки разные?" ];
+ }
+ 
+ function renderAbout() {
+-$("#aboutBody").innerHTML = "en" === LANG ? '\n<p>"Cartography of Collapse" is a spatial-demographic analysis of Asharshylyk, the 1930–1933 famine in Kazakhstan, carried out using historical GIS (HGIS). The work answers one methodological question: <b>how much do conclusions about the geography of the catastrophe depend on the administrative grid the data is grouped by?</b></p>\n\n<h4>What the study shows</h4>\n<p>The 1926 census describes the Kazak ASSR through 8 okrugs; the 1939 census, through 12 oblasts. The territory is the same, the people are the same, but the layout differs. Carrying the 1926 data onto the 1939 grid by areal interpolation across 96 polygon intersections produces a total share shift of <b>42.46 percentage points</b> and a dissimilarity index of <b>21.2%</b>. In other words, changing the grid "relocates" a fifth of the entire spatial distribution of the population. This is the Modifiable Areal Unit Problem on historical material.</p>\n\n<h4>Three historiographic lenses</h4>\n<ul>\n<li><b>Sarah Cameron:</b> the famine as a consequence of the destruction of the nomadic economy; the epicenter is where the share of pastoralism was highest.</li>\n<li><b>Niccolò Pianciola:</b> an imperial hierarchy of priorities; hence the "anomalous growth" in industrial and camp districts.</li>\n<li><b>Talas Omarbekov:</b> Kazakh agency and resistance; the link between the centers of the 1929–1931 uprisings and the depth of the losses.</li>\n</ul>\n\n<h4>Honest limitations worth stating in a defense</h4>\n<ul>\n<li><b>The boundaries are not an archival cadastre.</b> The geometry is built as a reference reconstruction: modern administrative outlines (geoBoundaries), merged under the historical units of 1926 and 1939. The real historical boundaries differed.</li>\n<li><b>Attributes and geometry are kept separate.</b> Demographic figures are stored apart from the outlines, so the boundary reconstruction is never mistaken for the source of the numbers.</li>\n<li><b>Different base totals.</b> The 1926 and 1939 attribute sets come from different sources, so it is more accurate to compare shares rather than absolute sums.</li>\n<li><b>The interpolation assumption.</b> Areal interpolation assumes uniform density within a unit. For a nomadic population this is a simplification, and part of the error comes from exactly this.</li>\n<li><b>The breakdown of migrations by country is a debated estimate.</b> S. Cameron explicitly calls an exact count by destination an open research question.</li>\n<li><b>Death-toll estimates diverge</b> from 1.258 million (the Ptukha Institute) to 4 million (Kh. M. Abzhanov). We give the range with attribution, not a single "correct" figure.</li>\n</ul>\n\n<h4>Data and technology</h4>\n<ul>\n<li>Boundaries: geoBoundaries (reference geometry), Natural Earth 110m for the world map.</li>\n<li>Projections: the Albers equal-area conic for Kazakhstan, Equal Earth for the world map, both equal-area, so comparing areas is valid.</li>\n<li>Calculations: areal interpolation, dissimilarity index, quantile classification.</li>\n<li>Application: a single self-contained HTML file. The assistant\'s language model runs in the browser via WebGPU, so no data is sent anywhere.</li>\n</ul>\n\n<p style="margin-top:14px;color:var(--ink-mute);font-size:12px">All of the project\'s data is open: the "Data & MAUP" section lets you export the indicators as CSV, the boundaries as GeoJSON, and the polygon-intersection matrix.</p>' : '\n<p>«Картография коллапса»: пространственно-демографический анализ Ашаршылыка, голода в Казахстане 1930–1933 годов, выполненный средствами исторической ГИС (HGIS). Работа отвечает на один методологический вопрос: <b>насколько выводы о географии катастрофы зависят от административной сетки, по которой сгруппированы данные?</b></p>\n\n<h4>Что показывает исследование</h4>\n<p>Перепись 1926 года описывает Казакскую АССР через 8 округов, перепись 1939 года — через 12 областей. Территория одна, люди одни, но нарезка разная. Перенеся данные 1926 года на сетку 1939 года методом ареальной интерполяции по 96 пересечениям полигонов, мы получили суммарный сдвиг долей в <b>42,46 процентных пункта</b> и индекс несходства <b>21,2 %</b>. Иными словами, при смене сетки «переезжает» пятая часть всего пространственного распределения населения. Это и есть Modifiable Areal Unit Problem на историческом материале.</p>\n\n<h4>Три историографические линзы</h4>\n<ul>\n<li><b>Сара Кэмерон:</b> голод как следствие уничтожения кочевого хозяйства; эпицентр там, где выше доля скотоводства.</li>\n<li><b>Никколо Пьянчола:</b> имперская иерархия приоритетов; отсюда «аномальный рост» в промышленных и лагерных районах.</li>\n<li><b>Талас Омарбеков:</b> субъектность казахов и сопротивление; связь очагов восстаний 1929–1931 гг. с глубиной потерь.</li>\n</ul>\n\n<h4>Честные ограничения, которые нужно называть на защите</h4>\n<ul>\n<li><b>Границы: не архивный кадастр.</b> Геометрия построена как опорная реконструкция: современные административные контуры (geoBoundaries), объединённые под исторические единицы 1926 и 1939 годов. Реальные исторические границы отличались.</li>\n<li><b>Атрибуты и геометрия разделены.</b> Демографические показатели хранятся отдельно от контуров, чтобы реконструкция границ не выдавалась за источник цифр.</li>\n<li><b>Разные базовые итоги.</b> Наборы атрибутов 1926 и 1939 годов происходят из разных источников, поэтому корректнее сравнивать доли, а не абсолютные суммы.</li>\n<li><b>Допущение интерполяции.</b> Ареальная интерполяция предполагает равномерную плотность внутри единицы. Для кочевого населения это упрощение, и часть погрешности берётся именно отсюда.</li>\n<li><b>Разбивка откочёвок по странам: дискуссионная оценка.</b> С. Кэмерон прямо называет точный подсчёт по направлениям открытым исследовательским вопросом.</li>\n<li><b>Оценки числа жертв расходятся</b> от 1,258 млн (Институт им. Птухи) до 4 млн (Х. М. Абжанов). Мы приводим диапазон с атрибуцией, а не одну «правильную» цифру.</li>\n</ul>\n\n<h4>Данные и технологии</h4>\n<ul>\n<li>Границы: geoBoundaries (опорная геометрия), Natural Earth 110 м для карты мира.</li>\n<li>Проекции: Альберс равновеликая коническая для Казахстана, Equal Earth для карты мира, обе равновеликие, поэтому сравнение площадей корректно.</li>\n<li>Расчёты: ареальная интерполяция, индекс несходства, квантильная классификация.</li>\n<li>Приложение: один самодостаточный HTML-файл. Языковая модель ассистента работает в браузере через WebGPU, поэтому данные никуда не отправляются.</li>\n</ul>\n\n<p style="margin-top:14px;color:var(--ink-mute);font-size:12px">Все данные проекта открыты: раздел «Данные и MAUP» позволяет выгрузить показатели в CSV, границы в GeoJSON и матрицу пересечений полигонов.</p>';
++$("#aboutBody").innerHTML = "kz" === LANG ? '\n<p>«Күйреу картографиясы»: Ашаршылықтың — 1930–1933 жылдардағы Қазақстандағы ашаршылықтың — тарихи ГАЖ (HGIS) құралдарымен жасалған кеңістіктік-демографиялық талдауы. Жұмыс бір әдіснамалық сұраққа жауап береді: <b>апат географиясы туралы қорытындылар деректер топтастырылған әкімшілік торға қаншалықты тәуелді?</b></p>\n\n<h4>Зерттеу нені көрсетеді</h4>\n<p>1926 жылғы санақ Қазақ АКСР-ін 8 округ арқылы, ал 1939 жылғы санақ 12 облыс арқылы сипаттайды. Аумақ бір, адамдар бір, бірақ бөліну әртүрлі. 1926 жылғы деректерді 96 полигон қиылысы бойынша ареалдық интерполяция әдісімен 1939 жылғы торға көшіргенде, біз үлестердің жиынтық ауытқуын <b>42,46 пайыздық тармақ</b> және ұқсамау индексін <b>21,2 %</b> алдық. Басқаша айтқанда, тор өзгергенде халықтың бүкіл кеңістіктік үлестірімінің бестен бірі «көшіп кетеді». Бұл тарихи материалдағы Modifiable Areal Unit Problem дәл өзі.</p>\n\n<h4>Үш тарихнамалық көзқарас</h4>\n<ul>\n<li><b>Сара Кэмерон:</b> ашаршылық — көшпелі шаруашылықтың құрып кетуінің салдары; эпицентр мал шаруашылығының үлесі жоғары жерде.</li>\n<li><b>Никколо Пьянчола:</b> империялық басымдықтар иерархиясы; сондықтан өнеркәсіп пен лагерь аудандарында «аномальды өсім» байқалады.</li>\n<li><b>Талас Омарбеков:</b> қазақтардың субъектілігі мен қарсылығы; 1929–1931 жж. көтеріліс ошақтарының шығын тереңдігімен байланысы.</li>\n</ul>\n\n<h4>Қорғауда тікелей айту керек адал ескертулер</h4>\n<ul>\n<li><b>Шекаралар: мұрағаттық кадастр емес.</b> Геометрия тірек реконструкция ретінде құрылған: 1926 және 1939 жылдардың тарихи бірліктеріне сәйкес біріктірілген қазіргі әкімшілік контурлар (geoBoundaries). Нақты тарихи шекаралар өзгеше болған.</li>\n<li><b>Атрибуттар мен геометрия бөлек.</b> Демографиялық көрсеткіштер контурлардан бөлек сақталады, шекара реконструкциясы сандардың дереккөзі ретінде қабылданбауы үшін.</li>\n<li><b>Әртүрлі базалық қорытындылар.</b> 1926 және 1939 жылдардың атрибут жиынтықтары әртүрлі көздерден алынған, сондықтан абсолютті сомаларды емес, үлестерді салыстырған дұрысырақ.</li>\n<li><b>Интерполяция болжамы.</b> Ареалдық интерполяция бірлік ішінде тығыздықтың бірдей болуын болжайды. Көшпелі халық үшін бұл жеңілдету, және қателіктің бір бөлігі дәл осыдан туындайды.</li>\n<li><b>Көші-қонның елдер бойынша бөлінуі: пікірталастық баға.</b> С. Кэмерон бағыттар бойынша дәл санақты ашық зерттеу мәселесі деп тікелей атайды.</li>\n<li><b>Құрбандар саны бағасы алшақтайды</b> 1,258 млн-нан (Птуха институты) 4 млн-ға дейін (Х. М. Әбжанов). Біз бір «дұрыс» санды емес, атрибуциясы бар диапазонды береміз.</li>\n</ul>\n\n<h4>Деректер мен технологиялар</h4>\n<ul>\n<li>Шекаралар: geoBoundaries (тірек геометрия), әлем картасы үшін Natural Earth 110 м.</li>\n<li>Проекциялар: Қазақстан үшін Альберстің тең аумақты конустық проекциясы, әлем картасы үшін Equal Earth, екеуі де тең аумақты, сондықтан аудандарды салыстыру дұрыс.</li>\n<li>Есептеулер: ареалдық интерполяция, ұқсамау индексі, квантильдік жіктеу.</li>\n<li>Қолданба: бір дербес HTML-файл. Көмекшінің тілдік моделі браузерде WebGPU арқылы жұмыс істейді, сондықтан деректер еш жерге жіберілмейді.</li>\n</ul>\n\n<p style="margin-top:14px;color:var(--ink-mute);font-size:12px">Жобаның барлық деректері ашық: «Деректер және MAUP» бөлімі көрсеткіштерді CSV форматында, шекараларды GeoJSON форматында және полигон қиылысу матрицасын жүктеп алуға мүмкіндік береді.</p>' : "en" === LANG ? '\n<p>"Cartography of Collapse" is a spatial-demographic analysis of Asharshylyk, the 1930–1933 famine in Kazakhstan, carried out using historical GIS (HGIS). The work answers one methodological question: <b>how much do conclusions about the geography of the catastrophe depend on the administrative grid the data is grouped by?</b></p>\n\n<h4>What the study shows</h4>\n<p>The 1926 census describes the Kazak ASSR through 8 okrugs; the 1939 census, through 12 oblasts. The territory is the same, the people are the same, but the layout differs. Carrying the 1926 data onto the 1939 grid by areal interpolation across 96 polygon intersections produces a total share shift of <b>42.46 percentage points</b> and a dissimilarity index of <b>21.2%</b>. In other words, changing the grid "relocates" a fifth of the entire spatial distribution of the population. This is the Modifiable Areal Unit Problem on historical material.</p>\n\n<h4>Three historiographic lenses</h4>\n<ul>\n<li><b>Sarah Cameron:</b> the famine as a consequence of the destruction of the nomadic economy; the epicenter is where the share of pastoralism was highest.</li>\n<li><b>Niccolò Pianciola:</b> an imperial hierarchy of priorities; hence the "anomalous growth" in industrial and camp districts.</li>\n<li><b>Talas Omarbekov:</b> Kazakh agency and resistance; the link between the centers of the 1929–1931 uprisings and the depth of the losses.</li>\n</ul>\n\n<h4>Honest limitations worth stating in a defense</h4>\n<ul>\n<li><b>The boundaries are not an archival cadastre.</b> The geometry is built as a reference reconstruction: modern administrative outlines (geoBoundaries), merged under the historical units of 1926 and 1939. The real historical boundaries differed.</li>\n<li><b>Attributes and geometry are kept separate.</b> Demographic figures are stored apart from the outlines, so the boundary reconstruction is never mistaken for the source of the numbers.</li>\n<li><b>Different base totals.</b> The 1926 and 1939 attribute sets come from different sources, so it is more accurate to compare shares rather than absolute sums.</li>\n<li><b>The interpolation assumption.</b> Areal interpolation assumes uniform density within a unit. For a nomadic population this is a simplification, and part of the error comes from exactly this.</li>\n<li><b>The breakdown of migrations by country is a debated estimate.</b> S. Cameron explicitly calls an exact count by destination an open research question.</li>\n<li><b>Death-toll estimates diverge</b> from 1.258 million (the Ptukha Institute) to 4 million (Kh. M. Abzhanov). We give the range with attribution, not a single "correct" figure.</li>\n</ul>\n\n<h4>Data and technology</h4>\n<ul>\n<li>Boundaries: geoBoundaries (reference geometry), Natural Earth 110m for the world map.</li>\n<li>Projections: the Albers equal-area conic for Kazakhstan, Equal Earth for the world map, both equal-area, so comparing areas is valid.</li>\n<li>Calculations: areal interpolation, dissimilarity index, quantile classification.</li>\n<li>Application: a single self-contained HTML file. The assistant\'s language model runs in the browser via WebGPU, so no data is sent anywhere.</li>\n</ul>\n\n<p style="margin-top:14px;color:var(--ink-mute);font-size:12px">All of the project\'s data is open: the "Data & MAUP" section lets you export the indicators as CSV, the boundaries as GeoJSON, and the polygon-intersection matrix.</p>' : '\n<p>«Картография коллапса»: пространственно-демографический анализ Ашаршылыка, голода в Казахстане 1930–1933 годов, выполненный средствами исторической ГИС (HGIS). Работа отвечает на один методологический вопрос: <b>насколько выводы о географии катастрофы зависят от административной сетки, по которой сгруппированы данные?</b></p>\n\n<h4>Что показывает исследование</h4>\n<p>Перепись 1926 года описывает Казакскую АССР через 8 округов, перепись 1939 года — через 12 областей. Территория одна, люди одни, но нарезка разная. Перенеся данные 1926 года на сетку 1939 года методом ареальной интерполяции по 96 пересечениям полигонов, мы получили суммарный сдвиг долей в <b>42,46 процентных пункта</b> и индекс несходства <b>21,2 %</b>. Иными словами, при смене сетки «переезжает» пятая часть всего пространственного распределения населения. Это и есть Modifiable Areal Unit Problem на историческом материале.</p>\n\n<h4>Три историографические линзы</h4>\n<ul>\n<li><b>Сара Кэмерон:</b> голод как следствие уничтожения кочевого хозяйства; эпицентр там, где выше доля скотоводства.</li>\n<li><b>Никколо Пьянчола:</b> имперская иерархия приоритетов; отсюда «аномальный рост» в промышленных и лагерных районах.</li>\n<li><b>Талас Омарбеков:</b> субъектность казахов и сопротивление; связь очагов восстаний 1929–1931 гг. с глубиной потерь.</li>\n</ul>\n\n<h4>Честные ограничения, которые нужно называть на защите</h4>\n<ul>\n<li><b>Границы: не архивный кадастр.</b> Геометрия построена как опорная реконструкция: современные административные контуры (geoBoundaries), объединённые под исторические единицы 1926 и 1939 годов. Реальные исторические границы отличались.</li>\n<li><b>Атрибуты и геометрия разделены.</b> Демографические показатели хранятся отдельно от контуров, чтобы реконструкция границ не выдавалась за источник цифр.</li>\n<li><b>Разные базовые итоги.</b> Наборы атрибутов 1926 и 1939 годов происходят из разных источников, поэтому корректнее сравнивать доли, а не абсолютные суммы.</li>\n<li><b>Допущение интерполяции.</b> Ареальная интерполяция предполагает равномерную плотность внутри единицы. Для кочевого населения это упрощение, и часть погрешности берётся именно отсюда.</li>\n<li><b>Разбивка откочёвок по странам: дискуссионная оценка.</b> С. Кэмерон прямо называет точный подсчёт по направлениям открытым исследовательским вопросом.</li>\n<li><b>Оценки числа жертв расходятся</b> от 1,258 млн (Институт им. Птухи) до 4 млн (Х. М. Абжанов). Мы приводим диапазон с атрибуцией, а не одну «правильную» цифру.</li>\n</ul>\n\n<h4>Данные и технологии</h4>\n<ul>\n<li>Границы: geoBoundaries (опорная геометрия), Natural Earth 110 м для карты мира.</li>\n<li>Проекции: Альберс равновеликая коническая для Казахстана, Equal Earth для карты мира, обе равновеликие, поэтому сравнение площадей корректно.</li>\n<li>Расчёты: ареальная интерполяция, индекс несходства, квантильная классификация.</li>\n<li>Приложение: один самодостаточный HTML-файл. Языковая модель ассистента работает в браузере через WebGPU, поэтому данные никуда не отправляются.</li>\n</ul>\n\n<p style="margin-top:14px;color:var(--ink-mute);font-size:12px">Все данные проекта открыты: раздел «Данные и MAUP» позволяет выгрузить показатели в CSV, границы в GeoJSON и матрицу пересечений полигонов.</p>';
+ }
+ 
+ rebuildAiModels(), $("#aiModel").addEventListener("change", () => {
+diff --git a/data.js b/data.js
+index f882e89..03f94b5 100644
+--- a/data.js
++++ b/data.js
+@@ -6,7 +6,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Уральский округ Казакской АССР. Скотоводческое и пойменное хозяйство.",
+ "name_en":"Ural Okrug",
+ "type_en":"okrug (1926)",
+-"desc_en":"Ural Okrug of the Kazak ASSR. Pastoral and floodplain economy."},
++"desc_en":"Ural Okrug of the Kazak ASSR. Pastoral and floodplain economy.","name_kz":"Орал округі","type_kz":"округ (1926)","desc_kz":"Қазақ АКСР-інің Орал округі. Мал шаруашылығы және өзен жайылмасындағы шаруашылық."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[54.544,
+ 50.527],
+@@ -74,7 +74,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Актюбинский округ Казакской АССР. Полукочевое скотоводство.",
+ "name_en":"Aktyubinsk Okrug",
+ "type_en":"okrug (1926)",
+-"desc_en":"Aktyubinsk Okrug of the Kazak ASSR. Semi-nomadic pastoralism."},
++"desc_en":"Aktyubinsk Okrug of the Kazak ASSR. Semi-nomadic pastoralism.","name_kz":"Ақтөбе округі","type_kz":"округ (1926)","desc_kz":"Қазақ АКСР-інің Ақтөбе округі. Жартылай көшпелі мал шаруашылығы."},
+ "g":{"type":"MultiPolygon",
+ "coordinates":[[[[55.999,
+ 45],
+@@ -256,7 +256,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Кустанайский округ. Зона смешанного земледелия и скотоводства.",
+ "name_en":"Kustanai Okrug",
+ "type_en":"okrug (1926)",
+-"desc_en":"Kustanai Okrug. A zone of mixed farming and pastoralism."},
++"desc_en":"Kustanai Okrug. A zone of mixed farming and pastoralism.","name_kz":"Қостанай округі","type_kz":"округ (1926)","desc_kz":"Қостанай округі. Аралас егіншілік пен мал шаруашылығы аймағы."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[66.075,
+ 54.64],
+@@ -358,7 +358,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Петропавловский округ. Сельскохозяйственный северный регион.",
+ "name_en":"Petropavlovsk Okrug",
+ "type_en":"okrug (1926)",
+-"desc_en":"Petropavlovsk Okrug. An agricultural northern region."},
++"desc_en":"Petropavlovsk Okrug. An agricultural northern region.","name_kz":"Петропавл округі","type_kz":"округ (1926)","desc_kz":"Петропавл округі. Солтүстіктегі ауыл шаруашылығы аймағы."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[73.439,
+ 53.435],
+@@ -502,7 +502,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Акмолинский округ. Традиционные кочевья казахов-сары-уйсуней и аргынов.",
+ "name_en":"Akmola Okrug",
+ "type_en":"okrug (1926)",
+-"desc_en":"Akmola Okrug. Traditional nomadic grounds of the Sary-Uisun and Argyn Kazakhs."},
++"desc_en":"Akmola Okrug. Traditional nomadic grounds of the Sary-Uisun and Argyn Kazakhs.","name_kz":"Ақмола округі","type_kz":"округ (1926)","desc_kz":"Ақмола округі. Сары-үйсін және арғын қазақтарының дәстүрлі көшу жолдары."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[74.027,
+ 51.198],
+@@ -640,7 +640,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Семипалатинский округ. Обширные пастбища Прииртышья и степей.",
+ "name_en":"Semipalatinsk Okrug",
+ "type_en":"okrug (1926)",
+-"desc_en":"Semipalatinsk Okrug. Vast pastures along the Irtysh and the steppe."},
++"desc_en":"Semipalatinsk Okrug. Vast pastures along the Irtysh and the steppe.","name_kz":"Семей округі","type_kz":"округ (1926)","desc_kz":"Семей округі. Ертіс жағалауы мен даланың кең жайылымдары."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[77.697,
+ 50.222],
+@@ -740,7 +740,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Сыр-Дарьинский округ. Оазисное земледелие и поливное хозяйство.",
+ "name_en":"Syr-Darya Okrug",
+ "type_en":"okrug (1926)",
+-"desc_en":"Syr-Darya Okrug. Oasis farming and irrigated agriculture."},
++"desc_en":"Syr-Darya Okrug. Oasis farming and irrigated agriculture.","name_kz":"Сырдария округі","type_kz":"округ (1926)","desc_kz":"Сырдария округі. Оазистік егіншілік және суармалы шаруашылық."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[67.175,
+ 46.001],
+@@ -858,7 +858,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Жетысуский округ (Семиречье). Горное и предгорное скотоводство.",
+ "name_en":"Jetisu Okrug",
+ "type_en":"okrug (1926)",
+-"desc_en":"Jetisu Okrug (Semirechye). Mountain and foothill pastoralism."},
++"desc_en":"Jetisu Okrug (Semirechye). Mountain and foothill pastoralism.","name_kz":"Жетісу округі","type_kz":"округ (1926)","desc_kz":"Жетісу округі (Жетісу өңірі). Таулы және тау бөктеріндегі мал шаруашылығы."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[76.194,
+ 42.931],
+@@ -941,7 +941,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Массовая гибель скота. Исход беженцев через границу Нижнего Поволжья.",
+ "name_en":"West Kazakhstan Oblast",
+ "type_en":"oblast",
+-"desc_en":"Mass die-off of livestock. Refugees fled across the Lower Volga border."},
++"desc_en":"Mass die-off of livestock. Refugees fled across the Lower Volga border.","name_kz":"Батыс Қазақстан облысы","type_kz":"облыс","desc_kz":"Малдың жаппай қырылуы. Босқындардың Төменгі Еділ шекарасы арқылы кетуі."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[54.544,
+ 50.527],
+@@ -1012,7 +1012,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Мангистауские и Адаевские откочевки в Туркмению и Каракалпакию.",
+ "name_en":"Guryev Oblast",
+ "type_en":"oblast",
+-"desc_en":"Mangistau and Adai migrations into Turkmenistan and Karakalpakia."},
++"desc_en":"Mangistau and Adai migrations into Turkmenistan and Karakalpakia.","name_kz":"Гурьев облысы","type_kz":"облыс","desc_kz":"Маңғыстау және Адай қазақтарының Түрікменстан мен Қарақалпақстанға көшуі."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[56.553,
+ 46.006],
+@@ -1131,7 +1131,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Эпицентр Иргизского восстания. Разрушение кочевого животноводства.",
+ "name_en":"Aktyubinsk Oblast",
+ "type_en":"oblast",
+-"desc_en":"Epicenter of the Irgiz uprising. Destruction of nomadic livestock herding."},
++"desc_en":"Epicenter of the Irgiz uprising. Destruction of nomadic livestock herding.","name_kz":"Ақтөбе облысы","type_kz":"облыс","desc_kz":"Ырғыз көтерілісінің ошағы. Көшпелі мал шаруашылығының күйреуі."},
+ "g":{"type":"MultiPolygon",
+ "coordinates":[[[[61.852,
+ 51.317],
+@@ -1244,7 +1244,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Земледельческий район с высокими нормами хлебозаготовок. Батпаккаринский бунт.",
+ "name_en":"Kustanai Oblast",
+ "type_en":"oblast",
+-"desc_en":"A farming district with high grain-procurement quotas. The Batpakkara revolt."},
++"desc_en":"A farming district with high grain-procurement quotas. The Batpakkara revolt.","name_kz":"Қостанай облысы","type_kz":"облыс","desc_kz":"Астық дайындау нормасы жоғары егіншілік ауданы. Батпаққара көтерілісі."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[66.075,
+ 54.64],
+@@ -1349,7 +1349,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Высокая доля раскулачивания спецпереселенцев из РСФСР.",
+ "name_en":"North Kazakhstan Oblast",
+ "type_en":"oblast",
+-"desc_en":"A high share of dekulakized special settlers from the RSFSR."},
++"desc_en":"A high share of dekulakized special settlers from the RSFSR.","name_kz":"Солтүстік Қазақстан облысы","type_kz":"облыс","desc_kz":"РКФСР-ден келген арнайы қоныс аударушыларды тәркілеу үлесі жоғары."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[73.363,
+ 53.467],
+@@ -1470,7 +1470,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Катастрофическая гибель скота. Место размещения АЛЖИРа.",
+ "name_en":"Akmola Oblast",
+ "type_en":"oblast",
+-"desc_en":"Catastrophic livestock losses. Site of the ALZHIR camp."},
++"desc_en":"Catastrophic livestock losses. Site of the ALZHIR camp.","name_kz":"Ақмола облысы","type_kz":"облыс","desc_kz":"Малдың апатты қырылуы. АЛЖИР лагері орналасқан жер."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[74,
+ 52.544],
+@@ -1561,7 +1561,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Зона Карлага. Вымирание казахских аулов на фоне прихода спецконтингента ГУЛАГа.",
+ "name_en":"Karaganda Oblast",
+ "type_en":"oblast",
+-"desc_en":"The Karlag zone. Kazakh auls died out as GULAG special contingents arrived."},
++"desc_en":"The Karlag zone. Kazakh auls died out as GULAG special contingents arrived.","name_kz":"Қарағанды облысы","type_kz":"облыс","desc_kz":"Карлаг аймағы. ГУЛАГ арнайы контингентінің келуімен қатар қазақ ауылдарының қырылуы."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[73.671,
+ 51.279],
+@@ -1674,7 +1674,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Зайсанское и Абралинское восстания. Бегство населения в Синьцзян.",
+ "name_en":"Semipalatinsk Oblast",
+ "type_en":"oblast",
+-"desc_en":"The Zaisan and Abralin uprisings. Population fled into Xinjiang."},
++"desc_en":"The Zaisan and Abralin uprisings. Population fled into Xinjiang.","name_kz":"Семей облысы","type_kz":"облыс","desc_kz":"Зайсан және Абыралы көтерілістері. Тұрғындардың Шыңжаңға қашуы."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[73.439,
+ 53.435],
+@@ -1751,7 +1751,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Горные откочевки через Алтай. Освещение леспромхозов ОГПУ.",
+ "name_en":"East Kazakhstan Oblast",
+ "type_en":"oblast",
+-"desc_en":"Mountain migrations across the Altai. OGPU timber-camp coverage."},
++"desc_en":"Mountain migrations across the Altai. OGPU timber-camp coverage.","name_kz":"Шығыс Қазақстан облысы","type_kz":"облыс","desc_kz":"Алтай арқылы таулы аймаққа көшу. ОГПУ орман шаруашылықтарының қадағалауы."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[77.697,
+ 50.222],
+@@ -1854,7 +1854,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Приграничная зона. Пресечение побегов погранвойсками ОГПУ.",
+ "name_en":"Almaty Oblast",
+ "type_en":"oblast",
+-"desc_en":"A border zone. OGPU border troops intercepted those fleeing."},
++"desc_en":"A border zone. OGPU border troops intercepted those fleeing.","name_kz":"Алматы облысы","type_kz":"облыс","desc_kz":"Шекара маңы аймағы. ОГПУ шекара әскерлерінің қашуды тоқтатуы."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[76.194,
+ 42.931],
+@@ -1937,7 +1937,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Созакское восстание. Приток голодающих с севера к Турксибу.",
+ "name_en":"South Kazakhstan Oblast",
+ "type_en":"oblast",
+-"desc_en":"The Sozak uprising. An influx of starving people from the north toward the Turksib railway."},
++"desc_en":"The Sozak uprising. An influx of starving people from the north toward the Turksib railway.","name_kz":"Оңтүстік Қазақстан облысы","type_kz":"облыс","desc_kz":"Созақ көтерілісі. Солтүстіктен ашыққандардың Түрксіб бойына ағылуы."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[70.869,
+ 42.318],
+@@ -2026,7 +2026,7 @@ window.__KZ_HIST__={"1926":[{"p":{"id":"uralsk_1926",
+ "desc":"Поливное земледелие Сырдарьи. Отток в Узбекистан.",
+ "name_en":"Kzyl-Orda Oblast",
+ "type_en":"oblast",
+-"desc_en":"Irrigated farming along the Syr Darya. Outflow into Uzbekistan."},
++"desc_en":"Irrigated farming along the Syr Darya. Outflow into Uzbekistan.","name_kz":"Қызылорда облысы","type_kz":"облыс","desc_kz":"Сырдария бойындағы суармалы егіншілік. Өзбекстанға көшу."},
+ "g":{"type":"Polygon",
+ "coordinates":[[[62.581,
+ 47.242],
+diff --git a/index.html b/index.html
+index 186ecc4..c9a1200 100644
+--- a/index.html
++++ b/index.html
+@@ -387,6 +387,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
+       <div class="langmenu" id="langMenu">
+         <button class="langopt on" data-lang="ru">Русский</button>
+         <button class="langopt" data-lang="en">English</button>
++        <button class="langopt" data-lang="kz">Қазақша</button>
+       </div>
+     </div>
+     <button class="btn ico ghost" id="bAbout" data-i18n-title="btnAboutTitle" title="О проекте и методология">ⓘ</button>
+-- 
+2.43.0
+
