@@ -2107,6 +2107,11 @@ en: {
 label: "Kazakh population loss",
 unit: "%",
 hint: "The decline in Kazakh population between the 1926 and 1939 censuses, by oblast."
+},
+kz: {
+label: "Қазақ халқының шығыны",
+unit: "%",
+hint: "1926 және 1939 жылдардағы санақтар арасында әр облыс бойынша қазақ халқының кемуі."
 }
 }, {
 id: "growth",
@@ -2122,12 +2127,17 @@ en: {
 label: "Change in total population",
 unit: "%",
 hint: 'Red — the oblast’s total population shrank; blue — it grew. Growth alongside mass Kazakh death is Pianciola’s "anomaly".'
+},
+kz: {
+label: "Жалпы халық санының өзгерісі",
+unit: "%",
+hint: "Қызыл — облыстың жалпы халқы азайды, көк — өсті. Қазақтардың жаппай қырылуы кезіндегі өсім — Пьянчоланың «аномалиясы»."
 }
 }, {
 id: "gap",
 ramp: "violet",
 get: p => p.growth + p.kazLoss,
-fmt: v => v.toFixed(0) + " п.п.",
+fmt: v => v.toFixed(0) + ("en" === LANG ? " pp" : " п.п."),
 ru: {
 label: "Разрыв: общее и казахское",
 unit: "п.п.",
@@ -2137,6 +2147,11 @@ en: {
 label: "Gap: total vs. Kazakh",
 unit: "pp",
 hint: 'By how many points the total-population trend is "better" than the Kazakh-population trend. The darker the color, the more the aggregate figure masks the catastrophe.'
+},
+kz: {
+label: "Алшақтық: жалпы және қазақ халқы",
+unit: "п.п.",
+hint: "Жалпы халық динамикасы қазақ халқы динамикасынан неше пунктке «жақсы». Түсі неғұрлым қою болса, жиынтық сан апатты соғұрлым жасырады."
 }
 }, {
 id: "share1939",
@@ -2152,12 +2167,17 @@ en: {
 label: "Kazakh share in 1939",
 unit: "%",
 hint: "The share of Kazakhs in the oblast’s population per the 1939 census."
+},
+kz: {
+label: "1939 ж. қазақтар үлесі",
+unit: "%",
+hint: "1939 жылғы санақ бойынша облыс халқындағы қазақтар үлесі."
 }
 }, {
 id: "shareShift",
 diverge: 9,
 get: p => p.shareShift,
-fmt: v => fmtP(v, 2) + " п.п.",
+fmt: v => fmtP(v, 2) + ("en" === LANG ? " pp" : " п.п."),
 ru: {
 label: "MAUP-сдвиг доли",
 unit: "п.п.",
@@ -2167,6 +2187,11 @@ en: {
 label: "MAUP share shift",
 unit: "pp",
 hint: "How much the oblast’s share of the overall 1926 Kazakh distribution changes when computed on the okrug grid instead of the oblast grid. This is the MAUP effect."
+},
+kz: {
+label: "MAUP үлес ығысуы",
+unit: "п.п.",
+hint: "Облыстың 1926 ж. қазақтардың жалпы бөлінісіндегі үлесі облыстар торы емес, округтер торы бойынша есептелгенде қаншаға өзгереді. Бұл — MAUP әсері."
 }
 } ],
 1926: [ {
@@ -2183,6 +2208,11 @@ en: {
 label: "Kazakh share",
 unit: "%",
 hint: "The share of Kazakhs in the okrug’s population per the 1926 census."
+},
+kz: {
+label: "Қазақтар үлесі",
+unit: "%",
+hint: "1926 жылғы санақ бойынша округ халқындағы қазақтар үлесі."
 }
 }, {
 id: "kazAbs",
@@ -2198,6 +2228,11 @@ en: {
 label: "Kazakh population",
 unit: "people",
 hint: "The absolute number of Kazakhs in the okrug per the 1926 census."
+},
+kz: {
+label: "Қазақ халқы",
+unit: "адам",
+hint: "1926 жылғы санақ бойынша округтегі қазақтардың абсолюттік саны."
 }
 }, {
 id: "pop",
@@ -2213,6 +2248,11 @@ en: {
 label: "Total population",
 unit: "people",
 hint: "The okrug’s total population per the 1926 census."
+},
+kz: {
+label: "Жалпы халық саны",
+unit: "адам",
+hint: "1926 жылғы санақ бойынша округтің жалпы халық саны."
 }
 } ]
 };
