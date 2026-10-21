@@ -18,7 +18,8 @@ tabData: "Данные и MAUP",
 tabQuiz: "Квиз",
 tabAi: "ИИ-ассистент",
 btnAboutTitle: "О проекте и методология",
-btnThemeTitle: "Светлая / тёмная тема",
+themeToLight: "Включить светлую тему",
+themeToDark: "Включить тёмную тему",
 btnLangTitle: "Язык интерфейса",
 secGrid: "Административная сетка",
 seg1926: "1926 · 8 округов",
@@ -257,7 +258,8 @@ tabData: "Data & MAUP",
 tabQuiz: "Quiz",
 tabAi: "AI Assistant",
 btnAboutTitle: "About the project and methodology",
-btnThemeTitle: "Light / dark theme",
+themeToLight: "Switch to light theme",
+themeToDark: "Switch to dark theme",
 btnLangTitle: "Interface language",
 secGrid: "Administrative grid",
 seg1926: "1926 · 8 okrugs",
@@ -496,7 +498,8 @@ tabData: "Деректер және MAUP",
 tabQuiz: "Викторина",
 tabAi: "ЖИ-көмекші",
 btnAboutTitle: "Жоба және әдіснама туралы",
-btnThemeTitle: "Ашық / қара тақырып",
+themeToLight: "Ашық тақырыпқа ауысу",
+themeToDark: "Қараңғы тақырыпқа ауысу",
 btnLangTitle: "Интерфейс тілі",
 secGrid: "Әкімшілік бөліну торы",
 seg1926: "1926 · 8 округ",
@@ -764,7 +767,7 @@ n.setAttribute("title", t(n.dataset.i18nTitle));
 n.setAttribute("placeholder", t(n.dataset.i18nPlaceholder));
 }), document.querySelectorAll("[data-i18n-aria]").forEach(n => {
 n.setAttribute("aria-label", t(n.dataset.i18nAria));
-}), $$(".langopt").forEach(b => b.classList.toggle("on", b.dataset.lang === LANG));
+}), $$(".langopt").forEach(b => b.classList.toggle("on", b.dataset.lang === LANG)), "function" == typeof syncThemeBtn && syncThemeBtn();
 const lb = $("#bLangLabel");
 lb && (lb.textContent = LANG.toUpperCase());
 const sp = $("#stPrev");
@@ -2366,12 +2369,22 @@ const t = $("#toast");
 t.textContent = msg, t.classList.add("on"), clearTimeout(toastT), toastT = setTimeout(() => t.classList.remove("on"), 2600);
 }
 
+const ICON_SUN = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M2.5 12h2.3M19.2 12h2.3M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>', ICON_MOON = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20.5 14.6A8.5 8.5 0 1 1 9.4 3.5a6.8 6.8 0 0 0 11.1 11.1z"/></svg>';
+
+// The button shows what a click does: a sun in dark mode, a moon in light mode.
+function syncThemeBtn() {
+const b = $("#bTheme");
+if (!b) return;
+const light = "light" === document.documentElement.getAttribute("data-theme"), label = t(light ? "themeToDark" : "themeToLight");
+b.innerHTML = light ? ICON_MOON : ICON_SUN, b.setAttribute("title", label), b.setAttribute("aria-label", label);
+}
+
 $("#tabs").addEventListener("click", e => {
 const t = e.target.closest(".tab");
 t && showView(t.dataset.v);
 }), $("#bTheme").addEventListener("click", () => {
 const light = "light" === document.documentElement.getAttribute("data-theme");
-document.documentElement.setAttribute("data-theme", light ? "dark" : "light"), toast(t(light ? "toastThemeDark" : "toastThemeLight")), 
+document.documentElement.setAttribute("data-theme", light ? "dark" : "light"), syncThemeBtn(), toast(t(light ? "toastThemeDark" : "toastThemeLight")), 
 "function" == typeof refreshCharts && refreshCharts();
 });
 
