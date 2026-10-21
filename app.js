@@ -683,7 +683,7 @@ return p["type_" + LANG] || p.type;
 }
 
 function applyStaticI18n() {
-document.documentElement.lang = LANG, document.title = t("pageTitle");
+document.documentElement.lang = "kz" === LANG ? "kk" : LANG, document.title = t("pageTitle");
 const md = document.querySelector('meta[name="description"]');
 md && md.setAttribute("content", t("pageDesc")), document.querySelectorAll("[data-i18n]").forEach(n => {
 n.textContent = t(n.dataset.i18n);
