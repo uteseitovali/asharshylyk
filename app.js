@@ -93,6 +93,11 @@ exportMaup: "CSV · матрица пересечений",
 exportHint: "Все данные открыты. GeoJSON открывается в QGIS, ArcGIS и geojson.io.",
 tableHeading: "Таблица показателей",
 tableHint: "Нажмите на заголовок столбца для сортировки, на строку, чтобы открыть карточку региона.",
+logHeading: "Журнал изменений данных",
+logIntro: "Все правки чисел и формулировок, влияющих на данные атласа: что изменено, почему и по какому источнику.",
+logWhat: "Что изменено",
+logWhy: "Почему",
+logSource: "Источник",
 quizTag: "Для школьников",
 quizHeading: "Проверьте, что вы поняли",
 quizIntro: "Квиз по материалам сайта: карта, данные переписей, историография и методология HGIS. После каждого ответа даётся объяснение со ссылкой на источник, а в конце — разбор ошибок.",
@@ -311,6 +316,11 @@ exportMaup: "CSV · intersection matrix",
 exportHint: "All data is open. The GeoJSON opens in QGIS, ArcGIS, and geojson.io.",
 tableHeading: "Indicator table",
 tableHint: "Click a column header to sort, click a row to open the region card.",
+logHeading: "Data changelog",
+logIntro: "Every change to figures and wording that affects the atlas data: what changed, why, and on what source.",
+logWhat: "What changed",
+logWhy: "Why",
+logSource: "Source",
 quizTag: "For students",
 quizHeading: "Check what you understood",
 quizIntro: "A quiz on the site’s material: the map, census data, historiography, and HGIS methodology. Each answer comes with an explanation and a source, and the end brings a review of mistakes.",
@@ -529,6 +539,11 @@ exportMaup: "CSV · қиылысу матрицасы",
 exportHint: "Барлық деректер ашық. GeoJSON файлы QGIS, ArcGIS және geojson.io бағдарламаларында ашылады.",
 tableHeading: "Көрсеткіштер кестесі",
 tableHint: "Сұрыптау үшін баған тақырыбын, аймақ карточкасын ашу үшін жолды басыңыз.",
+logHeading: "Деректер өзгерістерінің журналы",
+logIntro: "Атлас деректеріне әсер ететін сандар мен тұжырымдардағы барлық түзетулер: не өзгерді, неге және қандай дереккөз бойынша.",
+logWhat: "Не өзгерді",
+logWhy: "Неге",
+logSource: "Дереккөз",
 quizTag: "Оқушыларға арналған",
 quizHeading: "Түсінгеніңізді тексеріңіз",
 quizIntro: "Сайт материалдары бойынша викторина: карта, санақ деректері, тарихнама және HGIS әдіснамасы. Әр жауаптан кейін дереккөзге сілтемесі бар түсініктеме беріледі, ал соңында қателерге талдау жасалады.",
@@ -725,7 +740,7 @@ const wr = $("#wRst");
 wr && (wr.textContent = "region" === WS.scope ? t("worldWhole") : t("worldToRegion"));
 }
 schoolsMap.ready && (renderSchoolCards(), selectSchool(S.school)), renderBiblio(), 
-"function" == typeof renderAbout && renderAbout(), buildTable(), function() {
+"function" == typeof renderAbout && renderAbout(), buildTable(), renderDataLog(), function() {
 const i = $("#mSrc"), j = $("#mTgt");
 i && j && (populateMaupSelects(), calcMaup());
 }(), rebuildAiModels(), void 0 !== AI && setAiState(AI.engine ? t("aiReady") : t("aiOffline"), AI.engine ? "ok" : ""), 
@@ -2236,7 +2251,7 @@ $$("section.view").forEach(s => s.classList.toggle("on", s.id === "v-" + v)), wi
 top: 0,
 behavior: "smooth"
 }), "world" === v && worldMap.ensure(), "schools" === v && schoolsMap.ensure(), 
-"data" === v && buildTable(), "biblio" === v && renderBiblio();
+"data" === v && (buildTable(), renderDataLog()), "biblio" === v && renderBiblio();
 }
 
 function toast(msg) {
@@ -3429,6 +3444,103 @@ get: p => p.shareShift,
 f: v => fmtP(v, 2),
 cls: v => v >= 0 ? "pos" : "neg"
 } ];
+}
+
+const DATA_LOG = [ {
+date: "2026-10-21",
+ru: {
+what: "Диапазон потерь: «от 1,26 до 4 млн» и «1,3–4 млн» заменены на «безвозвратные потери казахского населения ≈1,3–2,3 млн (оценки разных авторов); А. Н. Алексеенко: 1,5–1,84 млн». Оценки 3,25 млн (Ж. Абылхожин, М. Козыбаев, М. Татимов) и до 4 млн (Х. М. Абжанов) оставлены как отдельно подписанные авторские оценки.",
+why: "Приведение к тексту научной работы: общий диапазон не должен включать единичные максимальные оценки.",
+source: "Текст научной работы; Алексеенко А. Н. Население Казахстана в 1926–1939 годах // Компьютер и историческая демография. Барнаул, 2000. С. 9–25."
+},
+en: {
+what: "Loss range: “1.26 to 4 million” and “1.3–4 million” replaced with “irrecoverable losses of the Kazakh population ≈1.3–2.3 million (estimates by different authors); A. N. Alekseenko: 1.5–1.84 million”. The estimates of 3.25 million (Zh. Abylkhozhin, M. Kozybaev, M. Tatimov) and up to 4 million (Kh. M. Abzhanov) are kept as separately attributed individual estimates.",
+why: "Alignment with the text of the research paper: the overall range should not include single maximum estimates.",
+source: "Text of the research paper; Алексеенко А. Н. Население Казахстана в 1926–1939 годах // Компьютер и историческая демография. Барнаул, 2000. С. 9–25."
+},
+kz: {
+what: "Шығын диапазоны: «1,26-дан 4 млн-ға дейін» және «1,3–4 млн» орнына «қазақ халқының қайтарымсыз шығыны ≈1,3–2,3 млн (әртүрлі авторлардың бағалары); А. Н. Алексеенко: 1,5–1,84 млн». 3,25 млн (Ж. Әбілхожин, М. Қозыбаев, М. Тәтімов) және 4 млн-ға дейін (Х. М. Әбжанов) бағалары жеке авторлық бағалар ретінде қалдырылды.",
+why: "Ғылыми жұмыс мәтініне сәйкестендіру: жалпы диапазонға жекелеген ең жоғары бағалар кірмеуі керек.",
+source: "Ғылыми жұмыс мәтіні; Алексеенко А. Н. Население Казахстана в 1926–1939 годах // Компьютер и историческая демография. Барнаул, 2000. С. 9–25."
+}
+}, {
+date: "2026-10-21",
+ru: {
+what: "«Более 380 восстаний и волнений» заменено на «более 370 выступлений 1929–1931 гг. (Т. Омарбеков)» во всех текстах.",
+why: "Расхождение с текстом научной работы.",
+source: "Т. Омарбеков (по тексту научной работы)."
+},
+en: {
+what: "“More than 380 uprisings and disturbances” replaced with “more than 370 uprisings of 1929–1931 (T. Omarbekov)” in all texts.",
+why: "Discrepancy with the text of the research paper.",
+source: "T. Omarbekov (as cited in the research paper)."
+},
+kz: {
+what: "«380-нен астам көтеріліс пен толқу» барлық мәтіндерде «1929–1931 жж. 370-тен астам көтеріліс (Т. Омарбеков)» деп өзгертілді.",
+why: "Ғылыми жұмыс мәтінімен алшақтық.",
+source: "Т. Омарбеков (ғылыми жұмыс мәтіні бойынша)."
+}
+}, {
+date: "2026-10-21",
+ru: {
+what: "Числа 3,968 млн и 3,1 млн подписаны как «казахи во всём СССР по переписям 1926 и 1939 гг.»; убыль ≈867 тыс. — по СССР. Значения не менялись.",
+why: "Это итоги по всему Союзу, а не по республике; формулировку можно было прочитать как республиканскую.",
+source: "Всесоюзные переписи 1926 и 1939 гг., итоги по СССР."
+},
+en: {
+what: "The figures 3.968 million and 3.1 million are labelled “Kazakhs in the whole USSR according to the 1926 and 1939 censuses”; the ≈867,000 decline is USSR-wide. The values did not change.",
+why: "These are Union-wide totals, not figures for the republic; the wording could be read as republic-level.",
+source: "All-Union censuses of 1926 and 1939, USSR totals."
+},
+kz: {
+what: "3,968 млн және 3,1 млн сандары «1926 және 1939 жж. санақтары бойынша бүкіл КСРО-дағы қазақтар» деп белгіленді; ≈867 мың кему — КСРО бойынша. Мәндер өзгермеді.",
+why: "Бұл республика емес, бүкіл Одақ бойынша қорытынды; тұжырымды республикалық деп түсінуге болатын еді.",
+source: "1926 және 1939 жж. Бүкілодақтық санақтар, КСРО бойынша қорытынды."
+}
+}, {
+date: "2026-10-21",
+ru: {
+what: "Шаг StoryMap «Аномальный рост» показывает метрику «Изменение общего населения»; раньше из-за несуществующей метрики карта показывала потерю казахского населения.",
+why: "Карта на этом шаге не соответствовала тексту.",
+source: "Исправление отображения; данные не менялись."
+},
+en: {
+what: "The StoryMap step “Anomalous growth” now shows the “Change in total population” metric; previously, because of a non-existent metric, the map showed Kazakh population loss.",
+why: "The map on this step did not match the text.",
+source: "Display fix; the data did not change."
+},
+kz: {
+what: "StoryMap-тың «Аномальды өсім» қадамы «Жалпы халық санының өзгерісі» көрсеткішін көрсетеді; бұрын жоқ көрсеткіш салдарынан карта қазақ халқының шығынын көрсететін.",
+why: "Бұл қадамдағы карта мәтінге сәйкес келмеді.",
+source: "Көрсетуді түзету; деректер өзгермеді."
+}
+}, {
+date: "2026-10-21",
+ru: {
+what: "Областные и окружные показатели 1926 и 1939 гг. не изменены. Начата сверка с опубликованными итогами переписей по областям.",
+why: "Подготовка к замене рабочего набора данных атласа опубликованными итогами.",
+source: "Перепись 1926 г. по Казакской АССР и перепись 1939 г. по областям Казахской ССР (Демоскоп) — сверка ведётся."
+},
+en: {
+what: "The oblast and okrug figures for 1926 and 1939 are unchanged. A cross-check against the published census results by oblast has begun.",
+why: "Preparing to replace the atlas’s working dataset with the published results.",
+source: "1926 census for the Kazak ASSR and 1939 census by oblast of the Kazakh SSR (Demoscope) — cross-check in progress."
+},
+kz: {
+what: "1926 және 1939 жж. облыстық және округтік көрсеткіштер өзгертілген жоқ. Облыстар бойынша жарияланған санақ қорытындыларымен салыстыру басталды.",
+why: "Атластың жұмыс деректер жиынтығын жарияланған қорытындылармен ауыстыруға дайындық.",
+source: "Қазақ АКСР-і бойынша 1926 ж. санақ және Қазақ КСР-і облыстары бойынша 1939 ж. санақ (Демоскоп) — салыстыру жүргізілуде."
+}
+} ];
+
+function renderDataLog() {
+const box = $("#dataLog");
+if (!box) return;
+const locale = "kz" === LANG ? "kk-KZ" : "en" === LANG ? "en-US" : "ru-RU";
+box.innerHTML = DATA_LOG.map(e => {
+const L = tr(e), d = new Date(e.date + "T00:00:00").toLocaleDateString(locale);
+return `<div style="border-top:1px solid var(--line);padding:10px 0">\n      <p class="sec-t" style="margin:0 0 5px">${esc(d)}</p>\n      <p style="margin:0 0 4px;font-size:13px"><b>${esc(t("logWhat"))}:</b> ${esc(L.what)}</p>\n      <p style="margin:0 0 4px;font-size:12.5px;color:var(--ink-soft)"><b>${esc(t("logWhy"))}:</b> ${esc(L.why)}</p>\n      <p class="hint" style="margin:0"><b>${esc(t("logSource"))}:</b> ${esc(L.source)}</p>\n    </div>`;
+}).join("");
 }
 
 function buildTable() {
