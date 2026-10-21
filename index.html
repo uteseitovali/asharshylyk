@@ -147,6 +147,9 @@ section.view.on{display:block}
 .stage{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
 .stage svg{display:block;width:100%;height:auto;touch-action:none}
 .mapwrap{position:relative}
+.maphint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:7px 13px;border-radius:8px;background:var(--panel);border:1px solid var(--line);color:var(--ink);font-size:12.5px;box-shadow:var(--shadow);pointer-events:none;opacity:0;transition:opacity .2s;z-index:3}
+.maphint.on{opacity:.95}
+.stage svg:focus-visible{outline:2px solid var(--gold2);outline-offset:-2px}
 .region{cursor:pointer;transition:filter .15s, opacity .2s;stroke:var(--bg);stroke-width:.55;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .region:hover{filter:brightness(1.22)}
 .region.dim{opacity:.2}
@@ -545,7 +548,13 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
           <g id="gS"><g id="sBase"></g><g id="sMark"></g><g id="sLbl"></g></g>
         </svg>
       </div>
-      <div class="bar"><span id="sCaption" style="color:var(--ink-mute)" data-i18n="schoolCaptionDefault">Карта потерь казахского населения по областям 1939 года</span></div>
+      <div class="bar"><span id="sCaption" style="color:var(--ink-mute)" data-i18n="schoolCaptionDefault">Карта потерь казахского населения по областям 1939 года</span>
+        <div class="zoomer">
+          <button class="btn sm ico" id="sIn" data-i18n-title="zoomInTitle" title="Приблизить">+</button>
+          <button class="btn sm ico" id="sOut" data-i18n-title="zoomOutTitle" title="Отдалить">−</button>
+          <button class="btn sm" id="sRst" data-i18n="zoomReset">Сброс</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -718,7 +727,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
-<script src="/data.js?v=6"></script>
-<script src="/app.js?v=6"></script>
+<script src="/data.js?v=7"></script>
+<script src="/app.js?v=7"></script>
 </body>
 </html>

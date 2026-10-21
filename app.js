@@ -38,6 +38,7 @@ hintStory: "StoryMap проводит через шесть шагов иссл�
 zoomInTitle: "Приблизить",
 zoomOutTitle: "Отдалить",
 zoomReset: "Сброс",
+mapWheelHint: "Ctrl (⌘) + колесо — масштаб карты",
 sidelblL: "1926 · округа",
 sidelblR: "1939 · области",
 ariaMapKz: "Карта Казахстана",
@@ -261,6 +262,7 @@ hintStory: "StoryMap walks through six steps of the research: from the 1926 step
 zoomInTitle: "Zoom in",
 zoomOutTitle: "Zoom out",
 zoomReset: "Reset",
+mapWheelHint: "Ctrl (⌘) + scroll to zoom the map",
 sidelblL: "1926 · okrugs",
 sidelblR: "1939 · oblasts",
 ariaMapKz: "Map of Kazakhstan",
@@ -484,6 +486,7 @@ hintStory: "StoryMap зерттеудің алты қадамынан өткіз
 zoomInTitle: "Жақындату",
 zoomOutTitle: "Алыстату",
 zoomReset: "Бастапқы қалып",
+mapWheelHint: "Ctrl (⌘) + дөңгелек — картаны масштабтау",
 sidelblL: "1926 · округтер",
 sidelblR: "1939 · облыстар",
 ariaMapKz: "Қазақстан картасы",
@@ -2350,17 +2353,40 @@ ty: (vbH - (y1 - y0) * s) / 2 - y0 * s
 k: 1,
 x: 0,
 y: 0
-};
+}, K_MIN = 1, K_MAX = 8, DRAG_PX = 4, box = [ base.tx + x0 * s, base.ty + y0 * s, base.tx + x1 * s, base.ty + y1 * s ];
 let onChange = null;
+// Keep at least half of the map (or half of the view, when zoomed in) inside the viewBox.
+function clampPan() {
+const fit = (lo, hi, view, k, off) => {
+const w = (hi - lo) * k, m = .5 * Math.min(w, view);
+return Math.max(-w + m - lo * k, Math.min(view - m - lo * k, off));
+};
+st.x = fit(box[0], box[2], vbW, st.k, st.x), st.y = fit(box[1], box[3], vbH, st.k, st.y);
+}
 function apply(anim) {
-g.style.transition = anim ? "transform .55s cubic-bezier(.4,0,.2,1)" : "none", g.setAttribute("transform", `translate(${st.x} ${st.y}) scale(${st.k}) translate(${base.tx} ${base.ty}) scale(${base.s})`), 
+clampPan(), g.style.transition = anim ? `transform ${!0 === anim ? ".55s" : anim} cubic-bezier(.4,0,.2,1)` : "none",
+g.setAttribute("transform", `translate(${st.x} ${st.y}) scale(${st.k}) translate(${base.tx} ${base.ty}) scale(${base.s})`),
 onChange && onChange(st.k, base.s);
+}
+// Client (screen) point -> viewBox coordinates, respecting preserveAspectRatio letterboxing.
+function toVb(cx, cy) {
+const m = svg.getScreenCTM();
+if (!m) return [ vbW / 2, vbH / 2 ];
+const p = new DOMPoint(cx, cy).matrixTransform(m.inverse());
+return [ p.x, p.y ];
+}
+// Scale to k around viewBox point (px, py): the map point under it stays put.
+function zoomAt(k, px, py, anim) {
+k = Math.max(K_MIN, Math.min(K_MAX, k));
+const r = k / st.k;
+st.x = px - (px - st.x) * r, st.y = py - (py - st.y) * r, st.k = k, apply(anim);
 }
 apply();
 const api = {
 base: base,
 state: st,
 apply: apply,
+onReset: null,
 setOnChange(f) {
 onChange = f, f(st.k, base.s);
 },
@@ -2369,39 +2395,96 @@ reset(anim = !0) {
 st.k = 1, st.x = 0, st.y = 0, apply(anim);
 },
 zoom(f) {
-st.k = Math.max(.6, Math.min(9, st.k * f)), apply(!0);
+zoomAt(st.k * f, vbW / 2, vbH / 2, ".25s");
 },
 focus(box, anim = !0, margin = 1.5) {
 if (!box) return api.reset(anim);
-const [a, b, c, d] = box, [px0, py0] = api.proj(a, b), [px1, py1] = api.proj(c, d), w = Math.max(px1 - px0, 1), h = Math.max(py1 - py0, 1), k = Math.max(.7, Math.min(6, Math.min(vbW / (w * margin), vbH / (h * margin))));
-st.k = k, st.x = vbW / 2 - k * (px0 + px1) / 2, st.y = vbH / 2 - k * (py0 + py1) / 2, 
+const [a, b, c, d] = box, [px0, py0] = api.proj(a, b), [px1, py1] = api.proj(c, d), w = Math.max(px1 - px0, 1), h = Math.max(py1 - py0, 1), k = Math.max(K_MIN, Math.min(6, Math.min(vbW / (w * margin), vbH / (h * margin))));
+st.k = k, st.x = vbW / 2 - k * (px0 + px1) / 2, st.y = vbH / 2 - k * (py0 + py1) / 2,
 apply(anim);
 }
 };
+// Wheel zooms only with Ctrl/⌘ (also trackpad pinch) or after a click on the map; otherwise the page scrolls.
+let armed = !1, hintTimer = null;
+const hint = document.createElement("div");
+hint.className = "maphint", hint.setAttribute("aria-hidden", "true"), svg.parentNode.appendChild(hint);
+const showHint = () => {
+hint.textContent = t("mapWheelHint"), hint.classList.add("on"), clearTimeout(hintTimer),
+hintTimer = setTimeout(() => hint.classList.remove("on"), 1200);
+};
 svg.addEventListener("wheel", e => {
-e.preventDefault(), api.zoom(e.deltaY < 0 ? 1.16 : 1 / 1.16);
+if (!(e.ctrlKey || e.metaKey || armed)) return void showHint();
+e.preventDefault();
+const dy = e.deltaY * (1 === e.deltaMode ? 16 : 2 === e.deltaMode ? vbH : 1), [px, py] = toVb(e.clientX, e.clientY);
+zoomAt(st.k * Math.max(.5, Math.min(2, Math.exp(-dy * .002))), px, py);
 }, {
 passive: !1
+}), svg.addEventListener("pointerleave", e => {
+"mouse" === e.pointerType && (armed = !1);
+}), document.addEventListener("pointerdown", e => {
+svg.contains(e.target) || (armed = !1);
 });
-let drag = null;
-svg.addEventListener("pointerdown", e => {
-e.target.closest("[data-nodrag]") || (drag = {
-x: e.clientX,
-y: e.clientY,
-sx: st.x,
-sy: st.y
-}, svg.setPointerCapture(e.pointerId), svg.style.cursor = "grabbing");
-}), svg.addEventListener("pointermove", e => {
-if (!drag) return;
-const r = svg.getBoundingClientRect(), sc = vbW / r.width;
-st.x = drag.sx + (e.clientX - drag.x) * sc, st.y = drag.sy + (e.clientY - drag.y) * sc, 
-apply();
-});
-const up = () => {
-drag = null, svg.style.cursor = "";
+// Drag (one pointer, after a 4 px threshold) and pinch (two touch pointers).
+const pts = new Map;
+let drag = null, pinch = null, moved = !1;
+const startPinch = () => {
+const [a, b] = [ ...pts.values() ], [mx, my] = toVb((a.x + b.x) / 2, (a.y + b.y) / 2);
+pinch = {
+d: Math.hypot(a.x - b.x, a.y - b.y) || 1,
+k: st.k,
+cx: (mx - st.x) / st.k,
+cy: (my - st.y) / st.k
+}, drag = null, moved = !0;
 };
-return svg.addEventListener("pointerup", up), svg.addEventListener("pointercancel", up), 
-api;
+svg.addEventListener("pointerdown", e => {
+armed = !0, "mouse" === e.pointerType && 0 !== e.button || (pts.set(e.pointerId, {
+x: e.clientX,
+y: e.clientY
+}), moved = !1, 2 === pts.size ? startPinch() : 1 === pts.size && (drag = {
+id: e.pointerId,
+cx: e.clientX,
+cy: e.clientY,
+p: toVb(e.clientX, e.clientY),
+sx: st.x,
+sy: st.y,
+on: !1
+}));
+}), svg.addEventListener("pointermove", e => {
+if (!pts.has(e.pointerId)) return;
+if (pts.set(e.pointerId, {
+x: e.clientX,
+y: e.clientY
+}), pinch && 2 === pts.size) {
+const [a, b] = [ ...pts.values() ], [mx, my] = toVb((a.x + b.x) / 2, (a.y + b.y) / 2), k = Math.max(K_MIN, Math.min(K_MAX, pinch.k * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d));
+return st.k = k, st.x = mx - pinch.cx * k, st.y = my - pinch.cy * k, void apply();
+}
+if (!drag || drag.id !== e.pointerId) return;
+if (!drag.on) {
+if (Math.hypot(e.clientX - drag.cx, e.clientY - drag.cy) < DRAG_PX) return;
+drag.on = !0, moved = !0, svg.setPointerCapture(e.pointerId), svg.style.cursor = "grabbing";
+}
+const [px, py] = toVb(e.clientX, e.clientY);
+st.x = drag.sx + px - drag.p[0], st.y = drag.sy + py - drag.p[1], apply();
+});
+const up = e => {
+pts.delete(e.pointerId), pts.size < 2 && (pinch = null), drag && drag.id === e.pointerId && (drag = null),
+svg.style.cursor = "";
+};
+svg.addEventListener("pointerup", up), svg.addEventListener("pointercancel", up),
+svg.addEventListener("click", e => {
+moved && (e.stopPropagation(), e.preventDefault(), moved = !1);
+}, !0), svg.addEventListener("dblclick", e => {
+e.preventDefault();
+const [px, py] = toVb(e.clientX, e.clientY);
+zoomAt(2 * st.k, px, py, ".25s");
+});
+// Keyboard when the map has focus: + / − / 0.
+svg.hasAttribute("tabindex") || svg.setAttribute("tabindex", "0"), svg.addEventListener("keydown", e => {
+let k = e.key;
+"+" === k || "=" === k ? api.zoom(1.25) : "-" === k || "_" === k || "−" === k ? api.zoom(1 / 1.25) : "0" === k ? (api.reset(),
+api.onReset && api.onReset()) : k = null, k && e.preventDefault();
+});
+return api;
 }
 
 document.addEventListener("click", e => {
@@ -2862,7 +2945,7 @@ inp.addEventListener("change", () => {
 const chip = inp.closest(".chip"), k = chip.dataset.l;
 S.layers[k] = inp.checked, chip.classList.toggle("on", inp.checked), "labels" === k ? $("#lLabels").classList.toggle("off", !inp.checked) : $("#l" + k[0].toUpperCase() + k.slice(1)).classList.toggle("off", !inp.checked);
 });
-}), $("#zIn").addEventListener("click", () => zKz.zoom(1.35)), $("#zOut").addEventListener("click", () => zKz.zoom(1 / 1.35)), 
+}), zKz.onReset = () => setSplit(splitPos), $("#zIn").addEventListener("click", () => zKz.zoom(1.25)), $("#zOut").addEventListener("click", () => zKz.zoom(1 / 1.25)), 
 $("#zRst").addEventListener("click", () => {
 zKz.reset(), setSplit(splitPos);
 });
@@ -2936,8 +3019,8 @@ if (this.ready) return;
 this.ready = !0;
 const M = WORLD.meta;
 zW = makeZoom("#svgW", "#gW", [ M.minx, M.miny, M.maxx, M.maxy ], VBW.w, VBW.h, 12), 
-zW.setOnChange(() => syncWScale()), drawWorldBase(), renderWorld(), $("#wIn").addEventListener("click", () => zW.zoom(1.35)), 
-$("#wOut").addEventListener("click", () => zW.zoom(1 / 1.35)), $("#wRst").addEventListener("click", () => {
+zW.setOnChange(() => syncWScale()), drawWorldBase(), renderWorld(), $("#wIn").addEventListener("click", () => zW.zoom(1.25)), 
+$("#wOut").addEventListener("click", () => zW.zoom(1 / 1.25)), $("#wRst").addEventListener("click", () => {
 WS.scope = "region" === WS.scope ? "world" : "region", $("#wRst").textContent = "region" === WS.scope ? t("worldWhole") : t("worldToRegion"), 
 renderWorld();
 }), $("#wRst").textContent = t("worldWhole");
@@ -3174,7 +3257,7 @@ const schoolsMap = {
 ready: !1,
 ensure() {
 this.ready || (this.ready = !0, zS = makeZoom("#svgS", "#gS", KZ_BBOX, VBS.w, VBS.h), 
-zS.setOnChange(() => syncSScale()), renderSchoolCards(), renderSchoolMap());
+zS.setOnChange(() => syncSScale()), $("#sIn").addEventListener("click", () => zS.zoom(1.25)), $("#sOut").addEventListener("click", () => zS.zoom(1 / 1.25)), $("#sRst").addEventListener("click", () => zS.reset()), renderSchoolCards(), renderSchoolMap());
 }
 };
 
