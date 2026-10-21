@@ -85,10 +85,15 @@ focusRegions: "Регионы в фокусе этой линзы",
 askAssistantSchool: "Спросить ассистента об этой школе",
 schoolCaptionDefault: "Карта потерь казахского населения по областям 1939 года. Выберите школу выше.",
 biblioHeading: "Библиография и источники",
-biblioIntro: "Подборка работ, на которых основаны историографические интерпретации, демографический контекст и методологические решения атласа. Ссылки открываются в новой вкладке.",
-biblioOpen: "Открыть источник ↗",
-biblioAccessNote: "Может потребовать доступ через библиотеку или институциональную подписку.",
-biblioPrint: "Печатное издание, доступно через библиотеки.",
+biblioIntro: "Список литературы научной работы «Картография распада»: 15 основных и 35 электронных источников, оформленных по APA 7. Названия даны на языке оригинала.",
+biblioCopy: "Скопировать ссылку APA",
+biblioCopied: "Ссылка APA скопирована",
+biblioCopyFail: "Не удалось скопировать — выделите ссылку вручную",
+biblioGroup_primary: "Первичные источники и статистика",
+biblioGroup_works: "Монографии и статьи",
+biblioGroup_geo: "Геоданные и методы",
+biblioApaNote: "Список оформлен по APA 7th edition. Внутри разделов: сначала источники на кириллице, затем на латинице, по алфавиту фамилии первого автора (или названия, если автора нет). Даты обращения к электронным ресурсам — 4 мая 2026 г.",
+biblioPrint: "Печатное издание",
 dataHeading: "Главный результат: сетка меняет вывод",
 statShiftSum: "Суммарный сдвиг долей",
 statShiftUnit: "процентных пункта",
@@ -325,10 +330,15 @@ focusRegions: "Regions in focus for this lens",
 askAssistantSchool: "Ask the assistant about this school",
 schoolCaptionDefault: "Map of Kazakh population loss by 1939 oblast. Choose a school above.",
 biblioHeading: "Bibliography and sources",
-biblioIntro: "A selection of works underlying the atlas’s historiographic interpretations, demographic context, and methodological choices. Links open in a new tab.",
-biblioOpen: "Open source ↗",
-biblioAccessNote: "May require library or institutional access.",
-biblioPrint: "Print publication, available through libraries.",
+biblioIntro: "The bibliography of the research paper “Cartography of Collapse”: 15 main and 35 electronic sources in APA 7 style. Titles are given in the original language, with English translations in square brackets.",
+biblioCopy: "Copy APA reference",
+biblioCopied: "APA reference copied",
+biblioCopyFail: "Could not copy — select the reference manually",
+biblioGroup_primary: "Primary sources and statistics",
+biblioGroup_works: "Monographs and articles",
+biblioGroup_geo: "Geodata and methods",
+biblioApaNote: "References follow APA 7th edition. Within each section, Cyrillic-script sources come first, then Latin-script ones, alphabetically by the first author’s surname (or by title when there is no author). Online sources were accessed on 4 May 2026.",
+biblioPrint: "Print publication",
 dataHeading: "The main result: the grid changes the conclusion",
 statShiftSum: "Total share shift",
 statShiftUnit: "percentage points",
@@ -565,10 +575,15 @@ focusRegions: "Осы көзқарас назардағы аймақтар",
 askAssistantSchool: "Осы мектеп туралы көмекшіден сұрау",
 schoolCaptionDefault: "1939 жылғы облыстар бойынша қазақ халқының шығын картасы. Жоғарыдан мектепті таңдаңыз.",
 biblioHeading: "Библиография және дереккөздер",
-biblioIntro: "Атластың тарихнамалық түсіндірмелері, демографиялық контексі және әдіснамалық шешімдері негізделген еңбектер жинағы. Сілтемелер жаңа қойындыда ашылады.",
-biblioOpen: "Дереккөзді ашу ↗",
-biblioAccessNote: "Кітапхана немесе институционалдық жазылым арқылы қолжетімділік қажет болуы мүмкін.",
-biblioPrint: "Баспа басылымы, кітапханалар арқылы қолжетімді.",
+biblioIntro: "«Күйреу картографиясы» ғылыми жұмысының әдебиеттер тізімі: APA 7 бойынша рәсімделген 15 негізгі және 35 электрондық дереккөз. Атаулар түпнұсқа тілінде берілген.",
+biblioCopy: "APA сілтемесін көшіру",
+biblioCopied: "APA сілтемесі көшірілді",
+biblioCopyFail: "Көшіру мүмкін болмады — сілтемені қолмен белгілеңіз",
+biblioGroup_primary: "Бастапқы дереккөздер мен статистика",
+biblioGroup_works: "Монографиялар мен мақалалар",
+biblioGroup_geo: "Геодеректер мен әдістер",
+biblioApaNote: "Тізім APA 7th edition бойынша рәсімделген. Бөлімдер ішінде алдымен кириллицадағы, содан кейін латиницадағы дереккөздер бірінші автордың тегі (автор болмаса — атауы) бойынша әліпби ретімен берілген. Электрондық ресурстарға жүгінген күн — 2026 ж. 4 мамыр.",
+biblioPrint: "Баспа басылымы",
 dataHeading: "Басты нәтиже: тор қорытындыны өзгертеді",
 statShiftSum: "Үлестердің жиынтық ауытқуы",
 statShiftUnit: "пайыздық тармақ",
@@ -3504,139 +3519,439 @@ tipShow(`<b>${esc(title)}</b><div class="s">${esc(sub)}</div>`), tipMove(e);
 g.appendChild(n);
 }
 
-const BIBLIOGRAPHY = [ {
-url: "https://ewjus.com/index.php/ewjus/en/article/view/220",
-ru: {
-cat: "Статья",
-title: "Сара Кэмерон — «The Kazakh Famine of 1930–33: Current Research and New Directions»",
-role: "Современный обзор исследований и историографический контекст."
+// Bibliography of the research paper (docs/bibliography-source.md), stored as structured fields; apa() builds APA 7 strings.
+// src: number in the paper ("1".."15" — main list, "Э1".."Э35" — electronic sources). Fields absent in the paper are left empty.
+// DOI values were checked against Crossref (api.crossref.org).
+const ACCESSED = "2026-05-04", BIB_CAT = {
+monograph: {
+ru: "Монография",
+en: "Monograph",
+kz: "Монография"
 },
-en: {
-cat: "Article",
-title: 'Sarah Cameron — "The Kazakh Famine of 1930–33: Current Research and New Directions"',
-role: "A contemporary survey of research and historiographic context."
+chapter: {
+ru: "Статья в сборнике",
+en: "Book chapter",
+kz: "Жинақтағы мақала"
 },
-kz: {
-cat: "Мақала",
-title: "Сара Кэмерон — «The Kazakh Famine of 1930–33: Current Research and New Directions»",
-role: "Зерттеулердің заманауи шолуы және тарихнамалық контекст."
+article: {
+ru: "Статья",
+en: "Journal article",
+kz: "Мақала"
+},
+census: {
+ru: "Перепись",
+en: "Census",
+kz: "Санақ"
+},
+handbook: {
+ru: "Статистический справочник",
+en: "Statistical handbook",
+kz: "Статистикалық анықтамалық"
+},
+dataset: {
+ru: "Набор данных",
+en: "Dataset",
+kz: "Деректер жиынтығы"
+},
+report: {
+ru: "Рабочий доклад",
+en: "Working paper",
+kz: "Жұмыс баяндамасы"
+},
+webpage: {
+ru: "Веб-страница",
+en: "Web page",
+kz: "Веб-парақ"
+},
+video: {
+ru: "Видео",
+en: "Video",
+kz: "Бейне"
+}
+}, BIBLIOGRAPHY = [ {
+src: "1",
+group: "works",
+type: "book",
+cat: "monograph",
+lang: "en",
+authors: [ [ "Cameron", "S." ] ],
+year: "2018",
+title: "The hungry steppe: Famine, violence, and the making of Soviet Kazakhstan",
+publisher: "Cornell University Press",
+doi: "10.7591/cornell/9781501730436.001.0001",
+role: {
+ru: "Ключевая монография о голоде и становлении советского Казахстана — основной источник историографической линзы Кэмерон.",
+en: "The key monograph on the famine and the making of Soviet Kazakhstan — the main source for Cameron’s historiographic lens.",
+kz: "Ашаршылық пен кеңестік Қазақстанның қалыптасуы туралы негізгі монография — Кэмерон көзқарасының басты дереккөзі."
 }
 }, {
-url: "https://books.google.kz/books?hl=en&lr=&id=mEVQDwAAQBAJ&oi=fnd&pg=PT6&redir_esc=y",
-ru: {
-cat: "Монография",
-title: "Сара Кэмерон — «The Hungry Steppe: Famine, Violence, and the Making of Soviet Kazakhstan»",
-role: "Ключевая монография о голоде и становлении советского Казахстана — основной источник историографической линзы Кэмерон на этом сайте."
-},
-en: {
-cat: "Monograph",
-title: 'Sarah Cameron — "The Hungry Steppe: Famine, Violence, and the Making of Soviet Kazakhstan"',
-role: "The key monograph on the famine and the making of Soviet Kazakhstan — the primary source for Cameron’s historiographic lens on this site."
-},
-kz: {
-cat: "Монография",
-title: "Сара Кэмерон — «The Hungry Steppe: Famine, Violence, and the Making of Soviet Kazakhstan»",
-role: "Ашаршылық және кеңестік Қазақстанның қалыптасуы туралы негізгі монография — осы сайттағы Кэмерон көзқарасының басты дереккөзі."
+src: "2",
+group: "works",
+type: "chapter",
+cat: "chapter",
+lang: "ru",
+authors: [ [ "Алексеенко", "А. Н." ] ],
+year: "2000",
+title: "Население Казахстана в 1926–1939 годах",
+tr: "The population of Kazakhstan in 1926–1939",
+editors: [ [ "Владимиров", "В. Н." ] ],
+container: "Компьютер и историческая демография",
+pages: "9–25",
+role: {
+ru: "Демографическая реконструкция 1926–1939 гг.; оценка безвозвратных потерь казахского населения 1,5–1,84 млн.",
+en: "Demographic reconstruction for 1926–1939; estimate of irrecoverable Kazakh losses of 1.5–1.84 million.",
+kz: "1926–1939 жж. демографиялық реконструкция; қазақ халқының қайтарымсыз шығынының бағасы 1,5–1,84 млн."
 }
 }, {
-url: "https://journals.openedition.org/monderusse/8681",
-ru: {
-cat: "Статья",
-title: "Никколо Пьянчола — «Famine in the Steppe: The Collectivization of Agriculture and the Kazak Herdsmen, 1928–1934»",
-role: "Коллективизация, скотоводство и политика государства в степи."
-},
-en: {
-cat: "Article",
-title: 'Niccolò Pianciola — "Famine in the Steppe: The Collectivization of Agriculture and the Kazak Herdsmen, 1928–1934"',
-role: "Collectivization, pastoralism, and state policy in the steppe."
-},
-kz: {
-cat: "Мақала",
-title: "Никколо Пьянчола — «Famine in the Steppe: The Collectivization of Agriculture and the Kazak Herdsmen, 1928–1934»",
-role: "Далада ұжымдастыру, мал шаруашылығы және мемлекет саясаты."
+src: "3",
+group: "primary",
+type: "book",
+cat: "census",
+lang: "ru",
+year: "1928",
+title: "Всесоюзная перепись населения 1926 года. Том VIII. Казакская АССР. Отдел I: Народность, родной язык, возраст, грамотность",
+tr: "All-Union population census of 1926. Vol. VIII. Kazak ASSR. Section I: Nationality, native language, age, literacy",
+publisher: "ЦСУ СССР",
+role: {
+ru: "Первичный источник данных 1926 г. по Казакской АССР (электронная версия — Демоскоп).",
+en: "Primary source of the 1926 data for the Kazak ASSR (electronic version on Demoscope).",
+kz: "Қазақ АКСР-і бойынша 1926 ж. деректердің бастапқы дереккөзі (электрондық нұсқасы — Демоскоп)."
 }
 }, {
-url: "https://www.jstor.org/stable/41036834",
-ru: {
-cat: "Статья",
-title: "Никколо Пьянчола — «The Collectivization Famine in Kazakhstan, 1931–1933»",
-role: "Механизмы коллективизации и региональная специфика казахстанского голода."
-},
-en: {
-cat: "Article",
-title: 'Niccolò Pianciola — "The Collectivization Famine in Kazakhstan, 1931–1933"',
-role: "The mechanisms of collectivization and the regional specifics of the Kazakh famine."
-},
-kz: {
-cat: "Мақала",
-title: "Никколо Пьянчола — «The Collectivization Famine in Kazakhstan, 1931–1933»",
-role: "Ұжымдастыру механизмдері және қазақ ашаршылығының өңірлік ерекшеліктері."
+src: "4",
+group: "primary",
+type: "book",
+cat: "census",
+lang: "ru",
+year: "1992",
+title: "Всесоюзная перепись населения 1939 года. Основные итоги: данные по Казахской ССР и областям",
+tr: "All-Union population census of 1939. Main results: Data for the Kazakh SSR and its oblasts",
+publisher: "Наука",
+role: {
+ru: "Первичный источник данных 1939 г. по Казахской ССР и областям (электронная версия — Демоскоп).",
+en: "Primary source of the 1939 data for the Kazakh SSR and its oblasts (electronic version on Demoscope).",
+kz: "Қазақ КСР-і мен облыстары бойынша 1939 ж. деректердің бастапқы дереккөзі (электрондық нұсқасы — Демоскоп)."
 }
 }, {
-url: "https://karolinum.cz/data/clanek/26/96643.pdf",
-ru: {
-cat: "Демография",
-title: "A. Saparbekova, J. Kocourková, T. Kučera — «Sweeping Ethno-Demographic Changes in Kazakhstan During the 20th Century»",
-role: "Демографические изменения и миграционные волны XX века."
-},
-en: {
-cat: "Demography",
-title: 'A. Saparbekova, J. Kocourková, T. Kučera — "Sweeping Ethno-Demographic Changes in Kazakhstan During the 20th Century"',
-role: "Demographic change and migration waves across the 20th century."
-},
-kz: {
-cat: "Демография",
-title: "A. Saparbekova, J. Kocourková, T. Kučera — «Sweeping Ethno-Demographic Changes in Kazakhstan During the 20th Century»",
-role: "XX ғасырдағы демографиялық өзгерістер мен көші-қон толқындары."
+src: "5",
+group: "geo",
+type: "book",
+cat: "monograph",
+lang: "en",
+authors: [ [ "Gregory", "I. N." ], [ "Ell", "P. S." ] ],
+year: "2007",
+title: "Historical GIS: Technologies, methodologies, and scholarship",
+publisher: "Cambridge University Press",
+doi: "10.1017/CBO9780511493645",
+role: {
+ru: "Методологическая основа исторической ГИС: базы данных, время, интерполяция между единицами.",
+en: "Methodological basis of historical GIS: databases, time, interpolation between units.",
+kz: "Тарихи ГАЖ-дың әдіснамалық негізі: деректер базасы, уақыт, бірліктер арасындағы интерполяция."
 }
 }, {
-url: "https://ieres.elliott.gwu.edu/project/remembering-kazakhstans-great-famine-of-the-1930s/",
-ru: {
-cat: "Публичная история",
-title: "GWU IERES — «Remembering Kazakhstan's Great Famine of the 1930s»",
-role: "Образовательный ресурс с документами, свидетельствами и контекстом памяти."
-},
-en: {
-cat: "Public history",
-title: 'GWU IERES — "Remembering Kazakhstan\'s Great Famine of the 1930s"',
-role: "An educational resource with documents, testimonies, and the context of memory."
-},
-kz: {
-cat: "Қоғамдық тарих",
-title: "GWU IERES — «Remembering Kazakhstan's Great Famine of the 1930s»",
-role: "Құжаттары, куәліктері және есте сақтау контексі бар білім беру ресурсы."
+src: "6",
+group: "works",
+type: "article",
+cat: "article",
+lang: "en",
+authors: [ [ "Pianciola", "N." ] ],
+year: "2004",
+title: "Famine in the steppe: The collectivization of agriculture and the Kazak herdsmen, 1928–1934",
+container: "Cahiers du Monde russe",
+volume: "45",
+issue: "1–2",
+pages: "137–192",
+doi: "10.4000/monderusse.8681",
+role: {
+ru: "Источник линзы Пьянчолы: колониальная иерархия приоритетов и судьба казахских скотоводов.",
+en: "Source of Pianciola’s lens: the colonial hierarchy of priorities and the fate of Kazakh herders.",
+kz: "Пьянчола көзқарасының дереккөзі: басымдықтардың отарлық иерархиясы және қазақ малшыларының тағдыры."
 }
 }, {
-url: "",
-ru: {
-cat: "Демография",
-title: "Алексеенко А. Н. Население Казахстана в 1926–1939 годах // Компьютер и историческая демография. Барнаул, 2000. С. 9–25",
-role: "Оценка безвозвратных потерь казахского населения: 1,5–1,84 млн."
-},
-en: {
-cat: "Demography",
-title: "Alekseenko A. N. «Население Казахстана в 1926–1939 годах» [The Population of Kazakhstan in 1926–1939] // Компьютер и историческая демография. Barnaul, 2000. Pp. 9–25",
-role: "Estimate of the irrecoverable losses of the Kazakh population: 1.5–1.84 million."
-},
-kz: {
-cat: "Демография",
-title: "Алексеенко А. Н. Население Казахстана в 1926–1939 годах // Компьютер и историческая демография. Барнаул, 2000. 9–25 б.",
-role: "Қазақ халқының қайтарымсыз шығынының бағасы: 1,5–1,84 млн."
+src: "7",
+group: "works",
+type: "book",
+cat: "monograph",
+lang: "fr",
+authors: [ [ "Ohayon", "I." ] ],
+year: "2006",
+title: "La sédentarisation des Kazakhs dans l’URSS de Staline: Collectivisation et changement social (1928–1945)",
+publisher: "Maisonneuve et Larose",
+role: {
+ru: "Исследование седентаризации казахов и социальных изменений 1928–1945 гг.",
+en: "A study of Kazakh sedentarization and social change in 1928–1945.",
+kz: "1928–1945 жж. қазақтарды отырықшыландыру мен әлеуметтік өзгерістер туралы зерттеу."
 }
-} ];
+}, {
+src: "8",
+group: "works",
+type: "book",
+cat: "monograph",
+lang: "kk",
+authors: [ [ "Омарбеков", "Т. О." ] ],
+year: "1997",
+title: "20–30 жылдардағы Қазақстан қасіреті",
+tr: "The tragedy of Kazakhstan in the 1920s–1930s",
+publisher: "Санат",
+role: {
+ru: "Национальная историографическая школа; оценка «более 370 выступлений» 1929–1931 гг.",
+en: "National historiographic school; the estimate of “more than 370 uprisings” in 1929–1931.",
+kz: "Ұлттық тарихнамалық мектеп; 1929–1931 жж. «370-тен астам көтеріліс» бағасы."
+}
+}, {
+src: "9",
+group: "works",
+type: "article",
+cat: "article",
+lang: "ru",
+authors: [ [ "Абылхожин", "Ж. Б." ], [ "Козыбаев", "М. К." ], [ "Татимов", "М. Б." ] ],
+year: "1989",
+title: "Казахстанская трагедия",
+tr: "The Kazakhstan tragedy",
+container: "Вопросы истории",
+issue: "7",
+pages: "53–71",
+role: {
+ru: "Первая публикация о масштабах голода в советской научной печати; отдельная авторская оценка потерь.",
+en: "The first publication on the scale of the famine in the Soviet academic press; a separately attributed loss estimate.",
+kz: "Кеңестік ғылыми баспасөзде ашаршылық ауқымы туралы алғашқы жарияланым; жеке авторлық шығын бағасы."
+}
+}, {
+src: "10",
+group: "works",
+type: "book",
+cat: "monograph",
+lang: "kk",
+authors: [ [ "Омарбеков", "Т. О." ] ],
+year: "2003",
+title: "Қазақстан тарихының ХХ ғасырдағы өзекті мәселелері",
+tr: "Topical problems of the history of Kazakhstan in the 20th century",
+publisher: "Өнер",
+role: {
+ru: "Национальная школа: сопротивление, откочёвки и их подавление.",
+en: "National school: resistance, migrations and their suppression.",
+kz: "Ұлттық мектеп: қарсылық, көші-қон және оларды басу."
+}
+}, {
+src: "11",
+group: "works",
+type: "book",
+cat: "monograph",
+lang: "ru",
+authors: [ [ "Акимбеков", "С. М." ] ],
+year: "2021",
+title: "Казахи между революцией и голодом",
+tr: "Kazakhs between revolution and famine",
+publisher: "Институт азиатских исследований",
+role: {
+ru: "Современная казахстанская работа о периоде от революции до голода.",
+en: "A recent Kazakhstani work on the period from the revolution to the famine.",
+kz: "Революциядан ашаршылыққа дейінгі кезең туралы заманауи қазақстандық еңбек."
+}
+}, {
+src: "12",
+group: "primary",
+type: "book",
+cat: "handbook",
+lang: "ru",
+year: "1936",
+title: "Социалистическое строительство КазАССР: экономико-статистический справочник за 1920–1935 гг.",
+tr: "Socialist construction of the Kazak ASSR: An economic and statistical handbook for 1920–1935",
+role: {
+ru: "Статистика 1920–1935 гг., в том числе поголовье скота.",
+en: "Statistics for 1920–1935, including livestock numbers.",
+kz: "1920–1935 жж. статистика, соның ішінде мал басы."
+}
+}, {
+src: "13",
+group: "geo",
+type: "web",
+cat: "dataset",
+lang: "en",
+title: "Kazakhstan – Subnational administrative boundaries",
+format: "dataset",
+site: "Humanitarian Data Exchange (HDX)",
+url: "https://data.humdata.org/dataset/cod-ab-kaz",
+role: {
+ru: "Современная административная геометрия, на которой реконструированы границы 1926 и 1939 гг.",
+en: "Modern administrative geometry on which the 1926 and 1939 boundaries are reconstructed.",
+kz: "1926 және 1939 жж. шекаралары қайта құрылған қазіргі әкімшілік геометрия."
+}
+}, {
+src: "14",
+group: "geo",
+type: "report",
+cat: "report",
+lang: "en",
+authors: [ [ "Eckert", "F." ], [ "Gvirtz", "A." ], [ "Liang", "J." ], [ "Peters", "M." ] ],
+year: "2020",
+title: "A method to construct geographical crosswalks with an application to US counties since 1790",
+series: "NBER Working Paper No. 26770",
+publisher: "National Bureau of Economic Research",
+doi: "10.3386/w26770",
+url: "https://www.nber.org/papers/w26770",
+role: {
+ru: "Метод площадных «кросс-таблиц» между сетками — основа расчёта 96 пересечений.",
+en: "The areal crosswalk method between grids — the basis for the 96-intersection calculation.",
+kz: "Торлар арасындағы ареалдық сәйкестендіру әдісі — 96 қиылысу есебінің негізі."
+}
+}, {
+src: "15",
+group: "geo",
+type: "web",
+cat: "webpage",
+lang: "en",
+title: "Interpolating point data (QGIS3)",
+site: "QGIS Tutorials and Tips",
+url: "https://www.qgistutorials.com/en/docs/3/interpolating_point_data.html",
+role: {
+ru: "Практическое руководство по интерполяции в QGIS.",
+en: "A practical guide to interpolation in QGIS.",
+kz: "QGIS-тегі интерполяция бойынша практикалық нұсқаулық."
+}
+}, ...[ [ "Э1", "works", "Kazakh famine of 1930–1933", "Wikipedia", "https://en.wikipedia.org/wiki/Kazakh_famine_of_1930%E2%80%931933", "Обзорная статья энциклопедии о голоде.", "Encyclopedia overview of the famine.", "Ашаршылық туралы энциклопедиялық шолу." ], [ "Э2", "works", "“The hungry steppe: Famine, violence, and the making of Soviet Kazakhstan” by Sarah Cameron", "Asian Review of Books", "https://asianreviewofbooks.com/the-hungry-steppe-famine-violence-and-the-making-of-soviet-kazakhstan-by-sarah-cameron/", "Рецензия на монографию С. Кэмерон.", "A review of S. Cameron’s monograph.", "С. Кэмерон монографиясына рецензия." ], [ "Э3", "geo", "Методические рекомендации по подготовке исследовательских и проектн[…]", "spb.hse.ru", "https://spb.hse.ru/mirror/pubs/share/993176122", "Методические требования к исследовательской работе.", "Methodological requirements for a research paper.", "Зерттеу жұмысына қойылатын әдістемелік талаптар.", "Methodological recommendations for preparing research and project […]" ], [ "Э4", "works", "25 for 25: “The hungry steppe: Famine, violence, and the making of Soviet Kazakhstan” by Sarah Cameron", "Library of Congress Blogs", "https://blogs.loc.gov/kluge/2025/09/25-25-cameron/", "Материал Библиотеки Конгресса о монографии С. Кэмерон.", "Library of Congress post on S. Cameron’s monograph.", "Конгресс кітапханасының С. Кэмерон монографиясы туралы материалы." ], [ "Э5", "geo", "Population estimation methods in GIS and remote sensing: A review", "University at Buffalo, personal websites", "http://www.acsu.buffalo.edu/~lewang/pdf/lewang_sample4.pdf", "Обзор методов оценки населения в ГИС — обоснование площадной интерполяции.", "Review of population-estimation methods in GIS — the rationale for areal interpolation.", "ГАЖ-дағы халық санын бағалау әдістеріне шолу — ареалдық интерполяцияның негіздемесі." ], [ "Э6", "geo", "A method to construct geographical crosswalks with an application to US counties since 1790", "Fabian Eckert", "https://www.fpeckert.me/eglp.pdf", "Авторская PDF-версия работы о кросс-таблицах между сетками.", "Author’s PDF of the paper on crosswalks between grids.", "Торлар арасындағы сәйкестендіру туралы еңбектің авторлық PDF нұсқасы." ], [ "Э7", "works", "Genocide or not? The 1931–1933 famine in the collective memories of Kazakhstan’s post-independence generations", "Taylor & Francis", "https://www.tandfonline.com/doi/abs/10.1080/14623528.2025.2561440", "Исследование памяти о голоде (аннотация).", "A study of the memory of the famine (abstract).", "Ашаршылық туралы жадыны зерттеу (аңдатпа)." ], [ "Э8", "works", "The collectivization famine in Kazakhstan, 1931–1933", "ResearchGate", "https://www.researchgate.net/publication/40773328_The_collectivization_famine_in_Kazakhstan_1931-1933", "Статья о коллективизационном голоде в Казахстане.", "An article on the collectivization famine in Kazakhstan.", "Қазақстандағы ұжымдастыру ашаршылығы туралы мақала." ], [ "Э9", "works", "The Kazakh famine of 1930–1933 and Stalinist collectivization: The limitation of legal frameworks for genocide in communist studies", "yris.yira.org", "https://yris.yira.org/spring-issue/the-kazakh-famine-of-1930-1933-and-stalinist-collectivization-the-limitation-of-legal-frameworks-for-genocide-in-communist-studies/", "Правовые рамки квалификации голода.", "Legal frameworks for classifying the famine.", "Ашаршылықты саралаудың құқықтық шеңбері." ], [ "Э10", "works", "The Kazakh famine of 1930–33: Current research and new directions", "ewjus.com", "https://ewjus.com/index.php/ewjus/article/download/220/88/525", "Обзор современных исследований голода.", "A survey of current famine research.", "Ашаршылық туралы заманауи зерттеулерге шолу." ], [ "Э11", "works", "Kazakh famine (Asharshylyq): Interview with Sarah Cameron", "zaurebatayeva.blog", "https://www.zaurebatayeva.blog/post/kazakh-famine-asharshylyq-interview-with-sarah-cameron", "Интервью с С. Кэмерон.", "An interview with S. Cameron.", "С. Кэмерон сұхбаты." ], [ "Э12", "works", "The hungry steppe: Famine, violence, and the making of Soviet Kazakhstan. By Sarah Cameron. Ithaca, N.Y.: Cornell University Press, 2018. xiv, 277 pp. Appendix. Notes. Bibliography. Glossary. Index. Photographs. Tables. Maps. $45.95, hard bound", "Slavic Review, Cambridge Core", "https://www.cambridge.org/core/journals/slavic-review/article/hungry-steppe-famine-violence-and-the-making-of-soviet-kazakhstan-by-sarah-cameron-ithaca-ny-cornell-university-press-2018-xiv-277-pp-appendix-notes-bibliography-glossary-index-photographs-tables-maps-4595-hard-bound/6512FCA4FD6866951B8CA792C1739114", "Рецензия в Slavic Review на монографию С. Кэмерон.", "A Slavic Review review of S. Cameron’s monograph.", "Slavic Review журналындағы С. Кэмерон монографиясына рецензия." ], [ "Э13", "works", "The famine in Soviet Kazakhstan (Chapter 8)", "The Cambridge World History of Genocide, Cambridge Core", "https://www.cambridge.org/core/books/cambridge-world-history-of-genocide/famine-in-soviet-kazakhstan/7DD5501C3BB06317450E155A216D1305", "Глава о голоде в Казахстане в кембриджской истории геноцидов.", "A chapter on the Kazakh famine in the Cambridge history of genocide.", "Кембридж геноцид тарихындағы Қазақстандағы ашаршылық туралы тарау." ], [ "Э14", "works", "Famine in the steppe", "OpenEdition Journals", "https://journals.openedition.org/monderusse/8681", "Открытая электронная версия статьи Н. Пьянчолы.", "Open electronic version of N. Pianciola’s article.", "Н. Пьянчола мақаласының ашық электрондық нұсқасы." ], [ "Э15", "works", "Soviet famine of 1930–1933", "Wikipedia", "https://en.wikipedia.org/wiki/Soviet_famine_of_1930%E2%80%931933", "Обзор голода 1930–1933 гг. в СССР для сравнения.", "Overview of the 1930–1933 Soviet famine for comparison.", "Салыстыру үшін КСРО-дағы 1930–1933 жж. ашаршылыққа шолу." ], [ "Э16", "works", "Genocide or not? The 1931–1933 famine in the collective memories of Kazakhstan’s post-independence generations (full article)", "Taylor & Francis", "https://www.tandfonline.com/doi/full/10.1080/14623528.2025.2561440", "Исследование памяти о голоде (полный текст).", "A study of the memory of the famine (full text).", "Ашаршылық туралы жадыны зерттеу (толық мәтін)." ], [ "Э17", "works", "От голода 1932–1933 гг. погибло более 4 млн. казахов!", "Qazaquni.kz", "https://qazaquni.kz/alash/36654-ot-goloda-1932-1933-gg-pogiblo-bolee-4-mln-kazah", "Публицистическая максимальная оценка потерь (до 4 млн) — на сайте приводится только как отдельная авторская оценка.", "A journalistic maximum loss estimate (up to 4 million) — cited on the site only as a separately attributed estimate.", "Публицистикалық ең жоғары шығын бағасы (4 млн-ға дейін) — сайтта тек жеке авторлық баға ретінде келтіріледі.", "More than 4 million Kazakhs died in the famine of 1932–1933!" ], [ "Э18", "works", "Talas Omarbekov (1948–2021)", "Taylor & Francis", "https://www.tandfonline.com/doi/full/10.1080/02634937.2022.2104491", "Биографический очерк о Т. Омарбекове.", "A biographical essay on T. Omarbekov.", "Т. Омарбеков туралы өмірбаяндық очерк." ], [ "Э19", "works", "ҚР Тәуелсіздігінің 30 жылдығына арналған «Қазақстандағы аштық: жаңа деректер мен пайымдаулар» халықаралық ғылыми-тәжірибелік конференциясының […]", "Алматинский университет энергетики и связи", "https://libr.aues.kz/facultet/104_FIT/101_Kafedra_sistem_informatsionnoy_bezopasnosti/699_KR_Taiuelsizdiginin_30_zhildighina_arnalghan_%C2%ABKazakstandaghi_ashtik:_zhana_derekter_men_payimdaular%C2%BB/K3WQsGRqwyJ1cA7jdfHk6mlbCUTOBL.pdf", "Материалы конференции о новых данных по голоду.", "Conference materials on new data about the famine.", "Ашаршылық туралы жаңа деректер бойынша конференция материалдары.", "… of the international research-to-practice conference “Famine in Kazakhstan: New data and interpretations” dedicated to the 30th anniversary of the independence of the Republic of Kazakhstan" ] ].map(([src, group, title, site, url, ru, en, kz, tr]) => ({
+src: src,
+group: group,
+type: "web",
+cat: "webpage",
+lang: /[А-Яа-яЁёӘәҒғҚқҢңӨөҰұҮүҺһІі]/.test(title) ? /[ӘәҒғҚқҢңӨөҰұҮүҺһІі]/.test(title) ? "kk" : "ru" : "en",
+title: title,
+tr: tr,
+site: site,
+url: url,
+role: {
+ru: ru,
+en: en,
+kz: kz
+}
+})), ...[ [ "Э20", "primary", "Данные Всесоюзной переписи населения 1926 года", "Demoscope.ru", "http://www.demoscope.ru/weekly/ssp/rus_nac_26.php?reg=753", "Электронная публикация итогов переписи 1926 г. по Казакской АССР.", "Electronic publication of the 1926 census results for the Kazak ASSR.", "Қазақ АКСР-і бойынша 1926 ж. санақ қорытындыларының электрондық жарияланымы.", "Data of the 1926 All-Union population census" ], [ "Э21", "primary", "Данные Всесоюзной переписи населения 1939 года", "Demoscope.ru", "http://www.demoscope.ru/weekly/ssp/rus_nac_39.php?reg=77", "Электронная публикация итогов переписи 1939 г. по Казахской ССР.", "Electronic publication of the 1939 census results for the Kazakh SSR.", "Қазақ КСР-і бойынша 1939 ж. санақ қорытындыларының электрондық жарияланымы.", "Data of the 1939 All-Union population census" ], [ "Э22", "geo", "Mapping the peoples of Kazakhstan", "ArcGIS StoryMaps", "https://storymaps.arcgis.com/stories/4f0e4059f2184bc481c3df64477497bf", "Пример картографического рассказа об этническом составе.", "An example of a story map on ethnic composition.", "Этникалық құрам туралы картографиялық әңгіме мысалы." ], [ "Э23", "works", "The population history of Kazakhstan", "European Population Conference 2012 (epc2012)", "https://epc2012.eaps.nl/papers/120586", "Демографическая история Казахстана: долгосрочный контекст.", "Population history of Kazakhstan: long-term context.", "Қазақстанның демографиялық тарихы: ұзақ мерзімді контекст." ], [ "Э24", "geo", "Geocoding historical data using QGIS", "Programming Historian", "https://programminghistorian.org/en/lessons/geocoding-qgis", "Урок по геокодированию исторических данных в QGIS.", "A lesson on geocoding historical data in QGIS.", "QGIS-те тарихи деректерді геокодтау сабағы." ], [ "Э25", "geo", "Chapter 7: Spatial analysis with US Census data", "walker-data.com", "https://walker-data.com/census-r/spatial-analysis-with-us-census-data.html", "Пространственный анализ переписных данных: методический пример.", "Spatial analysis of census data: a methodological example.", "Санақ деректерін кеңістіктік талдау: әдістемелік мысал." ], [ "Э26", "geo", "Historical GIS datafiles", "Census Mosaic (IPUMS)", "https://mosaic.ipums.org/historical-gis-datafiles", "Пример открытых исторических ГИС-данных.", "An example of open historical GIS data.", "Ашық тарихи ГАЖ деректерінің мысалы." ], [ "Э27", "geo", "SUNGEO historical GIS boundaries", "SUNGEO", "https://www.sungeo.org/sungeo-historical-gis-boundaries", "Исторические границы для ГИС: сравнение подходов.", "Historical boundaries for GIS: comparing approaches.", "ГАЖ-ға арналған тарихи шекаралар: тәсілдерді салыстыру." ], [ "Э29", "geo", "Historical maps of Kazakhstan", "EtoMesto", "http://www.etomesto.com/kazakhstan/maps.php?start=0", "Исторические карты Казахстана для сверки границ.", "Historical maps of Kazakhstan for checking boundaries.", "Шекараларды тексеруге арналған Қазақстанның тарихи карталары." ], [ "Э30", "geo", "Interpolating within a boundary using QGIS", "GIS StackExchange", "https://gis.stackexchange.com/questions/281519/interpolating-within-a-boundary-using-qgis", "Обсуждение интерполяции в пределах границы.", "A discussion of interpolation within a boundary.", "Шекара ішіндегі интерполяцияны талқылау." ], [ "Э32", "geo", "Spatial interpolation masking out areas based on population density", "Reddit, r/gis", "https://www.reddit.com/r/gis/comments/1evqmar/spatial_interpolation_masking_out_areas_based_on/", "Обсуждение маскирования при интерполяции по плотности населения.", "A discussion of masking in population-density interpolation.", "Халық тығыздығы бойынша интерполяциядағы маскалауды талқылау." ], [ "Э33", "geo", "What’s the best way to produce a density map from weighted points in QGIS?", "GIS StackExchange", "https://gis.stackexchange.com/questions/39074/whats-the-best-way-to-produce-a-density-map-from-weighted-points-in-qgis", "Обсуждение построения карты плотности по взвешенным точкам.", "A discussion of building a density map from weighted points.", "Салмақталған нүктелер бойынша тығыздық картасын құруды талқылау." ], [ "Э34", "works", "The hungry steppe: Famine, violence, and the making of Soviet Kazakhstan with author Sarah Cameron (video and transcript)", "Voices on Central Asia", "https://voicesoncentralasia.org/the-hungry-steppe-famine-violence-and-the-making-of-soviet-kazakhstan-with-author-sarah-cameron-video-and-transcript/", "Выступление С. Кэмерон о монографии (видео и стенограмма).", "S. Cameron’s talk on the monograph (video and transcript).", "С. Кэмерон монография туралы сөзі (бейне және стенограмма)." ], [ "Э35", "geo", "A place in history: A guide to using GIS in historical research", "ResearchGate", "https://www.researchgate.net/publication/263441890_A_Place_in_History_A_Guide_to_Using_GIS_in_Historical_Research", "Руководство по использованию ГИС в исторических исследованиях.", "A guide to using GIS in historical research.", "Тарихи зерттеулерде ГАЖ қолдану жөніндегі нұсқаулық." ] ].map(([src, group, title, site, url, ru, en, kz, tr]) => ({
+src: src,
+group: group,
+type: "web",
+cat: "webpage",
+lang: /[А-Яа-яЁё]/.test(title) ? "ru" : "en",
+title: title,
+tr: tr,
+site: site,
+url: url,
+role: {
+ru: ru,
+en: en,
+kz: kz
+}
+})), ...[ [ "Э28", "Georeferencing historical maps with QGIS", "https://www.youtube.com/watch?v=UddhBhCvF0A", "Видеоурок по привязке исторических карт в QGIS.", "A video lesson on georeferencing historical maps in QGIS.", "QGIS-те тарихи карталарды байланыстыру бойынша бейнесабақ." ], [ "Э31", "Spatial interpolation techniques in QGIS", "https://www.youtube.com/watch?v=IRMupikjXng", "Видеоурок по методам пространственной интерполяции в QGIS.", "A video lesson on spatial interpolation techniques in QGIS.", "QGIS-тегі кеңістіктік интерполяция әдістері бойынша бейнесабақ." ] ].map(([src, title, url, ru, en, kz]) => ({
+src: src,
+group: "geo",
+type: "web",
+cat: "video",
+format: "video",
+lang: "en",
+title: title,
+site: "YouTube",
+url: url,
+role: {
+ru: ru,
+en: en,
+kz: kz
+}
+})) ];
+
+// APA 7 reference for one entry. Connective words follow the interface: Russian forms for ru and kz
+// (the list belongs to a Russian-language paper), English forms for en. Titles stay in the original language;
+// the English interface adds a translation in square brackets for Cyrillic titles.
+function apa(e) {
+const en = "en" === LANG, W = en ? {
+nd: "n.d.",
+in: "In",
+ed: "Ed.",
+eds: "Eds.",
+pp: "pp.",
+dataset: "Data set",
+video: "Video",
+retrieved: u => `Retrieved May 4, 2026, from ${u}`
+} : {
+nd: "б. д.",
+in: "В",
+ed: "Ред.",
+eds: "Ред.",
+pp: "с.",
+dataset: "Набор данных",
+video: "Видео",
+retrieved: u => `Дата обращения: 4 мая 2026 г. ${u}`
+}, names = list => {
+const n = list.map(([f, g]) => `${f}, ${g}`);
+return n.length < 2 ? n.join("") : n.slice(0, -1).join(", ") + ", & " + n[n.length - 1];
+}, edNames = list => {
+const n = list.map(([f, g]) => `${g} ${f}`);
+return n.length < 2 ? n.join("") : n.slice(0, -1).join(", ") + ", & " + n[n.length - 1];
+}, tr = en && e.tr ? ` [${e.tr}]` : "", link = e.doi ? "https://doi.org/" + e.doi : e.url || "", dot = s => /[.!?…]$/.test(s) ? s : s + ".", I = s => `<i>${esc(s)}</i>`;
+let h;
+if ("web" === e.type) {
+const desc = e.format ? ` [${"video" === e.format ? W.video : W.dataset}]` : "";
+const sep = /[?!]$/.test(e.title) && !tr && !desc ? "" : ".";
+h = `${I(e.title)}${esc(tr)}${desc}${sep} (${W.nd}). ${esc(dot(e.site))} ${esc(W.retrieved(link))}`;
+return {
+html: h.replace(esc(link), `<a href="${esc(link)}" target="_blank" rel="noopener noreferrer">${esc(link)}</a>`),
+link: link
+};
+}
+const who = e.authors ? `${esc(names(e.authors))} (${e.year}).` : "", end = !tr && /[.!?…]$/.test(e.title) ? "" : ".";
+if ("article" === e.type) h = `${who} ${esc(dot(e.title + tr))} ${I(e.container)}${e.volume ? ", " + I(e.volume) : ","}${e.issue ? (e.volume ? "" : " ") + `(${esc(e.issue)})` : ""}${e.pages ? ", " + esc(e.pages) : ""}.`; else if ("chapter" === e.type) h = `${who} ${esc(dot(e.title + tr))} ${W.in} ${esc(edNames(e.editors))} (${e.editors.length > 1 ? W.eds : W.ed}), ${I(e.container)} (${W.pp} ${esc(e.pages)}).${e.publisher ? " " + esc(dot(e.publisher)) : ""}`; else if ("report" === e.type) h = `${who} ${I(e.title)}${esc(tr)} (${esc(e.series)}). ${esc(dot(e.publisher))}`; else h = e.authors ? `${who} ${I(e.title)}${esc(tr)}${end}${e.publisher ? " " + esc(dot(e.publisher)) : ""}` : `${I(e.title)}${esc(tr)}${end} (${e.year}).${e.publisher ? " " + esc(dot(e.publisher)) : ""}`;
+return link && (h += ` <a href="${esc(link)}" target="_blank" rel="noopener noreferrer">${esc(link)}</a>`), {
+html: h.trim(),
+link: link
+};
+}
+
+// Order inside a group: Cyrillic block first, then Latin (as in Russian bibliographies, GOST 7.80), each alphabetical
+// by the first author's surname, or by title when there is no author (APA moves the title into the author position;
+// a leading A/An/The is ignored).
+function bibSortKey(e) {
+const k = (e.authors ? e.authors[0][0] : e.title).replace(/^[«“"'\[(]+/, "").replace(/^(the|an|a)\s+/i, "");
+return [ /^[A-Za-z0-9]/.test(k) ? 1 : 0, k.toLowerCase(), e.year || "" ];
+}
 
 function renderBiblio() {
 const box = $("#biblio");
-box && (box.innerHTML = BIBLIOGRAPHY.map(b => {
-const L = tr(b), domain = (() => {
-try {
-return new URL(b.url).hostname.replace(/^www\./, "");
-} catch (e) {
-return "";
+if (!box) return;
+const groups = [ "primary", "works", "geo" ], cmp = (a, b) => {
+const x = bibSortKey(a), y = bibSortKey(b);
+return x[0] - y[0] || x[1].localeCompare(y[1], 0 === x[0] ? "ru" : "en") || x[2].localeCompare(y[2]);
+};
+box.innerHTML = groups.map(g => {
+const items = BIBLIOGRAPHY.filter(e => e.group === g).sort(cmp);
+return `<section class="card pad bib-group">\n      <h3>${esc(t("biblioGroup_" + g))} <span class="bib-count">${items.length}</span></h3>\n      ${items.map(e => {
+const r = apa(e), C = BIB_CAT[e.cat];
+return `<div class="bib-entry">\n        <p class="apa" lang="${"kk" === e.lang ? "kk" : e.lang}">${r.html}</p>\n        <div class="bib-meta"><span class="bib-cat">${esc(C[LANG] || C.ru)}</span><span>${esc(e.role[LANG] || e.role.ru)}</span>${r.link ? "" : `<span class="bib-print">${esc(t("biblioPrint"))}</span>`}\n        <button class="btn sm bib-copy" data-src="${esc(e.src)}">${esc(t("biblioCopy"))}</button></div>\n      </div>`;
+}).join("")}\n    </section>`;
+}).join("") + `<p class="hint bib-note">${esc(t("biblioApaNote"))}</p>`;
 }
-})();
-return `<div class="card pad biblio-card">\n      <p class="sec-t">${esc(L.cat)}</p>\n      <h4 style="font-size:14.5px;line-height:1.4;margin-bottom:7px">${esc(L.title)}</h4>\n      <p style="font-size:12px;color:var(--ink-soft);margin:0 0 3px"><b style="color:var(--ink-mute);font-weight:600">${"kz" === LANG ? "Атластағы рөлі:" : "en" === LANG ? "Role in the atlas:" : "Роль в атласе:"}</b> ${esc(L.role)}</p>\n      ${b.url ? `<p class="hint" style="margin:2px 0 10px">${esc(domain)} · ${esc(t("biblioAccessNote"))}</p>\n      <a class="btn sm" href="${esc(b.url)}" target="_blank" rel="noopener noreferrer">${esc(t("biblioOpen"))}</a>` : `<p class="hint" style="margin:2px 0 10px">${esc(t("biblioPrint"))}</p>`}\n    </div>`;
-}).join(""));
+
+document.addEventListener("click", e => {
+const b = e.target.closest(".bib-copy");
+if (!b) return;
+const entry = BIBLIOGRAPHY.find(x => x.src === b.dataset.src);
+if (!entry) return;
+const tmp = document.createElement("div");
+tmp.innerHTML = apa(entry).html;
+const text = tmp.textContent.replace(/\s+/g, " ").trim(), done = ok => toast(t(ok ? "biblioCopied" : "biblioCopyFail"));
+try {
+navigator.clipboard.writeText(text).then(() => done(!0), () => done(fallbackCopy(text)));
+} catch (err) {
+done(fallbackCopy(text));
+}
+});
+
+function fallbackCopy(text) {
+try {
+const ta = document.createElement("textarea");
+ta.value = text, ta.setAttribute("readonly", ""), ta.style.position = "fixed", ta.style.opacity = "0", document.body.appendChild(ta),
+ta.select();
+const ok = document.execCommand("copy");
+return ta.remove(), ok;
+} catch (e) {
+return !1;
+}
 }
 
 const TS = {
