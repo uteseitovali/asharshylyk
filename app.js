@@ -2601,11 +2601,30 @@ school: null,
 selected: null
 }, zKz = makeZoom("#svgKz", "#gKz", KZ_BBOX, VB.w, VB.h);
 
-function syncKzScale() {
-const k = zKz.state.k, u = zKz.base.s * k, fs = (8 / u).toFixed(3), sw = (2.4 / u).toFixed(3);
-$$("#lLabels text, #lSplit text").forEach(t => {
-t.style.fontSize = fs + "px", t.style.strokeWidth = sw + "px";
+// Labels live inside the zoom group, so their size is set in inner units: px / (zoom scale × base scale × screen px per viewBox unit).
+// Greedy collision pass in screen space: labels with higher data-pri win, the rest get .lbl-hide.
+function fitLabels(z, svgSel, nodes, px, collide = !0) {
+const svg = $(svgSel), m = svg && svg.getScreenCTM(), ppu = m && m.a || 1, scale = z.base.s * z.state.k * ppu, fs = px / scale, sw = .3 * px / scale, kept = [];
+nodes.forEach(n => {
+n.style.fontSize = fs + "px", n.style.strokeWidth = sw + "px";
+}), collide && nodes.map((n, i) => ({
+n: n,
+pri: +(n.dataset.pri || 0) - 1e-6 * i
+})).sort((a, b) => b.pri - a.pri).forEach(({n: n}) => {
+if (n.classList.remove("lbl-hide"), "none" === n.style.display || n.closest(".off")) return;
+const bb = n.getBBox(), sx = v => (z.state.x + z.state.k * (z.base.tx + z.base.s * v)) * ppu, sy = v => (z.state.y + z.state.k * (z.base.ty + z.base.s * v)) * ppu, r = {
+x0: sx(bb.x),
+x1: sx(bb.x + bb.width),
+y0: sy(bb.y),
+y1: sy(bb.y + bb.height)
+};
+kept.some(q => r.x0 < q.x1 + 2 && q.x0 < r.x1 + 2 && r.y0 < q.y1 && q.y0 < r.y1) ? n.classList.add("lbl-hide") : kept.push(r);
 });
+}
+
+function syncKzScale() {
+const u = zKz.base.s * zKz.state.k;
+fitLabels(zKz, "#svgKz", $$("#lLabels text"), 11.5), fitLabels(zKz, "#svgKz", $$("#lSplit text"), 11.5, !1);
 const ms = 1 / u;
 $$("#lCamps g,#lRevolts g").forEach(n => {
 const [x, y] = n.dataset.at.split(",");
@@ -2618,6 +2637,13 @@ return t("1926" === p ? "gridUnitOkrug" : "gridUnitOblast");
 }
 
 zKz.setOnChange(() => syncKzScale());
+
+let _lblResize = null;
+window.addEventListener("resize", () => {
+clearTimeout(_lblResize), _lblResize = setTimeout(() => {
+syncKzScale(), worldMap.ready && syncWScale(), schoolsMap.ready && syncSScale();
+}, 120);
+});
 
 const SHORT_KZ = {
 west_kz: "Западно-Каз.",
@@ -2673,7 +2699,8 @@ tipHide(), openRegion(per, f);
 const t2 = el("text", {
 x: f.c[0].toFixed(2),
 y: f.c[1].toFixed(2),
-class: "lbl"
+class: "lbl",
+"data-pri": ((f.b[2] - f.b[0]) * (f.b[3] - f.b[1])).toFixed(1)
 });
 t2.textContent = shortName(f), lbl.appendChild(t2);
 }), lbl.classList.toggle("off", !S.layers.labels), renderLegend(per, m), renderStats(per, m), 
@@ -3085,8 +3112,8 @@ n.setAttribute("transform", `translate(${x} ${y}) scale(${1 / u})`);
 });
 const hideLbl = "flows" === WS.layer && "world" === WS.scope;
 $$("#wLbl text").forEach(t => {
-t.style.fontSize = 9 / u + "px", t.style.strokeWidth = 2.6 / u + "px", t.style.display = hideLbl && "1" !== t.dataset.keep ? "none" : "";
-});
+t.style.display = hideLbl && "1" !== t.dataset.keep ? "none" : "", "1" === t.dataset.keep && (t.dataset.pri = 1e9);
+}), fitLabels(zW, "#svgW", $$("#wLbl text"), 10.5);
 }
 
 function drawWorldBase() {
@@ -3313,9 +3340,7 @@ zS.setOnChange(() => syncSScale()), $("#sIn").addEventListener("click", () => zS
 
 function syncSScale() {
 const u = zS.base.s * zS.state.k;
-$$("#sLbl text").forEach(t => {
-t.style.fontSize = 8 / u + "px", t.style.strokeWidth = 2.4 / u + "px";
-}), $$("#sMark g").forEach(n => {
+fitLabels(zS, "#svgS", $$("#sLbl text"), 11), $$("#sMark g").forEach(n => {
 const [x, y] = n.dataset.at.split(",");
 n.setAttribute("transform", `translate(${x} ${y}) scale(${1 / u})`);
 });
@@ -3373,7 +3398,8 @@ tipHide(), openRegion("1939", f);
 const t2 = el("text", {
 x: f.c[0].toFixed(2),
 y: f.c[1].toFixed(2),
-class: "lbl"
+class: "lbl",
+"data-pri": ((f.b[2] - f.b[0]) * (f.b[3] - f.b[1])).toFixed(1)
 });
 t2.textContent = shortName(f), lbl.appendChild(t2);
 }), s && "anomaly" === s.metric && CAMPS.forEach(c => {
