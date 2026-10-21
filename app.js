@@ -756,6 +756,8 @@ document.documentElement.lang = "kz" === LANG ? "kk" : LANG, document.title = t(
 const md = document.querySelector('meta[name="description"]');
 md && md.setAttribute("content", t("pageDesc")), document.querySelectorAll("[data-i18n]").forEach(n => {
 n.textContent = t(n.dataset.i18n);
+}), document.querySelectorAll("[data-num]").forEach(n => {
+n.textContent = fmtD(+n.dataset.num, +(n.dataset.dec || 0)) + (n.dataset.suffix || "");
 }), document.querySelectorAll("[data-i18n-title]").forEach(n => {
 n.setAttribute("title", t(n.dataset.i18nTitle));
 }), document.querySelectorAll("[data-i18n-placeholder]").forEach(n => {
@@ -1981,12 +1983,12 @@ KZ[1939].forEach(f => {
 const p = f.p;
 kbRu("Область: " + p.name, `${p.name} (сетка 1939 г.). Казахское население: 1926 г. — ${p.kazakh_1926.toLocaleString("ru")}, 1939 г. — ${p.kazakh_1939.toLocaleString("ru")}. Общее население: 1926 г. — ${p.total_1926.toLocaleString("ru")}, 1939 г. — ${p.total_1939.toLocaleString("ru")}. Потеря казахского населения: ${p.loss_percent} %. ${p.desc}`, "регион"), 
 kbEn("Oblast: " + (p.name_en || p.name), `${p.name_en || p.name} (1939 grid). Kazakh population: 1926 — ${p.kazakh_1926.toLocaleString("en-US")}, 1939 — ${p.kazakh_1939.toLocaleString("en-US")}. Total population: 1926 — ${p.total_1926.toLocaleString("en-US")}, 1939 — ${p.total_1939.toLocaleString("en-US")}. Kazakh population loss: ${p.loss_percent}%. ${p.desc_en || p.desc}`, "region"),
-kbKz("Облыс: " + (p.name_kz || p.name), `${p.name_kz || p.name} (1939 торы). Қазақ халқы: 1926 ж. — ${p.kazakh_1926.toLocaleString("kk")}, 1939 ж. — ${p.kazakh_1939.toLocaleString("kk")}. Жалпы халық: 1926 ж. — ${p.total_1926.toLocaleString("kk")}, 1939 ж. — ${p.total_1939.toLocaleString("kk")}. Қазақ халқының шығыны: ${p.loss_percent} %. ${p.desc_kz || p.desc}`, "аймақ");
+kbKz("Облыс: " + (p.name_kz || p.name), `${p.name_kz || p.name} (1939 торы). Қазақ халқы: 1926 ж. — ${p.kazakh_1926.toLocaleString("ru-RU")}, 1939 ж. — ${p.kazakh_1939.toLocaleString("ru-RU")}. Жалпы халық: 1926 ж. — ${p.total_1926.toLocaleString("ru-RU")}, 1939 ж. — ${p.total_1939.toLocaleString("ru-RU")}. Қазақ халқының шығыны: ${p.loss_percent} %. ${p.desc_kz || p.desc}`, "аймақ");
 }), KZ[1926].forEach(f => {
 const p = f.p;
 kbRu("Округ: " + p.name, `${p.name} (сетка 1926 г.). Всего населения: ${p.population_total.toLocaleString("ru")}. Доля казахов: ${p.kazakh_percent} %. ${p.desc}`, "регион"),
 kbEn("Okrug: " + (p.name_en || p.name), `${p.name_en || p.name} (1926 grid). Total population: ${p.population_total.toLocaleString("en-US")}. Kazakh share: ${p.kazakh_percent}%. ${p.desc_en || p.desc}`, "region"),
-kbKz("Округ: " + (p.name_kz || p.name), `${p.name_kz || p.name} (1926 торы). Жалпы халық: ${p.population_total.toLocaleString("kk")}. Қазақтар үлесі: ${p.kazakh_percent} %. ${p.desc_kz || p.desc}`, "аймақ");
+kbKz("Округ: " + (p.name_kz || p.name), `${p.name_kz || p.name} (1926 торы). Жалпы халық: ${p.population_total.toLocaleString("ru-RU")}. Қазақтар үлесі: ${p.kazakh_percent} %. ${p.desc_kz || p.desc}`, "аймақ");
 }), FLOWS.forEach(fl => {
 kbRu("Направление откочёвки: " + fl.ru.to, `${fl.ru.to} — ${"abroad" === fl.kind ? "зарубежное" : "внутрисоюзное"} направление откочёвок. Оценочный диапазон: ${fl.lo}–${fl.hi} тыс. человек (дискуссионная оценка). ${fl.ru.note}`, "откочёвки"),
 kbEn("Migration destination: " + fl.en.to, `${fl.en.to} — a ${"abroad" === fl.kind ? "foreign" : "within-USSR"} migration destination. Estimated range: ${fl.lo}–${fl.hi} thousand people (a debated estimate). ${fl.en.note}`, "migrations"),
@@ -2140,13 +2142,16 @@ const arr = t < 0 ? DIVERGE.neg : DIVERGE.pos, i = Math.min(arr.length - 1, Math
 return t < 0 ? arr[arr.length - 1 - i] : arr[i];
 }
 
-const fmtN = n => Math.round(n).toLocaleString("kz" === LANG ? "kk-KZ" : "en" === LANG ? "en-US" : "ru-RU"), fmtP = (n, d = 1) => (n > 0 ? "+" : "") + n.toFixed(d), METRICS_DEF = {
+const numLoc = () => "en" === LANG ? "en-US" : "ru-RU", fmtN = n => Math.round(n).toLocaleString(numLoc()), fmtD = (n, d = 1) => Number(n).toLocaleString(numLoc(), {
+minimumFractionDigits: d,
+maximumFractionDigits: d
+}).replace(/^-/, "−"), fmtP = (n, d = 1) => (n > 0 ? "+" : "") + fmtD(n, d), METRICS_DEF = {
 1939: [ {
 id: "loss",
 basis: "c2",
 ramp: "orange",
 get: p => p.loss,
-fmt: v => v.toFixed(1) + " %",
+fmt: v => fmtD(v) + " %",
 ru: {
 label: "Потеря казахского населения",
 unit: "%",
@@ -2188,7 +2193,7 @@ id: "gap",
 basis: "c2",
 ramp: "violet",
 get: p => p.growth + p.kazLoss,
-fmt: v => v.toFixed(0) + ("en" === LANG ? " pp" : " п.п."),
+fmt: v => fmtD(v, 0) + ("en" === LANG ? " pp" : "kz" === LANG ? " п.т." : " п.п."),
 ru: {
 label: "Разрыв: общее и казахское",
 unit: "п.п.",
@@ -2201,7 +2206,7 @@ hint: 'By how many points the total-population trend is "better" than the Kazakh
 },
 kz: {
 label: "Алшақтық: жалпы және қазақ халқы",
-unit: "п.п.",
+unit: "п.т.",
 hint: "Жалпы халық динамикасы қазақ халқы динамикасынан неше пунктке «жақсы». Түсі неғұрлым қою болса, жиынтық сан апатты соғұрлым жасырады."
 }
 }, {
@@ -2209,7 +2214,7 @@ id: "share1939",
 basis: "c39",
 ramp: "blue",
 get: p => p.share1939,
-fmt: v => v.toFixed(1) + " %",
+fmt: v => fmtD(v) + " %",
 ru: {
 label: "Доля казахов в 1939 г.",
 unit: "%",
@@ -2230,7 +2235,7 @@ id: "shareShift",
 basis: "model",
 diverge: 9,
 get: p => p.shareShift,
-fmt: v => fmtP(v, 2) + ("en" === LANG ? " pp" : " п.п."),
+fmt: v => fmtP(v, 2) + ("en" === LANG ? " pp" : "kz" === LANG ? " п.т." : " п.п."),
 ru: {
 label: "MAUP-сдвиг доли",
 unit: "п.п.",
@@ -2243,7 +2248,7 @@ hint: "How much the oblast’s share of the overall 1926 Kazakh distribution cha
 },
 kz: {
 label: "MAUP үлес ығысуы",
-unit: "п.п.",
+unit: "п.т.",
 hint: "Облыстың 1926 ж. қазақтардың жалпы бөлінісіндегі үлесі облыстар торы емес, округтер торы бойынша есептелгенде қаншаға өзгереді. Бұл — MAUP әсері."
 }
 } ],
@@ -2252,7 +2257,7 @@ id: "kazShare",
 basis: "c26",
 ramp: "blue",
 get: p => p.kazShare,
-fmt: v => v.toFixed(1) + " %",
+fmt: v => fmtD(v) + " %",
 ru: {
 label: "Доля казахов",
 unit: "%",
@@ -2755,10 +2760,10 @@ function renderStats(per, m) {
 const box = $("#statsKz");
 if ("1926" === per) {
 const tot = KZ[1926].reduce((s, f) => s + f.p.pop, 0), kaz = KZ[1926].reduce((s, f) => s + f.p.kazAbs, 0);
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("totalPopulation"))}${lvl("census")}</u><b>${fmtN(tot)}</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhsWord"))}${lvl("census")}</u><b>${fmtN(kaz)}</b><s>${(kaz / tot * 100).toFixed(1)} ${esc(t("toKazakhsShare"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}${lvl("hist")}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("totalPopulation"))}${lvl("census")}</u><b>${fmtN(tot)}</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhsWord"))}${lvl("census")}</u><b>${fmtN(kaz)}</b><s>${fmtD(kaz / tot * 100)} ${esc(t("toKazakhsShare"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}${lvl("hist")}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
 } else {
 const k26 = KZ[1939].reduce((s, f) => s + f.p.kazakh_1926, 0), k39 = KZ[1939].reduce((s, f) => s + f.p.kazakh_1939, 0), worst = KZ[1939].slice().sort((a, b) => b.p.loss - a.p.loss)[0], grew = KZ[1939].filter(f => f.p.growth > 0).length;
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLoss"))}${lvl("census")}</u><b style="color:var(--carmine2)">−${((k26 - k39) / k26 * 100).toFixed(1)} %</b><s>${fmtN(k26 - k39)} ${"kz" === LANG ? "адам" : "en" === LANG ? "people" : "человек"}</s></div>\n      <div class="stat"><u>${esc(t("maxLoss"))}${lvl("census")}</u><b style="font-size:15px">${esc(shortName(worst))}</b><s>${worst.p.loss.toFixed(1)} %</s></div>\n      <div class="stat"><u>${esc(t("anomalyGrowth"))}${lvl("census")}</u><b>${grew} ${esc(t("ofOblasts"))}</b><s>${esc(t("grewOverall"))}</s></div>`;
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLoss"))}${lvl("census")}</u><b style="color:var(--carmine2)">−${fmtD((k26 - k39) / k26 * 100)} %</b><s>${fmtN(k26 - k39)} ${"kz" === LANG ? "адам" : "en" === LANG ? "people" : "человек"}</s></div>\n      <div class="stat"><u>${esc(t("maxLoss"))}${lvl("census")}</u><b style="font-size:15px">${esc(shortName(worst))}</b><s>${fmtD(worst.p.loss)} %</s></div>\n      <div class="stat"><u>${esc(t("anomalyGrowth"))}${lvl("census")}</u><b>${grew} ${esc(t("ofOblasts"))}</b><s>${esc(t("grewOverall"))}</s></div>`;
 }
 }
 
@@ -2890,8 +2895,8 @@ S.selected = p.id;
 let html = `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">\n    <div><h3 style="font-size:18px">${esc(pName(p))}</h3>\n    <p style="color:var(--ink-mute);font-size:11.5px;margin:3px 0 0">${esc(t("regionGridLabel"))} ${per} ${esc(t("regionOf"))} · ${esc(pType(p))}</p></div>\n    <button class="btn ico ghost" onclick="drawerClose()">✕</button></div>`;
 if ("1939" === per) {
 const tags = LENS_TAGS[p.id] || {};
-html += `<div style="margin:13px 0">\n      ${tags.nomadic ? `<span class="badge">${esc(t("tagNomadic"))}</span>` : ""}\n      ${tags.gulag ? `<span class="badge">${esc(t("tagGulag"))}</span>` : ""}\n      ${tags.unrest ? `<span class="badge">${esc(t("tagUnrest"))}</span>` : ""}</div>\n    <div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin-bottom:13px">\n      <div style="font-size:42px;font-weight:700;color:var(--carmine2);line-height:1">−${p.loss.toFixed(1)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("lossOfKazPop"))}${lvl("census")}</div>\n    </div>\n    <div class="kv"><span>${esc(t("kazakhs1926"))}${lvl("census")}</span><b>${fmtN(p.kazakh_1926)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhs1939"))}</span><b>${fmtN(p.kazakh_1939)}</b></div>\n    <div class="kv"><span>${esc(t("total1926"))}</span><b>${fmtN(p.total_1926)}</b></div>\n    <div class="kv"><span>${esc(t("total1939"))}</span><b>${fmtN(p.total_1939)}</b></div>\n    <div class="kv"><span>${esc(t("generalPopChange"))}</span><b style="color:${p.growth >= 0 ? "var(--good)" : "var(--carmine2)"}">${fmtP(p.growth)} %</b></div>\n    <div class="kv"><span>${esc(t("kazShareChange"))}</span><b>${p.share1926.toFixed(1)} % → ${p.share1939.toFixed(1)} %</b></div>\n    <div class="kv"><span>${esc(t("maupShift"))}${lvl("model")}</span><b>${fmtP(p.shareShift, 2)} ${"kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п."}</b></div>`;
-} else html += `<div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin:13px 0">\n      <div style="font-size:42px;font-weight:700;color:var(--s26);line-height:1">${p.kazShare.toFixed(1)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("shareKazPop"))}${lvl("census")}</div>\n    </div>\n    <div class="kv"><span>${esc(t("totalPop"))}${lvl("census")}</span><b>${fmtN(p.pop)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhPop"))}</span><b>${fmtN(p.kazAbs)}</b></div>\n    <div class="kv"><span>${esc(t("otherPop"))}</span><b>${fmtN(p.pop - p.kazAbs)}</b></div>`;
+html += `<div style="margin:13px 0">\n      ${tags.nomadic ? `<span class="badge">${esc(t("tagNomadic"))}</span>` : ""}\n      ${tags.gulag ? `<span class="badge">${esc(t("tagGulag"))}</span>` : ""}\n      ${tags.unrest ? `<span class="badge">${esc(t("tagUnrest"))}</span>` : ""}</div>\n    <div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin-bottom:13px">\n      <div style="font-size:42px;font-weight:700;color:var(--carmine2);line-height:1">−${fmtD(p.loss)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("lossOfKazPop"))}${lvl("census")}</div>\n    </div>\n    <div class="kv"><span>${esc(t("kazakhs1926"))}${lvl("census")}</span><b>${fmtN(p.kazakh_1926)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhs1939"))}</span><b>${fmtN(p.kazakh_1939)}</b></div>\n    <div class="kv"><span>${esc(t("total1926"))}</span><b>${fmtN(p.total_1926)}</b></div>\n    <div class="kv"><span>${esc(t("total1939"))}</span><b>${fmtN(p.total_1939)}</b></div>\n    <div class="kv"><span>${esc(t("generalPopChange"))}</span><b style="color:${p.growth >= 0 ? "var(--good)" : "var(--carmine2)"}">${fmtP(p.growth)} %</b></div>\n    <div class="kv"><span>${esc(t("kazShareChange"))}</span><b>${fmtD(p.share1926)} % → ${fmtD(p.share1939)} %</b></div>\n    <div class="kv"><span>${esc(t("maupShift"))}${lvl("model")}</span><b>${fmtP(p.shareShift, 2)} ${"kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п."}</b></div>`;
+} else html += `<div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin:13px 0">\n      <div style="font-size:42px;font-weight:700;color:var(--s26);line-height:1">${fmtD(p.kazShare)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("shareKazPop"))}${lvl("census")}</div>\n    </div>\n    <div class="kv"><span>${esc(t("totalPop"))}${lvl("census")}</span><b>${fmtN(p.pop)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhPop"))}</span><b>${fmtN(p.kazAbs)}</b></div>\n    <div class="kv"><span>${esc(t("otherPop"))}</span><b>${fmtN(p.pop - p.kazAbs)}</b></div>`;
 if (html += `<div style="margin:15px 0 0"><canvas id="rChart" height="150"></canvas></div>\n    <p class="prose" style="margin-top:13px">${esc(pDesc(p))}</p>`, 
 "1939" === per) {
 const parts = MAUP.m.map((row, i) => ({
@@ -2901,7 +2906,7 @@ v: row[p.idx]
 parts.length && (html += `<p class="sec-t" style="margin-top:17px">${esc(t("formedFrom"))}${lvl("model")}</p>`, 
 parts.forEach(o => {
 const src = KZ[1926][o.i];
-html += `<div class="kv"><span>${esc(pName(src.p))}</span><b>${(o.v / MAUP.a39[p.idx] * 100).toFixed(1)} ${esc(t("ofArea"))}</b></div>`;
+html += `<div class="kv"><span>${esc(pName(src.p))}</span><b>${fmtD(o.v / MAUP.a39[p.idx] * 100)} ${esc(t("ofArea"))}</b></div>`;
 }), html += `<p class="note" style="margin-top:10px">${esc(tf("maupNote", {
 a: fmtN(p.interpKaz),
 b: fmtN(p.kazakh_1926),
@@ -2967,6 +2972,7 @@ borderRadius: 4
 }))
 },
 options: {
+locale: numLoc(),
 responsive: !0,
 maintainAspectRatio: !1,
 plugins: {
@@ -3015,7 +3021,7 @@ rChart && (rChart.destroy(), rChart = null);
 function printRegion(per, id) {
 const f = KZ[per].find(x => x.p.id === id);
 if (!f) return;
-const p = f.p, rows = "1939" === per ? [ [ t("kazakhs1926"), fmtN(p.kazakh_1926) ], [ t("kazakhs1939"), fmtN(p.kazakh_1939) ], [ t("total1926"), fmtN(p.total_1926) ], [ t("total1939"), fmtN(p.total_1939) ], [ t("kazakhLoss"), p.loss.toFixed(1) + " %" ], [ t("generalPopChange"), fmtP(p.growth) + " %" ], [ t("maupShift"), fmtP(p.shareShift, 2) + " " + ("kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п.") ] ] : [ [ t("totalPop"), fmtN(p.pop) ], [ t("kazakhPop"), fmtN(p.kazAbs) ], [ t("shareKazPop").replace(/^./, c => c.toUpperCase()), p.kazShare.toFixed(1) + " %" ] ], locale = "kz" === LANG ? "kk-KZ" : "en" === LANG ? "en-US" : "ru-RU";
+const p = f.p, rows = "1939" === per ? [ [ t("kazakhs1926"), fmtN(p.kazakh_1926) ], [ t("kazakhs1939"), fmtN(p.kazakh_1939) ], [ t("total1926"), fmtN(p.total_1926) ], [ t("total1939"), fmtN(p.total_1939) ], [ t("kazakhLoss"), fmtD(p.loss) + " %" ], [ t("generalPopChange"), fmtP(p.growth) + " %" ], [ t("maupShift"), fmtP(p.shareShift, 2) + " " + ("kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п.") ] ] : [ [ t("totalPop"), fmtN(p.pop) ], [ t("kazakhPop"), fmtN(p.kazAbs) ], [ t("shareKazPop").replace(/^./, c => c.toUpperCase()), fmtD(p.kazShare) + " %" ] ], locale = "kz" === LANG ? "kk-KZ" : "en" === LANG ? "en-US" : "ru-RU";
 $("#print").innerHTML = `<h1>${esc(pName(p))}</h1>\n    <div class="m">${t("brandTitle")} · Asharshylyk 1930–1933 · ${esc(t("regionGridLabel"))} ${per} ${esc(t("regionOf"))}</div>\n    <table>${rows.map(r => `<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join("")}</table>\n    <p style="margin-top:14px">${esc(pDesc(p))}</p>\n    <div class="f">${esc(t("disclaimer1939"))} ${t("printGenerated")} ${(new Date).toLocaleDateString(locale)}.</div>`, 
 window.print();
 }
@@ -3394,7 +3400,7 @@ if (s) {
 const L = tr(s), keys = lensKeys(s.metric);
 d.innerHTML = `<p class="sec-t" style="color:${s.color}">${esc(L.name)}</p>\n      <p class="prose" style="margin:0 0 11px">${esc(L.detail)}</p>\n      <p class="sec-t">${esc(t("focusRegions"))}</p>\n      ${keys.map(k => {
 const f = KZ[1939].find(x => x.p.id === k);
-return `<div class="kv"><span>${esc(pName(f.p))}</span><b>−${f.p.loss.toFixed(1)} %</b></div>`;
+return `<div class="kv"><span>${esc(pName(f.p))}</span><b>−${fmtD(f.p.loss)} %</b></div>`;
 }).join("")}\n      <button class="btn sm" style="margin-top:12px;width:100%;justify-content:center"\n        onclick="askAbout('${esc(L.name).replace(/'/g, "")}')">${esc(t("askAssistantSchool"))}</button>`;
 } else d.innerHTML = `<p class="sec-t">${esc(t("chooseSchool"))}</p><p class="hint">${esc(t("chooseSchoolHint"))}</p>`;
 renderSchoolMap();
@@ -3631,7 +3637,7 @@ f: fmtN
 k: "kazShare",
 t: metricDef("1926", "kazShare").label,
 get: p => p.kazShare,
-f: v => v.toFixed(1) + " %"
+f: v => fmtD(v) + " %"
 } ] : [ {
 k: "name",
 t: "kz" === LANG ? "Облыс" : "en" === LANG ? "Oblast" : "Область",
@@ -3651,7 +3657,7 @@ f: fmtN
 k: "loss",
 t: t("kazakhLoss"),
 get: p => p.loss,
-f: v => "−" + v.toFixed(1) + " %",
+f: v => "−" + fmtD(v) + " %",
 cls: () => "neg"
 }, {
 k: "growth",
@@ -3805,7 +3811,7 @@ KZ[1939].forEach((f, i) => tgt.appendChild(new Option(pName(f.p), i))), "" !== c
 
 function calcMaup() {
 const i = +$("#mSrc").value, j = +$("#mTgt").value, a = KZ[1926][i], b = KZ[1939][j], inter = MAUP.m[i][j], areaSrc = MAUP.a26[i], w = inter / areaSrc, pop = a.p.kazAbs, frag = pop * w, out = $("#mOut"), sqDeg = "kz" === LANG ? "шаршы °" : "en" === LANG ? "sq.°" : "кв.°";
-out.innerHTML = inter <= 1e-4 ? "kz" === LANG ? `<p class="note">«${esc(pName(a.p))}» мен «${esc(pName(b.p))}» қиылыспайды: округ бұл облысқа халық қоспаған. Басқа жұпты таңдаңыз — аймақ карточкасында облыс қай округтерден құралғаны көрсетілген.</p>` : "en" === LANG ? `<p class="note">“${esc(pName(a.p))}” and “${esc(pName(b.p))}” do not intersect: the okrug contributed no population to this oblast. Choose another pair — the region card shows which okrugs formed each oblast.</p>` : `<p class="note">«${esc(pName(a.p))}» и «${esc(pName(b.p))}» не пересекаются: округ не внёс населения в эту область. Выберите другую пару — в карточке области указано, из каких округов она сложилась.</p>` : `\n    <div class="kv"><span>${"kz" === LANG ? "1926 ж. округ аумағы" : "en" === LANG ? "1926 okrug area" : "Площадь округа 1926"}</span><b>${areaSrc.toFixed(2)} ${sqDeg}</b></div>\n    <div class="kv"><span>${"kz" === LANG ? "Қиылысу аумағы" : "en" === LANG ? "Intersection area" : "Площадь пересечения"}</span><b>${inter.toFixed(2)} ${sqDeg}</b></div>\n    <div class="kv"><span>${"kz" === LANG ? "Салмақ коэффициенті" : "en" === LANG ? "Weight coefficient" : "Весовой коэффициент"}</span><b>${(100 * w).toFixed(1)} %</b></div>\n    <div class="kv"><span>${"kz" === LANG ? "1926 ж. округтегі қазақтар" : "en" === LANG ? "Kazakhs in the 1926 okrug" : "Казахи в округе 1926"}</span><b>${fmtN(pop)}</b></div>\n    <div style="margin-top:11px;padding:12px;background:var(--panel2);border-radius:9px;text-align:center">\n      <div style="font-size:10.5px;color:var(--ink-mute);letter-spacing:.05em">P<sub>${"kz" === LANG ? "фрагмент" : "en" === LANG ? "fragment" : "фрагмент"}</sub> = P<sub>1926</sub> × (S<sub>${"kz" === LANG ? "қиыл." : "en" === LANG ? "inter." : "пересеч."}</sub> ÷ S<sub>${"kz" === LANG ? "округ" : "en" === LANG ? "okrug" : "округа"}</sub>)</div>\n      <div style="font-size:12px;color:var(--ink-soft);margin:6px 0">${fmtN(pop)} × ${w.toFixed(4)} =</div>\n      <div style="font-size:27px;font-weight:700;color:var(--gold2);line-height:1.1">${fmtN(frag)}</div>\n      <div style="font-size:10.8px;color:var(--ink-mute);margin-top:3px">${"kz" === LANG ? "қазақтар «" + pName(b.p) + "» облысына ауыстырылады" : "en" === LANG ? "Kazakhs allocated to “" + pName(b.p) + "”" : "казахов переносится в «" + pName(b.p) + "»"}</div>\n    </div>\n    <p class="note" style="margin-top:11px">${"kz" === LANG ? "Допущение: округ ішінде халық тығыздығы бірдей деп есептеледі. Көшпелі халық үшін бұл жеңілдету, және қателіктің бір бөлігі дәл осыдан туындайды. Барлық 96 жұп бойынша қосындыланғанда, бұл процедура үлестірімді 42,46 пайыздық тармаққа ауыстырады." : "en" === LANG ? "The assumption is uniform population density within the okrug. For a nomadic population this is a simplification, and part of the error comes from exactly this. Summed over all 96 pairs, this procedure shifts the distribution by 42.46 percentage points." : "Допущение — равномерная плотность населения внутри округа. Для кочевого населения это упрощение, и часть погрешности берётся именно отсюда. Суммарно по всем 96 парам эта процедура даёт сдвиг распределения на 42,46 п.п."}</p>`;
+out.innerHTML = inter <= 1e-4 ? "kz" === LANG ? `<p class="note">«${esc(pName(a.p))}» мен «${esc(pName(b.p))}» қиылыспайды: округ бұл облысқа халық қоспаған. Басқа жұпты таңдаңыз — аймақ карточкасында облыс қай округтерден құралғаны көрсетілген.</p>` : "en" === LANG ? `<p class="note">“${esc(pName(a.p))}” and “${esc(pName(b.p))}” do not intersect: the okrug contributed no population to this oblast. Choose another pair — the region card shows which okrugs formed each oblast.</p>` : `<p class="note">«${esc(pName(a.p))}» и «${esc(pName(b.p))}» не пересекаются: округ не внёс населения в эту область. Выберите другую пару — в карточке области указано, из каких округов она сложилась.</p>` : `\n    <div class="kv"><span>${"kz" === LANG ? "1926 ж. округ аумағы" : "en" === LANG ? "1926 okrug area" : "Площадь округа 1926"}</span><b>${fmtD(areaSrc, 2)} ${sqDeg}</b></div>\n    <div class="kv"><span>${"kz" === LANG ? "Қиылысу аумағы" : "en" === LANG ? "Intersection area" : "Площадь пересечения"}</span><b>${fmtD(inter, 2)} ${sqDeg}</b></div>\n    <div class="kv"><span>${"kz" === LANG ? "Салмақ коэффициенті" : "en" === LANG ? "Weight coefficient" : "Весовой коэффициент"}</span><b>${fmtD(100 * w)} %</b></div>\n    <div class="kv"><span>${"kz" === LANG ? "1926 ж. округтегі қазақтар" : "en" === LANG ? "Kazakhs in the 1926 okrug" : "Казахи в округе 1926"}</span><b>${fmtN(pop)}</b></div>\n    <div style="margin-top:11px;padding:12px;background:var(--panel2);border-radius:9px;text-align:center">\n      <div style="font-size:10.5px;color:var(--ink-mute);letter-spacing:.05em">P<sub>${"kz" === LANG ? "фрагмент" : "en" === LANG ? "fragment" : "фрагмент"}</sub> = P<sub>1926</sub> × (S<sub>${"kz" === LANG ? "қиыл." : "en" === LANG ? "inter." : "пересеч."}</sub> ÷ S<sub>${"kz" === LANG ? "округ" : "en" === LANG ? "okrug" : "округа"}</sub>)</div>\n      <div style="font-size:12px;color:var(--ink-soft);margin:6px 0">${fmtN(pop)} × ${fmtD(w, 4)} =</div>\n      <div style="font-size:27px;font-weight:700;color:var(--gold2);line-height:1.1">${fmtN(frag)}</div>\n      <div style="font-size:10.8px;color:var(--ink-mute);margin-top:3px">${"kz" === LANG ? "қазақтар «" + pName(b.p) + "» облысына ауыстырылады" : "en" === LANG ? "Kazakhs allocated to “" + pName(b.p) + "”" : "казахов переносится в «" + pName(b.p) + "»"}</div>\n    </div>\n    <p class="note" style="margin-top:11px">${"kz" === LANG ? "Болжам: округ ішінде халық тығыздығы бірдей деп есептеледі. Көшпелі халық үшін бұл жеңілдету, және қателіктің бір бөлігі дәл осыдан туындайды. Барлық 96 жұп бойынша қосындыланғанда, бұл процедура үлестірімді 42,46 пайыздық тармаққа ауыстырады." : "en" === LANG ? "The assumption is uniform population density within the okrug. For a nomadic population this is a simplification, and part of the error comes from exactly this. Summed over all 96 pairs, this procedure shifts the distribution by 42.46 percentage points." : "Допущение — равномерная плотность населения внутри округа. Для кочевого населения это упрощение, и часть погрешности берётся именно отсюда. Суммарно по всем 96 парам эта процедура даёт сдвиг распределения на 42,46 п.п."}</p>`;
 }
 
 $("#segTable").addEventListener("click", e => {
