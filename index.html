@@ -130,6 +130,7 @@ section.view{display:none;animation:fade .28s ease}
 section.view.on{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .split{display:grid;grid-template-columns:284px 1fr;gap:16px;align-items:start}
+.split>*{min-width:0}
 @media(max-width:1080px){.split{grid-template-columns:1fr}.split>aside.side{order:2}.split>div{order:1}}
 
 .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
@@ -188,11 +189,12 @@ section.view.on{display:block}
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:9px 13px;
   border-top:1px solid var(--line);background:var(--panel2);font-size:11.5px;
 }
-.legend{display:flex;align-items:center;gap:0}
+.legend{display:flex;align-items:center;gap:0;flex-wrap:wrap;min-width:0;row-gap:4px}
 .legend i{width:26px;height:11px;display:block}
 .legend i:first-of-type{border-radius:3px 0 0 3px}
 .legend i:last-of-type{border-radius:0 3px 3px 0}
 .legend b{font-weight:500;color:var(--ink-mute);margin:0 7px;font-size:11px;white-space:nowrap}
+.legend b:last-child{white-space:normal}
 .zoomer{display:flex;gap:4px;margin-left:auto}
 .maptitle{padding:9px 13px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);background:var(--panel2)}
 .maptitle b{color:var(--ink);font-weight:600}
@@ -752,7 +754,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
-<script src="/data.js?v=16"></script>
-<script src="/app.js?v=16"></script>
+<script src="/data.js?v=17"></script>
+<script src="/app.js?v=17"></script>
 </body>
 </html>
