@@ -40,6 +40,14 @@ zoomOutTitle: "Отдалить",
 zoomReset: "Сброс",
 mapWheelHint: "Ctrl (⌘) + колесо — масштаб карты",
 mapTouchHint: "Двумя пальцами — двигать карту",
+mapBasis_c26: "перепись 1926 г.",
+mapBasis_c39: "перепись 1939 г.",
+mapBasis_c2: "переписи 1926 и 1939 гг.",
+mapBasis_model: "модель: площадная интерполяция",
+mapUnits1926: "8 единиц",
+mapUnits1939: "12 единиц",
+mapSrcData: "Данные: рабочий набор атласа по переписям 1926 и 1939 гг., сверка с опубликованными итогами ведётся. Границы: реконструкция на геометрии geoBoundaries.",
+mapSrcModel: "Расчёт: площадная интерполяция по 96 пересечениям сеток 1926 и 1939 гг. Границы: реконструкция на геометрии geoBoundaries.",
 sidelblL: "1926 · округа",
 sidelblR: "1939 · области",
 ariaMapKz: "Карта Казахстана",
@@ -265,6 +273,14 @@ zoomOutTitle: "Zoom out",
 zoomReset: "Reset",
 mapWheelHint: "Ctrl (⌘) + scroll to zoom the map",
 mapTouchHint: "Use two fingers to move the map",
+mapBasis_c26: "1926 census",
+mapBasis_c39: "1939 census",
+mapBasis_c2: "1926 and 1939 censuses",
+mapBasis_model: "model: areal interpolation",
+mapUnits1926: "8 units",
+mapUnits1939: "12 units",
+mapSrcData: "Data: the atlas’s working dataset based on the 1926 and 1939 censuses; cross-checking against the published results is in progress. Boundaries: reconstruction on geoBoundaries geometry.",
+mapSrcModel: "Calculation: areal interpolation over 96 intersections of the 1926 and 1939 grids. Boundaries: reconstruction on geoBoundaries geometry.",
 sidelblL: "1926 · okrugs",
 sidelblR: "1939 · oblasts",
 ariaMapKz: "Map of Kazakhstan",
@@ -490,6 +506,14 @@ zoomOutTitle: "Алыстату",
 zoomReset: "Бастапқы қалып",
 mapWheelHint: "Ctrl (⌘) + дөңгелек — картаны масштабтау",
 mapTouchHint: "Картаны екі саусақпен жылжытыңыз",
+mapBasis_c26: "1926 ж. санақ",
+mapBasis_c39: "1939 ж. санақ",
+mapBasis_c2: "1926 және 1939 жж. санақтар",
+mapBasis_model: "модель: ареалдық интерполяция",
+mapUnits1926: "8 бірлік",
+mapUnits1939: "12 бірлік",
+mapSrcData: "Деректер: 1926 және 1939 жж. санақтар бойынша атластың жұмыс деректер жиынтығы, жарияланған қорытындылармен салыстыру жүргізілуде. Шекаралар: geoBoundaries геометриясына негізделген реконструкция.",
+mapSrcModel: "Есептеу: 1926 және 1939 жж. торларының 96 қиылысуы бойынша ареалдық интерполяция. Шекаралар: geoBoundaries геометриясына негізделген реконструкция.",
 sidelblL: "1926 · округтер",
 sidelblR: "1939 · облыстар",
 ariaMapKz: "Қазақстан картасы",
@@ -2101,6 +2125,7 @@ return t < 0 ? arr[arr.length - 1 - i] : arr[i];
 const fmtN = n => Math.round(n).toLocaleString("kz" === LANG ? "kk-KZ" : "en" === LANG ? "en-US" : "ru-RU"), fmtP = (n, d = 1) => (n > 0 ? "+" : "") + n.toFixed(d), METRICS_DEF = {
 1939: [ {
 id: "loss",
+basis: "c2",
 ramp: "orange",
 get: p => p.loss,
 fmt: v => v.toFixed(1) + " %",
@@ -2121,6 +2146,7 @@ hint: "1926 және 1939 жылдардағы санақтар арасында
 }
 }, {
 id: "growth",
+basis: "c2",
 diverge: 30,
 get: p => p.growth,
 fmt: v => fmtP(v) + " %",
@@ -2141,6 +2167,7 @@ hint: "Қызыл — облыстың жалпы халқы азайды, кө�
 }
 }, {
 id: "gap",
+basis: "c2",
 ramp: "violet",
 get: p => p.growth + p.kazLoss,
 fmt: v => v.toFixed(0) + ("en" === LANG ? " pp" : " п.п."),
@@ -2161,6 +2188,7 @@ hint: "Жалпы халық динамикасы қазақ халқы дина
 }
 }, {
 id: "share1939",
+basis: "c39",
 ramp: "blue",
 get: p => p.share1939,
 fmt: v => v.toFixed(1) + " %",
@@ -2181,6 +2209,7 @@ hint: "1939 жылғы санақ бойынша облыс халқындағы
 }
 }, {
 id: "shareShift",
+basis: "model",
 diverge: 9,
 get: p => p.shareShift,
 fmt: v => fmtP(v, 2) + ("en" === LANG ? " pp" : " п.п."),
@@ -2202,6 +2231,7 @@ hint: "Облыстың 1926 ж. қазақтардың жалпы бөліні�
 } ],
 1926: [ {
 id: "kazShare",
+basis: "c26",
 ramp: "blue",
 get: p => p.kazShare,
 fmt: v => v.toFixed(1) + " %",
@@ -2222,6 +2252,7 @@ hint: "1926 жылғы санақ бойынша округ халқындағы
 }
 }, {
 id: "kazAbs",
+basis: "c26",
 ramp: "blue",
 get: p => p.kazAbs,
 fmt: v => fmtN(v),
@@ -2242,6 +2273,7 @@ hint: "1926 жылғы санақ бойынша округтегі қазақт
 }
 }, {
 id: "pop",
+basis: "c26",
 ramp: "blue",
 get: p => p.pop,
 fmt: v => fmtN(v),
@@ -2659,7 +2691,9 @@ const vals = KZ[per].map(f => m.get(f.p));
 quantileBreaks(vals, RAMPS[m.ramp].length), add(`<b>${m.fmt(Math.min(...vals))}</b>`), 
 RAMPS[m.ramp].forEach(c => add(`<i style="background:${c}"></i>`)), add(`<b>${m.fmt(Math.max(...vals))}</b>`);
 }
-add(`<b style="margin-left:12px;color:var(--ink-soft)">${esc(m.label)}</b>`);
+add(`<b style="margin-left:12px;color:var(--ink-soft)">${esc(m.label)}, ${esc(m.unit)}</b>`);
+const ti = $("#kzTitle"), sr = $("#kzSrc");
+ti && (ti.innerHTML = `<b>${esc(m.label)}</b> · ${esc(t("mapBasis_" + m.basis))} · ${esc(t("mapUnits" + per))}`), sr && (sr.textContent = t("model" === m.basis ? "mapSrcModel" : "mapSrcData"));
 }
 
 function renderStats(per, m) {
