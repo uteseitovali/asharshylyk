@@ -2342,7 +2342,13 @@ return kids.forEach(c => n.appendChild(c)), n;
 let toastT, currentView = "kz";
 
 function showView(v) {
-currentView = v, $$(".tab").forEach(t => t.classList.toggle("on", t.dataset.v === v)), 
+currentView = v, $$(".tab").forEach(t => t.classList.toggle("on", t.dataset.v === v)), (() => {
+const a = $(".tab.on"), nav = $("#tabs");
+a && nav && nav.scrollWidth > nav.clientWidth && nav.scrollTo({
+left: a.offsetLeft - nav.offsetLeft - (nav.clientWidth - a.offsetWidth) / 2,
+behavior: "smooth"
+});
+})(), 
 $$("section.view").forEach(s => s.classList.toggle("on", s.id === "v-" + v)), window.scrollTo({
 top: 0,
 behavior: "smooth"
@@ -2622,7 +2628,9 @@ selected: null
 // Labels live inside the zoom group, so their size is set in inner units: px / (zoom scale × base scale × screen px per viewBox unit).
 // Greedy collision pass in screen space: labels with higher data-pri win, the rest get .lbl-hide.
 function fitLabels(z, svgSel, nodes, px, collide = !0) {
-const svg = $(svgSel), m = svg && svg.getScreenCTM(), ppu = m && m.a || 1, scale = z.base.s * z.state.k * ppu, fs = px / scale, sw = .3 * px / scale, kept = [];
+const svg = $(svgSel), m = svg && svg.getScreenCTM();
+if (!m || !m.a) return;
+const ppu = m.a, scale = z.base.s * z.state.k * ppu, fs = px / scale, sw = .3 * px / scale, kept = [];
 nodes.forEach(n => {
 n.style.fontSize = fs + "px", n.style.strokeWidth = sw + "px";
 }), collide && nodes.map((n, i) => ({
@@ -2656,11 +2664,10 @@ return t("1926" === p ? "gridUnitOkrug" : "gridUnitOblast");
 
 zKz.setOnChange(() => syncKzScale());
 
-let _lblResize = null;
-window.addEventListener("resize", () => {
-clearTimeout(_lblResize), _lblResize = setTimeout(() => {
-syncKzScale(), worldMap.ready && syncWScale(), schoolsMap.ready && syncSScale();
-}, 120);
+// Refit labels whenever a map changes size: window resize, or a hidden tab becoming visible.
+"function" == typeof ResizeObserver && [ [ "#svgKz", () => syncKzScale() ], [ "#svgW", () => worldMap.ready && syncWScale() ], [ "#svgS", () => schoolsMap.ready && syncSScale() ] ].forEach(([sel, f]) => {
+const n = $(sel);
+n && new ResizeObserver(() => n.getBoundingClientRect().width > 0 && f()).observe(n);
 });
 
 const SHORT_KZ = {

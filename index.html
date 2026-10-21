@@ -78,6 +78,21 @@ nav.tabs{display:flex;gap:3px;flex-wrap:wrap;margin-left:auto}
 .tab.on{background:var(--panel2);border-color:var(--line2);color:var(--ink);font-weight:600}
 .tab.on::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold2);margin-right:7px;vertical-align:middle}
 .hdr-act{display:flex;gap:6px;margin-left:auto}
+@media(max-width:900px){
+  .hdr-in{gap:8px 10px;padding:8px 14px}
+  .brand{flex:1 1 0}
+  .brand>div:last-child{min-width:0}
+  .brand b,.brand span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hdr-act{order:2}
+  nav.tabs{order:3;flex:1 0 100%;flex-wrap:nowrap;overflow-x:auto;margin:0 -14px;padding:0 14px 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding:0 14px}
+  nav.tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;padding:7px 11px}
+}
+@media(max-width:480px){
+  .brand span{display:none}
+  .seal{width:32px;height:32px;font-size:16px}
+  .hdr-act .btn.ico{padding-left:9px;padding-right:9px}
+}
 .langwrap{position:relative}
 .langmenu{
   position:absolute;top:calc(100% + 6px);right:0;z-index:60;min-width:132px;
@@ -737,7 +752,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
-<script src="/data.js?v=11"></script>
-<script src="/app.js?v=11"></script>
+<script src="/data.js?v=13"></script>
+<script src="/app.js?v=13"></script>
 </body>
 </html>
