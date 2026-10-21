@@ -39,6 +39,7 @@ zoomInTitle: "Приблизить",
 zoomOutTitle: "Отдалить",
 zoomReset: "Сброс",
 mapWheelHint: "Ctrl (⌘) + колесо — масштаб карты",
+mapTouchHint: "Двумя пальцами — двигать карту",
 sidelblL: "1926 · округа",
 sidelblR: "1939 · области",
 ariaMapKz: "Карта Казахстана",
@@ -263,6 +264,7 @@ zoomInTitle: "Zoom in",
 zoomOutTitle: "Zoom out",
 zoomReset: "Reset",
 mapWheelHint: "Ctrl (⌘) + scroll to zoom the map",
+mapTouchHint: "Use two fingers to move the map",
 sidelblL: "1926 · okrugs",
 sidelblR: "1939 · oblasts",
 ariaMapKz: "Map of Kazakhstan",
@@ -487,6 +489,7 @@ zoomInTitle: "Жақындату",
 zoomOutTitle: "Алыстату",
 zoomReset: "Бастапқы қалып",
 mapWheelHint: "Ctrl (⌘) + дөңгелек — картаны масштабтау",
+mapTouchHint: "Картаны екі саусақпен жылжытыңыз",
 sidelblL: "1926 · округтер",
 sidelblR: "1939 · облыстар",
 ariaMapKz: "Қазақстан картасы",
@@ -2408,12 +2411,12 @@ apply(anim);
 let armed = !1, hintTimer = null;
 const hint = document.createElement("div");
 hint.className = "maphint", hint.setAttribute("aria-hidden", "true"), svg.parentNode.appendChild(hint);
-const showHint = () => {
-hint.textContent = t("mapWheelHint"), hint.classList.add("on"), clearTimeout(hintTimer),
+const showHint = (key = "mapWheelHint") => {
+hint.textContent = t(key), hint.classList.add("on"), clearTimeout(hintTimer),
 hintTimer = setTimeout(() => hint.classList.remove("on"), 1200);
 };
 svg.addEventListener("wheel", e => {
-if (!(e.ctrlKey || e.metaKey || armed)) return void showHint();
+if (!(e.ctrlKey || e.metaKey || armed)) return void showHint("mapWheelHint");
 e.preventDefault();
 const dy = e.deltaY * (1 === e.deltaMode ? 16 : 2 === e.deltaMode ? vbH : 1), [px, py] = toVb(e.clientX, e.clientY);
 zoomAt(st.k * Math.max(.5, Math.min(2, Math.exp(-dy * .002))), px, py);
@@ -2424,23 +2427,12 @@ passive: !1
 }), document.addEventListener("pointerdown", e => {
 svg.contains(e.target) || (armed = !1);
 });
-// Drag (one pointer, after a 4 px threshold) and pinch (two touch pointers).
-const pts = new Map;
-let drag = null, pinch = null, moved = !1;
-const startPinch = () => {
-const [a, b] = [ ...pts.values() ], [mx, my] = toVb((a.x + b.x) / 2, (a.y + b.y) / 2);
-pinch = {
-d: Math.hypot(a.x - b.x, a.y - b.y) || 1,
-k: st.k,
-cx: (mx - st.x) / st.k,
-cy: (my - st.y) / st.k
-}, drag = null, moved = !0;
-};
+// Mouse/pen: drag after a 4 px threshold. Touch: one finger scrolls the page (touch-action: pan-x pan-y),
+// two fingers pan and pinch-zoom the map, like web maps do.
+let drag = null, pinch = null, moved = !1, swipe = null;
 svg.addEventListener("pointerdown", e => {
-armed = !0, "mouse" === e.pointerType && 0 !== e.button || (pts.set(e.pointerId, {
-x: e.clientX,
-y: e.clientY
-}), moved = !1, 2 === pts.size ? startPinch() : 1 === pts.size && (drag = {
+armed = !0, "touch" === e.pointerType || "mouse" === e.pointerType && 0 !== e.button || (moved = !1,
+drag = {
 id: e.pointerId,
 cx: e.clientX,
 cy: e.clientY,
@@ -2448,16 +2440,8 @@ p: toVb(e.clientX, e.clientY),
 sx: st.x,
 sy: st.y,
 on: !1
-}));
+});
 }), svg.addEventListener("pointermove", e => {
-if (!pts.has(e.pointerId)) return;
-if (pts.set(e.pointerId, {
-x: e.clientX,
-y: e.clientY
-}), pinch && 2 === pts.size) {
-const [a, b] = [ ...pts.values() ], [mx, my] = toVb((a.x + b.x) / 2, (a.y + b.y) / 2), k = Math.max(K_MIN, Math.min(K_MAX, pinch.k * Math.hypot(a.x - b.x, a.y - b.y) / pinch.d));
-return st.k = k, st.x = mx - pinch.cx * k, st.y = my - pinch.cy * k, void apply();
-}
 if (!drag || drag.id !== e.pointerId) return;
 if (!drag.on) {
 if (Math.hypot(e.clientX - drag.cx, e.clientY - drag.cy) < DRAG_PX) return;
@@ -2467,10 +2451,42 @@ const [px, py] = toVb(e.clientX, e.clientY);
 st.x = drag.sx + px - drag.p[0], st.y = drag.sy + py - drag.p[1], apply();
 });
 const up = e => {
-pts.delete(e.pointerId), pts.size < 2 && (pinch = null), drag && drag.id === e.pointerId && (drag = null),
-svg.style.cursor = "";
+drag && drag.id === e.pointerId && (drag = null), svg.style.cursor = "";
 };
-svg.addEventListener("pointerup", up), svg.addEventListener("pointercancel", up),
+svg.addEventListener("pointerup", up), svg.addEventListener("pointercancel", up);
+const mid = tl => toVb((tl[0].clientX + tl[1].clientX) / 2, (tl[0].clientY + tl[1].clientY) / 2), dist = tl => Math.hypot(tl[0].clientX - tl[1].clientX, tl[0].clientY - tl[1].clientY) || 1;
+svg.addEventListener("touchstart", e => {
+if (e.touches.length >= 2) {
+e.preventDefault();
+const [mx, my] = mid(e.touches);
+pinch = {
+d: dist(e.touches),
+k: st.k,
+cx: (mx - st.x) / st.k,
+cy: (my - st.y) / st.k
+}, moved = !0, swipe = null;
+} else pinch || (moved = !1, swipe = {
+x: e.touches[0].clientX,
+y: e.touches[0].clientY,
+shown: !1
+});
+}, {
+passive: !1
+}), svg.addEventListener("touchmove", e => {
+if (pinch && e.touches.length >= 2) {
+e.preventDefault();
+const [mx, my] = mid(e.touches), k = Math.max(K_MIN, Math.min(K_MAX, pinch.k * dist(e.touches) / pinch.d));
+return st.k = k, st.x = mx - pinch.cx * k, st.y = my - pinch.cy * k, void apply();
+}
+swipe && !swipe.shown && 1 === e.touches.length && Math.hypot(e.touches[0].clientX - swipe.x, e.touches[0].clientY - swipe.y) > 12 && (swipe.shown = !0,
+showHint("mapTouchHint"));
+}, {
+passive: !1
+});
+const touchEnd = e => {
+e.touches.length < 2 && (pinch = null), e.touches.length || (swipe = null);
+};
+svg.addEventListener("touchend", touchEnd), svg.addEventListener("touchcancel", touchEnd),
 svg.addEventListener("click", e => {
 moved && (e.stopPropagation(), e.preventDefault(), moved = !1);
 }, !0), svg.addEventListener("dblclick", e => {
