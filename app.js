@@ -48,6 +48,12 @@ mapUnits1926: "8 единиц",
 mapUnits1939: "12 единиц",
 mapSrcData: "Данные: рабочий набор атласа по переписям 1926 и 1939 гг., сверка с опубликованными итогами ведётся. Границы: реконструкция на геометрии geoBoundaries.",
 mapSrcModel: "Расчёт: площадная интерполяция по 96 пересечениям сеток 1926 и 1939 гг. Границы: реконструкция на геометрии geoBoundaries.",
+lvl_census: "перепись",
+lvl_model: "модель",
+lvl_hist: "оценка историографии",
+lvlTip_census: "Уровень: данные переписи 1926/1939 гг. (рабочий набор атласа; сверка с опубликованными итогами по областям ведётся).",
+lvlTip_model: "Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.",
+lvlTip_hist: "Уровень: оценка историков — диапазон с указанием автора, а не результат подсчёта.",
 sidelblL: "1926 · округа",
 sidelblR: "1939 · области",
 ariaMapKz: "Карта Казахстана",
@@ -281,6 +287,12 @@ mapUnits1926: "8 units",
 mapUnits1939: "12 units",
 mapSrcData: "Data: the atlas’s working dataset based on the 1926 and 1939 censuses; cross-checking against the published results is in progress. Boundaries: reconstruction on geoBoundaries geometry.",
 mapSrcModel: "Calculation: areal interpolation over 96 intersections of the 1926 and 1939 grids. Boundaries: reconstruction on geoBoundaries geometry.",
+lvl_census: "census",
+lvl_model: "model",
+lvl_hist: "historiographic estimate",
+lvlTip_census: "Level: 1926/1939 census data (the atlas’s working dataset; cross-checking against the published oblast results is in progress).",
+lvlTip_model: "Level: a model value — areal interpolation between the 1926 and 1939 grids.",
+lvlTip_hist: "Level: historians’ estimate — a range attributed to its authors, not a count.",
 sidelblL: "1926 · okrugs",
 sidelblR: "1939 · oblasts",
 ariaMapKz: "Map of Kazakhstan",
@@ -514,6 +526,12 @@ mapUnits1926: "8 бірлік",
 mapUnits1939: "12 бірлік",
 mapSrcData: "Деректер: 1926 және 1939 жж. санақтар бойынша атластың жұмыс деректер жиынтығы, жарияланған қорытындылармен салыстыру жүргізілуде. Шекаралар: geoBoundaries геометриясына негізделген реконструкция.",
 mapSrcModel: "Есептеу: 1926 және 1939 жж. торларының 96 қиылысуы бойынша ареалдық интерполяция. Шекаралар: geoBoundaries геометриясына негізделген реконструкция.",
+lvl_census: "санақ",
+lvl_model: "модель",
+lvl_hist: "тарихнамалық баға",
+lvlTip_census: "Деңгей: 1926/1939 жж. санақ деректері (атластың жұмыс деректер жиынтығы; облыстар бойынша жарияланған қорытындылармен салыстыру жүргізілуде).",
+lvlTip_model: "Деңгей: модельдің есептік мәні — 1926 және 1939 жж. торлары арасындағы ареалдық интерполяция.",
+lvlTip_hist: "Деңгей: тарихшылардың бағасы — есеп нәтижесі емес, авторы көрсетілген диапазон.",
 sidelblL: "1926 · округтер",
 sidelblR: "1939 · облыстар",
 ariaMapKz: "Қазақстан картасы",
@@ -2723,14 +2741,17 @@ const ti = $("#kzTitle"), sr = $("#kzSrc");
 ti && (ti.innerHTML = `<b>${esc(m.label)}</b> · ${esc(t("mapBasis_" + m.basis))} · ${esc(t("mapUnits" + per))}`), sr && (sr.textContent = t("model" === m.basis ? "mapSrcModel" : "mapSrcData"));
 }
 
+// Evidence level of a figure, as in the paper: census fact / model value / historiographic estimate.
+const lvl = kind => `<span class="lvl lvl-${kind}" tabindex="0" title="${esc(t("lvlTip_" + kind))}">${esc(t("lvl_" + kind))}</span>`;
+
 function renderStats(per, m) {
 const box = $("#statsKz");
 if ("1926" === per) {
 const tot = KZ[1926].reduce((s, f) => s + f.p.pop, 0), kaz = KZ[1926].reduce((s, f) => s + f.p.kazAbs, 0);
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("totalPopulation"))}</u><b>${fmtN(tot)}</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhsWord"))}</u><b>${fmtN(kaz)}</b><s>${(kaz / tot * 100).toFixed(1)} ${esc(t("toKazakhsShare"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("totalPopulation"))}${lvl("census")}</u><b>${fmtN(tot)}</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhsWord"))}${lvl("census")}</u><b>${fmtN(kaz)}</b><s>${(kaz / tot * 100).toFixed(1)} ${esc(t("toKazakhsShare"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}${lvl("hist")}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
 } else {
 const k26 = KZ[1939].reduce((s, f) => s + f.p.kazakh_1926, 0), k39 = KZ[1939].reduce((s, f) => s + f.p.kazakh_1939, 0), worst = KZ[1939].slice().sort((a, b) => b.p.loss - a.p.loss)[0], grew = KZ[1939].filter(f => f.p.growth > 0).length;
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLoss"))}</u><b style="color:var(--carmine2)">−${((k26 - k39) / k26 * 100).toFixed(1)} %</b><s>${fmtN(k26 - k39)} ${"kz" === LANG ? "адам" : "en" === LANG ? "people" : "человек"}</s></div>\n      <div class="stat"><u>${esc(t("maxLoss"))}</u><b style="font-size:15px">${esc(shortName(worst))}</b><s>${worst.p.loss.toFixed(1)} %</s></div>\n      <div class="stat"><u>${esc(t("anomalyGrowth"))}</u><b>${grew} ${esc(t("ofOblasts"))}</b><s>${esc(t("grewOverall"))}</s></div>`;
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLoss"))}${lvl("census")}</u><b style="color:var(--carmine2)">−${((k26 - k39) / k26 * 100).toFixed(1)} %</b><s>${fmtN(k26 - k39)} ${"kz" === LANG ? "адам" : "en" === LANG ? "people" : "человек"}</s></div>\n      <div class="stat"><u>${esc(t("maxLoss"))}${lvl("census")}</u><b style="font-size:15px">${esc(shortName(worst))}</b><s>${worst.p.loss.toFixed(1)} %</s></div>\n      <div class="stat"><u>${esc(t("anomalyGrowth"))}${lvl("census")}</u><b>${grew} ${esc(t("ofOblasts"))}</b><s>${esc(t("grewOverall"))}</s></div>`;
 }
 }
 
@@ -2862,15 +2883,15 @@ S.selected = p.id;
 let html = `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">\n    <div><h3 style="font-size:18px">${esc(pName(p))}</h3>\n    <p style="color:var(--ink-mute);font-size:11.5px;margin:3px 0 0">${esc(t("regionGridLabel"))} ${per} ${esc(t("regionOf"))} · ${esc(pType(p))}</p></div>\n    <button class="btn ico ghost" onclick="drawerClose()">✕</button></div>`;
 if ("1939" === per) {
 const tags = LENS_TAGS[p.id] || {};
-html += `<div style="margin:13px 0">\n      ${tags.nomadic ? `<span class="badge">${esc(t("tagNomadic"))}</span>` : ""}\n      ${tags.gulag ? `<span class="badge">${esc(t("tagGulag"))}</span>` : ""}\n      ${tags.unrest ? `<span class="badge">${esc(t("tagUnrest"))}</span>` : ""}</div>\n    <div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin-bottom:13px">\n      <div style="font-size:42px;font-weight:700;color:var(--carmine2);line-height:1">−${p.loss.toFixed(1)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("lossOfKazPop"))}</div>\n    </div>\n    <div class="kv"><span>${esc(t("kazakhs1926"))}</span><b>${fmtN(p.kazakh_1926)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhs1939"))}</span><b>${fmtN(p.kazakh_1939)}</b></div>\n    <div class="kv"><span>${esc(t("total1926"))}</span><b>${fmtN(p.total_1926)}</b></div>\n    <div class="kv"><span>${esc(t("total1939"))}</span><b>${fmtN(p.total_1939)}</b></div>\n    <div class="kv"><span>${esc(t("generalPopChange"))}</span><b style="color:${p.growth >= 0 ? "var(--good)" : "var(--carmine2)"}">${fmtP(p.growth)} %</b></div>\n    <div class="kv"><span>${esc(t("kazShareChange"))}</span><b>${p.share1926.toFixed(1)} % → ${p.share1939.toFixed(1)} %</b></div>\n    <div class="kv"><span>${esc(t("maupShift"))}</span><b>${fmtP(p.shareShift, 2)} ${"kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п."}</b></div>`;
-} else html += `<div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin:13px 0">\n      <div style="font-size:42px;font-weight:700;color:var(--s26);line-height:1">${p.kazShare.toFixed(1)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("shareKazPop"))}</div>\n    </div>\n    <div class="kv"><span>${esc(t("totalPop"))}</span><b>${fmtN(p.pop)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhPop"))}</span><b>${fmtN(p.kazAbs)}</b></div>\n    <div class="kv"><span>${esc(t("otherPop"))}</span><b>${fmtN(p.pop - p.kazAbs)}</b></div>`;
+html += `<div style="margin:13px 0">\n      ${tags.nomadic ? `<span class="badge">${esc(t("tagNomadic"))}</span>` : ""}\n      ${tags.gulag ? `<span class="badge">${esc(t("tagGulag"))}</span>` : ""}\n      ${tags.unrest ? `<span class="badge">${esc(t("tagUnrest"))}</span>` : ""}</div>\n    <div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin-bottom:13px">\n      <div style="font-size:42px;font-weight:700;color:var(--carmine2);line-height:1">−${p.loss.toFixed(1)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("lossOfKazPop"))}${lvl("census")}</div>\n    </div>\n    <div class="kv"><span>${esc(t("kazakhs1926"))}${lvl("census")}</span><b>${fmtN(p.kazakh_1926)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhs1939"))}</span><b>${fmtN(p.kazakh_1939)}</b></div>\n    <div class="kv"><span>${esc(t("total1926"))}</span><b>${fmtN(p.total_1926)}</b></div>\n    <div class="kv"><span>${esc(t("total1939"))}</span><b>${fmtN(p.total_1939)}</b></div>\n    <div class="kv"><span>${esc(t("generalPopChange"))}</span><b style="color:${p.growth >= 0 ? "var(--good)" : "var(--carmine2)"}">${fmtP(p.growth)} %</b></div>\n    <div class="kv"><span>${esc(t("kazShareChange"))}</span><b>${p.share1926.toFixed(1)} % → ${p.share1939.toFixed(1)} %</b></div>\n    <div class="kv"><span>${esc(t("maupShift"))}${lvl("model")}</span><b>${fmtP(p.shareShift, 2)} ${"kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п."}</b></div>`;
+} else html += `<div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin:13px 0">\n      <div style="font-size:42px;font-weight:700;color:var(--s26);line-height:1">${p.kazShare.toFixed(1)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("shareKazPop"))}${lvl("census")}</div>\n    </div>\n    <div class="kv"><span>${esc(t("totalPop"))}${lvl("census")}</span><b>${fmtN(p.pop)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhPop"))}</span><b>${fmtN(p.kazAbs)}</b></div>\n    <div class="kv"><span>${esc(t("otherPop"))}</span><b>${fmtN(p.pop - p.kazAbs)}</b></div>`;
 if (html += `<div style="margin:15px 0 0"><canvas id="rChart" height="150"></canvas></div>\n    <p class="prose" style="margin-top:13px">${esc(pDesc(p))}</p>`, 
 "1939" === per) {
 const parts = MAUP.m.map((row, i) => ({
 i: i,
 v: row[p.idx]
 })).filter(o => o.v > .02).sort((a, b) => b.v - a.v);
-parts.length && (html += `<p class="sec-t" style="margin-top:17px">${esc(t("formedFrom"))}</p>`, 
+parts.length && (html += `<p class="sec-t" style="margin-top:17px">${esc(t("formedFrom"))}${lvl("model")}</p>`, 
 parts.forEach(o => {
 const src = KZ[1926][o.i];
 html += `<div class="kv"><span>${esc(pName(src.p))}</span><b>${(o.v / MAUP.a39[p.idx] * 100).toFixed(1)} ${esc(t("ofArea"))}</b></div>`;
@@ -3307,8 +3328,8 @@ function renderWorldStats() {
 const box = $("#statsW");
 if ("flows" === WS.layer) {
 const ab = FLOWS.filter(f => "abroad" === f.kind), sv = FLOWS.filter(f => "soviet" === f.kind), rng = a => `${a.reduce((s, f) => s + f.lo, 0)}–${a.reduce((s, f) => s + f.hi, 0)} ${t("flowRange")}`;
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("abroadDest"))}</u><b>${ab.length}</b><s>${rng(ab)}</s></div>\n      <div class="stat"><u>${esc(t("sovietDest"))}</u><b>${sv.length}</b><s>${rng(sv)}</s></div>\n      <div class="stat"><u>${esc(t("biggestDest"))}</u><b style="font-size:15px">${esc(tr(FLOWS[0]).short)}</b><s>100–200 ${t("flowRange")}</s></div>\n      <div class="stat"><u>${esc(t("returnedShare"))}</u><b>40 %</b><s>454 / 1130 ${t("flowRange")}</s></div>`;
-} else box.innerHTML = `\n      <div class="stat"><u>${esc(t("relLoss"))}</u><b style="color:var(--carmine2)">38–42 %</b><s>${esc(tr(FAMINES[0]).n)}</s></div>\n      <div class="stat"><u>${esc(t("absMax"))}</u><b style="font-size:15px">${esc(tr(FAMINES[1]).n)}</b><s>${esc(tr(FAMINES[1]).deaths)}</s></div>\n      <div class="stat"><u>${esc(t("deathEstimates"))}</u><b>≈${"en" === LANG ? "1.3–2.3 million" : "1,3–2,3 млн"}</b><s>${esc(t("deathEstimatesSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}</u><b>60 % → 38 %</b><s>1926 → 1939</s></div>`;
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("abroadDest"))}${lvl("hist")}</u><b>${ab.length}</b><s>${rng(ab)}</s></div>\n      <div class="stat"><u>${esc(t("sovietDest"))}${lvl("hist")}</u><b>${sv.length}</b><s>${rng(sv)}</s></div>\n      <div class="stat"><u>${esc(t("biggestDest"))}${lvl("hist")}</u><b style="font-size:15px">${esc(tr(FLOWS[0]).short)}</b><s>100–200 ${t("flowRange")}</s></div>\n      <div class="stat"><u>${esc(t("returnedShare"))}${lvl("hist")}</u><b>40 %</b><s>454 / 1130 ${t("flowRange")}</s></div>`;
+} else box.innerHTML = `\n      <div class="stat"><u>${esc(t("relLoss"))}${lvl("hist")}</u><b style="color:var(--carmine2)">38–42 %</b><s>${esc(tr(FAMINES[0]).n)}</s></div>\n      <div class="stat"><u>${esc(t("absMax"))}${lvl("hist")}</u><b style="font-size:15px">${esc(tr(FAMINES[1]).n)}</b><s>${esc(tr(FAMINES[1]).deaths)}</s></div>\n      <div class="stat"><u>${esc(t("deathEstimates"))}${lvl("hist")}</u><b>≈${"en" === LANG ? "1.3–2.3 million" : "1,3–2,3 млн"}</b><s>${esc(t("deathEstimatesSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}${lvl("census")}</u><b>60 % → 38 %</b><s>1926 → 1939</s></div>`;
 }
 
 $("#segWorld").addEventListener("click", e => {

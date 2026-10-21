@@ -232,6 +232,9 @@ section.view.on{display:block}
 .stat u{display:block;font-size:10.3px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);text-decoration:none;line-height:1.3}
 .stat b{display:block;font-size:20px;font-weight:650;margin-top:3px;letter-spacing:-.02em}
 .stat s{display:block;font-size:10.8px;color:var(--ink-mute);text-decoration:none;margin-top:1px}
+.lvl{display:inline-block;margin-left:6px;padding:0 5px;border:1px solid currentColor;border-radius:4px;font-size:9px;line-height:14px;letter-spacing:.02em;text-transform:none;font-weight:600;vertical-align:1px;cursor:help;white-space:nowrap}
+.lvl-census{color:var(--neon)}.lvl-model{color:var(--violet)}.lvl-hist{color:var(--gold2)}
+.sec-t .lvl{letter-spacing:.02em}
 
 /* ══ ТАБЛИЦА ══ */
 .tw{overflow:auto;max-height:520px;border-radius:10px;border:1px solid var(--line)}
@@ -580,10 +583,10 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
   <div class="card pad" style="margin-bottom:14px">
     <h3 data-i18n="dataHeading">Главный результат: сетка меняет вывод</h3>
     <div class="stats" style="margin-top:11px">
-      <div class="stat"><u data-i18n="statShiftSum">Суммарный сдвиг долей</u><b style="color:var(--gold2)">42,46</b><s data-i18n="statShiftUnit">процентных пункта</s></div>
-      <div class="stat"><u data-i18n="statDissim">Индекс несходства</u><b style="color:var(--carmine2)">21,2 %</b><s data-i18n="statDissimSub">пятая часть распределения</s></div>
-      <div class="stat"><u data-i18n="statIntersections">Пересечений полигонов</u><b>96</b><s data-i18n="statIntersectionsSub">8 округов × 12 областей</s></div>
-      <div class="stat"><u data-i18n="statCoverage">Покрытие площади</u><b style="color:var(--good)">100 %</b><s data-i18n="statCoverageSub">сетки совпадают по территории</s></div>
+      <div class="stat"><u><span data-i18n="statShiftSum">Суммарный сдвиг долей</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span></u><b style="color:var(--gold2)">42,46</b><s data-i18n="statShiftUnit">процентных пункта</s></div>
+      <div class="stat"><u><span data-i18n="statDissim">Индекс несходства</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span></u><b style="color:var(--carmine2)">21,2 %</b><s data-i18n="statDissimSub">пятая часть распределения</s></div>
+      <div class="stat"><u><span data-i18n="statIntersections">Пересечений полигонов</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span></u><b>96</b><s data-i18n="statIntersectionsSub">8 округов × 12 областей</s></div>
+      <div class="stat"><u><span data-i18n="statCoverage">Покрытие площади</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span></u><b style="color:var(--good)">100 %</b><s data-i18n="statCoverageSub">сетки совпадают по территории</s></div>
     </div>
     <p class="prose" style="margin:13px 0 0" data-i18n="dataIntro">Одна территория, одни люди, две административные сетки. При переносе казахского населения 1926 года с сетки 8 округов на сетку 12 областей суммарный сдвиг долей составляет 42,46 п.п., а индекс несходства — 21,2 %. Практический смысл: если бы исследователь работал только с сеткой 1939 года, он получил бы другую карту эпицентра катастрофы, чем работая с сеткой 1926 года. Граница определяет вывод — это и есть Modifiable Areal Unit Problem.</p>
   </div>
@@ -734,7 +737,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
-<script src="/data.js?v=10"></script>
-<script src="/app.js?v=10"></script>
+<script src="/data.js?v=11"></script>
+<script src="/app.js?v=11"></script>
 </body>
 </html>
