@@ -196,7 +196,8 @@ section.view.on{display:block}
 .legend i:last-of-type{border-radius:0 3px 3px 0}
 .legend b{font-weight:500;color:var(--ink-mute);margin:0 7px;font-size:11px;white-space:nowrap}
 .legend b:last-child{white-space:normal}
-.zoomer{display:flex;gap:4px;margin-left:auto}
+.zoomer{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+.ai-disclaimer{margin:0;padding:8px 13px 11px;font-size:11.5px;color:var(--ink-mute);border-top:1px solid var(--line)}
 .maptitle{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 13px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);background:var(--panel2)}
 #bDefense{flex:none}
 .maptitle b{color:var(--ink);font-weight:600}
@@ -523,6 +524,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
           <button class="btn sm ico" id="zIn" data-i18n-title="zoomInTitle" title="Приблизить">+</button>
           <button class="btn sm ico" id="zOut" data-i18n-title="zoomOutTitle" title="Отдалить">−</button>
           <button class="btn sm" id="zRst" data-i18n="zoomReset">Сброс</button>
+          <button class="btn sm" id="zPng" data-png="kz" data-i18n-title="exportPngTitle" data-i18n-aria="exportPngTitle" title="Скачать карту (PNG)" aria-label="Скачать карту (PNG)">PNG ⤓</button>
         </div>
         <p class="mapsrc" id="kzSrc"></p>
       </div>
@@ -582,6 +584,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
           <button class="btn sm ico" id="wIn" data-i18n-title="zoomInTitle">+</button>
           <button class="btn sm ico" id="wOut" data-i18n-title="zoomOutTitle">−</button>
           <button class="btn sm" id="wRst" data-i18n="zoomReset">Сброс</button>
+          <button class="btn sm" id="wPng" data-png="world" data-i18n-title="exportPngTitle" data-i18n-aria="exportPngTitle" title="Скачать карту (PNG)" aria-label="Скачать карту (PNG)">PNG ⤓</button>
         </div>
       </div>
     </div>
@@ -760,6 +763,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
       <input id="aiIn" data-i18n-placeholder="aiPlaceholder" placeholder="Спросите про регион, цифру, историка или метод…" autocomplete="off">
       <button class="btn gold" id="aiSend" data-i18n="aiSend">Спросить</button>
     </div>
+    <p class="ai-disclaimer" data-i18n="aiDisclaimer">Ответы справочные, основаны на материалах атласа; сверяйтесь с первоисточниками.</p>
   </div>
 </div></section>
 
@@ -793,7 +797,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
-<script src="/data.js?v=32"></script>
-<script src="/app.js?v=32"></script>
+<script src="/data.js?v=33"></script>
+<script src="/app.js?v=33"></script>
 </body>
 </html>

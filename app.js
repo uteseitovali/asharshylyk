@@ -208,6 +208,13 @@ quizMsgLow: "Стоит вернуться к разделам «Историо�
 aiHeading: "ИИ-ассистент по материалам сайта",
 aiSub: "Модель работает прямо в браузере: данные никуда не отправляются",
 aiOffline: "Офлайн-режим",
+exportPngTitle: "Скачать карту (PNG)",
+pngCredit: "Картография коллапса · HGIS-атлас Ашаршылыка, 1926–1939",
+pngSrcWorld: "Карта мира, проекция Equal Earth. Направления и масштабы откочёвок — оценки историографии (дискуссионные); масштабы голодов — оценки разных авторов.",
+toastPngFailed: "Не удалось сохранить карту в PNG",
+mapPhoneHint: "Для полной работы с картой удобнее ноутбук или планшет",
+aiDisclaimer: "Ответы справочные, основаны на материалах атласа; сверяйтесь с первоисточниками.",
+aiLoadNoGpu: "Модель недоступна: в этом браузере нет WebGPU. Ответы строятся офлайн-поиском по базе знаний атласа.",
 aiReady: "Модель готова",
 aiLoading: "Загрузка модели…",
 aiModelLabel: "Модель",
@@ -508,6 +515,13 @@ quizMsgLow: "It’s worth revisiting the “Historiography” and “Data & MAUP
 aiHeading: "AI assistant on the site’s material",
 aiSub: "The model runs right in your browser: nothing is sent anywhere",
 aiOffline: "Offline mode",
+exportPngTitle: "Download map (PNG)",
+pngCredit: "Cartography of Collapse · an HGIS atlas of Asharshylyk, 1926–1939",
+pngSrcWorld: "World map, Equal Earth projection. Migration destinations and sizes are historiographic estimates (debated); famine figures are estimates by different authors.",
+toastPngFailed: "Could not save the map as PNG",
+mapPhoneHint: "The map is easier to work with on a laptop or tablet",
+aiDisclaimer: "Answers are for reference, based on the atlas materials; check them against the primary sources.",
+aiLoadNoGpu: "The model is unavailable: this browser has no WebGPU. Answers come from the offline search over the atlas knowledge base.",
 aiReady: "Model ready",
 aiLoading: "Loading the model…",
 aiModelLabel: "Model",
@@ -808,6 +822,13 @@ quizMsgLow: "«Тарихнама» және «Деректер және MAUP» 
 aiHeading: "Сайт материалдары бойынша ЖИ-көмекші",
 aiSub: "Модель тікелей браузерде жұмыс істейді: деректер еш жерге жіберілмейді",
 aiOffline: "Офлайн режим",
+exportPngTitle: "Картаны жүктеу (PNG)",
+pngCredit: "Күйреу картографиясы · Ашаршылықтың HGIS-атласы, 1926–1939",
+pngSrcWorld: "Әлем картасы, Equal Earth проекциясы. Көші-қон бағыттары мен ауқымы — тарихнамалық бағалар (пікірталастық); ашаршылықтар ауқымы — әртүрлі авторлардың бағалары.",
+toastPngFailed: "Картаны PNG ретінде сақтау мүмкін болмады",
+mapPhoneHint: "Картамен толық жұмыс істеу үшін ноутбук немесе планшет ыңғайлырақ",
+aiDisclaimer: "Жауаптар анықтамалық, атлас материалдарына негізделген; бастапқы дереккөздермен салыстырыңыз.",
+aiLoadNoGpu: "Модель қолжетімсіз: бұл браузерде WebGPU жоқ. Жауаптар атлас білім қоры бойынша офлайн іздеу арқылы құрылады.",
 aiReady: "Модель дайын",
 aiLoading: "Модель жүктелуде…",
 aiModelLabel: "Модель",
@@ -947,7 +968,7 @@ n.setAttribute("title", t(n.dataset.i18nTitle));
 n.setAttribute("placeholder", t(n.dataset.i18nPlaceholder));
 }), document.querySelectorAll("[data-i18n-aria]").forEach(n => {
 n.setAttribute("aria-label", t(n.dataset.i18nAria));
-}), $$(".langopt").forEach(b => b.classList.toggle("on", b.dataset.lang === LANG)), "function" == typeof syncThemeBtn && syncThemeBtn(), "function" == typeof renderIntro && renderIntro();
+}), $$(".langopt").forEach(b => b.classList.toggle("on", b.dataset.lang === LANG)), "function" == typeof syncThemeBtn && syncThemeBtn(), "function" == typeof renderIntro && renderIntro(), navigator.gpu || !$("#aiProgTxt") || ($("#aiProgTxt").textContent = t("aiLoadNoGpu"));
 const lb = $("#bLangLabel");
 lb && (lb.textContent = LANG.toUpperCase());
 const sp = $("#stPrev");
@@ -2164,14 +2185,14 @@ kbEn("How to use the site", 'Sections: "Map of Kazakhstan" — a choropleth over
 kbKz("Сайтты қалай пайдалану керек", "Бөлімдер: «Қазақстан картасы» — 1926 және 1939 жылдардың торлары бойынша хороплет, көрсеткіштерді ауыстыру, лагерь мен көтеріліс қабаттары, сплит-салыстыру және StoryMap режимі. «Әлем картасы» — көші-қон ағындары және 1930 жж. ашаршылықтардың салыстырмалы қабаты. «Тарихнама» — сәйкес аймақтарды бөліп көрсететін үш зерттеу көзқарасы. «Библиография» — атластың негізіндегі ғылыми дереккөздер. «Деректер және MAUP» — кесте, ареалдық интерполяция калькуляторы және GeoJSON/CSV экспорты. «Викторина» — білімді тексеру. Аймаққа басу графигі мен PDF экспорты бар карточканы ашады.", "навигация"), 
 KZ[1939].forEach(f => {
 const p = f.p;
-kbRu("Область: " + p.name, `${p.name} (сетка 1939 г.). Казахское население: 1926 г. — ${p.kazakh_1926.toLocaleString("ru")}, 1939 г. — ${p.kazakh_1939.toLocaleString("ru")}. Общее население: 1926 г. — ${p.total_1926.toLocaleString("ru")}, 1939 г. — ${p.total_1939.toLocaleString("ru")}. Потеря казахского населения: ${p.loss_percent} %. ${p.desc}`, "регион"), 
-kbEn("Oblast: " + (p.name_en || p.name), `${p.name_en || p.name} (1939 grid). Kazakh population: 1926 — ${p.kazakh_1926.toLocaleString("en-US")}, 1939 — ${p.kazakh_1939.toLocaleString("en-US")}. Total population: 1926 — ${p.total_1926.toLocaleString("en-US")}, 1939 — ${p.total_1939.toLocaleString("en-US")}. Kazakh population loss: ${p.loss_percent}%. ${p.desc_en || p.desc}`, "region"),
-kbKz("Облыс: " + (p.name_kz || p.name), `${p.name_kz || p.name} (1939 торы). Қазақ халқы: 1926 ж. — ${p.kazakh_1926.toLocaleString("ru-RU")}, 1939 ж. — ${p.kazakh_1939.toLocaleString("ru-RU")}. Жалпы халық: 1926 ж. — ${p.total_1926.toLocaleString("ru-RU")}, 1939 ж. — ${p.total_1939.toLocaleString("ru-RU")}. Қазақ халқының шығыны: ${p.loss_percent} %. ${p.desc_kz || p.desc}`, "аймақ");
+kbRu("Область: " + p.name, `${p.name} (сетка 1939 г.). Казахское население: 1926 г. — ${p.kazakh_1926.toLocaleString("ru")}, 1939 г. — ${p.kazakh_1939.toLocaleString("ru")}. Общее население: 1926 г. — ${p.total_1926.toLocaleString("ru")}, 1939 г. — ${p.total_1939.toLocaleString("ru")}. Потеря казахского населения: ${p.loss_percent} %. (Областные значения — рабочий набор атласа; сверка с опубликованными итогами ведётся.) ${p.desc}`, "регион"), 
+kbEn("Oblast: " + (p.name_en || p.name), `${p.name_en || p.name} (1939 grid). Kazakh population: 1926 — ${p.kazakh_1926.toLocaleString("en-US")}, 1939 — ${p.kazakh_1939.toLocaleString("en-US")}. Total population: 1926 — ${p.total_1926.toLocaleString("en-US")}, 1939 — ${p.total_1939.toLocaleString("en-US")}. Kazakh population loss: ${p.loss_percent}%. (Oblast values are the atlas’s working dataset; cross-checking against the published results is in progress.) ${p.desc_en || p.desc}`, "region"),
+kbKz("Облыс: " + (p.name_kz || p.name), `${p.name_kz || p.name} (1939 торы). Қазақ халқы: 1926 ж. — ${p.kazakh_1926.toLocaleString("ru-RU")}, 1939 ж. — ${p.kazakh_1939.toLocaleString("ru-RU")}. Жалпы халық: 1926 ж. — ${p.total_1926.toLocaleString("ru-RU")}, 1939 ж. — ${p.total_1939.toLocaleString("ru-RU")}. Қазақ халқының шығыны: ${p.loss_percent} %. (Облыстық мәндер — атластың жұмыс жиынтығы; жарияланған қорытындылармен салыстыру жүргізілуде.) ${p.desc_kz || p.desc}`, "аймақ");
 }), KZ[1926].forEach(f => {
 const p = f.p;
-kbRu("Округ: " + p.name, `${p.name} (сетка 1926 г.). Всего населения: ${p.population_total.toLocaleString("ru")}. Доля казахов: ${p.kazakh_percent} %. ${p.desc}`, "регион"),
-kbEn("Okrug: " + (p.name_en || p.name), `${p.name_en || p.name} (1926 grid). Total population: ${p.population_total.toLocaleString("en-US")}. Kazakh share: ${p.kazakh_percent}%. ${p.desc_en || p.desc}`, "region"),
-kbKz("Округ: " + (p.name_kz || p.name), `${p.name_kz || p.name} (1926 торы). Жалпы халық: ${p.population_total.toLocaleString("ru-RU")}. Қазақтар үлесі: ${p.kazakh_percent} %. ${p.desc_kz || p.desc}`, "аймақ");
+kbRu("Округ: " + p.name, `${p.name} (сетка 1926 г.). Всего населения: ${p.population_total.toLocaleString("ru")}. Доля казахов: ${p.kazakh_percent} %. (Значения по округам — рабочий набор атласа; сверка с опубликованными итогами ведётся.) ${p.desc}`, "регион"),
+kbEn("Okrug: " + (p.name_en || p.name), `${p.name_en || p.name} (1926 grid). Total population: ${p.population_total.toLocaleString("en-US")}. Kazakh share: ${p.kazakh_percent}%. (Okrug values are the atlas’s working dataset; cross-checking against the published results is in progress.) ${p.desc_en || p.desc}`, "region"),
+kbKz("Округ: " + (p.name_kz || p.name), `${p.name_kz || p.name} (1926 торы). Жалпы халық: ${p.population_total.toLocaleString("ru-RU")}. Қазақтар үлесі: ${p.kazakh_percent} %. (Округтік мәндер — атластың жұмыс жиынтығы; жарияланған қорытындылармен салыстыру жүргізілуде.) ${p.desc_kz || p.desc}`, "аймақ");
 }), FLOWS.forEach(fl => {
 kbRu("Направление откочёвки: " + fl.ru.to, `${fl.ru.to} — ${"abroad" === fl.kind ? "зарубежное" : "внутрисоюзное"} направление откочёвок. Оценочный диапазон: ${fl.lo}–${fl.hi} тыс. человек (дискуссионная оценка). ${fl.ru.note}`, "откочёвки"),
 kbEn("Migration destination: " + fl.en.to, `${fl.en.to} — a ${"abroad" === fl.kind ? "foreign" : "within-USSR"} migration destination. Estimated range: ${fl.lo}–${fl.hi} thousand people (a debated estimate). ${fl.en.note}`, "migrations"),
@@ -3309,7 +3330,10 @@ zKz.focus(b);
 storyTimer = setTimeout(() => storyStep(i + 1), 11e3);
 }
 
-$("#bStory").addEventListener("click", () => S.story >= 0 ? storyStop() : storyStart()), $("#bDefense").addEventListener("click", () => S.story >= 0 ? storyStop() : storyStart()), 
+$("#bStory").addEventListener("click", () => S.story >= 0 ? storyStop() : storyStart()), document.addEventListener("click", e => {
+const b = e.target.closest("[data-png]");
+b && exportMapPng(b.dataset.png);
+}), $("#bDefense").addEventListener("click", () => S.story >= 0 ? storyStop() : storyStart()), 
 $("#stPrev").addEventListener("click", () => storyStep(S.story - 1)), $("#stNext").addEventListener("click", () => storyStep(S.story + 1)), 
 $("#stStop").addEventListener("click", storyStop);
 
@@ -4432,6 +4456,100 @@ box && (box.innerHTML = `<h3>${esc(t("aprobHeading"))}</h3>
 // Author contributions, appended to "About the project" (as recorded in the research diary).
 const contribHTML = () => `<h4>${esc(t("contribHeading"))}</h4>\n<ul>\n<li><b>${esc(t("contribNameAlizar"))}:</b> ${esc(t("contribAlizar"))}</li>\n<li><b>${esc(t("contribNameAli"))}:</b> ${esc(t("contribAli"))}</li>\n<li><b>${esc(t("contribJointLabel"))}:</b> ${esc(t("contribJoint"))}</li>\n</ul>`;
 
+// ---------- PNG export of a map ----------
+// The SVG is cloned with its computed styles inlined (CSS variables of the current theme resolve to real colours),
+// drawn on a canvas, and the title, legend and source line are drawn from their on-screen layout, so the PNG
+// matches what is on screen in both themes. Fonts: the page uses the system UI stack, available to the canvas too.
+const PNG_STYLE_PROPS = [ "fill", "fill-opacity", "stroke", "stroke-width", "stroke-opacity", "stroke-dasharray", "stroke-linejoin", "stroke-linecap", "opacity", "paint-order", "font-size", "font-family", "font-weight", "font-style", "text-anchor", "dominant-baseline", "display", "visibility", "letter-spacing", "vector-effect" ];
+function svgWithInlineStyles(svg) {
+const r = svg.getBoundingClientRect(), clone = svg.cloneNode(!0), src = [ svg, ...svg.querySelectorAll("*") ], dst = [ clone, ...clone.querySelectorAll("*") ];
+src.forEach((n, i) => {
+const cs = getComputedStyle(n), d = dst[i];
+d.removeAttribute("class"), PNG_STYLE_PROPS.forEach(p => {
+const v = cs.getPropertyValue(p);
+v && d.style.setProperty(p, v);
+});
+}), clone.setAttribute("xmlns", "http://www.w3.org/2000/svg"), clone.setAttribute("width", Math.round(r.width)), clone.setAttribute("height", Math.round(r.height)),
+clone.style.transition = "none", clone.removeAttribute("tabindex");
+const g = clone.querySelector("g");
+return g && (g.style.transition = "none"), {
+text: new XMLSerializer().serializeToString(clone),
+w: r.width,
+h: r.height
+};
+}
+function wrapText(ctx, text, maxW) {
+const words = text.split(/\s+/), lines = [];
+let line = "";
+return words.forEach(w => {
+const tryLine = line ? line + " " + w : w;
+ctx.measureText(tryLine).width > maxW && line ? (lines.push(line), line = w) : line = tryLine;
+}), line && lines.push(line), lines;
+}
+// Draw an inline HTML block (the legend) at its on-screen positions: coloured boxes as rectangles, text runs as text.
+function drawHtmlBlock(ctx, el, ox, oy) {
+const base = el.getBoundingClientRect(), walker = document.createTreeWalker(el, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
+for (let n = walker.currentNode; n; n = walker.nextNode()) if (n.nodeType === 1) {
+const cs = getComputedStyle(n), bg = cs.backgroundColor;
+if (bg && "rgba(0, 0, 0, 0)" !== bg && "transparent" !== bg) {
+const b = n.getBoundingClientRect();
+ctx.fillStyle = bg, ctx.fillRect(ox + b.left - base.left, oy + b.top - base.top, b.width, b.height);
+}
+} else if (n.textContent.trim()) {
+const p = n.parentElement, cs = getComputedStyle(p), rg = document.createRange();
+rg.selectNodeContents(n);
+const b = rg.getBoundingClientRect();
+ctx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`, ctx.fillStyle = cs.color, ctx.textBaseline = "middle",
+ctx.fillText(n.textContent.replace(/\s+/g, " ").trim(), ox + b.left - base.left, oy + b.top - base.top + b.height / 2);
+}
+}
+async function exportMapPng(kind) {
+try {
+const isKz = "kz" === kind, svg = $(isKz ? "#svgKz" : "#svgW"), legend = $(isKz ? "#legend" : "#wLegend"), stage = svg.closest(".stage"), sc = getComputedStyle(stage), body = getComputedStyle(document.body), m = svgWithInlineStyles(svg), W = Math.round(m.w), pad = 14, scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1)), font = body.fontFamily, title = isKz ? $("#kzTitle").textContent.trim() : `${t("tabWorld")} · ${($("#segWorld .on") || {}).textContent || ""}`.trim(), source = isKz ? $("#kzSrc").textContent.trim() : t("pngSrcWorld"), meas = document.createElement("canvas").getContext("2d");
+meas.font = `12px ${font}`;
+const srcLines = wrapText(meas, source, W - 2 * pad), lb = legend.getBoundingClientRect(), titleH = 34, legendH = Math.ceil(lb.height) + 16, srcH = 16 * srcLines.length + 8, creditH = 22, H = titleH + Math.round(m.h) + legendH + srcH + creditH, cv = document.createElement("canvas");
+cv.width = W * scale, cv.height = H * scale;
+const ctx = cv.getContext("2d");
+ctx.scale(scale, scale), ctx.fillStyle = sc.backgroundColor || body.backgroundColor, ctx.fillRect(0, 0, W, H),
+ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--ink").trim() || "#000", ctx.font = `600 14px ${font}`, ctx.textBaseline = "middle",
+ctx.fillText(title, pad, titleH / 2);
+const img = new Image();
+await new Promise((ok, fail) => {
+img.onload = ok, img.onerror = fail, img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(m.text);
+}), ctx.drawImage(img, 0, titleH, m.w, m.h), drawHtmlBlock(ctx, legend, pad, titleH + m.h + 8);
+const mute = getComputedStyle(document.documentElement).getPropertyValue("--ink-mute").trim() || "#777";
+ctx.fillStyle = mute, ctx.font = `12px ${font}`, ctx.textBaseline = "top", srcLines.forEach((l, i) => ctx.fillText(l, pad, titleH + m.h + legendH + 16 * i)),
+ctx.font = `11px ${font}`, ctx.fillText(t("pngCredit") + " · asharshylyk-full.vercel.app", pad, H - creditH + 4);
+const blob = await new Promise(ok => cv.toBlob(ok, "image/png")), name = isKz ? `map-kazakhstan-${S.period}-${S.metric}.png` : `map-world-${WS.layer}.png`;
+await download(name, blob, "image/png");
+} catch (err) {
+toast(t("toastPngFailed"));
+}
+}
+
+// One-time hint on phones, on the first touch on a map.
+(() => {
+const KEY = "agln_map_hint_seen";
+let seen = !1;
+try {
+seen = "1" === localStorage.getItem(KEY);
+} catch (e) {}
+seen || [ "#svgKz", "#svgW", "#svgS" ].forEach(sel => {
+const n = $(sel);
+n && n.addEventListener("touchstart", function once() {
+if (!matchMedia("(max-width:700px)").matches) return;
+[ "#svgKz", "#svgW", "#svgS" ].forEach(s => $(s) && $(s).removeEventListener("touchstart", once));
+if (seen) return;
+seen = !0, setTimeout(() => toast(t("mapPhoneHint")), 1600);
+try {
+localStorage.setItem(KEY, "1");
+} catch (e) {}
+}, {
+passive: !0
+});
+});
+})();
+
 function renderDataLog() {
 const box = $("#dataLog");
 if (!box) return;
@@ -4802,7 +4920,7 @@ const box = $("#sugg");
 box && (box.innerHTML = "", aiSuggestions().forEach(q => {
 const b = el("button");
 b.textContent = q, b.addEventListener("click", () => ask(q)), box.appendChild(b);
-})), $("#aiNote").textContent = navigator.gpu ? t("aiNoteGpu") : t("aiNoteNoGpu");
+})), $("#aiNote").textContent = navigator.gpu ? t("aiNoteGpu") : t("aiNoteNoGpu"), navigator.gpu || ($("#aiLoad").disabled = !0, $("#aiLoad").title = t("aiLoadNoGpu"), $("#aiProgTxt").textContent = t("aiLoadNoGpu"));
 }
 
 function aiSuggestions() {
@@ -4816,7 +4934,7 @@ $("#aboutBody").insertAdjacentHTML("beforeend", contribHTML());
 
 rebuildAiModels(), $("#aiModel").addEventListener("change", () => {
 AI.model = $("#aiModel").value, AI.engine = null, $("#aiBar").style.width = "0%", 
-$("#aiProgTxt").textContent = t("aiNotLoaded"), setAiState(t("aiOffline"), "");
+$("#aiProgTxt").textContent = t(navigator.gpu ? "aiNotLoaded" : "aiLoadNoGpu"), setAiState(t("aiOffline"), "");
 }), $("#aiLoad").addEventListener("click", ensureEngine), $("#aiSend").addEventListener("click", () => ask($("#aiIn").value)), 
 $("#aiIn").addEventListener("keydown", e => {
 "Enter" === e.key && ask($("#aiIn").value);
