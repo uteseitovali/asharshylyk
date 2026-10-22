@@ -2476,16 +2476,12 @@ const r = k / st.k;
 st.x = px - (px - st.x) * r, st.y = py - (py - st.y) * r, st.k = k, apply(anim);
 }
 apply();
-// Narrow screens: the SVG box takes the aspect ratio of the map's own bbox plus padding, so at the initial
-// view the map fills the width with no empty bands ("slice" then only trims empty viewBox margins).
-// If the 260px minimum height wins, fall back to "meet" so no part of the map is cut off.
-const AR = (box[2] - box[0] + 2 * pad) / (box[3] - box[1] + 2 * pad), MIN_H = 260;
+// Narrow screens: the SVG box takes exactly the aspect ratio of the map's own bbox plus padding, so at the
+// initial view the map fills the width with no empty bands ("slice" only trims the empty viewBox margins).
+const AR = (box[2] - box[0] + 2 * pad) / (box[3] - box[1] + 2 * pad);
 function fitSvgBox() {
-if (NARROW.matches) {
-svg.style.height = "auto", svg.style.aspectRatio = String(AR), svg.style.minHeight = MIN_H + "px";
-const w = svg.clientWidth;
-w && svg.setAttribute("preserveAspectRatio", w / AR >= MIN_H - 1 ? "xMidYMid slice" : "xMidYMid meet");
-} else svg.style.height = svg.style.aspectRatio = svg.style.minHeight = "", svg.removeAttribute("preserveAspectRatio");
+NARROW.matches ? (svg.style.height = "auto", svg.style.aspectRatio = String(AR), svg.setAttribute("preserveAspectRatio", "xMidYMid slice")) : (svg.style.height = svg.style.aspectRatio = "",
+svg.removeAttribute("preserveAspectRatio"));
 }
 fitSvgBox(), NARROW.addEventListener("change", fitSvgBox), window.addEventListener("resize", fitSvgBox);
 const api = {
