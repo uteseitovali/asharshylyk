@@ -197,7 +197,8 @@ section.view.on{display:block}
 .legend b{font-weight:500;color:var(--ink-mute);margin:0 7px;font-size:11px;white-space:nowrap}
 .legend b:last-child{white-space:normal}
 .zoomer{display:flex;gap:4px;margin-left:auto}
-.maptitle{padding:9px 13px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);background:var(--panel2)}
+.maptitle{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 13px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);background:var(--panel2)}
+#bDefense{flex:none}
 .maptitle b{color:var(--ink);font-weight:600}
 .mapsrc{flex-basis:100%;margin:0;font-size:10.5px;line-height:1.45;color:var(--ink-mute)}
 
@@ -252,6 +253,28 @@ section.view.on{display:block}
 .stat s{display:block;font-size:10.8px;color:var(--ink-mute);text-decoration:none;margin-top:1px}
 .lvl{display:inline-block;margin-left:6px;padding:0 5px;border:1px solid currentColor;border-radius:4px;font-size:9px;line-height:14px;letter-spacing:.02em;text-transform:none;font-weight:600;vertical-align:1px;cursor:help;white-space:nowrap}
 .lvl-census{color:var(--neon)}.lvl-model{color:var(--violet)}.lvl-hist{color:var(--gold2)}
+.info-i{display:inline-grid;place-items:center;width:15px;height:15px;margin-left:5px;padding:0;border:1px solid var(--line2);border-radius:50%;background:none;color:var(--ink-soft);font:600 10px/1 Georgia,serif;font-style:italic;text-transform:none;vertical-align:1px;cursor:pointer}
+.info-i:hover,.info-i:focus-visible{color:var(--ink);border-color:var(--ink-soft)}
+.info-pop{position:absolute;z-index:60;display:none;padding:10px 12px;border:1px solid var(--line2);border-radius:10px;background:var(--panel);color:var(--ink);font-size:12.5px;line-height:1.5;box-shadow:var(--shadow)}
+.info-pop.on{display:block}
+.methnote{margin:0;padding:7px 13px;border-bottom:1px solid var(--line);background:var(--panel);font-size:11.5px;color:var(--ink-soft)}
+.methnote summary{cursor:pointer;line-height:1.45}
+.methnote p{margin:6px 0 2px;line-height:1.5;color:var(--ink-mute)}
+.aprob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.aprob-grid .stat b{color:var(--gold2)}
+.intro{position:fixed;inset:0;z-index:300;display:none;align-items:flex-start;justify-content:center;padding:6vh 16px 16px;background:rgba(4,7,14,.72);overflow-y:auto}
+.intro.on{display:flex}
+body.intro-open{overflow:hidden}
+.intro-card{position:relative;max-width:720px;width:100%;padding:24px 24px 20px}
+.intro-x{position:absolute;top:12px;right:12px}
+.intro-kicker{margin:0 40px 6px 0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)}
+.intro h2{margin:0 36px 12px 0;font-size:19px;line-height:1.35}
+.intro-q{margin:0 0 14px;line-height:1.55}
+.intro-results{margin:0 0 8px;padding-left:20px;line-height:1.55}
+.intro-results li{margin-bottom:6px}
+.intro-people{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 16px;margin:14px 0 16px;font-size:13px}
+.intro-people span{display:block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+.intro-actions{display:flex;flex-wrap:wrap;gap:8px}
 .sec-t .lvl{letter-spacing:.02em}
 
 /* ══ ТАБЛИЦА ══ */
@@ -431,6 +454,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
         <button class="langopt" data-lang="kz">Қазақша</button>
       </div>
     </div>
+    <button class="btn ico ghost" id="bIntro" data-i18n-title="introOpenTitle" data-i18n-aria="introOpenTitle" title="Об исследовании: вход для жюри" aria-label="Об исследовании: вход для жюри"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M2.5 9.5 12 5l9.5 4.5L12 14z"/><path d="M6.5 11.5v4.2c1.5 1.5 3.5 2.3 5.5 2.3s4-.8 5.5-2.3v-4.2"/><path d="M21.5 9.5v5"/></svg></button>
     <button class="btn ico ghost" id="bAbout" data-i18n-title="btnAboutTitle" title="О проекте и методология">ⓘ</button>
     <button class="btn ico ghost" id="bTheme" title="Включить светлую тему" aria-label="Включить светлую тему"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M2.5 12h2.3M19.2 12h2.3M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg></button>
   </div>
@@ -468,7 +492,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
     <div class="card pad">
       <p class="sec-t" data-i18n="secModes">Режимы</p>
       <div style="display:flex;flex-direction:column;gap:7px">
-        <button class="btn gold" id="bStory" style="justify-content:center" data-i18n="btnStoryStart">▶ StoryMap: сценарий защиты</button>
+        <button class="btn gold" id="bStory" style="justify-content:center" data-i18n="btnStoryStart">▶ Режим защиты: 6 шагов исследования</button>
         <button class="btn" id="bSplit" style="justify-content:center" data-i18n="btnSplit">⇔ Сплит 1926 / 1939</button>
       </div>
       <p class="hint" data-i18n="hintStory">StoryMap ведёт по шести шагам исследования — от степи 1926 года до методологического вывода о MAUP.</p>
@@ -477,7 +501,8 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 
   <div>
     <div class="stage">
-      <div class="maptitle" id="kzTitle"></div>
+      <details class="methnote"><summary data-i18n="methNote">Методологическая помета: границы — опорная реконструкция на современной геометрии; карта для сравнительного анализа, не архивный кадастр</summary><p data-i18n="methNoteMore">Контуры округов 1926 г. и областей 1939 г. собраны из современной административной геометрии (geoBoundaries) под исторические единицы; реальные границы отличались. Демографические показатели хранятся отдельно от геометрии; областные значения — рабочий набор атласа, сверка с опубликованными итогами переписей ведётся.</p></details>
+      <div class="maptitle"><span id="kzTitle"></span><button class="btn sm gold" id="bDefense" data-i18n="btnDefenseShort">▶ Режим защиты</button></div>
       <div class="mapwrap" id="wrapKz">
         <svg id="svgKz" viewBox="0 0 1000 560" role="img" aria-label="Карта Казахстана" data-i18n-aria="ariaMapKz">
           <g id="gKz">
@@ -612,10 +637,10 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
   <div class="card pad" style="margin-bottom:14px">
     <h3 data-i18n="dataHeading">Главный результат: сетка меняет вывод</h3>
     <div class="stats" style="margin-top:11px">
-      <div class="stat"><u><span data-i18n="statShiftSum">Суммарный сдвиг долей</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span></u><b style="color:var(--gold2)" data-num="42.46" data-dec="2">42,46</b><s data-i18n="statShiftUnit">процентных пункта</s></div>
-      <div class="stat"><u><span data-i18n="statDissim">Индекс несходства</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span></u><b style="color:var(--carmine2)" data-num="21.2" data-dec="1" data-suffix=" %">21,2 %</b><s data-i18n="statDissimSub">пятая часть распределения</s></div>
-      <div class="stat"><u><span data-i18n="statIntersections">Пересечений полигонов</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span></u><b>96</b><s data-i18n="statIntersectionsSub">8 округов × 12 областей</s></div>
-      <div class="stat"><u><span data-i18n="statCoverage">Сетки покрывают одну и ту же территорию</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span></u><b style="color:var(--good)">100 %</b><s data-i18n="statCoverageSub">площадь 8 округов = площадь 12 областей</s></div>
+      <div class="stat"><u><span data-i18n="statShiftSum">Суммарный сдвиг долей</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_maupCalc" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b style="color:var(--gold2)" data-num="42.46" data-dec="2">42,46</b><s data-i18n="statShiftUnit">процентных пункта</s></div>
+      <div class="stat"><u><span data-i18n="statDissim">Индекс несходства</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_maupCalc" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b style="color:var(--carmine2)" data-num="21.2" data-dec="1" data-suffix=" %">21,2 %</b><s data-i18n="statDissimSub">пятая часть распределения</s></div>
+      <div class="stat"><u><span data-i18n="statIntersections">Пересечений полигонов</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_inter96" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b>96</b><s data-i18n="statIntersectionsSub">8 округов × 12 областей</s></div>
+      <div class="stat"><u><span data-i18n="statCoverage">Сетки покрывают одну и ту же территорию</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_coverage" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b style="color:var(--good)">100 %</b><s data-i18n="statCoverageSub">площадь 8 округов = площадь 12 областей</s></div>
     </div>
     <p class="prose" style="margin:13px 0 0" data-i18n="dataIntro">Одна территория, одни люди, две административные сетки. При переносе казахского населения 1926 года с сетки 8 округов на сетку 12 областей суммарный сдвиг долей составляет 42,46 п.п., а индекс несходства — 21,2 %. Практический смысл: если бы исследователь работал только с сеткой 1939 года, он получил бы другую карту эпицентра катастрофы, чем работая с сеткой 1926 года. Граница определяет вывод — это и есть Modifiable Areal Unit Problem.</p>
   </div>
@@ -658,6 +683,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
         <p class="hint" style="margin:0 0 8px" data-i18n="logIntro">Все правки чисел и формулировок, влияющих на данные атласа: что изменено, почему и по какому источнику.</p>
         <div id="dataLog"></div>
       </div>
+      <div class="card pad" id="aprob" style="margin-top:14px"></div>
     </div>
   </div>
 </section>
@@ -753,6 +779,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 </div>
 
 <div class="ov" id="ov"></div>
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle"><div class="intro-card card"><button class="btn ico ghost intro-x" id="introClose" data-i18n-aria="introClose" data-i18n-title="introClose" aria-label="Закрыть" title="Закрыть">✕</button><div id="introBody"></div></div></div>
 <aside class="drawer" id="drawer"><div id="drawerBody"></div></aside>
 
 <div class="modal" id="mAbout"><div class="box">
@@ -766,7 +793,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
-<script src="/data.js?v=23"></script>
-<script src="/app.js?v=23"></script>
+<script src="/data.js?v=25"></script>
+<script src="/app.js?v=25"></script>
 </body>
 </html>

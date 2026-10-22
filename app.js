@@ -32,7 +32,7 @@ layerCamps: "Лагеря и стройки",
 layerRevolts: "Восстания 1929–1931",
 layerLabels: "Подписи регионов",
 secModes: "Режимы",
-btnStoryStart: "▶ StoryMap: сценарий защиты",
+btnStoryStart: "▶ Режим защиты: 6 шагов исследования",
 btnStoryStop: "⏸ Остановить тур",
 btnSplit: "⇔ Сплит 1926 / 1939",
 hintStory: "StoryMap проводит через шесть шагов исследования: от степи 1926 года до методологического вывода о MAUP.",
@@ -55,6 +55,57 @@ lvl_hist: "оценка историографии",
 lvlTip_census: "Уровень: данные переписи 1926/1939 гг. (рабочий набор атласа; сверка с опубликованными итогами по областям ведётся).",
 lvlTip_model: "Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.",
 lvlTip_hist: "Уровень: оценка историков — диапазон с указанием автора, а не результат подсчёта.",
+introOpenTitle: "Об исследовании: вход для жюри",
+introKicker: "Исследовательская работа · историческая ГИС",
+introTitle: "Картография распада — картирование демографического наследия советской коллективизации в Казахстане с использованием GIS и открытых исторических данных",
+introQLabel: "Исследовательский вопрос",
+introQ: "Насколько выводы о географии катастрофы зависят от административной сетки, по которой сгруппированы данные?",
+introResultsLabel: "Три главных результата",
+introR1: "Доля казахов в населении республики: ≈60 % по переписи 1926 г. → ≈38 % по переписи 1939 г.",
+introR2: "Убыль казахского населения республики между переписями: ≈36 % (≈3,63 → ≈2,33 млн человек).",
+introR3: "Наложение сеток 1926 и 1939 гг. — матрица пересечений 8 × 12 (96 пар «округ — область»): от выбора сетки зависит, где на карте окажется эпицентр катастрофы (MAUP).",
+introSrc: "Республиканские итоги: перепись 1926 г. — Асылбеков, Асылбекова (2014); перепись 1939 г. — Тольц (Демоскоп Weekly, 2006). Областные показатели атласа ещё сверяются с опубликованными итогами.",
+introAuthorsLabel: "Авторы",
+introAuthors: "Жагиппаров Ализар, Утесеитов Али · 11F · НИШ Астана",
+introSupLabel: "Научный руководитель",
+introSup: "Ғазиз Ақтоты Ғазизқызы",
+introStart: "▶ Начать защиту (6 шагов)",
+introExplore: "Исследовать самостоятельно",
+introClose: "Закрыть",
+btnDefenseShort: "▶ Режим защиты",
+methNote: "Методологическая помета: границы — опорная реконструкция на современной геометрии; карта для сравнительного анализа, не архивный кадастр",
+methNoteMore: "Контуры округов 1926 г. и областей 1939 г. собраны из современной административной геометрии (geoBoundaries) под исторические единицы; реальные границы отличались. Демографические показатели хранятся отдельно от геометрии; областные значения — рабочий набор атласа, сверка с опубликованными итогами переписей ведётся.",
+infoLabel: "Источник и способ расчёта",
+info_totalPop1926: "Расчёт: сумма населения 8 округов рабочего набора атласа (перепись 1926 г.). Сверка с опубликованными итогами ведётся.",
+info_kaz1926: "Расчёт: для каждого округа население × доля казахов, затем сумма по 8 округам (рабочий набор атласа, перепись 1926 г.).",
+info_livestock: "Оценка историографии: около 40 млн голов скота до коллективизации, к 1933 г. — около одной десятой (С. Кэмерон, «The Hungry Steppe», 2018).",
+info_kazLoss: "Расчёт: (казахи 1926 − казахи 1939) ÷ казахи 1926 по 12 областям рабочего набора атласа. Сверка областных значений с опубликованными итогами переписей ведётся.",
+info_maxLoss: "Область с наибольшей относительной убылью казахского населения по рабочему набору атласа (сверка ведётся).",
+info_anomaly: "Число областей, в которых общее население по переписи 1939 г. больше, чем в 1926 г. (рабочий набор атласа).",
+info_flowsDest: "Сумма диапазонов оценок по направлениям откочёвок на карте. Разбивка по странам — дискуссионная оценка: С. Кэмерон называет точный подсчёт открытым исследовательским вопросом.",
+info_returned: "454 тыс. вернувшихся из ≈1,13 млн откочевавших (архивные данные АПРК; С. Кэмерон).",
+info_relLoss: "Оценка историографии: доля погибших от численности казахского народа, диапазон по разным авторам. Источник диапазона уточняется.",
+info_absMax: "Оценка историографии для Украинской ССР, диапазон по разным авторам. Источник диапазона уточняется.",
+info_deathEst: "Безвозвратные потери казахского населения ≈1,3–2,3 млн — диапазон оценок разных авторов (по тексту работы); А. Н. Алексеенко (2000): 1,5–1,84 млн.",
+info_shareRep: "Перепись 1926 г.: ≈3,63 млн казахов из ≈6,07 млн жителей (Асылбеков, Асылбекова, 2014); перепись 1939 г.: 2,33 млн из 6,15 млн, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
+info_maupCalc: "Собственный расчёт: ареальная интерполяция казахского населения 1926 г. с сетки 8 округов на сетку 12 областей; индекс несходства — половина суммы модулей сдвигов долей.",
+info_inter96: "Собственный расчёт: матрица 8 × 12 = 96 пар «округ 1926 г. — область 1939 г.»; для каждой пары вычислена площадь пересечения (у многих пар она нулевая).",
+info_coverage: "Сумма площадей 8 округов совпадает с суммой площадей 12 областей (расхождение 0,05 %): обе сетки описывают одну территорию.",
+aprobHeading: "Апробация: опрос",
+aprobMeta: "N = 32 респондента · 11 вопросов",
+aprob1: "воспринимали Ашаршылык как одну республиканскую цифру",
+aprob2: "не знали о смене административных сеток между переписями",
+aprob3: "считают интерактивные слои понятнее учебника",
+aprob4: "впервые поняли, как приток населения в промышленные районы может скрывать убыль казахов в сводной статистике",
+aprobLink: "Таблица ответов (Google Таблицы) ↗",
+aprobLimit: "Ограничение выборки: N = 32, выборка небольшая и нерепрезентативная; результаты описывают восприятие материалов атласа, а не исторические факты.",
+contribHeading: "Вклад авторов",
+contribAlizar: "историография, сведение таблиц переписей, сопоставление оценок потерь, опросник.",
+contribAli: "пространственная часть, веб-архитектура атласа, наложение сеток в GeoPandas/Shapely, матрица 96 пересечений.",
+contribJointLabel: "Совместно",
+contribJoint: "формулировка гипотезы и разграничение «оценка / модель».",
+contribNameAlizar: "Жагиппаров Ализар",
+contribNameAli: "Утесеитов Али",
 sidelblL: "1926 · округа",
 sidelblR: "1939 · области",
 ariaMapKz: "Карта Казахстана",
@@ -277,7 +328,7 @@ layerCamps: "Camps & construction sites",
 layerRevolts: "Uprisings 1929–1931",
 layerLabels: "Region labels",
 secModes: "Modes",
-btnStoryStart: "▶ StoryMap: defense scenario",
+btnStoryStart: "▶ Defense mode: 6 research steps",
 btnStoryStop: "⏸ Stop the tour",
 btnSplit: "⇔ Split 1926 / 1939",
 hintStory: "StoryMap walks through six steps of the research: from the 1926 steppe to the methodological conclusion about MAUP.",
@@ -300,6 +351,57 @@ lvl_hist: "historiographic estimate",
 lvlTip_census: "Level: 1926/1939 census data (the atlas’s working dataset; cross-checking against the published oblast results is in progress).",
 lvlTip_model: "Level: a model value — areal interpolation between the 1926 and 1939 grids.",
 lvlTip_hist: "Level: historians’ estimate — a range attributed to its authors, not a count.",
+introOpenTitle: "About the study: jury entry",
+introKicker: "Research paper · historical GIS",
+introTitle: "Cartography of Disintegration — mapping the demographic legacy of Soviet collectivization in Kazakhstan using GIS and open historical data",
+introQLabel: "Research question",
+introQ: "How far do conclusions about the geography of the catastrophe depend on the administrative grid by which the data are grouped?",
+introResultsLabel: "Three main results",
+introR1: "Kazakh share of the republic’s population: ≈60% in the 1926 census → ≈38% in the 1939 census.",
+introR2: "Decline of the republic’s Kazakh population between the censuses: ≈36% (≈3.63 → ≈2.33 million people).",
+introR3: "Overlaying the 1926 and 1939 grids gives an 8 × 12 intersection matrix (96 okrug–oblast pairs): the choice of grid determines where the epicenter of the catastrophe appears on the map (MAUP).",
+introSrc: "Republic totals: 1926 census — Asylbekov & Asylbekova (2014); 1939 census — Tolts (Demoscope Weekly, 2006). The atlas’s oblast figures are still being cross-checked against the published results.",
+introAuthorsLabel: "Authors",
+introAuthors: "Alizar Zhagipparov, Ali Uteseitov · 11F · NIS Astana",
+introSupLabel: "Supervisor",
+introSup: "Ғазиз Ақтоты Ғазизқызы",
+introStart: "▶ Start the defense (6 steps)",
+introExplore: "Explore on my own",
+introClose: "Close",
+btnDefenseShort: "▶ Defense mode",
+methNote: "Methodological note: boundaries are a reference reconstruction on modern geometry; the map is for comparative analysis, not an archival cadastre",
+methNoteMore: "The 1926 okrug and 1939 oblast outlines are assembled from modern administrative geometry (geoBoundaries) under the historical units; the real boundaries differed. Demographic figures are stored separately from the geometry; oblast values are the atlas’s working dataset, and cross-checking against the published census results is in progress.",
+infoLabel: "Source and method",
+info_totalPop1926: "Calculation: total population of the 8 okrugs in the atlas’s working dataset (1926 census). Cross-checking against the published results is in progress.",
+info_kaz1926: "Calculation: population × Kazakh share for each okrug, summed over the 8 okrugs (atlas working dataset, 1926 census).",
+info_livestock: "Historiographic estimate: about 40 million head of livestock before collectivization, about one-tenth by 1933 (S. Cameron, “The Hungry Steppe”, 2018).",
+info_kazLoss: "Calculation: (Kazakhs 1926 − Kazakhs 1939) ÷ Kazakhs 1926 over the 12 oblasts of the atlas’s working dataset. Oblast values are being cross-checked against the published census results.",
+info_maxLoss: "The oblast with the largest relative decline of the Kazakh population in the atlas’s working dataset (cross-check in progress).",
+info_anomaly: "Number of oblasts where the total population in the 1939 census exceeds that of 1926 (atlas working dataset).",
+info_flowsDest: "Sum of the estimate ranges for the migration destinations on the map. The breakdown by country is a debated estimate: S. Cameron calls an exact count an open research question.",
+info_returned: "454 thousand returnees out of ≈1.13 million who left (archival data, APRK; S. Cameron).",
+info_relLoss: "Historiographic estimate: share of deaths relative to the Kazakh people, a range across authors. The source of the range is being specified.",
+info_absMax: "Historiographic estimate for the Ukrainian SSR, a range across authors. The source of the range is being specified.",
+info_deathEst: "Irrecoverable losses of the Kazakh population ≈1.3–2.3 million — the range of estimates by different authors (per the paper); A. N. Alekseenko (2000): 1.5–1.84 million.",
+info_shareRep: "1926 census: ≈3.63 million Kazakhs of ≈6.07 million inhabitants (Asylbekov & Asylbekova, 2014); 1939 census: 2.33 million of 6.15 million, 37.8% (Tolts, Demoscope Weekly, 2006).",
+info_maupCalc: "Own calculation: areal interpolation of the 1926 Kazakh population from the 8-okrug grid to the 12-oblast grid; the dissimilarity index is half the sum of absolute share shifts.",
+info_inter96: "Own calculation: an 8 × 12 = 96-pair matrix of “1926 okrug — 1939 oblast”; the intersection area is computed for each pair (for many pairs it is zero).",
+info_coverage: "The total area of the 8 okrugs equals that of the 12 oblasts (0.05% difference): both grids describe the same territory.",
+aprobHeading: "Approbation: survey",
+aprobMeta: "N = 32 respondents · 11 questions",
+aprob1: "perceived Asharshylyk as a single republic-wide figure",
+aprob2: "did not know that the administrative grids changed between the censuses",
+aprob3: "find the interactive layers clearer than a textbook",
+aprob4: "understood for the first time how an influx of people into industrial districts can hide the decline of Kazakhs in aggregate statistics",
+aprobLink: "Response table (Google Sheets) ↗",
+aprobLimit: "Sample limitation: N = 32, a small and non-representative sample; the results describe how the atlas materials were perceived, not historical facts.",
+contribHeading: "Author contributions",
+contribAlizar: "historiography, compiling the census tables, comparing loss estimates, the questionnaire.",
+contribAli: "the spatial part, the atlas web architecture, overlaying the grids in GeoPandas/Shapely, the 96-intersection matrix.",
+contribJointLabel: "Jointly",
+contribJoint: "formulating the hypothesis and separating “estimate / model”.",
+contribNameAlizar: "Alizar Zhagipparov",
+contribNameAli: "Ali Uteseitov",
 sidelblL: "1926 · okrugs",
 sidelblR: "1939 · oblasts",
 ariaMapKz: "Map of Kazakhstan",
@@ -522,7 +624,7 @@ layerCamps: "Лагерьлер мен құрылыстар",
 layerRevolts: "1929–1931 көтерілістері",
 layerLabels: "Аймақ атаулары",
 secModes: "Режимдер",
-btnStoryStart: "▶ StoryMap: қорғау сценарийі",
+btnStoryStart: "▶ Қорғау режимі: зерттеудің 6 қадамы",
 btnStoryStop: "⏸ Турды тоқтату",
 btnSplit: "⇔ Салыстыру 1926 / 1939",
 hintStory: "StoryMap зерттеудің алты қадамынан өткізеді: 1926 жылғы даладан бастап MAUP туралы әдіснамалық қорытындыға дейін.",
@@ -545,6 +647,57 @@ lvl_hist: "тарихнамалық баға",
 lvlTip_census: "Деңгей: 1926/1939 жж. санақ деректері (атластың жұмыс деректер жиынтығы; облыстар бойынша жарияланған қорытындылармен салыстыру жүргізілуде).",
 lvlTip_model: "Деңгей: модельдің есептік мәні — 1926 және 1939 жж. торлары арасындағы ареалдық интерполяция.",
 lvlTip_hist: "Деңгей: тарихшылардың бағасы — есеп нәтижесі емес, авторы көрсетілген диапазон.",
+introOpenTitle: "Зерттеу туралы: қазылар алқасына кіріспе",
+introKicker: "Зерттеу жұмысы · тарихи ГАЖ",
+introTitle: "Ыдырау картографиясы — ГАЖ және ашық тарихи деректер арқылы Қазақстандағы кеңестік ұжымдастырудың демографиялық мұрасын картаға түсіру",
+introQLabel: "Зерттеу сұрағы",
+introQ: "Апат географиясы туралы қорытындылар деректер топтастырылған әкімшілік торға қаншалықты тәуелді?",
+introResultsLabel: "Үш басты нәтиже",
+introR1: "Республика халқындағы қазақтар үлесі: 1926 ж. санақ бойынша ≈60 % → 1939 ж. санақ бойынша ≈38 %.",
+introR2: "Санақтар арасында республикадағы қазақ халқының кемуі: ≈36 % (≈3,63 → ≈2,33 млн адам).",
+introR3: "1926 және 1939 жж. торларын қабаттастыру — 8 × 12 қиылыс матрицасы («округ — облыс» 96 жұбы): апат эпицентрінің картада қай жерде шығатыны тордың таңдауына байланысты (MAUP).",
+introSrc: "Республикалық қорытындылар: 1926 ж. санақ — Асылбеков, Асылбекова (2014); 1939 ж. санақ — Тольц (Демоскоп Weekly, 2006). Атластың облыстық көрсеткіштері жарияланған қорытындылармен әлі салыстырылуда.",
+introAuthorsLabel: "Авторлар",
+introAuthors: "Жагиппаров Ализар, Утесеитов Али · 11F · НЗМ Астана",
+introSupLabel: "Ғылыми жетекші",
+introSup: "Ғазиз Ақтоты Ғазизқызы",
+introStart: "▶ Қорғауды бастау (6 қадам)",
+introExplore: "Өз бетімше зерттеу",
+introClose: "Жабу",
+btnDefenseShort: "▶ Қорғау режимі",
+methNote: "Әдіснамалық ескерту: шекаралар — қазіргі геометриядағы тірек реконструкция; карта салыстырмалы талдауға арналған, мұрағаттық кадастр емес",
+methNoteMore: "1926 ж. округтер мен 1939 ж. облыстардың контурлары қазіргі әкімшілік геометриядан (geoBoundaries) тарихи бірліктерге сәйкес құрастырылған; нақты шекаралар өзгеше болған. Демографиялық көрсеткіштер геометриядан бөлек сақталады; облыстық мәндер — атластың жұмыс деректер жиынтығы, жарияланған санақ қорытындыларымен салыстыру жүргізілуде.",
+infoLabel: "Дереккөз және есептеу тәсілі",
+info_totalPop1926: "Есептеу: атлас жұмыс жиынтығындағы 8 округ халқының қосындысы (1926 ж. санақ). Жарияланған қорытындылармен салыстыру жүргізілуде.",
+info_kaz1926: "Есептеу: әр округ үшін халық саны × қазақтар үлесі, содан кейін 8 округ бойынша қосынды (атлас жұмыс жиынтығы, 1926 ж. санақ).",
+info_livestock: "Тарихнамалық баға: ұжымдастыруға дейін шамамен 40 млн бас мал, 1933 ж. қарай — шамамен оннан бірі (С. Кэмерон, «The Hungry Steppe», 2018).",
+info_kazLoss: "Есептеу: атлас жұмыс жиынтығының 12 облысы бойынша (1926 ж. қазақтар − 1939 ж. қазақтар) ÷ 1926 ж. қазақтар. Облыстық мәндерді жарияланған санақ қорытындыларымен салыстыру жүргізілуде.",
+info_maxLoss: "Атлас жұмыс жиынтығы бойынша қазақ халқының салыстырмалы кемуі ең көп облыс (салыстыру жүргізілуде).",
+info_anomaly: "1939 ж. санақ бойынша жалпы халқы 1926 ж.-дан көп облыстар саны (атлас жұмыс жиынтығы).",
+info_flowsDest: "Картадағы көші-қон бағыттары бойынша бағалау диапазондарының қосындысы. Елдер бойынша бөліну — пікірталастық баға: С. Кэмерон нақты есепті ашық зерттеу мәселесі деп атайды.",
+info_returned: "≈1,13 млн көшіп кеткендердің 454 мыңы оралды (ҚР ПМА мұрағат деректері; С. Кэмерон).",
+info_relLoss: "Тарихнамалық баға: қаза болғандардың қазақ халқы санындағы үлесі, әртүрлі авторлар бойынша диапазон. Диапазонның дереккөзі нақтылануда.",
+info_absMax: "Украин КСР-і үшін тарихнамалық баға, әртүрлі авторлар бойынша диапазон. Диапазонның дереккөзі нақтылануда.",
+info_deathEst: "Қазақ халқының қайтарымсыз шығыны ≈1,3–2,3 млн — әртүрлі авторлар бағаларының диапазоны (жұмыс мәтіні бойынша); А. Н. Алексеенко (2000): 1,5–1,84 млн.",
+info_shareRep: "1926 ж. санақ: ≈6,07 млн тұрғынның ≈3,63 млн-ы қазақ (Асылбеков, Асылбекова, 2014); 1939 ж. санақ: 6,15 млн-ның 2,33 млн-ы, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
+info_maupCalc: "Меншікті есептеу: 1926 ж. қазақ халқын 8 округ торынан 12 облыс торына ареалдық интерполяциялау; ұқсамау индексі — үлес ығысулары модульдерінің жартысы.",
+info_inter96: "Меншікті есептеу: «1926 ж. округ — 1939 ж. облыс» 8 × 12 = 96 жұп матрицасы; әр жұп үшін қиылысу ауданы есептелген (көп жұпта ол нөлге тең).",
+info_coverage: "8 округтің аудандарының қосындысы 12 облыстың аудандарының қосындысына тең (айырмашылық 0,05 %): екі тор бір аумақты сипаттайды.",
+aprobHeading: "Апробация: сауалнама",
+aprobMeta: "N = 32 респондент · 11 сұрақ",
+aprob1: "Ашаршылықты бір республикалық сан ретінде қабылдаған",
+aprob2: "санақтар арасында әкімшілік торлардың ауысқанын білмеген",
+aprob3: "интерактивті қабаттарды оқулықтан түсініктірек деп санайды",
+aprob4: "өнеркәсіп аудандарына халық ағыны жиынтық статистикада қазақтардың кемуін қалай жасыра алатынын алғаш рет түсінген",
+aprobLink: "Жауаптар кестесі (Google Кестелер) ↗",
+aprobLimit: "Іріктеме шектеуі: N = 32, іріктеме шағын және репрезентативті емес; нәтижелер тарихи фактілерді емес, атлас материалдарының қабылдануын сипаттайды.",
+contribHeading: "Авторлардың үлесі",
+contribAlizar: "тарихнама, санақ кестелерін жинақтау, шығын бағаларын салыстыру, сауалнама.",
+contribAli: "кеңістіктік бөлім, атластың веб-архитектурасы, GeoPandas/Shapely-де торларды қабаттастыру, 96 қиылыс матрицасы.",
+contribJointLabel: "Бірлесіп",
+contribJoint: "гипотезаны тұжырымдау және «баға / модель» деп ажырату.",
+contribNameAlizar: "Жагиппаров Ализар",
+contribNameAli: "Утесеитов Али",
 sidelblL: "1926 · округтер",
 sidelblR: "1939 · облыстар",
 ariaMapKz: "Қазақстан картасы",
@@ -782,7 +935,7 @@ n.setAttribute("title", t(n.dataset.i18nTitle));
 n.setAttribute("placeholder", t(n.dataset.i18nPlaceholder));
 }), document.querySelectorAll("[data-i18n-aria]").forEach(n => {
 n.setAttribute("aria-label", t(n.dataset.i18nAria));
-}), $$(".langopt").forEach(b => b.classList.toggle("on", b.dataset.lang === LANG)), "function" == typeof syncThemeBtn && syncThemeBtn();
+}), $$(".langopt").forEach(b => b.classList.toggle("on", b.dataset.lang === LANG)), "function" == typeof syncThemeBtn && syncThemeBtn(), "function" == typeof renderIntro && renderIntro();
 const lb = $("#bLangLabel");
 lb && (lb.textContent = LANG.toUpperCase());
 const sp = $("#stPrev");
@@ -808,7 +961,7 @@ const wr = $("#wRst");
 wr && (wr.textContent = "region" === WS.scope ? t("worldWhole") : t("worldToRegion"));
 }
 schoolsMap.ready && (renderSchoolCards(), selectSchool(S.school)), renderBiblio(), 
-"function" == typeof renderAbout && renderAbout(), buildTable(), renderDataLog(), function() {
+"function" == typeof renderAbout && renderAbout(), buildTable(), renderDataLog(), renderAprob(), function() {
 const i = $("#mSrc"), j = $("#mTgt");
 i && j && (populateMaupSelects(), calcMaup());
 }(), rebuildAiModels(), void 0 !== AI && setAiState(AI.engine ? t("aiReady") : t("aiOffline"), AI.engine ? "ok" : ""), 
@@ -2376,7 +2529,7 @@ $$("section.view").forEach(s => s.classList.toggle("on", s.id === "v-" + v)), wi
 top: 0,
 behavior: "smooth"
 }), "world" === v && worldMap.ensure(), "schools" === v && schoolsMap.ensure(), 
-"data" === v && (buildTable(), renderDataLog()), "biblio" === v && renderBiblio();
+"data" === v && (buildTable(), renderDataLog(), renderAprob()), "biblio" === v && renderBiblio();
 }
 
 function toast(msg) {
@@ -2793,16 +2946,16 @@ ti && (ti.innerHTML = `<b>${esc(m.label)}</b> · ${esc(t("mapBasis_" + m.basis))
 }
 
 // Evidence level of a figure, as in the paper: census fact / model value / historiographic estimate.
-const lvl = kind => `<span class="lvl lvl-${kind}" tabindex="0" title="${esc(t("lvlTip_" + kind))}">${esc(t("lvl_" + kind))}</span>`;
+const lvl = kind => `<span class="lvl lvl-${kind}" tabindex="0" title="${esc(t("lvlTip_" + kind))}">${esc(t("lvl_" + kind))}</span>`, info = key => `<button class="info-i" type="button" data-info="${key}" aria-label="${esc(t("infoLabel"))}" title="${esc(t("infoLabel"))}">i</button>`;
 
 function renderStats(per, m) {
 const box = $("#statsKz");
 if ("1926" === per) {
 const tot = KZ[1926].reduce((s, f) => s + f.p.pop, 0), kaz = KZ[1926].reduce((s, f) => s + f.p.kazAbs, 0);
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("totalPopulation"))}${lvl("census")}</u><b>${fmtN(tot)}</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhsWord"))}${lvl("census")}</u><b>${fmtN(kaz)}</b><s>${fmtD(kaz / tot * 100)} ${esc(t("toKazakhsShare"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}${lvl("hist")}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("totalPopulation"))}${lvl("census")}${info("info_totalPop1926")}</u><b>${fmtN(tot)}</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhsWord"))}${lvl("census")}${info("info_kaz1926")}</u><b>${fmtN(kaz)}</b><s>${fmtD(kaz / tot * 100)} ${esc(t("toKazakhsShare"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}${lvl("hist")}${info("info_livestock")}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
 } else {
 const k26 = KZ[1939].reduce((s, f) => s + f.p.kazakh_1926, 0), k39 = KZ[1939].reduce((s, f) => s + f.p.kazakh_1939, 0), worst = KZ[1939].slice().sort((a, b) => b.p.loss - a.p.loss)[0], grew = KZ[1939].filter(f => f.p.growth > 0).length;
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLoss"))}${lvl("census")}</u><b style="color:var(--carmine2)">−${fmtD((k26 - k39) / k26 * 100)} %</b><s>${fmtN(k26 - k39)} ${"kz" === LANG ? "адам" : "en" === LANG ? "people" : "человек"}</s></div>\n      <div class="stat"><u>${esc(t("maxLoss"))}${lvl("census")}</u><b style="font-size:15px">${esc(shortName(worst))}</b><s>${fmtD(worst.p.loss)} %</s></div>\n      <div class="stat"><u>${esc(t("anomalyGrowth"))}${lvl("census")}</u><b>${grew} ${esc(t("ofOblasts"))}</b><s>${esc(t("grewOverall"))}</s></div>`;
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLoss"))}${lvl("census")}${info("info_kazLoss")}</u><b style="color:var(--carmine2)">−${fmtD((k26 - k39) / k26 * 100)} %</b><s>${fmtN(k26 - k39)} ${"kz" === LANG ? "адам" : "en" === LANG ? "people" : "человек"}</s></div>\n      <div class="stat"><u>${esc(t("maxLoss"))}${lvl("census")}${info("info_maxLoss")}</u><b style="font-size:15px">${esc(shortName(worst))}</b><s>${fmtD(worst.p.loss)} %</s></div>\n      <div class="stat"><u>${esc(t("anomalyGrowth"))}${lvl("census")}${info("info_anomaly")}</u><b>${grew} ${esc(t("ofOblasts"))}</b><s>${esc(t("grewOverall"))}</s></div>`;
 }
 }
 
@@ -3144,7 +3297,7 @@ zKz.focus(b);
 storyTimer = setTimeout(() => storyStep(i + 1), 11e3);
 }
 
-$("#bStory").addEventListener("click", () => S.story >= 0 ? storyStop() : storyStart()), 
+$("#bStory").addEventListener("click", () => S.story >= 0 ? storyStop() : storyStart()), $("#bDefense").addEventListener("click", () => S.story >= 0 ? storyStop() : storyStart()), 
 $("#stPrev").addEventListener("click", () => storyStep(S.story - 1)), $("#stNext").addEventListener("click", () => storyStep(S.story + 1)), 
 $("#stStop").addEventListener("click", storyStop);
 
@@ -3380,8 +3533,8 @@ function renderWorldStats() {
 const box = $("#statsW");
 if ("flows" === WS.layer) {
 const ab = FLOWS.filter(f => "abroad" === f.kind), sv = FLOWS.filter(f => "soviet" === f.kind), rng = a => `${a.reduce((s, f) => s + f.lo, 0)}–${a.reduce((s, f) => s + f.hi, 0)} ${t("flowRange")}`;
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("abroadDest"))}${lvl("hist")}</u><b>${ab.length}</b><s>${rng(ab)}</s></div>\n      <div class="stat"><u>${esc(t("sovietDest"))}${lvl("hist")}</u><b>${sv.length}</b><s>${rng(sv)}</s></div>\n      <div class="stat"><u>${esc(t("biggestDest"))}${lvl("hist")}</u><b style="font-size:15px">${esc(tr(FLOWS[0]).short)}</b><s>100–200 ${t("flowRange")}</s></div>\n      <div class="stat"><u>${esc(t("returnedShare"))}${lvl("hist")}</u><b>40 %</b><s>454 / 1130 ${t("flowRange")}</s></div>`;
-} else box.innerHTML = `\n      <div class="stat"><u>${esc(t("relLoss"))}${lvl("hist")}</u><b style="color:var(--carmine2)">38–42 %</b><s>${esc(tr(FAMINES[0]).n)}</s></div>\n      <div class="stat"><u>${esc(t("absMax"))}${lvl("hist")}</u><b style="font-size:15px">${esc(tr(FAMINES[1]).n)}</b><s>${esc(tr(FAMINES[1]).deaths)}</s></div>\n      <div class="stat"><u>${esc(t("deathEstimates"))}${lvl("hist")}</u><b>≈${"en" === LANG ? "1.3–2.3 million" : "1,3–2,3 млн"}</b><s>${esc(t("deathEstimatesSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}${lvl("census")}</u><b>60 % → 38 %</b><s>1926 → 1939</s></div>`;
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("abroadDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b>${ab.length}</b><s>≈${rng(ab)}</s></div>\n      <div class="stat"><u>${esc(t("sovietDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b>${sv.length}</b><s>≈${rng(sv)}</s></div>\n      <div class="stat"><u>${esc(t("biggestDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b style="font-size:15px">${esc(tr(FLOWS[0]).short)}</b><s>≈100–200 ${t("flowRange")}</s></div>\n      <div class="stat"><u>${esc(t("returnedShare"))}${lvl("hist")}${info("info_returned")}</u><b>≈40 %</b><s>454 / 1130 ${t("flowRange")}</s></div>`;
+} else box.innerHTML = `\n      <div class="stat"><u>${esc(t("relLoss"))}${lvl("hist")}${info("info_relLoss")}</u><b style="color:var(--carmine2)">≈38–42 %</b><s>${esc(tr(FAMINES[0]).n)}</s></div>\n      <div class="stat"><u>${esc(t("absMax"))}${lvl("hist")}${info("info_absMax")}</u><b style="font-size:15px">${esc(tr(FAMINES[1]).n)}</b><s>≈${esc(tr(FAMINES[1]).deaths)}</s></div>\n      <div class="stat"><u>${esc(t("deathEstimates"))}${lvl("hist")}${info("info_deathEst")}</u><b>≈${"en" === LANG ? "1.3–2.3 million" : "1,3–2,3 млн"}</b><s>${esc(t("deathEstimatesSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}${lvl("census")}${info("info_shareRep")}</u><b>≈60 % → ≈38 %</b><s>1926 → 1939</s></div>`;
 }
 
 $("#segWorld").addEventListener("click", e => {
@@ -4122,6 +4275,69 @@ source: "Демоскоп Weekly: 1926 және 1939 жж. санақ қорыт
 }
 } ];
 
+// "i" buttons on plaques: one shared popover with the source and method of the figure.
+const infoPop = document.createElement("div");
+infoPop.className = "info-pop", infoPop.setAttribute("role", "tooltip"), document.body.appendChild(infoPop);
+document.addEventListener("click", e => {
+const b = e.target.closest(".info-i");
+if (!b) return void (e.target.closest(".info-pop") || infoPop.classList.remove("on"));
+e.preventDefault(), e.stopPropagation();
+if (infoPop.classList.contains("on") && infoPop.dataset.key === b.dataset.info) return void infoPop.classList.remove("on");
+infoPop.textContent = t(b.dataset.info), infoPop.dataset.key = b.dataset.info, infoPop.classList.add("on");
+const r = b.getBoundingClientRect(), w = Math.min(320, innerWidth - 24), x = Math.max(12, Math.min(innerWidth - w - 12, r.left + r.width / 2 - w / 2));
+infoPop.style.width = w + "px", infoPop.style.left = x + "px", infoPop.style.top = r.bottom + 8 + scrollY + "px";
+}, !0), document.addEventListener("keydown", e => {
+"Escape" === e.key && infoPop.classList.remove("on");
+}), window.addEventListener("scroll", () => infoPop.classList.remove("on"), {
+passive: !0
+});
+
+// Jury entry overlay: shown once on the first visit (remembered in localStorage), reopened from the header.
+const INTRO_KEY = "agln_intro_seen";
+function renderIntro() {
+const box = $("#introBody");
+box && (box.innerHTML = `<p class="intro-kicker">${esc(t("introKicker"))}</p>
+    <h2 id="introTitle">${esc(t("introTitle"))}</h2>
+    <p class="intro-q"><b>${esc(t("introQLabel"))}.</b> ${esc(t("introQ"))}</p>
+    <p class="sec-t">${esc(t("introResultsLabel"))}</p>
+    <ol class="intro-results"><li>${esc(t("introR1"))} ${lvl("census")}</li><li>${esc(t("introR2"))} ${lvl("census")}</li><li>${esc(t("introR3"))} ${lvl("model")}</li></ol>
+    <p class="hint">${esc(t("introSrc"))}</p>
+    <div class="intro-people"><div><span>${esc(t("introAuthorsLabel"))}</span>${esc(t("introAuthors"))}</div><div><span>${esc(t("introSupLabel"))}</span>${esc(t("introSup"))}</div></div>
+    <div class="intro-actions"><button class="btn gold" id="introStart">${esc(t("introStart"))}</button><button class="btn" id="introExplore">${esc(t("introExplore"))}</button></div>`);
+}
+function openIntro() {
+renderIntro(), $("#intro").classList.add("on"), document.body.classList.add("intro-open");
+const b = $("#introStart");
+b && b.focus();
+}
+function closeIntro() {
+$("#intro").classList.remove("on"), document.body.classList.remove("intro-open");
+try {
+localStorage.setItem(INTRO_KEY, "1");
+} catch (e) {}
+}
+document.addEventListener("click", e => {
+const id = e.target.closest("button") && e.target.closest("button").id;
+"introStart" === id ? (closeIntro(), "kz" !== currentView && showView("kz"), S.story >= 0 || storyStart()) : "introExplore" === id || "introClose" === id ? closeIntro() : "bIntro" === id && openIntro(),
+e.target.id === "intro" && closeIntro();
+}), document.addEventListener("keydown", e => {
+"Escape" === e.key && $("#intro").classList.contains("on") && closeIntro();
+});
+
+// Approbation (survey) block in the Data & MAUP tab.
+const APROB_SHEET = "https://docs.google.com/spreadsheets/d/19Gms0ieTLFT1fN0-udISmtWncfZ_dJgMv88tDOljKH4/edit?usp=sharing";
+function renderAprob() {
+const box = $("#aprob");
+box && (box.innerHTML = `<h3>${esc(t("aprobHeading"))}</h3>
+    <p class="hint" style="margin:0 0 10px">${esc(t("aprobMeta"))}</p>
+    <div class="aprob-grid">${[ [ 71.9, "aprob1" ], [ 78.1, "aprob2" ], [ 75, "aprob3" ], [ 75, "aprob4" ] ].map(([v, k]) => `<div class="stat"><b>${fmtD(v, v % 1 ? 1 : 0)} %</b><s>${esc(t(k))}</s></div>`).join("")}</div>
+    <p class="note" style="margin-top:12px">${esc(t("aprobLimit"))}</p>
+    <a class="btn sm" href="${APROB_SHEET}" target="_blank" rel="noopener noreferrer">${esc(t("aprobLink"))}</a>`);
+}
+
+// Author contributions, appended to "About the project" (as recorded in the research diary).
+const contribHTML = () => `<h4>${esc(t("contribHeading"))}</h4>\n<ul>\n<li><b>${esc(t("contribNameAlizar"))}:</b> ${esc(t("contribAlizar"))}</li>\n<li><b>${esc(t("contribNameAli"))}:</b> ${esc(t("contribAli"))}</li>\n<li><b>${esc(t("contribJointLabel"))}:</b> ${esc(t("contribJoint"))}</li>\n</ul>`;
+
 function renderDataLog() {
 const box = $("#dataLog");
 if (!box) return;
@@ -4501,6 +4717,7 @@ return "kz" === LANG ? [ "MAUP деген не, қарапайым тілмен 
 
 function renderAbout() {
 $("#aboutBody").innerHTML = "kz" === LANG ? '\n<p>«Күйреу картографиясы»: Ашаршылықтың — 1930–1933 жылдардағы Қазақстандағы ашаршылықтың — тарихи ГАЖ (HGIS) құралдарымен жасалған кеңістіктік-демографиялық талдауы. Жұмыс бір әдіснамалық сұраққа жауап береді: <b>апат географиясы туралы қорытындылар деректер топтастырылған әкімшілік торға қаншалықты тәуелді?</b></p>\n\n<h4>Зерттеу нені көрсетеді</h4>\n<p>1926 жылғы санақ Қазақ АКСР-ін 8 округ арқылы, ал 1939 жылғы санақ 12 облыс арқылы сипаттайды. Аумақ бір, адамдар бір, бірақ бөліну әртүрлі. 1926 жылғы деректерді 96 полигон қиылысы бойынша ареалдық интерполяция әдісімен 1939 жылғы торға көшіргенде, біз үлестердің жиынтық ауытқуын <b>42,46 пайыздық тармақ</b> және ұқсамау индексін <b>21,2 %</b> алдық. Басқаша айтқанда, тор өзгергенде халықтың бүкіл кеңістіктік үлестірімінің бестен бірі «көшіп кетеді». Бұл тарихи материалдағы Modifiable Areal Unit Problem дәл өзі.</p>\n\n<h4>Үш тарихнамалық көзқарас</h4>\n<ul>\n<li><b>Сара Кэмерон:</b> ашаршылық — көшпелі шаруашылықтың құрып кетуінің салдары; эпицентр мал шаруашылығының үлесі жоғары жерде.</li>\n<li><b>Никколо Пьянчола:</b> империялық басымдықтар иерархиясы; сондықтан өнеркәсіп пен лагерь аудандарында «аномальды өсім» байқалады.</li>\n<li><b>Талас Омарбеков:</b> қазақтардың субъектілігі мен қарсылығы; 1929–1931 жж. көтеріліс ошақтарының шығын тереңдігімен байланысы.</li>\n</ul>\n\n<h4>Қорғауда тікелей айту керек адал ескертулер</h4>\n<ul>\n<li><b>Шекаралар: мұрағаттық кадастр емес.</b> Геометрия тірек реконструкция ретінде құрылған: 1926 және 1939 жылдардың тарихи бірліктеріне сәйкес біріктірілген қазіргі әкімшілік контурлар (geoBoundaries). Нақты тарихи шекаралар өзгеше болған.</li>\n<li><b>Атрибуттар мен геометрия бөлек.</b> Демографиялық көрсеткіштер контурлардан бөлек сақталады, шекара реконструкциясы сандардың дереккөзі ретінде қабылданбауы үшін.</li>\n<li><b>Әртүрлі базалық қорытындылар.</b> 1926 және 1939 жылдардың атрибут жиынтықтары әртүрлі көздерден алынған, сондықтан абсолютті сомаларды емес, үлестерді салыстырған дұрысырақ.</li>\n<li><b>Интерполяция болжамы.</b> Ареалдық интерполяция бірлік ішінде тығыздықтың бірдей болуын болжайды. Көшпелі халық үшін бұл жеңілдету, және қателіктің бір бөлігі дәл осыдан туындайды.</li>\n<li><b>Көші-қонның елдер бойынша бөлінуі: пікірталастық баға.</b> С. Кэмерон бағыттар бойынша дәл санақты ашық зерттеу мәселесі деп тікелей атайды.</li>\n<li><b>Шығын бағалары алшақтайды.</b> Қазақ халқының қайтарымсыз шығыны ≈1,3–2,3 млн (әртүрлі авторлардың бағалары); А. Н. Алексеенко: 1,5–1,84 млн. Жоғарырақ сандар — жекелеген авторлық бағалар (Ж. Әбілхожин, М. Қозыбаев, М. Тәтімов — 3,25 млн; Х. М. Әбжанов — 4 млн-ға дейін). Біз бір «дұрыс» санды емес, атрибуциясы бар диапазонды береміз.</li>\n<li><b>Облыстық деректер.</b> Облыстық көрсеткіштер — атластың жұмыс деректер жиынтығы; облыстар бойынша жарияланған санақ қорытындыларымен салыстыру жүргізілуде, деректер өзгерістері журналын қараңыз.</li>\n</ul>\n\n<h4>Деректер мен технологиялар</h4>\n<ul>\n<li>Шекаралар: geoBoundaries (тірек геометрия), әлем картасы үшін Natural Earth 110 м.</li>\n<li>Проекциялар: Қазақстан үшін Альберстің тең аумақты конустық проекциясы, әлем картасы үшін Equal Earth, екеуі де тең аумақты, сондықтан аудандарды салыстыру дұрыс.</li>\n<li>Есептеулер: ареалдық интерполяция, ұқсамау индексі, квантильдік жіктеу.</li>\n<li>Қолданба: бір дербес HTML-файл. Көмекшінің тілдік моделі браузерде WebGPU арқылы жұмыс істейді, сондықтан деректер еш жерге жіберілмейді.</li>\n</ul>\n\n<p style="margin-top:14px;color:var(--ink-mute);font-size:12px">Жобаның барлық деректері ашық: «Деректер және MAUP» бөлімі көрсеткіштерді CSV форматында, шекараларды GeoJSON форматында және полигон қиылысу матрицасын жүктеп алуға мүмкіндік береді.</p>' : "en" === LANG ? '\n<p>"Cartography of Collapse" is a spatial-demographic analysis of Asharshylyk, the 1930–1933 famine in Kazakhstan, carried out using historical GIS (HGIS). The work answers one methodological question: <b>how much do conclusions about the geography of the catastrophe depend on the administrative grid the data is grouped by?</b></p>\n\n<h4>What the study shows</h4>\n<p>The 1926 census describes the Kazak ASSR through 8 okrugs; the 1939 census, through 12 oblasts. The territory is the same, the people are the same, but the layout differs. Carrying the 1926 data onto the 1939 grid by areal interpolation across 96 polygon intersections produces a total share shift of <b>42.46 percentage points</b> and a dissimilarity index of <b>21.2%</b>. In other words, changing the grid "relocates" a fifth of the entire spatial distribution of the population. This is the Modifiable Areal Unit Problem on historical material.</p>\n\n<h4>Three historiographic lenses</h4>\n<ul>\n<li><b>Sarah Cameron:</b> the famine as a consequence of the destruction of the nomadic economy; the epicenter is where the share of pastoralism was highest.</li>\n<li><b>Niccolò Pianciola:</b> an imperial hierarchy of priorities; hence the "anomalous growth" in industrial and camp districts.</li>\n<li><b>Talas Omarbekov:</b> Kazakh agency and resistance; the link between the centers of the 1929–1931 uprisings and the depth of the losses.</li>\n</ul>\n\n<h4>Honest limitations worth stating in a defense</h4>\n<ul>\n<li><b>The boundaries are not an archival cadastre.</b> The geometry is built as a reference reconstruction: modern administrative outlines (geoBoundaries), merged under the historical units of 1926 and 1939. The real historical boundaries differed.</li>\n<li><b>Attributes and geometry are kept separate.</b> Demographic figures are stored apart from the outlines, so the boundary reconstruction is never mistaken for the source of the numbers.</li>\n<li><b>Different base totals.</b> The 1926 and 1939 attribute sets come from different sources, so it is more accurate to compare shares rather than absolute sums.</li>\n<li><b>The interpolation assumption.</b> Areal interpolation assumes uniform density within a unit. For a nomadic population this is a simplification, and part of the error comes from exactly this.</li>\n<li><b>The breakdown of migrations by country is a debated estimate.</b> S. Cameron explicitly calls an exact count by destination an open research question.</li>\n<li><b>Loss estimates diverge.</b> Irrecoverable losses of the Kazakh population are ≈1.3–2.3 million (estimates by different authors); A. N. Alekseenko: 1.5–1.84 million. Higher figures are individual authors’ estimates (Zh. Abylkhozhin, M. Kozybaev, M. Tatimov — 3.25 million; Kh. M. Abzhanov — up to 4 million). We give the range with attribution, not a single "correct" figure.</li>\n<li><b>Oblast data.</b> Oblast-level figures are the atlas’s working dataset; cross-checking against the published census results by oblast is in progress, see the data changelog.</li>\n</ul>\n\n<h4>Data and technology</h4>\n<ul>\n<li>Boundaries: geoBoundaries (reference geometry), Natural Earth 110m for the world map.</li>\n<li>Projections: the Albers equal-area conic for Kazakhstan, Equal Earth for the world map, both equal-area, so comparing areas is valid.</li>\n<li>Calculations: areal interpolation, dissimilarity index, quantile classification.</li>\n<li>Application: a single self-contained HTML file. The assistant\'s language model runs in the browser via WebGPU, so no data is sent anywhere.</li>\n</ul>\n\n<p style="margin-top:14px;color:var(--ink-mute);font-size:12px">All of the project\'s data is open: the "Data & MAUP" section lets you export the indicators as CSV, the boundaries as GeoJSON, and the polygon-intersection matrix.</p>' : '\n<p>«Картография коллапса»: пространственно-демографический анализ Ашаршылыка, голода в Казахстане 1930–1933 годов, выполненный средствами исторической ГИС (HGIS). Работа отвечает на один методологический вопрос: <b>насколько выводы о географии катастрофы зависят от административной сетки, по которой сгруппированы данные?</b></p>\n\n<h4>Что показывает исследование</h4>\n<p>Перепись 1926 года описывает Казакскую АССР через 8 округов, перепись 1939 года — через 12 областей. Территория одна, люди одни, но нарезка разная. Перенеся данные 1926 года на сетку 1939 года методом ареальной интерполяции по 96 пересечениям полигонов, мы получили суммарный сдвиг долей в <b>42,46 процентных пункта</b> и индекс несходства <b>21,2 %</b>. Иными словами, при смене сетки «переезжает» пятая часть всего пространственного распределения населения. Это и есть Modifiable Areal Unit Problem на историческом материале.</p>\n\n<h4>Три историографические линзы</h4>\n<ul>\n<li><b>Сара Кэмерон:</b> голод как следствие уничтожения кочевого хозяйства; эпицентр там, где выше доля скотоводства.</li>\n<li><b>Никколо Пьянчола:</b> имперская иерархия приоритетов; отсюда «аномальный рост» в промышленных и лагерных районах.</li>\n<li><b>Талас Омарбеков:</b> субъектность казахов и сопротивление; связь очагов восстаний 1929–1931 гг. с глубиной потерь.</li>\n</ul>\n\n<h4>Честные ограничения, которые нужно называть на защите</h4>\n<ul>\n<li><b>Границы: не архивный кадастр.</b> Геометрия построена как опорная реконструкция: современные административные контуры (geoBoundaries), объединённые под исторические единицы 1926 и 1939 годов. Реальные исторические границы отличались.</li>\n<li><b>Атрибуты и геометрия разделены.</b> Демографические показатели хранятся отдельно от контуров, чтобы реконструкция границ не выдавалась за источник цифр.</li>\n<li><b>Разные базовые итоги.</b> Наборы атрибутов 1926 и 1939 годов происходят из разных источников, поэтому корректнее сравнивать доли, а не абсолютные суммы.</li>\n<li><b>Допущение интерполяции.</b> Ареальная интерполяция предполагает равномерную плотность внутри единицы. Для кочевого населения это упрощение, и часть погрешности берётся именно отсюда.</li>\n<li><b>Разбивка откочёвок по странам: дискуссионная оценка.</b> С. Кэмерон прямо называет точный подсчёт по направлениям открытым исследовательским вопросом.</li>\n<li><b>Оценки потерь расходятся.</b> Безвозвратные потери казахского населения ≈1,3–2,3 млн (оценки разных авторов); А. Н. Алексеенко: 1,5–1,84 млн. Более высокие цифры — отдельные авторские оценки (Ж. Абылхожин, М. Козыбаев, М. Татимов — 3,25 млн; Х. М. Абжанов — до 4 млн). Мы приводим диапазон с атрибуцией, а не одну «правильную» цифру.</li>\n<li><b>Областные данные.</b> Областные показатели — рабочий набор данных атласа; сверка с опубликованными итогами переписей по областям ведётся, см. журнал изменений данных.</li>\n</ul>\n\n<h4>Данные и технологии</h4>\n<ul>\n<li>Границы: geoBoundaries (опорная геометрия), Natural Earth 110 м для карты мира.</li>\n<li>Проекции: Альберс равновеликая коническая для Казахстана, Equal Earth для карты мира, обе равновеликие, поэтому сравнение площадей корректно.</li>\n<li>Расчёты: ареальная интерполяция, индекс несходства, квантильная классификация.</li>\n<li>Приложение: один самодостаточный HTML-файл. Языковая модель ассистента работает в браузере через WebGPU, поэтому данные никуда не отправляются.</li>\n</ul>\n\n<p style="margin-top:14px;color:var(--ink-mute);font-size:12px">Все данные проекта открыты: раздел «Данные и MAUP» позволяет выгрузить показатели в CSV, границы в GeoJSON и матрицу пересечений полигонов.</p>';
+$("#aboutBody").insertAdjacentHTML("beforeend", contribHTML());
 }
 
 rebuildAiModels(), $("#aiModel").addEventListener("change", () => {
@@ -4518,3 +4735,12 @@ e.stopPropagation(), $("#langMenu").classList.toggle("on");
 }), document.addEventListener("click", e => {
 e.target.closest(".langwrap") || $("#langMenu").classList.remove("on");
 }), applyStaticI18n(), syncPeriodUI(), renderMarks(), renderKz();
+
+// First visit: show the jury entry overlay once.
+(() => {
+let seen = !1;
+try {
+seen = "1" === localStorage.getItem(INTRO_KEY);
+} catch (e) {}
+seen || openIntro();
+})();
