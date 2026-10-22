@@ -3060,7 +3060,7 @@ rChart && (rChart.destroy(), rChart = null);
 function printRegion(per, id) {
 const f = KZ[per].find(x => x.p.id === id);
 if (!f) return;
-const p = f.p, rows = "1939" === per ? [ [ t("kazakhs1926"), fmtN(p.kazakh_1926) ], [ t("kazakhs1939"), fmtN(p.kazakh_1939) ], [ t("total1926"), fmtN(p.total_1926) ], [ t("total1939"), fmtN(p.total_1939) ], [ t("kazakhLoss"), fmtD(p.loss) + " %" ], [ t("generalPopChange"), fmtP(p.growth) + " %" ], [ t("maupShift"), fmtP(p.shareShift, 2) + " " + ("kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п.") ] ] : [ [ t("totalPop"), fmtN(p.pop) ], [ t("kazakhPop"), fmtN(p.kazAbs) ], [ t("shareKazPop").replace(/^./, c => c.toUpperCase()), fmtD(p.kazShare) + " %" ] ], locale = "kz" === LANG ? "kk-KZ" : "en" === LANG ? "en-US" : "ru-RU";
+const p = f.p, rows = "1939" === per ? [ [ t("kazakhs1926"), fmtN(p.kazakh_1926) ], [ t("kazakhs1939"), fmtN(p.kazakh_1939) ], [ t("total1926"), fmtN(p.total_1926) ], [ t("total1939"), fmtN(p.total_1939) ], [ t("kazakhLoss"), fmtD(p.loss) + " %" ], [ t("generalPopChange"), fmtP(p.growth) + " %" ], [ t("maupShift"), fmtP(p.shareShift, 2) + " " + ("kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п.") ] ] : [ [ t("totalPop"), fmtN(p.pop) ], [ t("kazakhPop"), fmtN(p.kazAbs) ], [ t("shareKazPop").replace(/^./, c => c.toUpperCase()), fmtD(p.kazShare) + " %" ] ], locale = numLoc();
 $("#print").innerHTML = `<h1>${esc(pName(p))}</h1>\n    <div class="m">${t("brandTitle")} · Asharshylyk 1930–1933 · ${esc(t("regionGridLabel"))} ${per} ${esc(t("regionOf"))}</div>\n    <table>${rows.map(r => `<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join("")}</table>\n    <p style="margin-top:14px">${esc(pDesc(p))}</p>\n    <div class="f">${esc(t("disclaimer1939"))} ${t("printGenerated")} ${(new Date).toLocaleDateString(locale)}.</div>`, 
 window.print();
 }
@@ -4125,7 +4125,7 @@ source: "Демоскоп Weekly: 1926 және 1939 жж. санақ қорыт
 function renderDataLog() {
 const box = $("#dataLog");
 if (!box) return;
-const locale = "kz" === LANG ? "kk-KZ" : "en" === LANG ? "en-US" : "ru-RU";
+const locale = numLoc();
 box.innerHTML = DATA_LOG.map(e => {
 const L = tr(e), d = new Date(e.date + "T00:00:00").toLocaleDateString(locale);
 return `<div style="border-top:1px solid var(--line);padding:10px 0">\n      <p class="sec-t" style="margin:0 0 5px">${esc(d)}</p>\n      <p style="margin:0 0 4px;font-size:13px"><b>${esc(t("logWhat"))}:</b> ${esc(L.what)}</p>\n      <p style="margin:0 0 4px;font-size:12.5px;color:var(--ink-soft)"><b>${esc(t("logWhy"))}:</b> ${esc(L.why)}</p>\n      <p class="hint" style="margin:0"><b>${esc(t("logSource"))}:</b> ${esc(L.source)}</p>\n    </div>`;
