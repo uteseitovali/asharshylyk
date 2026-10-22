@@ -1736,22 +1736,22 @@ cite: "Т. Омарбеков, қазақстандық ұлттық мекте�
 }, {
 p: "1939",
 focus: [ "karaganda", "east_kz", "akmola" ],
-metric: "growth",
+metric: "loss",
 layer: "camps",
 ru: {
 t: "Аномальный рост",
-text: "Парадокс, который не виден в сводной статистике: в Карагандинской области общее население РАСТЁТ, потому что прибывают спецпереселенцы, заключённые Карлага и рабочие. При этом казахское население той же области падает более чем вдвое. Сводная цифра маскирует этнодемографический коллапс.",
-cite: "Н. Пьянчола: колониальная иерархия приоритетов"
+text: "По опубликованным данным (Асылбеков, Асылбекова, 2014) общая численность Карагандинской области выросла сильнее всех, а казахское население сократилось; в рабочем наборе атласа это ещё не отражено — сверка ведётся.",
+cite: "Асылбеков, Асылбекова (2014); Н. Пьянчола: колониальная иерархия приоритетов"
 },
 en: {
 t: "Anomalous growth",
-text: "A paradox invisible in aggregate statistics: in Karaganda Oblast the total population GROWS, because special settlers, Karlag prisoners, and workers arrive. Yet the Kazakh population of that same oblast falls by more than half. The aggregate figure masks the ethno-demographic collapse.",
-cite: "N. Pianciola: an imperial hierarchy of priorities"
+text: "According to published data (Asylbekov & Asylbekova, 2014), Karaganda Oblast’s total population grew more than any other oblast’s, while its Kazakh population declined; the atlas’s working dataset does not reflect this yet — cross-checking is in progress.",
+cite: "Asylbekov & Asylbekova (2014); N. Pianciola: an imperial hierarchy of priorities"
 },
 kz: {
 t: "Аномальды өсім",
-text: "Жиынтық статистикада көрінбейтін парадокс: Қарағанды облысында жалпы халық саны ӨСЕДІ, себебі арнайы қоныс аударушылар, Карлаг тұтқындары және жұмысшылар келеді. Ал сол облыстың қазақ халқы екі еседен астам азаяды. Жиынтық сан этнодемографиялық күйреуді жасырады.",
-cite: "Н. Пьянчола: империялық басымдықтар иерархиясы"
+text: "Жарияланған деректер бойынша (Асылбеков, Асылбекова, 2014) Қарағанды облысының жалпы халқы барлық облыстан көп өсті, ал қазақ халқы азайды; атластың жұмыс деректер жиынтығында бұл әлі көрсетілмеген — салыстыру жүргізілуде.",
+cite: "Асылбеков, Асылбекова (2014); Н. Пьянчола: империялық басымдықтар иерархиясы"
 }
 }, {
 p: "1939",
