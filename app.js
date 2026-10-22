@@ -81,15 +81,20 @@ infoLabel: "Источник и способ расчёта",
 info_totalPop1926: "Расчёт: сумма населения 8 округов рабочего набора атласа (перепись 1926 г.). Сверка с опубликованными итогами ведётся.",
 info_kaz1926: "Расчёт: для каждого округа население × доля казахов, затем сумма по 8 округам (рабочий набор атласа, перепись 1926 г.).",
 info_livestock: "Оценка историографии: около 40 млн голов скота до коллективизации, к 1933 г. — около одной десятой (С. Кэмерон, «The Hungry Steppe», 2018).",
-info_kazLoss: "Расчёт: (казахи 1926 − казахи 1939) ÷ казахи 1926 по 12 областям рабочего набора атласа. Сверка областных значений с опубликованными итогами переписей ведётся.",
-info_maxLoss: "Область с наибольшей относительной убылью казахского населения по рабочему набору атласа (сверка ведётся).",
-info_anomaly: "Число областей, в которых общее население по переписи 1939 г. больше, чем в 1926 г. (рабочий набор атласа).",
 info_flowsDest: "Сумма диапазонов оценок по направлениям откочёвок на карте. Разбивка по странам — дискуссионная оценка: С. Кэмерон называет точный подсчёт открытым исследовательским вопросом.",
 info_returned: "454 тыс. вернувшихся из ≈1,13 млн откочевавших (архивные данные АПРК; С. Кэмерон).",
 info_relLoss: "Оценка историографии: погибло ≈38 % казахов (С. Кэмерон, «The Hungry Steppe», 2018).",
 info_absMax: "Украинская ССР: ≈3,3–3,9 млн погибших («between 3.3 and 3.9 million died in Ukraine») — Wikipedia, «Soviet famine of 1930–1933» (Э15 списка литературы работы).",
 info_deathEst: "Безвозвратные потери казахского населения ≈1,3–2,3 млн — диапазон оценок разных авторов (по тексту работы); А. Н. Алексеенко (2000): 1,5–1,84 млн.",
 info_shareRep: "Перепись 1926 г.: ≈3,63 млн казахов из ≈6,07 млн жителей (Асылбеков, Асылбекова, 2014); перепись 1939 г.: 2,33 млн из 6,15 млн, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
+kazakhLossRep: "Убыль казахов в республике",
+kazakhLossRepSub: "≈3,63 → ≈2,33 млн · переписи 1926 и 1939 гг.",
+info_kazLossRep: "Перепись 1926 г.: ≈3,63 млн казахов (Асылбеков, Асылбекова, 2014); перепись 1939 г.: 2,33 млн (Тольц, Демоскоп Weekly, 2006). Убыль: (2,33 − 3,63) ÷ 3,63 ≈ −36 %.",
+oblastDataLabel: "Областные показатели",
+oblastDataVal: "сверка ведётся",
+oblastDataSub: "проценты по областям — в карточках областей (рабочий набор атласа)",
+regionCheckTag: "сверка ведётся",
+regionCheckTip: "Значение из рабочего набора атласа; сверка с опубликованными итогами переписей по областям ведётся.",
 info_maupCalc: "Собственный расчёт: ареальная интерполяция казахского населения 1926 г. с сетки 8 округов на сетку 12 областей; индекс несходства — половина суммы модулей сдвигов долей.",
 info_inter96: "Собственный расчёт: матрица 8 × 12: 96 пар «округ — область», из них 37 с ненулевой площадью пересечения. Для каждой пары «округ 1926 г. — область 1939 г.» вычислена площадь пересечения в GeoPandas/Shapely.",
 info_coverage: "Сумма площадей 8 округов совпадает с суммой площадей 12 областей (расхождение 0,05 %): обе сетки описывают одну территорию.",
@@ -245,10 +250,6 @@ kazakhsWord: "Казахов",
 livestockCount: "Поголовье скота",
 oblastsCount: "Областей",
 kazakhLoss: "Потеря казахов",
-maxLoss: "Максимум потерь",
-anomalyGrowth: "Аномальный рост",
-ofOblasts: "из 12",
-grewOverall: "областей выросли по общему населению",
 byOkrugsGrid: "сетка 1926 года",
 byOblastsGrid: "сетка 1939 года",
 toKazakhsShare: "% населения",
@@ -380,15 +381,20 @@ infoLabel: "Source and method",
 info_totalPop1926: "Calculation: total population of the 8 okrugs in the atlas’s working dataset (1926 census). Cross-checking against the published results is in progress.",
 info_kaz1926: "Calculation: population × Kazakh share for each okrug, summed over the 8 okrugs (atlas working dataset, 1926 census).",
 info_livestock: "Historiographic estimate: about 40 million head of livestock before collectivization, about one-tenth by 1933 (S. Cameron, “The Hungry Steppe”, 2018).",
-info_kazLoss: "Calculation: (Kazakhs 1926 − Kazakhs 1939) ÷ Kazakhs 1926 over the 12 oblasts of the atlas’s working dataset. Oblast values are being cross-checked against the published census results.",
-info_maxLoss: "The oblast with the largest relative decline of the Kazakh population in the atlas’s working dataset (cross-check in progress).",
-info_anomaly: "Number of oblasts where the total population in the 1939 census exceeds that of 1926 (atlas working dataset).",
 info_flowsDest: "Sum of the estimate ranges for the migration destinations on the map. The breakdown by country is a debated estimate: S. Cameron calls an exact count an open research question.",
 info_returned: "454 thousand returnees out of ≈1.13 million who left (archival data, APRK; S. Cameron).",
 info_relLoss: "Historiographic estimate: ≈38% of Kazakhs died (S. Cameron, “The Hungry Steppe”, 2018).",
 info_absMax: "Ukrainian SSR: ≈3.3–3.9 million deaths (“between 3.3 and 3.9 million died in Ukraine”) — Wikipedia, “Soviet famine of 1930–1933” (E15 in the paper’s reference list).",
 info_deathEst: "Irrecoverable losses of the Kazakh population ≈1.3–2.3 million — the range of estimates by different authors (per the paper); A. N. Alekseenko (2000): 1.5–1.84 million.",
 info_shareRep: "1926 census: ≈3.63 million Kazakhs of ≈6.07 million inhabitants (Asylbekov & Asylbekova, 2014); 1939 census: 2.33 million of 6.15 million, 37.8% (Tolts, Demoscope Weekly, 2006).",
+kazakhLossRep: "Kazakh decline in the republic",
+kazakhLossRepSub: "≈3.63 → ≈2.33 million · 1926 and 1939 censuses",
+info_kazLossRep: "1926 census: ≈3.63 million Kazakhs (Asylbekov & Asylbekova, 2014); 1939 census: 2.33 million (Tolts, Demoscope Weekly, 2006). Decline: (2.33 − 3.63) ÷ 3.63 ≈ −36%.",
+oblastDataLabel: "Oblast figures",
+oblastDataVal: "cross-check in progress",
+oblastDataSub: "oblast percentages are in the oblast cards (atlas working dataset)",
+regionCheckTag: "cross-check in progress",
+regionCheckTip: "A value from the atlas’s working dataset; cross-checking against the published oblast census results is in progress.",
 info_maupCalc: "Own calculation: areal interpolation of the 1926 Kazakh population from the 8-okrug grid to the 12-oblast grid; the dissimilarity index is half the sum of absolute share shifts.",
 info_inter96: "Own calculation: an 8 × 12 matrix: 96 okrug–oblast pairs, 37 of them with a non-zero intersection area. The intersection area is computed for each “1926 okrug — 1939 oblast” pair in GeoPandas/Shapely.",
 info_coverage: "The total area of the 8 okrugs equals that of the 12 oblasts (0.05% difference): both grids describe the same territory.",
@@ -544,10 +550,6 @@ kazakhsWord: "Kazakhs",
 livestockCount: "Livestock head",
 oblastsCount: "Oblasts",
 kazakhLoss: "Kazakh population loss",
-maxLoss: "Largest loss",
-anomalyGrowth: "Anomalous growth",
-ofOblasts: "of 12",
-grewOverall: "oblasts grew in total population",
 byOkrugsGrid: "1926 grid",
 byOblastsGrid: "1939 grid",
 toKazakhsShare: "% of population",
@@ -679,15 +681,20 @@ infoLabel: "Дереккөз және есептеу тәсілі",
 info_totalPop1926: "Есептеу: атлас жұмыс жиынтығындағы 8 округ халқының қосындысы (1926 ж. санақ). Жарияланған қорытындылармен салыстыру жүргізілуде.",
 info_kaz1926: "Есептеу: әр округ үшін халық саны × қазақтар үлесі, содан кейін 8 округ бойынша қосынды (атлас жұмыс жиынтығы, 1926 ж. санақ).",
 info_livestock: "Тарихнамалық баға: ұжымдастыруға дейін шамамен 40 млн бас мал, 1933 ж. қарай — шамамен оннан бірі (С. Кэмерон, «The Hungry Steppe», 2018).",
-info_kazLoss: "Есептеу: атлас жұмыс жиынтығының 12 облысы бойынша (1926 ж. қазақтар − 1939 ж. қазақтар) ÷ 1926 ж. қазақтар. Облыстық мәндерді жарияланған санақ қорытындыларымен салыстыру жүргізілуде.",
-info_maxLoss: "Атлас жұмыс жиынтығы бойынша қазақ халқының салыстырмалы кемуі ең көп облыс (салыстыру жүргізілуде).",
-info_anomaly: "1939 ж. санақ бойынша жалпы халқы 1926 ж.-дан көп облыстар саны (атлас жұмыс жиынтығы).",
 info_flowsDest: "Картадағы көші-қон бағыттары бойынша бағалау диапазондарының қосындысы. Елдер бойынша бөліну — пікірталастық баға: С. Кэмерон нақты есепті ашық зерттеу мәселесі деп атайды.",
 info_returned: "≈1,13 млн көшіп кеткендердің 454 мыңы оралды (ҚР ПМА мұрағат деректері; С. Кэмерон).",
 info_relLoss: "Тарихнамалық баға: қазақтардың ≈38 %-ы қаза тапты (С. Кэмерон, «The Hungry Steppe», 2018).",
 info_absMax: "Украин КСР-і: ≈3,3–3,9 млн қаза тапқан («between 3.3 and 3.9 million died in Ukraine») — Wikipedia, «Soviet famine of 1930–1933» (жұмыстың әдебиеттер тізіміндегі Э15).",
 info_deathEst: "Қазақ халқының қайтарымсыз шығыны ≈1,3–2,3 млн — әртүрлі авторлар бағаларының диапазоны (жұмыс мәтіні бойынша); А. Н. Алексеенко (2000): 1,5–1,84 млн.",
 info_shareRep: "1926 ж. санақ: ≈6,07 млн тұрғынның ≈3,63 млн-ы қазақ (Асылбеков, Асылбекова, 2014); 1939 ж. санақ: 6,15 млн-ның 2,33 млн-ы, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
+kazakhLossRep: "Республикадағы қазақтардың кемуі",
+kazakhLossRepSub: "≈3,63 → ≈2,33 млн · 1926 және 1939 жж. санақтар",
+info_kazLossRep: "1926 ж. санақ: ≈3,63 млн қазақ (Асылбеков, Асылбекова, 2014); 1939 ж. санақ: 2,33 млн (Тольц, Демоскоп Weekly, 2006). Кему: (2,33 − 3,63) ÷ 3,63 ≈ −36 %.",
+oblastDataLabel: "Облыстық көрсеткіштер",
+oblastDataVal: "салыстыру жүргізілуде",
+oblastDataSub: "облыстар бойынша пайыздар — облыс карточкаларында (атластың жұмыс жиынтығы)",
+regionCheckTag: "салыстыру жүргізілуде",
+regionCheckTip: "Атластың жұмыс деректер жиынтығындағы мән; облыстар бойынша жарияланған санақ қорытындыларымен салыстыру жүргізілуде.",
 info_maupCalc: "Меншікті есептеу: 1926 ж. қазақ халқын 8 округ торынан 12 облыс торына ареалдық интерполяциялау; ұқсамау индексі — үлес ығысулары модульдерінің жартысы.",
 info_inter96: "Меншікті есептеу: 8 × 12 матрицасы: «округ — облыс» 96 жұбы, оның 37-сінде қиылысу ауданы нөлден үлкен. Әр «1926 ж. округ — 1939 ж. облыс» жұбы үшін қиылысу ауданы GeoPandas/Shapely-де есептелген.",
 info_coverage: "8 округтің аудандарының қосындысы 12 облыстың аудандарының қосындысына тең (айырмашылық 0,05 %): екі тор бір аумақты сипаттайды.",
@@ -843,10 +850,6 @@ kazakhsWord: "Қазақтар",
 livestockCount: "Мал басы",
 oblastsCount: "Облыстар",
 kazakhLoss: "Қазақтардың шығыны",
-maxLoss: "Ең үлкен шығын",
-anomalyGrowth: "Аномальды өсім",
-ofOblasts: "12-нің",
-grewOverall: "облыс жалпы халық саны бойынша өсті",
 byOkrugsGrid: "1926 жылғы тор",
 byOblastsGrid: "1939 жылғы тор",
 toKazakhsShare: "% халық",
@@ -2963,8 +2966,8 @@ if ("1926" === per) {
 const tot = KZ[1926].reduce((s, f) => s + f.p.pop, 0), kaz = KZ[1926].reduce((s, f) => s + f.p.kazAbs, 0);
 box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("totalPopulation"))}${lvl("census")}${info("info_totalPop1926")}</u><b>${fmtN(tot)}</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhsWord"))}${lvl("census")}${info("info_kaz1926")}</u><b>${fmtN(kaz)}</b><s>${fmtD(kaz / tot * 100)} ${esc(t("toKazakhsShare"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}${lvl("hist")}${info("info_livestock")}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
 } else {
-const k26 = KZ[1939].reduce((s, f) => s + f.p.kazakh_1926, 0), k39 = KZ[1939].reduce((s, f) => s + f.p.kazakh_1939, 0), worst = KZ[1939].slice().sort((a, b) => b.p.loss - a.p.loss)[0], grew = KZ[1939].filter(f => f.p.growth > 0).length;
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLoss"))}${lvl("census")}${info("info_kazLoss")}</u><b style="color:var(--carmine2)">−${fmtD((k26 - k39) / k26 * 100)} %</b><s>${fmtN(k26 - k39)} ${"kz" === LANG ? "адам" : "en" === LANG ? "people" : "человек"}</s></div>\n      <div class="stat"><u>${esc(t("maxLoss"))}${lvl("census")}${info("info_maxLoss")}</u><b style="font-size:15px">${esc(shortName(worst))}</b><s>${fmtD(worst.p.loss)} %</s></div>\n      <div class="stat"><u>${esc(t("anomalyGrowth"))}${lvl("census")}${info("info_anomaly")}</u><b>${grew} ${esc(t("ofOblasts"))}</b><s>${esc(t("grewOverall"))}</s></div>`;
+// Republic-level census totals only: the oblast figures of the working dataset are not verified yet.
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLossRep"))}${lvl("census")}${info("info_kazLossRep")}</u><b style="color:var(--carmine2)">≈ −${fmtD(36, 0)} %</b><s>${esc(t("kazakhLossRepSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}${lvl("census")}${info("info_shareRep")}</u><b>≈60 % → ≈38 %</b><s>1926 → 1939</s></div>\n      <div class="stat"><u>${esc(t("oblastDataLabel"))}</u><b style="font-size:15px">${esc(t("oblastDataVal"))}</b><s>${esc(t("oblastDataSub"))}</s></div>`;
 }
 }
 
@@ -3096,8 +3099,8 @@ S.selected = p.id;
 let html = `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">\n    <div><h3 style="font-size:18px">${esc(pName(p))}</h3>\n    <p style="color:var(--ink-mute);font-size:11.5px;margin:3px 0 0">${esc(t("regionGridLabel"))} ${per} ${esc(t("regionOf"))} · ${esc(pType(p))}</p></div>\n    <button class="btn ico ghost" onclick="drawerClose()">✕</button></div>`;
 if ("1939" === per) {
 const tags = LENS_TAGS[p.id] || {};
-html += `<div style="margin:13px 0">\n      ${tags.nomadic ? `<span class="badge">${esc(t("tagNomadic"))}</span>` : ""}\n      ${tags.gulag ? `<span class="badge">${esc(t("tagGulag"))}</span>` : ""}\n      ${tags.unrest ? `<span class="badge">${esc(t("tagUnrest"))}</span>` : ""}</div>\n    <div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin-bottom:13px">\n      <div style="font-size:42px;font-weight:700;color:var(--carmine2);line-height:1">−${fmtD(p.loss)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("lossOfKazPop"))}${lvl("census")}</div>\n    </div>\n    <div class="kv"><span>${esc(t("kazakhs1926"))}${lvl("census")}</span><b>${fmtN(p.kazakh_1926)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhs1939"))}</span><b>${fmtN(p.kazakh_1939)}</b></div>\n    <div class="kv"><span>${esc(t("total1926"))}</span><b>${fmtN(p.total_1926)}</b></div>\n    <div class="kv"><span>${esc(t("total1939"))}</span><b>${fmtN(p.total_1939)}</b></div>\n    <div class="kv"><span>${esc(t("generalPopChange"))}</span><b style="color:${p.growth >= 0 ? "var(--good)" : "var(--carmine2)"}">${fmtP(p.growth)} %</b></div>\n    <div class="kv"><span>${esc(t("kazShareChange"))}</span><b>${fmtD(p.share1926)} % → ${fmtD(p.share1939)} %</b></div>\n    <div class="kv"><span>${esc(t("maupShift"))}${lvl("model")}</span><b>${fmtP(p.shareShift, 2)} ${"kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п."}</b></div>`;
-} else html += `<div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin:13px 0">\n      <div style="font-size:42px;font-weight:700;color:var(--s26);line-height:1">${fmtD(p.kazShare)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("shareKazPop"))}${lvl("census")}</div>\n    </div>\n    <div class="kv"><span>${esc(t("totalPop"))}${lvl("census")}</span><b>${fmtN(p.pop)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhPop"))}</span><b>${fmtN(p.kazAbs)}</b></div>\n    <div class="kv"><span>${esc(t("otherPop"))}</span><b>${fmtN(p.pop - p.kazAbs)}</b></div>`;
+html += `<div style="margin:13px 0">\n      ${tags.nomadic ? `<span class="badge">${esc(t("tagNomadic"))}</span>` : ""}\n      ${tags.gulag ? `<span class="badge">${esc(t("tagGulag"))}</span>` : ""}\n      ${tags.unrest ? `<span class="badge">${esc(t("tagUnrest"))}</span>` : ""}</div>\n    <div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin-bottom:13px">\n      <div style="font-size:42px;font-weight:700;color:var(--carmine2);line-height:1">−${fmtD(p.loss)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("lossOfKazPop"))}${lvl("census")}<span class="lvl lvl-check" tabindex="0" title="${esc(t("regionCheckTip"))}">${esc(t("regionCheckTag"))}</span></div>\n    </div>\n    <div class="kv"><span>${esc(t("kazakhs1926"))}${lvl("census")}</span><b>${fmtN(p.kazakh_1926)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhs1939"))}</span><b>${fmtN(p.kazakh_1939)}</b></div>\n    <div class="kv"><span>${esc(t("total1926"))}</span><b>${fmtN(p.total_1926)}</b></div>\n    <div class="kv"><span>${esc(t("total1939"))}</span><b>${fmtN(p.total_1939)}</b></div>\n    <div class="kv"><span>${esc(t("generalPopChange"))}</span><b style="color:${p.growth >= 0 ? "var(--good)" : "var(--carmine2)"}">${fmtP(p.growth)} %</b></div>\n    <div class="kv"><span>${esc(t("kazShareChange"))}</span><b>${fmtD(p.share1926)} % → ${fmtD(p.share1939)} %</b></div>\n    <div class="kv"><span>${esc(t("maupShift"))}${lvl("model")}</span><b>${fmtP(p.shareShift, 2)} ${"kz" === LANG ? "п.т." : "en" === LANG ? "pp" : "п.п."}</b></div>`;
+} else html += `<div style="background:var(--panel2);border-radius:11px;padding:15px;text-align:center;margin:13px 0">\n      <div style="font-size:42px;font-weight:700;color:var(--s26);line-height:1">${fmtD(p.kazShare)}<span style="font-size:20px"> %</span></div>\n      <div style="font-size:11.5px;color:var(--ink-mute);margin-top:3px">${esc(t("shareKazPop"))}${lvl("census")}<span class="lvl lvl-check" tabindex="0" title="${esc(t("regionCheckTip"))}">${esc(t("regionCheckTag"))}</span></div>\n    </div>\n    <div class="kv"><span>${esc(t("totalPop"))}${lvl("census")}</span><b>${fmtN(p.pop)}</b></div>\n    <div class="kv"><span>${esc(t("kazakhPop"))}</span><b>${fmtN(p.kazAbs)}</b></div>\n    <div class="kv"><span>${esc(t("otherPop"))}</span><b>${fmtN(p.pop - p.kazAbs)}</b></div>`;
 if (html += `<div style="margin:15px 0 0"><canvas id="rChart" height="150"></canvas></div>\n    <p class="prose" style="margin-top:13px">${esc(pDesc(p))}</p>`, 
 "1939" === per) {
 const parts = MAUP.m.map((row, i) => ({
@@ -4345,6 +4348,23 @@ kz: {
 what: "Библиографияға «Қосымша дереккөздер (жұмыс тапсырылғаннан кейін)» деген бөлек топ қосылды: М. С. Тольц (2006) және М. Х. Асылбек, Ж. М. Асылбекова (2014), APA 7 бойынша.",
 why: "«Қазылар алқасына кіріспе» панеліндегі, тақташалардағы және StoryMap-тің 4-қадамындағы республикалық санақ қорытындылары осы еңбектерге сүйенеді; олар жұмыстың әдебиеттер тізімінде жоқ.",
 source: "Тольц М. С. (2006), Демоскоп Weekly, № 245–246; Асылбек М. Х., Асылбекова Ж. М. (2014), iie.kz."
+}
+}, {
+date: "2026-10-22",
+ru: {
+what: "Цифры на сайте: относительная потеря казахов — ≈38 % (Cameron, 2018) вместо 38–42 %; потери Украинской ССР — ≈3,3–3,9 млн (Э15) вместо 3,5–5 млн; на плашке периода 1939 г. — убыль казахов в республике ≈ −36 % (переписи 1926 и 1939 гг.) вместо −51,4 % по сумме областей; областные проценты оставлены только в карточках областей с пометкой «сверка ведётся».",
+why: "Приведение к источникам; областные показатели рабочего набора ещё не сверены с опубликованными итогами переписей.",
+source: "Cameron S. (2018); Soviet famine of 1930–1933 — Wikipedia (Э15); Асылбек, Асылбекова (2014); Тольц (2006)."
+},
+en: {
+what: "Figures on the site: relative Kazakh loss — ≈38% (Cameron, 2018) instead of 38–42%; Ukrainian SSR losses — ≈3.3–3.9 million (E15) instead of 3.5–5 million; the 1939 plaque shows the republic-level Kazakh decline ≈ −36% (1926 and 1939 censuses) instead of −51.4% summed over oblasts; oblast percentages remain only in the oblast cards, marked “cross-check in progress”.",
+why: "Alignment with the sources; the oblast figures of the working dataset have not yet been cross-checked against the published census results.",
+source: "Cameron, S. (2018); Soviet famine of 1930–1933 — Wikipedia (E15); Asylbek & Asylbekova (2014); Tolts (2006)."
+},
+kz: {
+what: "Сайттағы сандар: қазақтардың салыстырмалы шығыны — 38–42 % орнына ≈38 % (Cameron, 2018); Украин КСР-інің шығыны — 3,5–5 млн орнына ≈3,3–3,9 млн (Э15); 1939 ж. тақташасында облыстар қосындысы бойынша −51,4 % орнына республикадағы қазақтардың кемуі ≈ −36 % (1926 және 1939 жж. санақтар); облыстық пайыздар тек облыс карточкаларында «салыстыру жүргізілуде» белгісімен қалдырылды.",
+why: "Дереккөздерге сәйкестендіру; жұмыс жиынтығының облыстық көрсеткіштері жарияланған санақ қорытындыларымен әлі салыстырылған жоқ.",
+source: "Cameron S. (2018); Soviet famine of 1930–1933 — Wikipedia (Э15); Асылбек, Асылбекова (2014); Тольц (2006)."
 }
 } ];
 
