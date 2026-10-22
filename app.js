@@ -60,6 +60,8 @@ introKicker: "Исследовательская работа · историч�
 introTitle: "Картография распада — картирование демографического наследия советской коллективизации в Казахстане с использованием GIS и открытых исторических данных",
 introQLabel: "Исследовательский вопрос",
 introQ: "Насколько выводы о географии катастрофы зависят от административной сетки, по которой сгруппированы данные?",
+introHLabel: "Гипотеза",
+introH: "Гипотеза состоит в том, что наиболее тяжелые потери приходились на районы традиционного скотоводства, тогда как статистический прирост в промышленных центрах мог быть следствием принудительной и организованной миграции.",
 introResultsLabel: "Три главных результата",
 introR1: "Доля казахов в населении республики: ≈60 % по переписи 1926 г. → ≈38 % по переписи 1939 г.",
 introR2: "Убыль казахского населения республики между переписями: ≈36 % (≈3,63 → ≈2,33 млн человек).",
@@ -356,6 +358,8 @@ introKicker: "Research paper · historical GIS",
 introTitle: "Cartography of Disintegration — mapping the demographic legacy of Soviet collectivization in Kazakhstan using GIS and open historical data",
 introQLabel: "Research question",
 introQ: "How far do conclusions about the geography of the catastrophe depend on the administrative grid by which the data are grouped?",
+introHLabel: "Hypothesis",
+introH: "The hypothesis is that the heaviest losses fell on areas of traditional pastoralism, while the statistical growth of industrial centres may have resulted from forced and organised migration.",
 introResultsLabel: "Three main results",
 introR1: "Kazakh share of the republic’s population: ≈60% in the 1926 census → ≈38% in the 1939 census.",
 introR2: "Decline of the republic’s Kazakh population between the censuses: ≈36% (≈3.63 → ≈2.33 million people).",
@@ -652,6 +656,8 @@ introKicker: "Зерттеу жұмысы · тарихи ГАЖ",
 introTitle: "Ыдырау картографиясы — ГАЖ және ашық тарихи деректер арқылы Қазақстандағы кеңестік ұжымдастырудың демографиялық мұрасын картаға түсіру",
 introQLabel: "Зерттеу сұрағы",
 introQ: "Апат географиясы туралы қорытындылар деректер топтастырылған әкімшілік торға қаншалықты тәуелді?",
+introHLabel: "Гипотеза",
+introH: "Гипотеза бойынша ең ауыр шығындар дәстүрлі мал шаруашылығы аудандарына келді, ал өнеркәсіп орталықтарындағы статистикалық өсім мәжбүрлі және ұйымдастырылған көші-қонның салдары болуы мүмкін.",
 introResultsLabel: "Үш басты нәтиже",
 introR1: "Республика халқындағы қазақтар үлесі: 1926 ж. санақ бойынша ≈60 % → 1939 ж. санақ бойынша ≈38 %.",
 introR2: "Санақтар арасында республикадағы қазақ халқының кемуі: ≈36 % (≈3,63 → ≈2,33 млн адам).",
@@ -4299,6 +4305,7 @@ const box = $("#introBody");
 box && (box.innerHTML = `<p class="intro-kicker">${esc(t("introKicker"))}</p>
     <h2 id="introTitle">${esc(t("introTitle"))}</h2>
     <p class="intro-q"><b>${esc(t("introQLabel"))}.</b> ${esc(t("introQ"))}</p>
+    <p class="intro-q"><b>${esc(t("introHLabel"))}.</b> ${esc(t("introH"))}</p>
     <p class="sec-t">${esc(t("introResultsLabel"))}</p>
     <ol class="intro-results"><li>${esc(t("introR1"))} ${lvl("census")}</li><li>${esc(t("introR2"))} ${lvl("census")}</li><li>${esc(t("introR3"))} ${lvl("model")}</li></ol>
     <p class="hint">${esc(t("introSrc"))}</p>
