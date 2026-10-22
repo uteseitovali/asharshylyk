@@ -86,8 +86,8 @@ info_maxLoss: "Область с наибольшей относительной
 info_anomaly: "Число областей, в которых общее население по переписи 1939 г. больше, чем в 1926 г. (рабочий набор атласа).",
 info_flowsDest: "Сумма диапазонов оценок по направлениям откочёвок на карте. Разбивка по странам — дискуссионная оценка: С. Кэмерон называет точный подсчёт открытым исследовательским вопросом.",
 info_returned: "454 тыс. вернувшихся из ≈1,13 млн откочевавших (архивные данные АПРК; С. Кэмерон).",
-info_relLoss: "Оценка историографии: доля погибших от численности казахского народа, диапазон по разным авторам. Источник диапазона уточняется.",
-info_absMax: "Оценка историографии для Украинской ССР, диапазон по разным авторам. Источник диапазона уточняется.",
+info_relLoss: "Оценка историографии: погибло ≈38 % казахов (С. Кэмерон, «The Hungry Steppe», 2018).",
+info_absMax: "Украинская ССР: ≈3,3–3,9 млн погибших («between 3.3 and 3.9 million died in Ukraine») — Wikipedia, «Soviet famine of 1930–1933» (Э15 списка литературы работы).",
 info_deathEst: "Безвозвратные потери казахского населения ≈1,3–2,3 млн — диапазон оценок разных авторов (по тексту работы); А. Н. Алексеенко (2000): 1,5–1,84 млн.",
 info_shareRep: "Перепись 1926 г.: ≈3,63 млн казахов из ≈6,07 млн жителей (Асылбеков, Асылбекова, 2014); перепись 1939 г.: 2,33 млн из 6,15 млн, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
 info_maupCalc: "Собственный расчёт: ареальная интерполяция казахского населения 1926 г. с сетки 8 округов на сетку 12 областей; индекс несходства — половина суммы модулей сдвигов долей.",
@@ -385,8 +385,8 @@ info_maxLoss: "The oblast with the largest relative decline of the Kazakh popula
 info_anomaly: "Number of oblasts where the total population in the 1939 census exceeds that of 1926 (atlas working dataset).",
 info_flowsDest: "Sum of the estimate ranges for the migration destinations on the map. The breakdown by country is a debated estimate: S. Cameron calls an exact count an open research question.",
 info_returned: "454 thousand returnees out of ≈1.13 million who left (archival data, APRK; S. Cameron).",
-info_relLoss: "Historiographic estimate: share of deaths relative to the Kazakh people, a range across authors. The source of the range is being specified.",
-info_absMax: "Historiographic estimate for the Ukrainian SSR, a range across authors. The source of the range is being specified.",
+info_relLoss: "Historiographic estimate: ≈38% of Kazakhs died (S. Cameron, “The Hungry Steppe”, 2018).",
+info_absMax: "Ukrainian SSR: ≈3.3–3.9 million deaths (“between 3.3 and 3.9 million died in Ukraine”) — Wikipedia, “Soviet famine of 1930–1933” (E15 in the paper’s reference list).",
 info_deathEst: "Irrecoverable losses of the Kazakh population ≈1.3–2.3 million — the range of estimates by different authors (per the paper); A. N. Alekseenko (2000): 1.5–1.84 million.",
 info_shareRep: "1926 census: ≈3.63 million Kazakhs of ≈6.07 million inhabitants (Asylbekov & Asylbekova, 2014); 1939 census: 2.33 million of 6.15 million, 37.8% (Tolts, Demoscope Weekly, 2006).",
 info_maupCalc: "Own calculation: areal interpolation of the 1926 Kazakh population from the 8-okrug grid to the 12-oblast grid; the dissimilarity index is half the sum of absolute share shifts.",
@@ -684,8 +684,8 @@ info_maxLoss: "Атлас жұмыс жиынтығы бойынша қазақ 
 info_anomaly: "1939 ж. санақ бойынша жалпы халқы 1926 ж.-дан көп облыстар саны (атлас жұмыс жиынтығы).",
 info_flowsDest: "Картадағы көші-қон бағыттары бойынша бағалау диапазондарының қосындысы. Елдер бойынша бөліну — пікірталастық баға: С. Кэмерон нақты есепті ашық зерттеу мәселесі деп атайды.",
 info_returned: "≈1,13 млн көшіп кеткендердің 454 мыңы оралды (ҚР ПМА мұрағат деректері; С. Кэмерон).",
-info_relLoss: "Тарихнамалық баға: қаза болғандардың қазақ халқы санындағы үлесі, әртүрлі авторлар бойынша диапазон. Диапазонның дереккөзі нақтылануда.",
-info_absMax: "Украин КСР-і үшін тарихнамалық баға, әртүрлі авторлар бойынша диапазон. Диапазонның дереккөзі нақтылануда.",
+info_relLoss: "Тарихнамалық баға: қазақтардың ≈38 %-ы қаза тапты (С. Кэмерон, «The Hungry Steppe», 2018).",
+info_absMax: "Украин КСР-і: ≈3,3–3,9 млн қаза тапқан («between 3.3 and 3.9 million died in Ukraine») — Wikipedia, «Soviet famine of 1930–1933» (жұмыстың әдебиеттер тізіміндегі Э15).",
 info_deathEst: "Қазақ халқының қайтарымсыз шығыны ≈1,3–2,3 млн — әртүрлі авторлар бағаларының диапазоны (жұмыс мәтіні бойынша); А. Н. Алексеенко (2000): 1,5–1,84 млн.",
 info_shareRep: "1926 ж. санақ: ≈6,07 млн тұрғынның ≈3,63 млн-ы қазақ (Асылбеков, Асылбекова, 2014); 1939 ж. санақ: 6,15 млн-ның 2,33 млн-ы, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
 info_maupCalc: "Меншікті есептеу: 1926 ж. қазақ халқын 8 округ торынан 12 облыс торына ареалдық интерполяциялау; ұқсамау индексі — үлес ығысулары модульдерінің жартысы.",
@@ -1553,39 +1553,39 @@ ru: {
 n: "Казахская АССР",
 deaths: "1,3–2,3 млн",
 pop: "≈6,2 млн",
-t: "Наибольшая ОТНОСИТЕЛЬНАЯ потеря среди народов СССР: погибло 38–42 % всех казахов."
+t: "Наибольшая ОТНОСИТЕЛЬНАЯ потеря среди народов СССР: погибло ≈38 % казахов (Cameron, 2018)."
 },
 en: {
 n: "Kazak ASSR",
 deaths: "1.3–2.3 million",
 pop: "≈6.2 million",
-t: "The largest RELATIVE loss among the peoples of the USSR: 38–42% of all Kazakhs died."
+t: "The largest RELATIVE loss among the peoples of the USSR: ≈38% of Kazakhs died (Cameron, 2018)."
 },
 kz: {
 n: "Қазақ АКСР-і",
 deaths: "1,3–2,3 млн",
 pop: "≈6,2 млн",
-t: "КСРО халықтары арасында ең үлкен САЛЫСТЫРМАЛЫ шығын: барлық қазақтардың 38–42 %-ы қаза тапты."
+t: "КСРО халықтары арасында ең үлкен САЛЫСТЫРМАЛЫ шығын: қазақтардың ≈38 %-ы қаза тапты (Cameron, 2018)."
 }
 }, {
 lon: 31,
 lat: 49,
-loss: 13,
+loss: 12,
 ru: {
 n: "Украинская ССР",
-deaths: "3,5–5 млн",
+deaths: "3,3–3,9 млн",
 pop: "≈31 млн",
 t: "Голодомор 1932–33. Наибольшее АБСОЛЮТНОЕ число жертв в СССР."
 },
 en: {
 n: "Ukrainian SSR",
-deaths: "3.5–5 million",
+deaths: "3.3–3.9 million",
 pop: "≈31 million",
 t: "The Holodomor of 1932–33. The largest ABSOLUTE number of victims in the USSR."
 },
 kz: {
 n: "Украин КСР-і",
-deaths: "3,5–5 млн",
+deaths: "3,3–3,9 млн",
 pop: "≈31 млн",
 t: "1932–33 жж. Голодомор. КСРО-дағы ең үлкен АБСОЛЮТТІ құрбандар саны."
 }
@@ -1921,19 +1921,19 @@ c: 1,
 ru: {
 q: "В чём отличие казахского голода от Голодомора по демографическим показателям?",
 a: [ "В Казахстане было больше жертв в абсолютных числах", "В Казахстане была наибольшая ОТНОСИТЕЛЬНАЯ потеря — доля погибших от численности народа", "В Казахстане голод длился один год", "Между ними нет статистических отличий" ],
-e: "В абсолютных числах больше всего жертв дала Украинская ССР (3,5–5 млн). Но по доле погибших от численности собственного народа казахи понесли наибольшие потери среди народов СССР: 38–42 %.",
+e: "В абсолютных числах больше всего жертв дала Украинская ССР (≈3,3–3,9 млн). Но по доле погибших от численности собственного народа казахи понесли наибольшие потери среди народов СССР: ≈38 % (Cameron, 2018).",
 tag: "Карта мира"
 },
 en: {
 q: "How does the Kazakh famine differ from the Holodomor in demographic terms?",
 a: [ "Kazakhstan had more victims in absolute numbers", "Kazakhstan had the largest RELATIVE loss — the share of deaths relative to the size of the people", "The famine in Kazakhstan lasted one year", "There is no statistical difference between them" ],
-e: "In absolute numbers, the Ukrainian SSR saw the most victims (3.5–5 million). But by the share of deaths relative to their own population, Kazakhs suffered the greatest loss among the peoples of the USSR: 38–42%.",
+e: "In absolute numbers, the Ukrainian SSR saw the most victims (≈3.3–3.9 million). But by the share of deaths relative to their own population, Kazakhs suffered the greatest loss among the peoples of the USSR: ≈38% (Cameron, 2018).",
 tag: "World map"
 },
 kz: {
 q: "Қазақ ашаршылығы демографиялық көрсеткіштер бойынша Голодомордан немен ерекшеленеді?",
 a: [ "Қазақстанда абсолютті сандар бойынша құрбандар көп болды", "Қазақстанда халық санына қатысты САЛЫСТЫРМАЛЫ шығын ең үлкен болды", "Қазақстанда ашаршылық бір жыл ғана болды", "Олардың арасында статистикалық айырмашылық жоқ" ],
-e: "Абсолютті сандар бойынша ең көп құрбан Украин КСР-інде болды (3,5–5 млн). Бірақ өз халқына қатысты шығын үлесі бойынша қазақтар КСРО халықтары арасында ең үлкен шығынды көрді: 38–42 %.",
+e: "Абсолютті сандар бойынша ең көп құрбан Украин КСР-інде болды (≈3,3–3,9 млн). Бірақ өз халқына қатысты шығын үлесі бойынша қазақтар КСРО халықтары арасында ең үлкен шығынды көрді: ≈38 % (Cameron, 2018).",
 tag: "Әлем картасы"
 }
 }, {
@@ -2080,20 +2080,20 @@ tag: "Әдіснама"
 c: 2,
 ru: {
 q: "Какая доля казахского населения погибла в 1930–1933 годах по наиболее распространённым оценкам?",
-a: [ "около 10 %", "около 20 %", "около 38–42 %", "около 70 %" ],
-e: "Погибло порядка 38–42 % всех казахов — наибольшая относительная потеря среди этнических групп СССР в период советских голодов.",
+a: [ "около 10 %", "около 20 %", "около 38 %", "около 70 %" ],
+e: "Погибло около 38 % казахов (Cameron, 2018) — наибольшая относительная потеря среди этнических групп СССР в период советских голодов.",
 tag: "Данные"
 },
 en: {
 q: "According to the most common estimates, what share of the Kazakh population died in 1930–1933?",
-a: [ "about 10%", "about 20%", "about 38–42%", "about 70%" ],
-e: "About 38–42% of all Kazakhs died — the largest relative loss among the ethnic groups of the USSR during the period of Soviet famines.",
+a: [ "about 10%", "about 20%", "about 38%", "about 70%" ],
+e: "About 38% of Kazakhs died (Cameron, 2018) — the largest relative loss among the ethnic groups of the USSR during the period of Soviet famines.",
 tag: "Data"
 },
 kz: {
 q: "Ең кең таралған бағалар бойынша 1930–1933 жж. қазақ халқының қанша үлесі қаза тапты?",
-a: [ "шамамен 10 %", "шамамен 20 %", "шамамен 38–42 %", "шамамен 70 %" ],
-e: "Барлық қазақтардың шамамен 38–42 %-ы қаза тапты — бұл КСРО-дағы кеңестік ашаршылықтар кезеңінде этникалық топтар арасындағы ең үлкен салыстырмалы шығын.",
+a: [ "шамамен 10 %", "шамамен 20 %", "шамамен 38 %", "шамамен 70 %" ],
+e: "Қазақтардың шамамен 38 %-ы қаза тапты (Cameron, 2018) — бұл КСРО-дағы кеңестік ашаршылықтар кезеңінде этникалық топтар арасындағы ең үлкен салыстырмалы шығын.",
 tag: "Деректер"
 }
 } ], KB_RU = [], KB_EN = [], KB_KZ = [], kbRu = (title, text, tag) => KB_RU.push({
@@ -2114,9 +2114,9 @@ function KBcur() {
 return "kz" === LANG ? KB_KZ : "en" === LANG ? KB_EN : KB_RU;
 }
 
-kbRu("Что такое Ашаршылык", "Ашаршылык — голод в Казахстане 1930–1933 годов, вызванный насильственной коллективизацией, седентаризацией (принудительным оседанием кочевников) и мясозаготовками. Безвозвратные потери казахского населения ≈1,3–2,3 млн (оценки разных авторов); А. Н. Алексеенко: 1,5–1,84 млн. Доля погибших от численности казахского народа — около 38–42 %, наибольшая относительная потеря среди народов СССР. Оценки разных авторов: Институт демографии им. Птухи НАН Украины — 1,258 млн; Р. Конквест — 2,3 млн. Отдельные авторские оценки выше общего диапазона: Ж. Абылхожин, М. Козыбаев, М. Татимов — 3,25 млн; проф. Х. М. Абжанов — до 4 млн.", "основное"), 
-kbEn("What Asharshylyk is", "Asharshylyk is the 1930–1933 famine in Kazakhstan, caused by forced collectivization, sedentarization (the forced settlement of nomads), and meat-procurement quotas. Irrecoverable losses of the Kazakh population are ≈1.3–2.3 million (estimates by different authors); A. N. Alekseenko: 1.5–1.84 million. The share of deaths relative to the Kazakh population was about 38–42%, the largest relative loss among the peoples of the USSR. Estimates by different authors: the Ptukha Institute of Demography of the National Academy of Sciences of Ukraine — 1.258 million; R. Conquest — 2.3 million. Individual authors’ estimates above the overall range: Zh. Abylkhozhin, M. Kozybaev, M. Tatimov — 3.25 million; Prof. Kh. M. Abzhanov — up to 4 million.", "core"), 
-kbKz("Ашаршылық деген не", "Ашаршылық — 1930–1933 жылдары Қазақстанда болған, күштеп ұжымдастыру, отырықшыландыру (көшпенділерді мәжбүрлеп қоныстандыру) және ет дайындау нормалары тудырған ашаршылық. Қазақ халқының қайтарымсыз шығыны ≈1,3–2,3 млн (әртүрлі авторлардың бағалары); А. Н. Алексеенко: 1,5–1,84 млн. Қазақ халқы санынан қаза болғандар үлесі — шамамен 38–42 %, бұл КСРО халықтары арасындағы ең үлкен салыстырмалы шығын. Әртүрлі авторлардың бағалары: Украина ҰҒА Птуха атындағы Демография институты — 1,258 млн; Р. Конквест — 2,3 млн. Жалпы диапазоннан жоғары жекелеген авторлық бағалар: Ж. Абылхожин, М. Қозыбаев, М. Тәтімов — 3,25 млн; проф. Х. М. Әбжанов — 4 млн-ға дейін.", "негізгі"), 
+kbRu("Что такое Ашаршылык", "Ашаршылык — голод в Казахстане 1930–1933 годов, вызванный насильственной коллективизацией, седентаризацией (принудительным оседанием кочевников) и мясозаготовками. Безвозвратные потери казахского населения ≈1,3–2,3 млн (оценки разных авторов); А. Н. Алексеенко: 1,5–1,84 млн. Доля погибших от численности казахского народа — ≈38 % (Cameron, 2018), наибольшая относительная потеря среди народов СССР. Оценки разных авторов: Институт демографии им. Птухи НАН Украины — 1,258 млн; Р. Конквест — 2,3 млн. Отдельные авторские оценки выше общего диапазона: Ж. Абылхожин, М. Козыбаев, М. Татимов — 3,25 млн; проф. Х. М. Абжанов — до 4 млн.", "основное"), 
+kbEn("What Asharshylyk is", "Asharshylyk is the 1930–1933 famine in Kazakhstan, caused by forced collectivization, sedentarization (the forced settlement of nomads), and meat-procurement quotas. Irrecoverable losses of the Kazakh population are ≈1.3–2.3 million (estimates by different authors); A. N. Alekseenko: 1.5–1.84 million. The share of deaths relative to the Kazakh population was ≈38% (Cameron, 2018), the largest relative loss among the peoples of the USSR. Estimates by different authors: the Ptukha Institute of Demography of the National Academy of Sciences of Ukraine — 1.258 million; R. Conquest — 2.3 million. Individual authors’ estimates above the overall range: Zh. Abylkhozhin, M. Kozybaev, M. Tatimov — 3.25 million; Prof. Kh. M. Abzhanov — up to 4 million.", "core"), 
+kbKz("Ашаршылық деген не", "Ашаршылық — 1930–1933 жылдары Қазақстанда болған, күштеп ұжымдастыру, отырықшыландыру (көшпенділерді мәжбүрлеп қоныстандыру) және ет дайындау нормалары тудырған ашаршылық. Қазақ халқының қайтарымсыз шығыны ≈1,3–2,3 млн (әртүрлі авторлардың бағалары); А. Н. Алексеенко: 1,5–1,84 млн. Қазақ халқы санынан қаза болғандар үлесі — ≈38 % (Cameron, 2018), бұл КСРО халықтары арасындағы ең үлкен салыстырмалы шығын. Әртүрлі авторлардың бағалары: Украина ҰҒА Птуха атындағы Демография институты — 1,258 млн; Р. Конквест — 2,3 млн. Жалпы диапазоннан жоғары жекелеген авторлық бағалар: Ж. Абылхожин, М. Қозыбаев, М. Тәтімов — 3,25 млн; проф. Х. М. Әбжанов — 4 млн-ға дейін.", "негізгі"), 
 kbRu("Тема и цель исследования", "Проект «Картография коллапса» — пространственно-демографический анализ Ашаршылыка средствами исторической ГИС (HGIS). Данные переписей 1926 и 1939 годов накладываются на разные административные сетки: 8 округов 1926 года и 12 областей 1939 года. Цель — показать, что вывод о географии катастрофы зависит от выбранной сетки агрегирования, то есть продемонстрировать Modifiable Areal Unit Problem на историческом материале.", "основное"), 
 kbEn("The topic and goal of the study", '"Cartography of Collapse" is a spatial-demographic analysis of Asharshylyk using historical GIS (HGIS). Data from the 1926 and 1939 censuses is overlaid on different administrative grids: 8 okrugs in 1926 and 12 oblasts in 1939. The goal is to show that a conclusion about the geography of the catastrophe depends on the chosen aggregation grid — that is, to demonstrate the Modifiable Areal Unit Problem on historical material.', "core"), 
 kbKz("Зерттеудің тақырыбы мен мақсаты", "«Күйреу картографиясы» жобасы — Ашаршылықтың тарихи ГАЖ (HGIS) құралдарымен жасалған кеңістіктік-демографиялық талдауы. 1926 және 1939 жылдардың санақ деректері әртүрлі әкімшілік торларға салынады: 1926 жылғы 8 округ және 1939 жылғы 12 облыс. Мақсат — апат географиясы туралы қорытынды таңдалған топтастыру торына тәуелді екенін көрсету, яғни тарихи материалда Modifiable Areal Unit Problem-ды көрсету.", "негізгі"), 
@@ -2147,9 +2147,9 @@ kbKz("Никколо Пьянчола: тезисі", "Никколо Пьянч
 kbRu("Талас Омарбеков: тезис", "Талас Омарбеков и казахстанская национальная историографическая школа ставят в центр субъектность казахов и трактуют голод как целенаправленную политику против народа. Акцент на сопротивлении: более 370 выступлений 1929–1931 гг. (Т. Омарбеков) — Сузакское, Иргизское, Батпаккаринское, Адаевское, Каракумское, Абралинское. Подавление восстаний и заградительные заслоны на путях откочёвок усиливали смертность в тех же районах.", "историография"), 
 kbEn("Talas Omarbekov: thesis", "Talas Omarbekov and the Kazakhstani national historiographic school place Kazakh agency at the center and treat the famine as a deliberate policy against the people. The emphasis is on resistance: more than 370 uprisings in 1929–1931 (T. Omarbekov) — Suzak, Irgiz, Batpakkara, Adai, Karakum, Abralin. The suppression of the uprisings and blocking cordons on migration routes intensified mortality in the same districts.", "historiography"), 
 kbKz("Талас Омарбеков: тезисі", "Талас Омарбеков және қазақстандық ұлттық тарихнамалық мектеп қазақтардың субъектілігін орталыққа қояды және ашаршылықты халыққа қарсы бағытталған мақсатты саясат ретінде түсіндіреді. Басты назар қарсылықта: 1929–1931 жж. 370-тен астам көтеріліс пен толқу болды (Т. Омарбеков) — Созақ, Ырғыз, Батпаққара, Адай, Қарақұм, Абыралы. Көтерілістерді басу және көші-қон жолдарындағы жазалау бекеттері сол аудандардағы өлім-жітімді күшейтті.", "тарихнама"), 
-kbRu("Сравнение с другими голодами 1930-х", "По абсолютному числу жертв наибольшие потери дала Украинская ССР — Голодомор 1932–33 гг., 3,5–5 млн при населении около 31 млн, то есть порядка 13 %. По ОТНОСИТЕЛЬНОЙ потере лидирует Казахская АССР: 38–42 % численности казахского народа. Также пострадали Поволжье, Северный Кавказ и Кубань, Западная Сибирь и Урал. Для масштаба на карте приведён голод в Китае (Ганьсу, Шэньси) 1928–1930 гг. — 3–10 млн, но у него иные причины: засуха и война милитаристов.", "сравнение"), 
-kbEn("Comparison with other 1930s famines", "By absolute number of victims, the Ukrainian SSR saw the greatest losses — the Holodomor of 1932–33, 3.5–5 million out of a population of about 31 million, i.e. around 13%. By RELATIVE loss, the Kazak ASSR leads: 38–42% of the Kazakh people. The Volga region, the North Caucasus and Kuban, and Western Siberia and the Urals also suffered. For scale, the map includes the famine in China (Gansu, Shaanxi) of 1928–1930 — 3–10 million — but it had different causes: drought and warlord conflict.", "comparison"), 
-kbKz("1930 жж. басқа ашаршылықтармен салыстыру", "Абсолютті құрбандар саны бойынша ең үлкен шығынды Украин КСР-і берді — 1932–33 жж. Голодомор, халқы шамамен 31 млн болғанда 3,5–5 млн, яғни шамамен 13 %. САЛЫСТЫРМАЛЫ шығын бойынша Қазақ АКСР-і алда: қазақ халқының 38–42 %-ы. Сондай-ақ Еділ бойы, Солтүстік Кавказ бен Кубань, Батыс Сібір мен Орал да зардап шекті. Масштабты көрсету үшін картада 1928–1930 жж. Қытайдағы (Ганьсу, Шэньси) ашаршылық — 3–10 млн берілген, бірақ оның себептері басқа: құрғақшылық пен милитаристер соғысы.", "салыстыру"), 
+kbRu("Сравнение с другими голодами 1930-х", "По абсолютному числу жертв наибольшие потери дала Украинская ССР — Голодомор 1932–33 гг., ≈3,3–3,9 млн погибших (Wikipedia, «Soviet famine of 1930–1933»). По ОТНОСИТЕЛЬНОЙ потере лидирует Казахская АССР: погибло ≈38 % казахов (Cameron, 2018). Также пострадали Поволжье, Северный Кавказ и Кубань, Западная Сибирь и Урал. Для масштаба на карте приведён голод в Китае (Ганьсу, Шэньси) 1928–1930 гг. — 3–10 млн, но у него иные причины: засуха и война милитаристов.", "сравнение"), 
+kbEn("Comparison with other 1930s famines", "By absolute number of victims, the Ukrainian SSR saw the greatest losses — the Holodomor of 1932–33, ≈3.3–3.9 million deaths (Wikipedia, “Soviet famine of 1930–1933”). By RELATIVE loss, the Kazak ASSR leads: ≈38% of Kazakhs died (Cameron, 2018). The Volga region, the North Caucasus and Kuban, and Western Siberia and the Urals also suffered. For scale, the map includes the famine in China (Gansu, Shaanxi) of 1928–1930 — 3–10 million — but it had different causes: drought and warlord conflict.", "comparison"), 
+kbKz("1930 жж. басқа ашаршылықтармен салыстыру", "Абсолютті құрбандар саны бойынша ең үлкен шығынды Украин КСР-і берді — 1932–33 жж. Голодомор, ≈3,3–3,9 млн қаза тапқан (Wikipedia, «Soviet famine of 1930–1933»). САЛЫСТЫРМАЛЫ шығын бойынша Қазақ АКСР-і алда: қазақтардың ≈38 %-ы қаза тапты (Cameron, 2018). Сондай-ақ Еділ бойы, Солтүстік Кавказ бен Кубань, Батыс Сібір мен Орал да зардап шекті. Масштабты көрсету үшін картада 1928–1930 жж. Қытайдағы (Ганьсу, Шэньси) ашаршылық — 3–10 млн берілген, бірақ оның себептері басқа: құрғақшылық пен милитаристер соғысы.", "салыстыру"), 
 kbRu("Переписи 1926 и 1939 годов", "Казахи во всём СССР по переписям 1926 и 1939 гг.: около 3,968 млн и около 3,1 млн соответственно (это итоги по всему Союзу, а не по республике). Убыль между переписями по СССР — порядка 867 тыс. человек. Но прямое вычитание занижает потери: перепись 1937 года (2,18 млн казахов) была объявлена «вредительской» и засекречена, а перепись 1939 года проводилась с политическим давлением на итоговые цифры. Кроме того, между переписями действуют одновременно смертность, откочёвки и возвращение части откочевников, поэтому разложить убыль на компоненты по одним лишь итогам переписей невозможно.", "данные"), 
 kbEn("The 1926 and 1939 censuses", 'Kazakhs in the whole USSR according to the 1926 and 1939 censuses: about 3.968 million and about 3.1 million respectively (these are Union-wide totals, not figures for the republic). The USSR-wide decline between the censuses is about 867,000 people. But simple subtraction understates the losses: the 1937 census (2.18 million Kazakhs) was declared "sabotage" and suppressed, and the 1939 census was conducted under political pressure on the final figures. Moreover, mortality, migration, and the return of some migrants all occur simultaneously between censuses, so the decline cannot be decomposed into components from census totals alone.', "data"), 
 kbKz("1926 және 1939 жылдардағы санақтар", "1926 және 1939 жж. санақтары бойынша бүкіл КСРО-дағы қазақтар: тиісінше шамамен 3,968 млн және шамамен 3,1 млн (бұл республика емес, бүкіл Одақ бойынша қорытынды). КСРО бойынша санақтар арасындағы кему — шамамен 867 мың адам. Бірақ жай ғана азайту шығынды төмендетіп көрсетеді: 1937 жылғы санақ (2,18 млн қазақ) «зиянкестік» деп жарияланып, құпияланды, ал 1939 жылғы санақ түпкі сандарға саяси қысым астында жүргізілді. Сонымен қатар, санақтар арасында өлім, көші-қон және кейбір көшкендердің оралуы бір мезгілде жүреді, сондықтан кемуді тек санақ қорытындылары бойынша құрамдас бөліктерге жіктеу мүмкін емес.", "деректер"), 
@@ -3543,7 +3543,7 @@ const box = $("#statsW");
 if ("flows" === WS.layer) {
 const ab = FLOWS.filter(f => "abroad" === f.kind), sv = FLOWS.filter(f => "soviet" === f.kind), rng = a => `${a.reduce((s, f) => s + f.lo, 0)}–${a.reduce((s, f) => s + f.hi, 0)} ${t("flowRange")}`;
 box.innerHTML = `\n      <div class="stat"><u>${esc(t("abroadDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b>${ab.length}</b><s>≈${rng(ab)}</s></div>\n      <div class="stat"><u>${esc(t("sovietDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b>${sv.length}</b><s>≈${rng(sv)}</s></div>\n      <div class="stat"><u>${esc(t("biggestDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b style="font-size:15px">${esc(tr(FLOWS[0]).short)}</b><s>≈100–200 ${t("flowRange")}</s></div>\n      <div class="stat"><u>${esc(t("returnedShare"))}${lvl("hist")}${info("info_returned")}</u><b>≈40 %</b><s>454 / 1130 ${t("flowRange")}</s></div>`;
-} else box.innerHTML = `\n      <div class="stat"><u>${esc(t("relLoss"))}${lvl("hist")}${info("info_relLoss")}</u><b style="color:var(--carmine2)">≈38–42 %</b><s>${esc(tr(FAMINES[0]).n)}</s></div>\n      <div class="stat"><u>${esc(t("absMax"))}${lvl("hist")}${info("info_absMax")}</u><b style="font-size:15px">${esc(tr(FAMINES[1]).n)}</b><s>≈${esc(tr(FAMINES[1]).deaths)}</s></div>\n      <div class="stat"><u>${esc(t("deathEstimates"))}${lvl("hist")}${info("info_deathEst")}</u><b>≈${"en" === LANG ? "1.3–2.3 million" : "1,3–2,3 млн"}</b><s>${esc(t("deathEstimatesSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}${lvl("census")}${info("info_shareRep")}</u><b>≈60 % → ≈38 %</b><s>1926 → 1939</s></div>`;
+} else box.innerHTML = `\n      <div class="stat"><u>${esc(t("relLoss"))}${lvl("hist")}${info("info_relLoss")}</u><b style="color:var(--carmine2)">≈38 %</b><s>${esc(tr(FAMINES[0]).n)}</s></div>\n      <div class="stat"><u>${esc(t("absMax"))}${lvl("hist")}${info("info_absMax")}</u><b style="font-size:15px">${esc(tr(FAMINES[1]).n)}</b><s>≈${esc(tr(FAMINES[1]).deaths)}</s></div>\n      <div class="stat"><u>${esc(t("deathEstimates"))}${lvl("hist")}${info("info_deathEst")}</u><b>≈${"en" === LANG ? "1.3–2.3 million" : "1,3–2,3 млн"}</b><s>${esc(t("deathEstimatesSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}${lvl("census")}${info("info_shareRep")}</u><b>≈60 % → ≈38 %</b><s>1926 → 1939</s></div>`;
 }
 
 $("#segWorld").addEventListener("click", e => {
