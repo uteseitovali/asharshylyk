@@ -138,13 +138,14 @@ focusRegions: "Регионы в фокусе этой линзы",
 askAssistantSchool: "Спросить ассистента об этой школе",
 schoolCaptionDefault: "Карта потерь казахского населения по областям 1939 года. Выберите школу выше.",
 biblioHeading: "Библиография и источники",
-biblioIntro: "Список литературы научной работы «Картография распада»: 15 основных и 35 электронных источников, оформленных по APA 7. Названия даны на языке оригинала.",
+biblioIntro: "Список литературы научной работы «Картография распада»: 15 основных и 35 электронных источников, оформленных по APA 7, и отдельно — 2 источника, привлечённых после подачи работы. Названия даны на языке оригинала.",
 biblioCopy: "Скопировать ссылку APA",
 biblioCopied: "Ссылка APA скопирована",
 biblioCopyFail: "Не удалось скопировать — выделите ссылку вручную",
 biblioGroup_primary: "Первичные источники и статистика",
 biblioGroup_works: "Монографии и статьи",
 biblioGroup_geo: "Геоданные и методы",
+biblioGroup_extra: "Дополнительные источники (после подачи работы)",
 biblioApaNote: "Список оформлен по APA 7th edition. Внутри разделов: сначала источники на кириллице, затем на латинице, по алфавиту фамилии первого автора (или названия, если автора нет). Даты обращения к электронным ресурсам — 4 мая 2026 г.",
 biblioPrint: "Печатное издание",
 dataHeading: "Главный результат: сетка меняет вывод",
@@ -436,13 +437,14 @@ focusRegions: "Regions in focus for this lens",
 askAssistantSchool: "Ask the assistant about this school",
 schoolCaptionDefault: "Map of Kazakh population loss by 1939 oblast. Choose a school above.",
 biblioHeading: "Bibliography and sources",
-biblioIntro: "The bibliography of the research paper “Cartography of Collapse”: 15 main and 35 electronic sources in APA 7 style. Titles are given in the original language, with English translations in square brackets.",
+biblioIntro: "The bibliography of the research paper “Cartography of Collapse”: 15 main and 35 electronic sources in APA 7 style, plus 2 sources added after the paper was submitted, listed separately. Titles are given in the original language, with English translations in square brackets.",
 biblioCopy: "Copy APA reference",
 biblioCopied: "APA reference copied",
 biblioCopyFail: "Could not copy — select the reference manually",
 biblioGroup_primary: "Primary sources and statistics",
 biblioGroup_works: "Monographs and articles",
 biblioGroup_geo: "Geodata and methods",
+biblioGroup_extra: "Additional sources (after the paper was submitted)",
 biblioApaNote: "References follow APA 7th edition. Within each section, Cyrillic-script sources come first, then Latin-script ones, alphabetically by the first author’s surname (or by title when there is no author). Online sources were accessed on 4 May 2026.",
 biblioPrint: "Print publication",
 dataHeading: "The main result: the grid changes the conclusion",
@@ -734,13 +736,14 @@ focusRegions: "Осы көзқарас назардағы аймақтар",
 askAssistantSchool: "Осы мектеп туралы көмекшіден сұрау",
 schoolCaptionDefault: "1939 жылғы облыстар бойынша қазақ халқының шығын картасы. Жоғарыдан мектепті таңдаңыз.",
 biblioHeading: "Библиография және дереккөздер",
-biblioIntro: "«Күйреу картографиясы» ғылыми жұмысының әдебиеттер тізімі: APA 7 бойынша рәсімделген 15 негізгі және 35 электрондық дереккөз. Атаулар түпнұсқа тілінде берілген.",
+biblioIntro: "«Күйреу картографиясы» ғылыми жұмысының әдебиеттер тізімі: APA 7 бойынша рәсімделген 15 негізгі және 35 электрондық дереккөз, сондай-ақ жұмыс тапсырылғаннан кейін тартылған 2 дереккөз бөлек берілген. Атаулар түпнұсқа тілінде берілген.",
 biblioCopy: "APA сілтемесін көшіру",
 biblioCopied: "APA сілтемесі көшірілді",
 biblioCopyFail: "Көшіру мүмкін болмады — сілтемені қолмен белгілеңіз",
 biblioGroup_primary: "Бастапқы дереккөздер мен статистика",
 biblioGroup_works: "Монографиялар мен мақалалар",
 biblioGroup_geo: "Геодеректер мен әдістер",
+biblioGroup_extra: "Қосымша дереккөздер (жұмыс тапсырылғаннан кейін)",
 biblioApaNote: "Тізім APA 7th edition бойынша рәсімделген. Бөлімдер ішінде алдымен кириллицадағы, содан кейін латиницадағы дереккөздер бірінші автордың тегі (автор болмаса — атауы) бойынша әліпби ретімен берілген. Электрондық ресурстарға жүгінген күн — 2026 ж. 4 мамыр.",
 biblioPrint: "Баспа басылымы",
 dataHeading: "Басты нәтиже: тор қорытындыны өзгертеді",
@@ -4009,7 +4012,46 @@ ru: ru,
 en: en,
 kz: kz
 }
-})) ];
+})), {
+src: "Д1",
+group: "extra",
+type: "article",
+cat: "article",
+lang: "ru",
+authors: [ [ "Тольц", "М. С." ] ],
+year: "2006",
+title: "Этнический состав населения Казахстана накануне второй мировой войны (реконструкция действительных результатов переписи 1939 года)",
+tr: "The ethnic composition of Kazakhstan’s population on the eve of the Second World War (a reconstruction of the actual results of the 1939 census)",
+container: "Демоскоп Weekly",
+issue: "245–246",
+url: "https://www.demoscope.ru/weekly/2006/0245/analit02.php",
+role: {
+ru: "Опубликованные и реконструированные итоги переписи 1939 г. по Казахской ССР: 6 151,1 тыс. жителей, 2 327,6 тыс. казахов (37,8 %).",
+en: "Published and reconstructed 1939 census results for the Kazakh SSR: 6,151.1 thousand inhabitants, 2,327.6 thousand Kazakhs (37.8%).",
+kz: "Қазақ КСР-і бойынша 1939 ж. санақтың жарияланған және қайта құрылған қорытындылары: 6 151,1 мың тұрғын, 2 327,6 мың қазақ (37,8 %)."
+}
+}, {
+src: "Д2",
+group: "extra",
+type: "web",
+cat: "webpage",
+lang: "ru",
+authors: [ [ "Асылбек", "М. Х." ], [ "Асылбекова", "Ж. М." ] ],
+year: "2014",
+date: {
+ru: "2014, 31 декабря",
+en: "2014, December 31"
+},
+title: "Население Казахстана между Всесоюзными переписями населения 1926 г. и 1939 г.",
+tr: "The population of Kazakhstan between the All-Union population censuses of 1926 and 1939",
+site: "Институт истории и этнологии им. Ч. Ч. Валиханова",
+url: "https://iie.kz/?p=4615",
+role: {
+ru: "Итоги переписи 1926 г. по республике (≈3,63 млн казахов из ≈6,07 млн жителей) и изменения численности областей 1926–1939 гг.",
+en: "1926 census totals for the republic (≈3.63 million Kazakhs of ≈6.07 million inhabitants) and oblast population change in 1926–1939.",
+kz: "Республика бойынша 1926 ж. санақ қорытындылары (≈6,07 млн тұрғынның ≈3,63 млн-ы қазақ) және 1926–1939 жж. облыстар халқының өзгерісі."
+}
+} ];
 
 // APA 7 reference for one entry. Connective words follow the interface: Russian forms for ru and kz
 // (the list belongs to a Russian-language paper), English forms for en. Titles stay in the original language;
@@ -4041,6 +4083,14 @@ const n = list.map(([f, g]) => `${g} ${f}`);
 return n.length < 2 ? n.join("") : n.slice(0, -1).join(", ") + ", & " + n[n.length - 1];
 }, tr = en && e.tr ? ` [${e.tr}]` : "", link = e.doi ? "https://doi.org/" + e.doi : e.url || "", dot = s => /[.!?…]$/.test(s) ? s : s + ".", I = s => `<i>${esc(s)}</i>`;
 let h;
+if ("web" === e.type && e.authors) {
+const d = e.date ? e.date[en ? "en" : "ru"] : e.year;
+h = `${esc(names(e.authors))} (${esc(d)}). ${I(e.title)}${esc(tr)}${!tr && /[.!?…]$/.test(e.title) ? "" : "."} ${esc(dot(e.site))} <a href="${esc(link)}" target="_blank" rel="noopener noreferrer">${esc(link)}</a>`;
+return {
+html: h,
+link: link
+};
+}
 if ("web" === e.type) {
 const desc = e.format ? ` [${"video" === e.format ? W.video : W.dataset}]` : "";
 const sep = /[?!]$/.test(e.title) && !tr && !desc ? "" : ".";
@@ -4069,7 +4119,7 @@ return [ /^[A-Za-z0-9]/.test(k) ? 1 : 0, k.toLowerCase(), e.year || "" ];
 function renderBiblio() {
 const box = $("#biblio");
 if (!box) return;
-const groups = [ "primary", "works", "geo" ], cmp = (a, b) => {
+const groups = [ "primary", "works", "geo", "extra" ], cmp = (a, b) => {
 const x = bibSortKey(a), y = bibSortKey(b);
 return x[0] - y[0] || x[1].localeCompare(y[1], 0 === x[0] ? "ru" : "en") || x[2].localeCompare(y[2]);
 };
@@ -4278,6 +4328,23 @@ kz: {
 what: "Библиографиядағы Демоскоп сілтемелері ауыстырылды (Э20, Э21): 1926 ж. — http://www.demoscope.ru/weekly/ssp/rus_nac_26.php, 1939 ж. — https://www.demoscope.ru/weekly/ssp/sng_nac_39.php (КСРО республикалары); аңдатпаға «тізімнен Қазақ АКСР-ін / Қазақ КСР-ін таңдаңыз» деп қосылды.",
 why: "Жұмыстың әдебиеттер тізімімен алшақтық: жұмыста көрсетілген rus_nac_39.php?reg=77 парағы Қазақ КСР-іне емес, РКФСР аймағына жатады, ал rus_nac_26.php?reg=753 парағы бос ашылады.",
 source: "Демоскоп Weekly: 1926 және 1939 жж. санақ қорытындылары."
+}
+}, {
+date: "2026-10-22",
+ru: {
+what: "В библиографию добавлена отдельная группа «Дополнительные источники (после подачи работы)»: М. С. Тольц (2006) и М. Х. Асылбек, Ж. М. Асылбекова (2014), оформление по APA 7.",
+why: "На эти работы опираются республиканские итоги переписей на панели «вход для жюри», на плашках и в шаге 4 StoryMap; в списке литературы работы их нет.",
+source: "Тольц М. С. Этнический состав населения Казахстана накануне второй мировой войны // Демоскоп Weekly. 2006. № 245–246; Асылбек М. Х., Асылбекова Ж. М. Население Казахстана между Всесоюзными переписями населения 1926 г. и 1939 г. (iie.kz, 2014)."
+},
+en: {
+what: "A separate bibliography group “Additional sources (after the paper was submitted)” was added: M. S. Tolts (2006) and M. Kh. Asylbek & Zh. M. Asylbekova (2014), in APA 7 style.",
+why: "The republic-level census totals on the jury panel, the plaques and StoryMap step 4 rely on these works; they are not in the paper’s reference list.",
+source: "Tolts, M. S. (2006), Demoscope Weekly, no. 245–246; Asylbek, M. Kh., & Asylbekova, Zh. M. (2014), iie.kz."
+},
+kz: {
+what: "Библиографияға «Қосымша дереккөздер (жұмыс тапсырылғаннан кейін)» деген бөлек топ қосылды: М. С. Тольц (2006) және М. Х. Асылбек, Ж. М. Асылбекова (2014), APA 7 бойынша.",
+why: "«Қазылар алқасына кіріспе» панеліндегі, тақташалардағы және StoryMap-тің 4-қадамындағы республикалық санақ қорытындылары осы еңбектерге сүйенеді; олар жұмыстың әдебиеттер тізімінде жоқ.",
+source: "Тольц М. С. (2006), Демоскоп Weekly, № 245–246; Асылбек М. Х., Асылбекова Ж. М. (2014), iie.kz."
 }
 } ];
 
