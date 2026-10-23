@@ -78,8 +78,6 @@ btnDefenseShort: "▶ Режим защиты",
 methNote: "Методологическая помета: границы — опорная реконструкция на современной геометрии; карта для сравнительного анализа, не архивный кадастр",
 methNoteMore: "Контуры округов 1926 г. и областей 1939 г. собраны из современной административной геометрии (geoBoundaries) под исторические единицы; реальные границы отличались. Демографические показатели хранятся отдельно от геометрии; областные значения — рабочий набор атласа, сверка с опубликованными итогами переписей ведётся.",
 infoLabel: "Источник и способ расчёта",
-info_totalPop1926: "Расчёт: сумма населения 8 округов рабочего набора атласа (перепись 1926 г.). Сверка с опубликованными итогами ведётся.",
-info_kaz1926: "Расчёт: для каждого округа население × доля казахов, затем сумма по 8 округам (рабочий набор атласа, перепись 1926 г.).",
 info_livestock: "Оценка историографии: около 40 млн голов скота до коллективизации, к 1933 г. — около одной десятой (С. Кэмерон, «The Hungry Steppe», 2018).",
 info_flowsDest: "Сумма диапазонов оценок по направлениям откочёвок на карте. Разбивка по странам — дискуссионная оценка: С. Кэмерон называет точный подсчёт открытым исследовательским вопросом.",
 info_returned: "454 тыс. вернувшихся из ≈1,13 млн откочевавших (архивные данные АПРК; С. Кэмерон).",
@@ -90,6 +88,12 @@ info_shareRep: "Перепись 1926 г.: ≈3,63 млн казахов из �
 kazakhLossRep: "Убыль казахов в республике",
 kazakhLossRepSub: "≈3,63 → ≈2,33 млн · переписи 1926 и 1939 гг.",
 info_kazLossRep: "Перепись 1926 г.: ≈3,63 млн казахов (Асылбек, Асылбекова, 2014); перепись 1939 г.: 2,33 млн (Тольц, Демоскоп Weekly, 2006). Убыль: (2,33 − 3,63) ÷ 3,63 ≈ −36 %.",
+popRep1926: "Население республики",
+popRep1926Sub: "перепись 1926 г.",
+kazRep1926: "Казахов в республике",
+kazRep1926Sub: "≈60 % населения",
+info_popRep1926: "Перепись 1926 г., Казакская АССР: ≈6,07 млн жителей (Асылбек М. Х., Асылбекова Ж. М., 2014). Суммы по 8 округам рабочего набора атласа — в таблице и карточках округов (сверка ведётся).",
+info_kazRep1926: "Перепись 1926 г.: ≈3,63 млн казахов, ≈60 % населения республики (Асылбек М. Х., Асылбекова Ж. М., 2014).",
 oblastDataLabel: "Областные показатели",
 oblastDataVal: "сверка ведётся",
 oblastDataSub: "проценты по областям — в карточках областей (рабочий набор атласа)",
@@ -259,7 +263,6 @@ oblastsCount: "Областей",
 kazakhLoss: "Потеря казахов",
 byOkrugsGrid: "сетка 1926 года",
 byOblastsGrid: "сетка 1939 года",
-toKazakhsShare: "% населения",
 toThousandKm: "к 1933 г. — около 1/10",
 abroadDest: "Зарубежных направлений",
 sovietDest: "Внутрисоюзных",
@@ -385,8 +388,6 @@ btnDefenseShort: "▶ Defense mode",
 methNote: "Methodological note: boundaries are a reference reconstruction on modern geometry; the map is for comparative analysis, not an archival cadastre",
 methNoteMore: "The 1926 okrug and 1939 oblast outlines are assembled from modern administrative geometry (geoBoundaries) under the historical units; the real boundaries differed. Demographic figures are stored separately from the geometry; oblast values are the atlas’s working dataset, and cross-checking against the published census results is in progress.",
 infoLabel: "Source and method",
-info_totalPop1926: "Calculation: total population of the 8 okrugs in the atlas’s working dataset (1926 census). Cross-checking against the published results is in progress.",
-info_kaz1926: "Calculation: population × Kazakh share for each okrug, summed over the 8 okrugs (atlas working dataset, 1926 census).",
 info_livestock: "Historiographic estimate: about 40 million head of livestock before collectivization, about one-tenth by 1933 (S. Cameron, “The Hungry Steppe”, 2018).",
 info_flowsDest: "Sum of the estimate ranges for the migration destinations on the map. The breakdown by country is a debated estimate: S. Cameron calls an exact count an open research question.",
 info_returned: "454 thousand returnees out of ≈1.13 million who left (archival data, APRK; S. Cameron).",
@@ -397,6 +398,12 @@ info_shareRep: "1926 census: ≈3.63 million Kazakhs of ≈6.07 million inhabita
 kazakhLossRep: "Kazakh decline in the republic",
 kazakhLossRepSub: "≈3.63 → ≈2.33 million · 1926 and 1939 censuses",
 info_kazLossRep: "1926 census: ≈3.63 million Kazakhs (Asylbek & Asylbekova, 2014); 1939 census: 2.33 million (Tolts, Demoscope Weekly, 2006). Decline: (2.33 − 3.63) ÷ 3.63 ≈ −36%.",
+popRep1926: "Population of the republic",
+popRep1926Sub: "1926 census",
+kazRep1926: "Kazakhs in the republic",
+kazRep1926Sub: "≈60% of the population",
+info_popRep1926: "1926 census, Kazak ASSR: ≈6.07 million inhabitants (Asylbek, M. Kh., & Asylbekova, Zh. M., 2014). Sums over the 8 okrugs of the atlas’s working dataset are in the table and okrug cards (cross-check in progress).",
+info_kazRep1926: "1926 census: ≈3.63 million Kazakhs, ≈60% of the republic’s population (Asylbek, M. Kh., & Asylbekova, Zh. M., 2014).",
 oblastDataLabel: "Oblast figures",
 oblastDataVal: "cross-check in progress",
 oblastDataSub: "oblast percentages are in the oblast cards (atlas working dataset)",
@@ -566,7 +573,6 @@ oblastsCount: "Oblasts",
 kazakhLoss: "Kazakh population loss",
 byOkrugsGrid: "1926 grid",
 byOblastsGrid: "1939 grid",
-toKazakhsShare: "% of population",
 toThousandKm: "by 1933 — about one-tenth remained",
 abroadDest: "Foreign destinations",
 sovietDest: "Within the USSR",
@@ -692,8 +698,6 @@ btnDefenseShort: "▶ Қорғау режимі",
 methNote: "Әдіснамалық ескерту: шекаралар — қазіргі геометриядағы тірек реконструкция; карта салыстырмалы талдауға арналған, мұрағаттық кадастр емес",
 methNoteMore: "1926 ж. округтер мен 1939 ж. облыстардың контурлары қазіргі әкімшілік геометриядан (geoBoundaries) тарихи бірліктерге сәйкес құрастырылған; нақты шекаралар өзгеше болған. Демографиялық көрсеткіштер геометриядан бөлек сақталады; облыстық мәндер — атластың жұмыс деректер жиынтығы, жарияланған санақ қорытындыларымен салыстыру жүргізілуде.",
 infoLabel: "Дереккөз және есептеу тәсілі",
-info_totalPop1926: "Есептеу: атлас жұмыс жиынтығындағы 8 округ халқының қосындысы (1926 ж. санақ). Жарияланған қорытындылармен салыстыру жүргізілуде.",
-info_kaz1926: "Есептеу: әр округ үшін халық саны × қазақтар үлесі, содан кейін 8 округ бойынша қосынды (атлас жұмыс жиынтығы, 1926 ж. санақ).",
 info_livestock: "Тарихнамалық баға: ұжымдастыруға дейін шамамен 40 млн бас мал, 1933 ж. қарай — шамамен оннан бірі (С. Кэмерон, «The Hungry Steppe», 2018).",
 info_flowsDest: "Картадағы көші-қон бағыттары бойынша бағалау диапазондарының қосындысы. Елдер бойынша бөліну — пікірталастық баға: С. Кэмерон нақты есепті ашық зерттеу мәселесі деп атайды.",
 info_returned: "≈1,13 млн көшіп кеткендердің 454 мыңы оралды (ҚР ПМА мұрағат деректері; С. Кэмерон).",
@@ -704,6 +708,12 @@ info_shareRep: "1926 ж. санақ: ≈6,07 млн тұрғынның ≈3,63 �
 kazakhLossRep: "Республикадағы қазақтардың кемуі",
 kazakhLossRepSub: "≈3,63 → ≈2,33 млн · 1926 және 1939 жж. санақтар",
 info_kazLossRep: "1926 ж. санақ: ≈3,63 млн қазақ (Асылбек, Асылбекова, 2014); 1939 ж. санақ: 2,33 млн (Тольц, Демоскоп Weekly, 2006). Кему: (2,33 − 3,63) ÷ 3,63 ≈ −36 %.",
+popRep1926: "Республика халқы",
+popRep1926Sub: "1926 ж. санақ",
+kazRep1926: "Республикадағы қазақтар",
+kazRep1926Sub: "халықтың ≈60 %-ы",
+info_popRep1926: "1926 ж. санақ, Қазақ АКСР-і: ≈6,07 млн тұрғын (Асылбек М. Х., Асылбекова Ж. М., 2014). Атлас жұмыс жиынтығының 8 округі бойынша қосындылар — кестеде және округ карточкаларында (салыстыру жүргізілуде).",
+info_kazRep1926: "1926 ж. санақ: ≈3,63 млн қазақ, республика халқының ≈60 %-ы (Асылбек М. Х., Асылбекова Ж. М., 2014).",
 oblastDataLabel: "Облыстық көрсеткіштер",
 oblastDataVal: "салыстыру жүргізілуде",
 oblastDataSub: "облыстар бойынша пайыздар — облыс карточкаларында (атластың жұмыс жиынтығы)",
@@ -873,7 +883,6 @@ oblastsCount: "Облыстар",
 kazakhLoss: "Қазақтардың шығыны",
 byOkrugsGrid: "1926 жылғы тор",
 byOblastsGrid: "1939 жылғы тор",
-toKazakhsShare: "% халық",
 toThousandKm: "1933 ж. — шамамен 1/10",
 abroadDest: "Шетелдік бағыттар",
 sovietDest: "Одақ ішіндегі",
@@ -2984,8 +2993,8 @@ const lvl = kind => `<span class="lvl lvl-${kind}" tabindex="0" title="${esc(t("
 function renderStats(per, m) {
 const box = $("#statsKz");
 if ("1926" === per) {
-const tot = KZ[1926].reduce((s, f) => s + f.p.pop, 0), kaz = KZ[1926].reduce((s, f) => s + f.p.kazAbs, 0);
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("totalPopulation"))}${lvl("census")}${info("info_totalPop1926")}</u><b>${fmtN(tot)}</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhsWord"))}${lvl("census")}${info("info_kaz1926")}</u><b>${fmtN(kaz)}</b><s>${fmtD(kaz / tot * 100)} ${esc(t("toKazakhsShare"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}${lvl("hist")}${info("info_livestock")}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
+// Republic-level 1926 census totals; okrug sums of the working dataset stay in the table and okrug cards.
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("popRep1926"))}${lvl("census")}${info("info_popRep1926")}</u><b>≈${fmtD(6.07, 2)} ${"en" === LANG ? "million" : "млн"}</b><s>${esc(t("popRep1926Sub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazRep1926"))}${lvl("census")}${info("info_kazRep1926")}</u><b>≈${fmtD(3.63, 2)} ${"en" === LANG ? "million" : "млн"}</b><s>${esc(t("kazRep1926Sub"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}${lvl("hist")}${info("info_livestock")}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
 } else {
 // Republic-level census totals only: the oblast figures of the working dataset are not verified yet.
 box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLossRep"))}${lvl("census")}${info("info_kazLossRep")}</u><b style="color:var(--carmine2)">≈ −${fmtD(36, 0)} %</b><s>${esc(t("kazakhLossRepSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}${lvl("census")}${info("info_shareRep")}</u><b>≈60 % → ≈38 %</b><s>1926 → 1939</s></div>\n      <div class="stat"><u>${esc(t("oblastDataLabel"))}</u><b style="font-size:15px">${esc(t("oblastDataVal"))}</b><s>${esc(t("oblastDataSub"))}</s></div>`;
@@ -4389,6 +4398,23 @@ kz: {
 what: "Сайттағы сандар: қазақтардың салыстырмалы шығыны — 38–42 % орнына ≈38 % (Cameron, 2018); Украин КСР-інің шығыны — 3,5–5 млн орнына ≈3,3–3,9 млн (Э15); 1939 ж. тақташасында облыстар қосындысы бойынша −51,4 % орнына республикадағы қазақтардың кемуі ≈ −36 % (1926 және 1939 жж. санақтар); облыстық пайыздар тек облыс карточкаларында «салыстыру жүргізілуде» белгісімен қалдырылды.",
 why: "Дереккөздерге сәйкестендіру; жұмыс жиынтығының облыстық көрсеткіштері жарияланған санақ қорытындыларымен әлі салыстырылған жоқ.",
 source: "Cameron S. (2018); Soviet famine of 1930–1933 — Wikipedia (Э15); Асылбек, Асылбекова (2014); Тольц (2006)."
+}
+}, {
+date: "2026-10-23",
+ru: {
+what: "Плашки периода 1926 г.: вместо сумм по 8 округам рабочего набора (3 880 000 жителей, 2 666 640 казахов) — итоги переписи по республике: ≈6,07 млн жителей, ≈3,63 млн казахов (≈60 %). Суммы по округам остаются в таблице и карточках с пометкой «сверка ведётся». Для Украинской ССР убраны доля погибших и население ≈31 млн, у которых нет источника.",
+why: "Окружные значения рабочего набора ещё не сверены с опубликованными итогами переписи 1926 г.",
+source: "Асылбек М. Х., Асылбекова Ж. М. (2014)."
+},
+en: {
+what: "1926 plaques: instead of the sums over the 8 okrugs of the working dataset (3,880,000 inhabitants, 2,666,640 Kazakhs) — the republic-level census totals: ≈6.07 million inhabitants, ≈3.63 million Kazakhs (≈60%). The okrug sums remain in the table and cards, marked “cross-check in progress”. For the Ukrainian SSR, the death share and the ≈31 million population, which have no source, were removed.",
+why: "The okrug values of the working dataset have not yet been cross-checked against the published 1926 census results.",
+source: "Asylbek, M. Kh., & Asylbekova, Zh. M. (2014)."
+},
+kz: {
+what: "1926 ж. тақташалары: жұмыс жиынтығының 8 округі бойынша қосындылардың (3 880 000 тұрғын, 2 666 640 қазақ) орнына — республика бойынша санақ қорытындылары: ≈6,07 млн тұрғын, ≈3,63 млн қазақ (≈60 %). Округтер бойынша қосындылар кестеде және карточкаларда «салыстыру жүргізілуде» белгісімен қалды. Украин КСР-і үшін дереккөзі жоқ қаза болғандар үлесі мен ≈31 млн халық алынып тасталды.",
+why: "Жұмыс жиынтығының округтік мәндері 1926 ж. санақтың жарияланған қорытындыларымен әлі салыстырылған жоқ.",
+source: "Асылбек М. Х., Асылбекова Ж. М. (2014)."
 }
 } ];
 
