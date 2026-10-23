@@ -195,7 +195,7 @@ quizStatTime: "Время",
 quizStatTimeVal: "Без лимита",
 quizGo: "Начать квиз",
 quizShuffle: "Перемешать вопросы",
-quizShuffleOn: "Вопросы и варианты будут перемешаны",
+quizShuffleOn: "Порядок вопросов будет перемешан (варианты ответов перемешиваются всегда)",
 quizShuffleOff: "Порядок вопросов — как в банке",
 quizNext: "Далее ›",
 quizFinish: "Результат",
@@ -506,7 +506,7 @@ quizStatTime: "Time",
 quizStatTimeVal: "No limit",
 quizGo: "Start the quiz",
 quizShuffle: "Shuffle questions",
-quizShuffleOn: "Questions and options will be shuffled",
+quizShuffleOn: "The question order will be shuffled (answer options are always shuffled)",
 quizShuffleOff: "Question order matches the question bank",
 quizNext: "Next ›",
 quizFinish: "Result",
@@ -817,7 +817,7 @@ quizStatTime: "Уақыт",
 quizStatTimeVal: "Шектеусіз",
 quizGo: "Викторинаны бастау",
 quizShuffle: "Сұрақтарды араластыру",
-quizShuffleOn: "Сұрақтар мен нұсқалар араластырылады",
+quizShuffleOn: "Сұрақтар реті араластырылады (жауап нұсқалары әрдайым араластырылады)",
 quizShuffleOff: "Сұрақтар реті — банктегідей",
 quizNext: "Келесі ›",
 quizFinish: "Нәтиже",
@@ -980,7 +980,7 @@ n.setAttribute("title", t(n.dataset.i18nTitle));
 n.setAttribute("placeholder", t(n.dataset.i18nPlaceholder));
 }), document.querySelectorAll("[data-i18n-aria]").forEach(n => {
 n.setAttribute("aria-label", t(n.dataset.i18nAria));
-}), $$(".langopt").forEach(b => b.classList.toggle("on", b.dataset.lang === LANG)), "function" == typeof syncThemeBtn && syncThemeBtn(), "function" == typeof renderIntro && renderIntro(), $("#chat [data-greeting]") && ($("#chat [data-greeting]").textContent = t("aiGreeting")), navigator.gpu || !$("#aiProgTxt") || ($("#aiProgTxt").textContent = t("aiLoadNoGpu"));
+}), $$(".langopt").forEach(b => b.classList.toggle("on", b.dataset.lang === LANG)), "function" == typeof syncThemeBtn && syncThemeBtn(), "function" == typeof renderIntro && renderIntro(), "function" == typeof quizRelang && quizRelang(), $("#chat [data-greeting]") && ($("#chat [data-greeting]").textContent = t("aiGreeting")), navigator.gpu || !$("#aiProgTxt") || ($("#aiProgTxt").textContent = t("aiLoadNoGpu"));
 const lb = $("#bLangLabel");
 lb && (lb.textContent = LANG.toUpperCase());
 const sp = $("#stPrev");
@@ -1833,42 +1833,42 @@ text: "Зерттеудің басты әдіснамалық қорытынды
 cite: "Меншікті есептеу: ареалдық интерполяция; 8 × 12 матрицасы: «округ — облыс» 96 жұбы, оның 37-сінде қиылысу ауданы нөлден үлкен"
 }
 } ], QUIZ = [ {
-c: 1,
+c: 0,
 ru: {
 q: "Сколько округов было в Казахской АССР по данным переписи 1926 года на карте этого исследования?",
-a: [ "6", "8", "12", "14" ],
+a: [ "8", "10", "12", "14" ],
 e: "Восемь округов: Уральский, Актюбинский, Кустанайский, Петропавловский, Акмолинский, Семипалатинский, Сыр-Дарьинский и Жетысуский. К 1939 году территория делится уже на 12 областей — именно это различие и порождает MAUP.",
 tag: "Карта"
 },
 en: {
 q: "How many okrugs did the Kazak ASSR have according to the 1926 census, on this study’s map?",
-a: [ "6", "8", "12", "14" ],
+a: [ "8", "10", "12", "14" ],
 e: "Eight okrugs: Uralsk, Aktyubinsk, Kustanai, Petropavlovsk, Akmola, Semipalatinsk, Syr-Darya, and Jetisu. By 1939 the territory is already divided into 12 oblasts — and this very difference is what creates MAUP.",
 tag: "Map"
 },
 kz: {
 q: "Осы зерттеудің картасында 1926 жылғы санақ бойынша Қазақ АКСР-інде неше округ болды?",
-a: [ "6", "8", "12", "14" ],
+a: [ "8", "10", "12", "14" ],
 e: "Сегіз округ: Орал, Ақтөбе, Қостанай, Петропавл, Ақмола, Семей, Сырдария және Жетісу. 1939 жылға қарай аумақ 12 облысқа бөлінеді — дәл осы айырмашылық MAUP-ты тудырады.",
 tag: "Карта"
 }
 }, {
-c: 1,
+c: 0,
 ru: {
 q: "Что означает аббревиатура MAUP?",
-a: [ "Модель анализа урбанизации и плотности", "Проблема модифицируемых пространственных единиц", "Метод архивной унификации переписей", "Международный атлас установленных периодов" ],
+a: [ "Проблема модифицируемых пространственных единиц", "Модель анализа урбанизации и плотности", "Метод архивной унификации переписей", "Международный атлас установленных периодов" ],
 e: "Modifiable Areal Unit Problem — проблема модифицируемых пространственных единиц: результат статистического анализа меняется в зависимости от того, по каким границам сгруппированы данные.",
 tag: "Методология"
 },
 en: {
 q: "What does the acronym MAUP stand for?",
-a: [ "Model of Urbanization and Density Analysis", "Modifiable Areal Unit Problem", "Method of Archival Census Unification", "International Atlas of Established Periods" ],
+a: [ "Modifiable Areal Unit Problem", "Model of Urbanization and Density Analysis", "Method of Archival Census Unification", "International Atlas of Established Periods" ],
 e: "Modifiable Areal Unit Problem: the result of a statistical analysis changes depending on which boundaries the data is grouped by.",
 tag: "Methodology"
 },
 kz: {
 q: "MAUP аббревиатурасы нені білдіреді?",
-a: [ "Урбанизация мен тығыздықты талдау моделі", "Модификацияланатын аумақтық бірліктер мәселесі", "Санақтарды мұрағаттық біріздендіру әдісі", "Белгіленген кезеңдердің халықаралық атласы" ],
+a: [ "Модификацияланатын аумақтық бірліктер мәселесі", "Урбанизация мен тығыздықты талдау моделі", "Санақтарды мұрағаттық біріздендіру әдісі", "Белгіленген кезеңдердің халықаралық атласы" ],
 e: "Modifiable Areal Unit Problem — модификацияланатын аумақтық бірліктер мәселесі: статистикалық талдау нәтижесі деректер қандай шекаралар бойынша топтастырылғанына байланысты өзгереді.",
 tag: "Әдіснама"
 }
@@ -1893,62 +1893,62 @@ e: "Қарағанды облысында жалпы халық саны арн�
 tag: "Тарихнама"
 }
 }, {
-c: 1,
+c: 3,
 ru: {
 q: "Почему именно скотоводческие районы пострадали сильнее земледельческих?",
-a: [ "Там была засуха, а в земледельческих — нет", "Скот изымался государством, а для кочевого хозяйства он был не товаром, а условием выживания", "Скотоводческие районы были дальше от железных дорог", "В скотоводческих районах было меньше врачей" ],
+a: [ "Там была засуха, а в земледельческих — нет", "Скотоводческие районы были дальше от железных дорог", "В скотоводческих районах было меньше врачей", "Скот изымался государством, а для кочевого хозяйства он был не товаром, а условием выживания" ],
 e: "Тезис Сары Кэмерон: республика выполняла мясозаготовки, но для кочевого и полукочевого хозяйства скот был основой всей системы жизнеобеспечения. Его изъятие означало не потерю дохода, а потерю средств к существованию.",
 tag: "Историография"
 },
 en: {
 q: "Why did pastoral districts suffer more than farming ones?",
-a: [ "There was a drought there, but not in farming districts", "Livestock was seized by the state, and for the nomadic economy it was not a commodity but a condition of survival", "Pastoral districts were farther from railways", "Pastoral districts had fewer doctors" ],
+a: [ "There was a drought there, but not in farming districts", "Pastoral districts were farther from railways", "Pastoral districts had fewer doctors", "Livestock was seized by the state, and for the nomadic economy it was not a commodity but a condition of survival" ],
 e: "Sarah Cameron’s thesis: the republic fulfilled meat-procurement quotas, but for the nomadic and semi-nomadic economy livestock was the foundation of the entire subsistence system. Its seizure meant not a loss of income, but a loss of the means of survival.",
 tag: "Historiography"
 },
 kz: {
 q: "Неге мал шаруашылығы аудандары егіншілік аудандарынан көбірек зардап шекті?",
-a: [ "Онда құрғақшылық болды, ал егіншілік аудандарда болмады", "Малды мемлекет тәркіледі, ал көшпелі шаруашылық үшін ол тауар емес, өмір сүру шарты болды", "Мал шаруашылығы аудандары теміржолдан алыс болды", "Мал шаруашылығы аудандарында дәрігер аз болды" ],
+a: [ "Онда құрғақшылық болды, ал егіншілік аудандарда болмады", "Мал шаруашылығы аудандары теміржолдан алыс болды", "Мал шаруашылығы аудандарында дәрігер аз болды", "Малды мемлекет тәркіледі, ал көшпелі шаруашылық үшін ол тауар емес, өмір сүру шарты болды" ],
 e: "Сара Кэмерон тезисі: республика ет дайындау нормасын орындады, бірақ көшпелі және жартылай көшпелі шаруашылық үшін мал бүкіл өмір сүру жүйесінің негізі болды. Оны тәркілеу кіріс жоғалту емес, күнкөріс құралын жоғалту дегенді білдірді.",
 tag: "Тарихнама"
 }
 }, {
-c: 1,
+c: 3,
 ru: {
 q: "Сколько примерно человек покинуло Казахстан в ходе откочёвок?",
-a: [ "около 300 тысяч", "около 1,13 миллиона", "около 3 миллионов", "около 5 миллионов" ],
+a: [ "около 300 тысяч", "около 500 тысяч", "около 800 тысяч", "около 1,13 миллиона" ],
 e: "Около 1,13 млн человек. Позднее вернулись примерно 454 тыс.; около 200 тыс. остались за границей навсегда — в Синьцзяне, Монголии, Афганистане, Иране, позже в Турции.",
 tag: "Данные"
 },
 en: {
 q: "Roughly how many people left Kazakhstan during the migrations?",
-a: [ "about 300 thousand", "about 1.13 million", "about 3 million", "about 5 million" ],
+a: [ "about 300 thousand", "about 500 thousand", "about 800 thousand", "about 1.13 million" ],
 e: "About 1.13 million people. Later, about 454,000 returned; about 200,000 remained abroad permanently — in Xinjiang, Mongolia, Afghanistan, Iran, and later Turkey.",
 tag: "Data"
 },
 kz: {
 q: "Көші-қон кезінде Қазақстаннан шамамен қанша адам кетті?",
-a: [ "шамамен 300 мың", "шамамен 1,13 миллион", "шамамен 3 миллион", "шамамен 5 миллион" ],
+a: [ "шамамен 300 мың", "шамамен 500 мың", "шамамен 800 мың", "шамамен 1,13 миллион" ],
 e: "Шамамен 1,13 млн адам. Кейін шамамен 454 мың адам оралды; шамамен 200 мың адам шетелде мәңгілікке қалды — Шыңжаңда, Моңғолияда, Ауғанстанда, Иранда, кейінірек Түркияда.",
 tag: "Деректер"
 }
 }, {
-c: 1,
+c: 2,
 ru: {
 q: "Какое зарубежное направление откочёвок было крупнейшим?",
-a: [ "Турция", "Синьцзян (Китай)", "Иран", "Афганистан" ],
+a: [ "Турция", "Иран", "Синьцзян (Китай)", "Афганистан" ],
 e: "Синьцзян: переход через Джунгарские ворота и Тарбагатай. Оценки — порядка 100–200 тыс. человек, но точная разбивка по направлениям остаётся дискуссионной: С. Кэмерон называет её открытым исследовательским вопросом.",
 tag: "Карта мира"
 },
 en: {
 q: "Which foreign destination of the migrations was the largest?",
-a: [ "Turkey", "Xinjiang (China)", "Iran", "Afghanistan" ],
+a: [ "Turkey", "Iran", "Xinjiang (China)", "Afghanistan" ],
 e: "Xinjiang: crossing via the Dzungarian Gate and Tarbagatai. Estimates run around 100,000–200,000 people, but the exact breakdown by destination remains debated: S. Cameron calls it an open research question.",
 tag: "World map"
 },
 kz: {
 q: "Көші-қонның қай шетелдік бағыты ең ірісі болды?",
-a: [ "Түркия", "Шыңжаң (Қытай)", "Иран", "Ауғанстан" ],
+a: [ "Түркия", "Иран", "Шыңжаң (Қытай)", "Ауғанстан" ],
 e: "Шыңжаң: Жоңғар қақпасы мен Тарбағатай арқылы өту. Бағалар шамамен 100–200 мың адамды құрайды, бірақ бағыттар бойынша дәл бөлу пікірталастық болып қалады: С. Кэмерон оны ашық зерттеу мәселесі деп атайды.",
 tag: "Әлем картасы"
 }
@@ -1973,62 +1973,62 @@ e: "Абсолютті сандар бойынша ең көп құрбан Ук
 tag: "Әлем картасы"
 }
 }, {
-c: 2,
+c: 0,
 ru: {
 q: "Что произошло с поголовьем скота между 1928 и 1933 годами?",
-a: [ "Сократилось примерно на четверть", "Сократилось примерно вдвое", "От 40 млн голов осталось около одной десятой", "Осталось почти без изменений" ],
+a: [ "От 40 млн голов осталось около одной десятой", "Сократилось примерно на четверть", "Сократилось примерно вдвое", "Осталось почти без изменений" ],
 e: "От примерно 40 млн голов к 1933 году осталось около 4,5 млн — порядка одной десятой. Это разрушило материальную основу кочевого хозяйства.",
 tag: "Данные"
 },
 en: {
 q: "What happened to the livestock herd between 1928 and 1933?",
-a: [ "It shrank by roughly a quarter", "It shrank by roughly half", "Of 40 million head, about one-tenth remained", "It remained almost unchanged" ],
+a: [ "Of 40 million head, about one-tenth remained", "It shrank by roughly a quarter", "It shrank by roughly half", "It remained almost unchanged" ],
 e: "Of roughly 40 million head, by 1933 about 4.5 million remained — around one-tenth. This destroyed the material foundation of the nomadic economy.",
 tag: "Data"
 },
 kz: {
 q: "1928–1933 жж. аралығында мал басына не болды?",
-a: [ "Шамамен төрттен бірге азайды", "Шамамен екі есе азайды", "40 млн бастан шамамен оннан бір бөлігі қалды", "Дерлік өзгеріссіз қалды" ],
+a: [ "40 млн бастан шамамен оннан бір бөлігі қалды", "Шамамен төрттен бірге азайды", "Шамамен екі есе азайды", "Дерлік өзгеріссіз қалды" ],
 e: "Шамамен 40 млн бастан 1933 жылға қарай шамамен 4,5 млн қалды — оннан бір бөлігі шамасында. Бұл көшпелі шаруашылықтың материалдық негізін құртты.",
 tag: "Деректер"
 }
 }, {
-c: 1,
+c: 3,
 ru: {
 q: "Как работает ареальная интерполяция, применённая в этом исследовании?",
-a: [ "Население округа делится поровну между всеми областями", "Население округа распределяется пропорционально площади пересечения с каждой областью", "Берётся население ближайшего города", "Данные копируются из переписи 1939 года" ],
+a: [ "Население округа делится поровну между всеми областями", "Берётся население ближайшего города", "Данные копируются из переписи 1939 года", "Население округа распределяется пропорционально площади пересечения с каждой областью" ],
 e: "Формула: P_фрагмент = P_1926 × (Площадь пересечения ÷ Площадь округа 1926). Допущение — равномерная плотность внутри округа. Это упрощение, и именно оно даёт часть погрешности.",
 tag: "Методология"
 },
 en: {
 q: "How does the areal interpolation used in this study work?",
-a: [ "The okrug’s population is split evenly among all oblasts", "The okrug’s population is distributed in proportion to the area of intersection with each oblast", "The population of the nearest city is used", "The data is copied from the 1939 census" ],
+a: [ "The okrug’s population is split evenly among all oblasts", "The population of the nearest city is used", "The data is copied from the 1939 census", "The okrug’s population is distributed in proportion to the area of intersection with each oblast" ],
 e: "The formula: P_fragment = P_1926 × (intersection area ÷ 1926 okrug area). The assumption is uniform population density within the okrug. This is a simplification, and it is itself a source of part of the error.",
 tag: "Methodology"
 },
 kz: {
 q: "Осы зерттеуде қолданылған ареалдық интерполяция қалай жұмыс істейді?",
-a: [ "Округ халқы барлық облыстар арасында тең бөлінеді", "Округ халқы әр облыспен қиылысу ауданына пропорционал бөлінеді", "Ең жақын қаланың халық саны алынады", "Деректер 1939 жылғы санақтан көшіріледі" ],
+a: [ "Округ халқы барлық облыстар арасында тең бөлінеді", "Ең жақын қаланың халық саны алынады", "Деректер 1939 жылғы санақтан көшіріледі", "Округ халқы әр облыспен қиылысу ауданына пропорционал бөлінеді" ],
 e: "Формула: P_фрагмент = P_1926 × (Қиылысу ауданы ÷ 1926 округ ауданы). Болжам — округ ішінде тығыздық бірдей. Бұл жеңілдету, және дәл осы қателіктің бір бөлігін береді.",
 tag: "Әдіснама"
 }
 }, {
-c: 1,
+c: 2,
 ru: {
 q: "Индекс несходства между сеткой 1926 и сеткой 1939 года в этом исследовании составил:",
-a: [ "2,1 %", "21,2 %", "42,5 %", "68,0 %" ],
+a: [ "2,1 %", "10,6 %", "21,2 %", "42,5 %" ],
 e: "Суммарный сдвиг долей — 42,46 процентных пункта, индекс несходства — половина от этого, то есть 21,2 %. Иначе говоря, при смене сетки «переезжает» пятая часть всего пространственного распределения населения.",
 tag: "Методология"
 },
 en: {
 q: "The dissimilarity index between the 1926 grid and the 1939 grid in this study is:",
-a: [ "2.1%", "21.2%", "42.5%", "68.0%" ],
+a: [ "2.1%", "10.6%", "21.2%", "42.5%" ],
 e: "The total share shift is 42.46 percentage points; the dissimilarity index is half of that, i.e. 21.2%. In other words, changing the grid “relocates” a fifth of the entire spatial distribution of the population.",
 tag: "Methodology"
 },
 kz: {
 q: "Осы зерттеуде 1926 жылғы тор мен 1939 жылғы тор арасындағы ұқсамау индексі неге тең болды?",
-a: [ "2,1 %", "21,2 %", "42,5 %", "68,0 %" ],
+a: [ "2,1 %", "10,6 %", "21,2 %", "42,5 %" ],
 e: "Үлестердің жиынтық ауытқуы — 42,46 пайыздық тармақ, ұқсамау индексі — осының жартысы, яғни 21,2 %. Басқаша айтқанда, тор өзгергенде халықтың бүкіл кеңістіктік үлестірімінің бестен бірі «көшіп кетеді».",
 tag: "Әдіснама"
 }
@@ -2053,42 +2053,42 @@ e: "Қазақстандық ұлттық мектеп қазақтардың с
 tag: "Тарихнама"
 }
 }, {
-c: 1,
+c: 2,
 ru: {
 q: "Почему сводная статистика по общему населению области может ввести в заблуждение?",
-a: [ "Переписи вообще не проводились", "Приток спецпереселенцев и рабочих может скрыть убыль коренного населения", "Общее население всегда считали точнее", "Области были слишком маленькими" ],
+a: [ "Переписи вообще не проводились", "Общее население всегда считали точнее", "Приток спецпереселенцев и рабочих может скрыть убыль коренного населения", "Области были слишком маленькими" ],
 e: "Это ключевой тезис Н. Пьянчолы. Общее население Карагандинской области росло (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939), тогда как казахское падало вдвое. Смотреть нужно на этнический разрез, а не на итоговую строку.",
 tag: "Историография"
 },
 en: {
 q: "Why can aggregate statistics on an oblast’s total population be misleading?",
-a: [ "No censuses were conducted at all", "An influx of special settlers and workers can conceal the decline of the indigenous population", "Total population was always counted more accurately", "The oblasts were too small" ],
+a: [ "No censuses were conducted at all", "Total population was always counted more accurately", "An influx of special settlers and workers can conceal the decline of the indigenous population", "The oblasts were too small" ],
 e: "This is N. Pianciola’s key thesis. Karaganda Oblast’s total population grew (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939) while its Kazakh population fell by half. One must look at the ethnic breakdown, not the bottom-line total.",
 tag: "Historiography"
 },
 kz: {
 q: "Неге облыстың жалпы халқы бойынша жиынтық статистика адастыруы мүмкін?",
-a: [ "Санақ мүлде жүргізілмеген", "Арнайы қоныс аударушылар мен жұмысшылар легі байырғы халықтың азаюын жасыруы мүмкін", "Жалпы халық әрқашан дәлірек саналған", "Облыстар тым кіші болған" ],
+a: [ "Санақ мүлде жүргізілмеген", "Жалпы халық әрқашан дәлірек саналған", "Арнайы қоныс аударушылар мен жұмысшылар легі байырғы халықтың азаюын жасыруы мүмкін", "Облыстар тым кіші болған" ],
 e: "Бұл Н. Пьянчоланың басты тезисі. Қарағанды облысының жалпы халқы өсті (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %), ал қазақ халқы екі есе азайды. Түпкі жолды емес, этникалық бөліністі қарау керек.",
 tag: "Тарихнама"
 }
 }, {
-c: 1,
+c: 0,
 ru: {
 q: "Границы на картах этого сайта — это:",
-a: [ "Точные архивные кадастровые границы 1926 и 1939 годов", "Опорная реконструкция на современной геометрии, а не архивный кадастр", "Случайно сгенерированные полигоны", "Границы современных областей Казахстана без изменений" ],
+a: [ "Опорная реконструкция на современной геометрии, а не архивный кадастр", "Точные архивные кадастровые границы 1926 и 1939 годов", "Случайно сгенерированные полигоны", "Границы современных областей Казахстана без изменений" ],
 e: "Честная оговорка проекта: геометрия построена как опорная реконструкция на основе современных административных контуров (geoBoundaries), объединённых под исторические единицы. Это не архивный кадастровый shapefile, и на защите об этом нужно говорить прямо.",
 tag: "Методология"
 },
 en: {
 q: "The boundaries on this site’s maps are:",
-a: [ "Exact archival cadastral boundaries from 1926 and 1939", "A reference reconstruction on modern geometry, not an archival cadastre", "Randomly generated polygons", "The boundaries of Kazakhstan’s modern oblasts, unchanged" ],
+a: [ "A reference reconstruction on modern geometry, not an archival cadastre", "Exact archival cadastral boundaries from 1926 and 1939", "Randomly generated polygons", "The boundaries of Kazakhstan’s modern oblasts, unchanged" ],
 e: "The project’s honest caveat: the geometry is built as a reference reconstruction based on modern administrative outlines (geoBoundaries), merged under the historical units. It is not an archival cadastral shapefile, and this should be stated plainly in a defense.",
 tag: "Methodology"
 },
 kz: {
 q: "Осы сайттың карталарындағы шекаралар — бұл:",
-a: [ "1926 және 1939 жылдардың дәл мұрағаттық кадастрлық шекаралары", "Қазіргі геометрияға негізделген тірек реконструкция, мұрағаттық кадастр емес", "Кездейсоқ жасалған полигондар", "Қазақстанның қазіргі облыстарының өзгеріссіз шекаралары" ],
+a: [ "Қазіргі геометрияға негізделген тірек реконструкция, мұрағаттық кадастр емес", "1926 және 1939 жылдардың дәл мұрағаттық кадастрлық шекаралары", "Кездейсоқ жасалған полигондар", "Қазақстанның қазіргі облыстарының өзгеріссіз шекаралары" ],
 e: "Жобаның адал ескертуі: геометрия тарихи бірліктерге сәйкес біріктірілген қазіргі әкімшілік контурлар (geoBoundaries) негізінде тірек реконструкция ретінде құрылған. Бұл мұрағаттық кадастрлық shapefile емес, және қорғауда бұл туралы тікелей айту керек.",
 tag: "Әдіснама"
 }
@@ -2102,7 +2102,7 @@ tag: "Методология"
 },
 en: {
 q: "Authors estimate the irrecoverable losses of the Kazakh population differently: ≈1.3–2.3 million, and some authors give higher figures. What does this mean for a researcher?",
-a: [ "That the topic is unscientific and the data cannot be used", 'That one should state the range and attribute each estimate, rather than giving one "correct" figure', "That one should take the arithmetic mean", "That the largest estimate is always correct" ],
+a: [ "That the topic is unscientific and the data cannot be used", "That one should state the range and attribute each estimate, rather than giving one \"correct\" figure", "That one should take the arithmetic mean", "That the largest estimate is always correct" ],
 e: "The spread reflects different methods and sources. Irrecoverable losses of the Kazakh population are ≈1.3–2.3 million (estimates by different authors); A. N. Alekseenko: 1.5–1.84 million. Individual authors’ estimates above this range: Zh. Abylkhozhin, M. Kozybaev, M. Tatimov — 3.25 million; Kh. M. Abzhanov — up to 4 million. Correct scholarly practice is to give the range with attribution, not to pick one figure.",
 tag: "Methodology"
 },
@@ -4696,36 +4696,46 @@ i: 0,
 score: 0,
 wrong: [],
 answered: !1,
+picked: null,
 shuffle: !1
 };
 
-function quizPrepare() {
-if (Q.list = QUIZ.map((q, idx) => {
-const L = tr(q), pairs = L.a.map((text, i) => ({
-text: text,
-ok: i === q.c
-}));
-if (Q.shuffle) for (let i = pairs.length - 1; i > 0; i--) {
+const shuffled = a => {
+for (let i = a.length - 1; i > 0; i--) {
 const j = Math.floor(Math.random() * (i + 1));
-[pairs[i], pairs[j]] = [ pairs[j], pairs[i] ];
+[a[i], a[j]] = [ a[j], a[i] ];
 }
+return a;
+};
+
+// Q.list holds { src: index in QUIZ, order: option order }; the text is built in the current language on demand.
+function quizItem(it) {
+const raw = QUIZ[it.src], L = tr(raw), opts = it.order.map(o => ({
+text: L.a[o],
+ok: o === raw.c
+}));
 return {
 q: L.q,
 e: L.e,
 tag: L.tag,
-opts: pairs,
-correct: pairs.findIndex(p => p.ok),
-src: idx
+opts: opts,
+correct: opts.findIndex(p => p.ok)
 };
-}), Q.shuffle) for (let i = Q.list.length - 1; i > 0; i--) {
-const j = Math.floor(Math.random() * (i + 1));
-[Q.list[i], Q.list[j]] = [ Q.list[j], Q.list[i] ];
 }
-Q.i = 0, Q.score = 0, Q.wrong = [], Q.answered = !1;
+
+function quizPrepare() {
+// Options are shuffled every time, except a natural numeric series (every option has a number): it stays ascending.
+Q.list = QUIZ.map((q, idx) => {
+const ids = q.ru.a.map((_, i) => i);
+return {
+src: idx,
+order: q.ru.a.every(x => /\d/.test(x)) ? ids : shuffled(ids)
+};
+}), Q.shuffle && shuffled(Q.list), Q.i = 0, Q.score = 0, Q.wrong = [], Q.answered = !1, Q.picked = null;
 }
 
 function quizStart() {
-quizPrepare(), $("#qStart").style.display = "none", $("#qDone").style.display = "none", 
+quizPrepare(), $("#qStart").style.display = "none", $("#qDone").style.display = "none",
 $("#qPlay").style.display = "", quizRender();
 }
 
@@ -4736,10 +4746,10 @@ kz: "АБВГ"
 };
 
 function quizRender() {
-const q = Q.list[Q.i];
-Q.answered = !1, $("#qPos").textContent = `${"kz" === LANG ? "Сұрақ" : "en" === LANG ? "Question" : "Вопрос"} ${Q.i + 1} ${"kz" === LANG ? "/" : "en" === LANG ? "of" : "из"} ${Q.list.length}`,
+const q = quizItem(Q.list[Q.i]);
+$("#qPos").textContent = `${"kz" === LANG ? "Сұрақ" : "en" === LANG ? "Question" : "Вопрос"} ${Q.i + 1} ${"kz" === LANG ? "/" : "en" === LANG ? "of" : "из"} ${Q.list.length}`,
 $("#qScore").textContent = `${"kz" === LANG ? "Дұрыс:" : "en" === LANG ? "Correct:" : "Верных:"} ${Q.score}`,
-$("#qBar").style.width = Q.i / Q.list.length * 100 + "%", $("#qTag").textContent = q.tag, 
+$("#qBar").style.width = Q.i / Q.list.length * 100 + "%", $("#qTag").textContent = q.tag,
 $("#qQ").textContent = q.q, $("#qExpl").classList.remove("on"), $("#qNext").style.display = "none";
 const letters = OPT_LETTERS[LANG] || OPT_LETTERS.ru, box = $("#qOpts");
 box.innerHTML = "", q.opts.forEach((o, i) => {
@@ -4747,25 +4757,30 @@ const b = el("button", {
 class: "opt",
 "data-i": i
 });
-b.innerHTML = `<span class="k">${letters[i]}</span><span>${esc(o.text)}</span>`, 
+b.innerHTML = `<span class="k">${letters[i]}</span><span>${esc(o.text)}</span>`,
 b.addEventListener("click", () => quizAnswer(i)), box.appendChild(b);
+}), Q.answered && quizShowAnswer(q);
+}
+
+// Marks the picked and the correct option and shows the explanation (also used when re-rendering in another language).
+function quizShowAnswer(q) {
+const ok = Q.picked === q.correct;
+$$("#qOpts .opt").forEach((b, idx) => {
+b.disabled = !0, idx === q.correct ? b.classList.add("ok") : idx === Q.picked && b.classList.add("no");
 });
+const ex = $("#qExpl");
+ex.innerHTML = `<b style="color:${ok ? "var(--good)" : "var(--carmine2)"}">${esc(t(ok ? "quizCorrect" : "quizWrong"))}.</b> ${esc(q.e)}`,
+ex.classList.add("on"), $("#qNext").style.display = "", $("#qNext").textContent = Q.i === Q.list.length - 1 ? t("quizFinish") : t("quizNext");
 }
 
 function quizAnswer(i) {
 if (Q.answered) return;
-Q.answered = !0;
-const q = Q.list[Q.i], ok = i === q.correct;
+Q.answered = !0, Q.picked = i;
+const q = quizItem(Q.list[Q.i]), ok = i === q.correct;
 ok ? Q.score++ : Q.wrong.push({
-q: q,
+k: Q.i,
 picked: i
-}), $$("#qOpts .opt").forEach((b, idx) => {
-b.disabled = !0, idx === q.correct ? b.classList.add("ok") : idx === i && b.classList.add("no");
-});
-const ex = $("#qExpl");
-ex.innerHTML = `<b style="color:${ok ? "var(--good)" : "var(--carmine2)"}">${esc(t(ok ? "quizCorrect" : "quizWrong"))}.</b> ${esc(q.e)}`, 
-ex.classList.add("on"), $("#qScore").textContent = `${"kz" === LANG ? "Дұрыс:" : "en" === LANG ? "Correct:" : "Верных:"} ${Q.score}`,
-$("#qNext").style.display = "", $("#qNext").textContent = Q.i === Q.list.length - 1 ? t("quizFinish") : t("quizNext"), 
+}), quizShowAnswer(q), $("#qScore").textContent = `${"kz" === LANG ? "Дұрыс:" : "en" === LANG ? "Correct:" : "Верных:"} ${Q.score}`,
 ok && window.confetti && Q.i === Q.list.length - 1 && 0 === Q.wrong.length && confetti({
 particleCount: 90,
 spread: 68,
@@ -4776,17 +4791,19 @@ y: .7
 }
 
 function quizNext() {
-Q.i < Q.list.length - 1 ? (Q.i++, quizRender()) : quizFinish();
+Q.i < Q.list.length - 1 ? (Q.i++, Q.answered = !1, Q.picked = null, quizRender()) : quizFinish();
 }
 
-function quizFinish() {
+function quizFinish(silent = !1) {
 $("#qPlay").style.display = "none", $("#qDone").style.display = "";
 const pct = Math.round(Q.score / Q.list.length * 100);
-$("#qBig").textContent = `${Q.score} / ${Q.list.length}`, $("#qBig").style.color = pct >= 80 ? "var(--good)" : pct >= 50 ? "var(--gold2)" : "var(--carmine2)", 
+$("#qBig").textContent = `${Q.score} / ${Q.list.length}`, $("#qBig").style.color = pct >= 80 ? "var(--good)" : pct >= 50 ? "var(--gold2)" : "var(--carmine2)",
 $("#qMsg").textContent = t(100 === pct ? "quizMsg100" : pct >= 80 ? "quizMsg80" : pct >= 50 ? "quizMsg50" : "quizMsgLow");
 const rv = $("#qReview");
-Q.wrong.length ? rv.innerHTML = `<p class="sec-t">${esc(t("quizReview"))}</p>` + Q.wrong.map(w => `<div class="rv"><b>${esc(w.q.q)}</b>\n        ${esc(t("quizYourAnswer"))} <span style="color:var(--carmine2)">${esc(w.q.opts[w.picked].text)}</span><br>\n        ${esc(t("quizCorrectAnswer"))} <span style="color:var(--good)">${esc(w.q.opts[w.q.correct].text)}</span>\n        <s>${esc(w.q.e)}</s></div>`).join("") : rv.innerHTML = "", 
-pct >= 80 && window.confetti && confetti({
+Q.wrong.length ? rv.innerHTML = `<p class="sec-t">${esc(t("quizReview"))}</p>` + Q.wrong.map(w => {
+const q = quizItem(Q.list[w.k]);
+return `<div class="rv"><b>${esc(q.q)}</b>\n        ${esc(t("quizYourAnswer"))} <span style="color:var(--carmine2)">${esc(q.opts[w.picked].text)}</span><br>\n        ${esc(t("quizCorrectAnswer"))} <span style="color:var(--good)">${esc(q.opts[q.correct].text)}</span>\n        <s>${esc(q.e)}</s></div>`;
+}).join("") : rv.innerHTML = "", !silent && pct >= 80 && window.confetti && confetti({
 particleCount: 130,
 spread: 78,
 origin: {
@@ -4795,6 +4812,10 @@ y: .6
 });
 }
 
+// Language switch: redraw whichever quiz screen is open, keeping the progress.
+function quizRelang() {
+Q.list.length && ("none" !== $("#qPlay").style.display ? quizRender() : "none" !== $("#qDone").style.display && quizFinish(!0));
+}
 $("#qGo").addEventListener("click", quizStart), $("#qAgain").addEventListener("click", quizStart), 
 $("#qNext").addEventListener("click", quizNext), $("#qBack").addEventListener("click", () => showView("kz")), 
 $("#qShuffle").addEventListener("click", () => {
