@@ -977,7 +977,7 @@ n.setAttribute("title", t(n.dataset.i18nTitle));
 n.setAttribute("placeholder", t(n.dataset.i18nPlaceholder));
 }), document.querySelectorAll("[data-i18n-aria]").forEach(n => {
 n.setAttribute("aria-label", t(n.dataset.i18nAria));
-}), $$(".langopt").forEach(b => b.classList.toggle("on", b.dataset.lang === LANG)), "function" == typeof syncThemeBtn && syncThemeBtn(), "function" == typeof renderIntro && renderIntro(), navigator.gpu || !$("#aiProgTxt") || ($("#aiProgTxt").textContent = t("aiLoadNoGpu"));
+}), $$(".langopt").forEach(b => b.classList.toggle("on", b.dataset.lang === LANG)), "function" == typeof syncThemeBtn && syncThemeBtn(), "function" == typeof renderIntro && renderIntro(), $("#chat [data-greeting]") && ($("#chat [data-greeting]").textContent = t("aiGreeting")), navigator.gpu || !$("#aiProgTxt") || ($("#aiProgTxt").textContent = t("aiLoadNoGpu"));
 const lb = $("#bLangLabel");
 lb && (lb.textContent = LANG.toUpperCase());
 const sp = $("#stPrev");
@@ -4964,7 +4964,7 @@ $("#aiProgTxt").textContent = t(navigator.gpu ? "aiNotLoaded" : "aiLoadNoGpu"), 
 }), $("#aiLoad").addEventListener("click", ensureEngine), $("#aiSend").addEventListener("click", () => ask($("#aiIn").value)), 
 $("#aiIn").addEventListener("keydown", e => {
 "Enter" === e.key && ask($("#aiIn").value);
-}), chatAdd("bot", t("aiGreeting")), renderAbout(), $("#bAbout").addEventListener("click", () => modalOpen("mAbout")), 
+}), chatAdd("bot", t("aiGreeting")), $("#chat .msg") && $("#chat .msg").setAttribute("data-greeting", "1"), renderAbout(), $("#bAbout").addEventListener("click", () => modalOpen("mAbout")), 
 $("#langMenu").addEventListener("click", e => {
 const b = e.target.closest(".langopt");
 b && (setLang(b.dataset.lang), $("#langMenu").classList.remove("on"));
