@@ -148,7 +148,7 @@ focusRegions: "Регионы в фокусе этой линзы",
 askAssistantSchool: "Спросить ассистента об этой школе",
 schoolCaptionDefault: "Карта потерь казахского населения по областям 1939 года. Выберите школу выше.",
 biblioHeading: "Библиография и источники",
-biblioIntro: "Список литературы научной работы «Картография распада»: 15 основных и 35 электронных источников, оформленных по APA 7, и отдельно — 2 источника, привлечённых после подачи работы. Названия даны на языке оригинала.",
+biblioIntro: "Список литературы научной работы «Картография распада»: 15 основных и 35 электронных источников, оформленных по APA 7, и отдельно — 3 источника, привлечённых после подачи работы. Названия даны на языке оригинала.",
 biblioCopy: "Скопировать ссылку APA",
 biblioCopied: "Ссылка APA скопирована",
 biblioCopyFail: "Не удалось скопировать — выделите ссылку вручную",
@@ -232,7 +232,7 @@ aiNoteGpu: "Модель скачивается один раз и кэширу�
 aiNoteNoGpu: "В этом браузере нет поддержки WebGPU, поэтому языковая модель не запустится. Работает встроенный офлайн-поиск по базе знаний сайта. Для полноценной модели откройте сайт в свежей версии Chrome, Edge или Firefox на компьютере.",
 aiGreeting: "Здравствуйте! Я отвечаю по материалам этого исследования: карты, переписи 1926 и 1939 годов, откочёвки, историография и метод HGIS. Задайте вопрос или выберите подсказку ниже.\n\nЧтобы ответы генерировала языковая модель прямо в вашем браузере — нажмите «Загрузить модель». Без неё я отвечаю точными выдержками из базы знаний.",
 aiSourceLabel: "Источник в материалах сайта: ",
-aiNoHits: "Не нашёл в материалах сайта ничего по этому запросу. Попробуйте спросить про конкретный регион (например, «Карагандинская область»), про цифру (потери, откочёвки, скот), про историка (Кэмерон, Пьянчола, Омарбеков) или про метод (MAUP, ареальная интерполяция).",
+aiNoHits: "В базе знаний атласа нет ответа на этот вопрос. Попробуйте спросить про регион (например, «Акмолинская область»), про оценки потерь или про метод MAUP.",
 aiIdentity: "Я — ИИ-ассистент проекта «Картография коллапса»: языковая модель, которая работает прямо в вашем браузере (данные никуда не отправляются) и отвечает на вопросы по материалам этого сайта — картам, переписям 1926 и 1939 годов, откочёвкам, историографии Ашаршылыка и методу HGIS. Спросите про регион, историка, цифру или метод.",
 toastWebgpuMissing: "WebGPU недоступен в этом браузере: включён офлайн-режим",
 toastModelLoaded: "Модель загружена: ответы теперь генерируются в вашем браузере",
@@ -459,7 +459,7 @@ focusRegions: "Regions in focus for this lens",
 askAssistantSchool: "Ask the assistant about this school",
 schoolCaptionDefault: "Map of Kazakh population loss by 1939 oblast. Choose a school above.",
 biblioHeading: "Bibliography and sources",
-biblioIntro: "The bibliography of the research paper “Cartography of Collapse”: 15 main and 35 electronic sources in APA 7 style, plus 2 sources added after the paper was submitted, listed separately. Titles are given in the original language, with English translations in square brackets.",
+biblioIntro: "The bibliography of the research paper “Cartography of Collapse”: 15 main and 35 electronic sources in APA 7 style, plus 3 sources added after the paper was submitted, listed separately. Titles are given in the original language, with English translations in square brackets.",
 biblioCopy: "Copy APA reference",
 biblioCopied: "APA reference copied",
 biblioCopyFail: "Could not copy — select the reference manually",
@@ -543,7 +543,7 @@ aiNoteGpu: "The model downloads once and is cached by the browser, then works wi
 aiNoteNoGpu: "This browser doesn’t support WebGPU, so the language model can’t run. The built-in offline search over the site’s knowledge base is active instead. For the full model, open the site in a recent version of Chrome, Edge, or Firefox on a computer.",
 aiGreeting: "Hello! I answer using this research’s material: the maps, the 1926 and 1939 censuses, the migrations, the historiography, and the HGIS method. Ask a question or pick a suggestion below.\n\nTo have a language model generate answers right in your browser — click “Load model”. Without it I answer with precise excerpts from the knowledge base.",
 aiSourceLabel: "Source in the site’s material: ",
-aiNoHits: "I couldn’t find anything on the site about this. Try asking about a specific region (e.g. “Karaganda Oblast”), a figure (losses, migrations, livestock), a historian (Cameron, Pianciola, Omarbekov), or a method (MAUP, areal interpolation).",
+aiNoHits: "The atlas knowledge base has no answer to this question. Try asking about a region (e.g. “Akmola Oblast”), about loss estimates, or about the MAUP method.",
 aiIdentity: "I'm the AI assistant for \"Cartography of Collapse\": a language model that runs right in your browser (nothing is sent anywhere) and answers questions using this site's material — the maps, the 1926 and 1939 censuses, the migrations, the historiography of Asharshylyk, and the HGIS method. Ask about a region, a historian, a figure, or a method.",
 toastWebgpuMissing: "WebGPU is unavailable in this browser: offline mode is active",
 toastModelLoaded: "Model loaded: answers are now generated in your browser",
@@ -770,7 +770,7 @@ focusRegions: "Осы көзқарас назардағы аймақтар",
 askAssistantSchool: "Осы мектеп туралы көмекшіден сұрау",
 schoolCaptionDefault: "1939 жылғы облыстар бойынша қазақ халқының шығын картасы. Жоғарыдан мектепті таңдаңыз.",
 biblioHeading: "Библиография және дереккөздер",
-biblioIntro: "«Күйреу картографиясы» ғылыми жұмысының әдебиеттер тізімі: APA 7 бойынша рәсімделген 15 негізгі және 35 электрондық дереккөз, сондай-ақ жұмыс тапсырылғаннан кейін тартылған 2 дереккөз бөлек берілген. Атаулар түпнұсқа тілінде берілген.",
+biblioIntro: "«Күйреу картографиясы» ғылыми жұмысының әдебиеттер тізімі: APA 7 бойынша рәсімделген 15 негізгі және 35 электрондық дереккөз, сондай-ақ жұмыс тапсырылғаннан кейін тартылған 3 дереккөз бөлек берілген. Атаулар түпнұсқа тілінде берілген.",
 biblioCopy: "APA сілтемесін көшіру",
 biblioCopied: "APA сілтемесі көшірілді",
 biblioCopyFail: "Көшіру мүмкін болмады — сілтемені қолмен белгілеңіз",
@@ -854,7 +854,7 @@ aiNoteGpu: "Модель бір рет жүктеледі және браузе�
 aiNoteNoGpu: "Бұл браузерде WebGPU қолдауы жоқ, сондықтан тілдік модель іске қосылмайды. Сайттың білім қоры бойынша кірістірілген офлайн іздеу жұмыс істейді. Толық модель үшін сайтты компьютердегі Chrome, Edge немесе Firefox-тың жаңа нұсқасында ашыңыз.",
 aiGreeting: "Сәлеметсіз бе! Мен осы зерттеудің материалдары бойынша жауап беремін: карталар, 1926 және 1939 жылдардағы санақтар, көші-қон, тарихнама және HGIS әдісі. Сұрақ қойыңыз немесе төмендегі ұсыныстардың бірін таңдаңыз.\n\nЖауаптарды тілдік модель тікелей сіздің браузеріңізде жасауы үшін «Модельді жүктеу» түймесін басыңыз. Ол болмаса, мен білім қорынан дәл үзінділермен жауап беремін.",
 aiSourceLabel: "Сайт материалдарындағы дереккөз: ",
-aiNoHits: "Бұл сұрау бойынша сайт материалдарынан ештеңе таппадым. Нақты аймақ туралы (мысалы, «Қарағанды облысы»), сан туралы (шығындар, көші-қон, мал басы), тарихшы туралы (Кэмерон, Пьянчола, Омарбеков) немесе әдіс туралы (MAUP, ареалдық интерполяция) сұрап көріңіз.",
+aiNoHits: "Атлас білім қорында бұл сұраққа жауап жоқ. Аймақ (мысалы, «Ақмола облысы»), шығын бағалары немесе MAUP әдісі туралы сұрап көріңіз.",
 aiIdentity: "Мен — «Күйреу картографиясы» жобасының ЖИ-көмекшісімін: сіздің браузеріңізде тікелей жұмыс істейтін (деректер еш жерге жіберілмейді) тілдік модельмін және осы сайттың материалдары — карталар, 1926 және 1939 жылдардағы санақтар, көші-қон, Ашаршылық тарихнамасы және HGIS әдісі бойынша сұрақтарға жауап беремін. Аймақ, тарихшы, сан немесе әдіс туралы сұраңыз.",
 toastWebgpuMissing: "Бұл браузерде WebGPU қолжетімсіз: офлайн режим қосылды",
 toastModelLoaded: "Модель жүктелді: жауаптар енді сіздің браузеріңізде жасалады",
@@ -2150,6 +2150,12 @@ function KBcur() {
 return "kz" === LANG ? KB_KZ : "en" === LANG ? KB_EN : KB_RU;
 }
 
+kbRu("Для кого атлас", "Атлас — практическая часть школьной исследовательской работы «Картография распада», которую подготовили ученики 11F НИШ Астана. Он рассчитан на всех, кто изучает историю Казахстана и голод 1930–1933 годов: на учеников и учителей, а также на жюри конкурса. Конкретные классы или возраст читателей в работе не указаны. Апробация: опрос N = 32 (11 вопросов); 75 % участников сочли интерактивные слои понятнее учебника.", "о проекте"), kbEn("Who the atlas is for", "The atlas is the practical part of the school research paper “Cartography of Disintegration” by students of class 11F, NIS Astana. It is meant for anyone studying the history of Kazakhstan and the 1930–1933 famine: students and teachers, and the competition jury. The paper does not name specific grades or ages. Approbation: a survey, N = 32 (11 questions); 75% of respondents found the interactive layers clearer than a textbook.", "about"), kbKz("Атлас кімге арналған", "Атлас — НЗМ Астана 11F сынып оқушылары дайындаған «Ыдырау картографиясы» мектептік зерттеу жұмысының практикалық бөлігі. Ол Қазақстан тарихы мен 1930–1933 жылдардағы ашаршылықты зерттейтін барлық адамға арналған: оқушылар мен мұғалімдерге, сондай-ақ байқаудың қазылар алқасына. Жұмыста нақты сыныптар немесе оқырман жасы көрсетілмеген. Апробация: сауалнама, N = 32 (11 сұрақ); қатысушылардың 75 %-ы интерактивті қабаттарды оқулықтан түсініктірек деп санады.", "жоба туралы");
+kbRu("Авторы и научный руководитель", "Авторы атласа и научной работы: Жагиппаров Ализар и Утесеитов Али (11F, НИШ Астана). Научный руководитель: Ғазиз Ақтоты Ғазизқызы. Вклад авторов: Ализар отвечал за историографию, сведение таблиц переписей, сопоставление оценок потерь и опросник; Али отвечал за пространственную часть, веб-архитектуру атласа, наложение сеток в GeoPandas/Shapely и матрицу 8 × 12. Совместно сформулирована гипотеза и разграничены уровни «оценка / модель».", "о проекте"), kbEn("Authors and supervisor", "Authors of the atlas and the research paper: Alizar Zhagipparov and Ali Uteseitov (11F, NIS Astana). Supervisor: Ғазиз Ақтоты Ғазизқызы. Contributions: Alizar did the historiography, compiled the census tables, compared the loss estimates and wrote the questionnaire; Ali did the spatial part, the atlas web architecture, overlaying the grids in GeoPandas/Shapely and the 8 × 12 matrix. Together they formulated the hypothesis and separated the “estimate / model” levels.", "about"), kbKz("Авторлар және ғылыми жетекші", "Атлас пен ғылыми жұмыстың авторлары: Жагиппаров Ализар және Утесеитов Али (11F, НЗМ Астана). Ғылыми жетекші: Ғазиз Ақтоты Ғазизқызы. Авторлардың үлесі: Ализар тарихнамаға, санақ кестелерін жинақтауға, шығын бағаларын салыстыруға және сауалнамаға жауап берді; Али кеңістіктік бөлімге, атластың веб-архитектурасына, GeoPandas/Shapely-де торларды қабаттастыруға және 8 × 12 матрицасына жауап берді. Гипотеза бірлесіп тұжырымдалды және «баға / модель» деңгейлері ажыратылды.", "жоба туралы");
+kbRu("Как цитировать атлас", "Ссылка на атлас в стиле APA 7: Жагиппаров, А., & Утесеитов, А. (2026). Картография коллапса: HGIS-атлас Ашаршылыка, 1926–1939 [Веб-атлас]. https://asharshylyk-full.vercel.app. Отдельные цифры лучше цитировать по первоисточникам, которые указаны во вкладке «Библиография».", "о проекте"), kbEn("How to cite the atlas", "To cite the atlas in APA 7 style: Zhagipparov, A., & Uteseitov, A. (2026). Cartography of Collapse: An HGIS atlas of Asharshylyk, 1926–1939 [Web atlas]. https://asharshylyk-full.vercel.app. Individual figures are better cited from the primary sources listed in the Bibliography tab.", "about"), kbKz("Атласқа қалай сілтеме жасау керек", "APA 7 стиліндегі сілтеме: Жагиппаров, А., & Утесеитов, А. (2026). Күйреу картографиясы: Ашаршылықтың HGIS-атласы, 1926–1939 [Веб-атлас]. https://asharshylyk-full.vercel.app. Жекелеген сандарды «Библиография» бөлімінде көрсетілген бастапқы дереккөздер бойынша келтірген дұрыс.", "жоба туралы");
+kbRu("Предварительные областные данные", "Значения по 8 округам 1926 г. и 12 областям 1939 г. — рабочий набор данных атласа. Их сверка с опубликованными итогами переписей ведётся, поэтому в подсказках карты, в легенде, в таблице и в карточках они помечены «предв., сверка ведётся». Республиканские итоги уже сверены с первоисточниками: в 1926 г. 6 198,5 тыс. жителей и 3 627,6 тыс. казахов (58,5 %), в 1939 г. 6 151,1 тыс. и 2 327,6 тыс. (37,8 %).", "данные"), kbEn("Preliminary oblast data", "Values for the 8 okrugs of 1926 and the 12 oblasts of 1939 are the atlas’s working dataset. They are still being cross-checked against the published census results, so map tooltips, the legend, the table and the cards mark them “prelim., cross-check in progress”. The republic totals have been checked against the primary sources: in 1926, 6,198.5 thousand inhabitants and 3,627.6 thousand Kazakhs (58.5%); in 1939, 6,151.1 and 2,327.6 thousand (37.8%).", "data"), kbKz("Алдын ала облыстық деректер", "1926 ж. 8 округ пен 1939 ж. 12 облыс бойынша мәндер — атластың жұмыс деректер жиынтығы. Олар жарияланған санақ қорытындыларымен әлі салыстырылуда, сондықтан карта кеңестерінде, шартты белгілерде, кестеде және карточкаларда «алдын ала, салыстыру жүргізілуде» деп белгіленген. Республикалық қорытындылар бастапқы дереккөздермен тексерілген: 1926 ж. 6 198,5 мың тұрғын және 3 627,6 мың қазақ (58,5 %), 1939 ж. 6 151,1 және 2 327,6 мың (37,8 %).", "деректер");
+kbRu("Факт, модель и гипотеза", "В работе и на сайте различаются три уровня утверждений. Факт — опубликованное значение с источником (итоги переписей, оценки историков с указанием автора); на плашках он отмечен меткой «перепись» или «оценка историографии». Модель — расчётное значение, полученное методом (ареальная интерполяция, MAUP-сдвиг, индекс несходства); метка «модель». Гипотеза — предположение, которое проверяется: «наиболее тяжелые потери приходились на районы традиционного скотоводства, тогда как статистический прирост в промышленных центрах мог быть следствием принудительной и организованной миграции».", "методология"), kbEn("Fact, model and hypothesis", "The paper and the site distinguish three levels of claims. A fact is a published value with a source (census results, historians’ estimates attributed to their authors); plaques mark it “census” or “historiographic estimate”. A model value is calculated by a method (areal interpolation, the MAUP shift, the dissimilarity index); it is marked “model”. A hypothesis is an assumption being tested: “the heaviest losses fell on areas of traditional pastoralism, while the statistical growth of industrial centres may have resulted from forced and organised migration”.", "methodology"), kbKz("Факт, модель және гипотеза", "Жұмыс пен сайтта тұжырымдардың үш деңгейі ажыратылады. Факт — дереккөзі бар жарияланған мән (санақ қорытындылары, авторы көрсетілген тарихшылардың бағалары); тақташаларда ол «санақ» немесе «тарихнамалық баға» белгісімен белгіленеді. Модель — әдіспен алынған есептік мән (ареалдық интерполяция, MAUP ығысуы, ұқсамау индексі); белгісі «модель». Гипотеза — тексерілетін болжам: ең ауыр шығындар дәстүрлі мал шаруашылығы аудандарына келді, ал өнеркәсіп орталықтарындағы статистикалық өсім мәжбүрлі және ұйымдастырылған көші-қонның салдары болуы мүмкін.", "әдіснама");
+
 kbRu("Что такое Ашаршылык", "Ашаршылык — голод в Казахстане 1930–1933 годов, вызванный насильственной коллективизацией, седентаризацией (принудительным оседанием кочевников) и мясозаготовками. Безвозвратные потери казахского населения ≈1,3–2,3 млн (оценки разных авторов); А. Н. Алексеенко: 1,5–1,84 млн. Доля погибших от численности казахского народа — ≈38 % (Cameron, 2018), наибольшая относительная потеря среди народов СССР. Оценки разных авторов: Институт демографии им. Птухи НАН Украины — 1,258 млн; Р. Конквест — 2,3 млн. Отдельные авторские оценки выше общего диапазона: Ж. Абылхожин, М. Козыбаев, М. Татимов — 3,25 млн; проф. Х. М. Абжанов — до 4 млн.", "основное"), 
 kbEn("What Asharshylyk is", "Asharshylyk is the 1930–1933 famine in Kazakhstan, caused by forced collectivization, sedentarization (the forced settlement of nomads), and meat-procurement quotas. Irrecoverable losses of the Kazakh population are ≈1.3–2.3 million (estimates by different authors); A. N. Alekseenko: 1.5–1.84 million. The share of deaths relative to the Kazakh population was ≈38% (Cameron, 2018), the largest relative loss among the peoples of the USSR. Estimates by different authors: the Ptukha Institute of Demography of the National Academy of Sciences of Ukraine — 1.258 million; R. Conquest — 2.3 million. Individual authors’ estimates above the overall range: Zh. Abylkhozhin, M. Kozybaev, M. Tatimov — 3.25 million; Prof. Kh. M. Abzhanov — up to 4 million.", "core"), 
 kbKz("Ашаршылық деген не", "Ашаршылық — 1930–1933 жылдары Қазақстанда болған, күштеп ұжымдастыру, отырықшыландыру (көшпенділерді мәжбүрлеп қоныстандыру) және ет дайындау нормалары тудырған ашаршылық. Қазақ халқының қайтарымсыз шығыны ≈1,3–2,3 млн (әртүрлі авторлардың бағалары); А. Н. Алексеенко: 1,5–1,84 млн. Қазақ халқы санынан қаза болғандар үлесі — ≈38 % (Cameron, 2018), бұл КСРО халықтары арасындағы ең үлкен салыстырмалы шығын. Әртүрлі авторлардың бағалары: Украина ҰҒА Птуха атындағы Демография институты — 1,258 млн; Р. Конквест — 2,3 млн. Жалпы диапазоннан жоғары жекелеген авторлық бағалар: Ж. Абылхожин, М. Қозыбаев, М. Тәтімов — 3,25 млн; проф. Х. М. Әбжанов — 4 млн-ға дейін.", "негізгі"), 
@@ -2165,9 +2171,9 @@ kbKz("Ареалдық интерполяция: формула", "1926 жылғ
 kbRu("Главный количественный результат", "При переносе казахского населения 1926 года с сетки 8 округов на сетку 12 областей суммарный сдвиг долей составил 42,46 процентных пункта, индекс несходства (половина суммы модулей сдвигов) — 21,2 %. Это означает, что при смене административной сетки «переезжает» примерно пятая часть всего пространственного распределения населения. Наибольший сдвиг вверх — Восточно-Казахстанская область (+165 % относительно исходной доли), наибольший сдвиг вниз — Акмолинская область (−60 %).", "результаты"), 
 kbEn("The main quantitative result", 'When the 1926 Kazakh population is reallocated from the 8-okrug grid onto the 12-oblast grid, the total share shift is 42.46 percentage points, and the dissimilarity index (half the sum of the absolute shifts) is 21.2%. This means that changing the administrative grid "relocates" roughly a fifth of the entire spatial distribution of the population. The largest upward shift is East Kazakhstan Oblast (+165% relative to its original share); the largest downward shift is Akmola Oblast (−60%).', "results"), 
 kbKz("Басты сандық нәтиже", "1926 жылғы қазақ халқын 8 округтік тордан 12 облыстық торға ауыстырғанда, үлестердің жиынтық ауытқуы 42,46 пайыздық тармақты, ал ұқсамау индексі (ауытқулар модульдерінің қосындысының жартысы) — 21,2 %-ды құрады. Бұл әкімшілік тор өзгергенде халықтың бүкіл кеңістіктік үлестірімінің шамамен бестен бірі «көшетінін» білдіреді. Ең үлкен жоғары ауытқу — Шығыс Қазақстан облысы (бастапқы үлеске қатысты +165 %), ең үлкен төмен ауытқу — Ақмола облысы (−60 %).", "нәтижелер"), 
-kbRu("Аномальный рост населения", "Аномальный рост — ситуация, когда общее население области растёт, а коренное (казахское) население той же области резко сокращается. Классический пример — Карагандинская область (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939): приток спецпереселенцев, заключённых Карлага и рабочих индустриальных строек увеличивал общую численность, тогда как казахское население упало более чем вдвое. Поэтому сводная статистика по общему населению маскирует этнодемографический коллапс, и анализировать нужно этнический разрез.", "результаты"), 
-kbEn("Anomalous population growth", "Anomalous growth is a situation where an oblast’s total population grows while its indigenous (Kazakh) population sharply declines. The classic example is Karaganda Oblast (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939): an influx of special settlers, Karlag prisoners, and industrial-construction workers increased the total count, while the Kazakh population fell by more than half. So aggregate statistics on total population mask the ethno-demographic collapse, and one needs to analyze the ethnic breakdown.", "results"), 
-kbKz("Халық санының аномальды өсуі", "Аномальды өсім — облыстың жалпы халқы өсіп жатқанда, сол облыстың байырғы (қазақ) халқы күрт азаятын жағдай. Классикалық мысал — Қарағанды облысы (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %): арнайы қоныс аударушылар, Карлаг тұтқындары және өнеркәсіп құрылысы жұмысшыларының легі жалпы санды арттырды, ал қазақ халқы екі еседен астам азайды. Сондықтан жалпы халық бойынша жиынтық статистика этнодемографиялық күйреуді жасырады, этникалық бөліністі талдау керек.", "нәтижелер"), 
+kbRu("Аномальный рост населения", "Аномальный рост — ситуация, когда общее население области растёт, а коренное (казахское) население той же области резко сокращается. Классический пример — Карагандинская область (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939): приток спецпереселенцев, заключённых Карлага и рабочих индустриальных строек увеличивал общую численность. Данные о казахском населении области в рабочем наборе атласа ещё сверяются; по оценке А. Н. Алексеенко (2003), в Центральном Казахстане (Карагандинская область) потери казахского этноса были наименьшими в республике: 22,5 тыс. человек, или 15,6 %. Поэтому общая численность области сама по себе ничего не говорит о судьбе её казахского населения, и анализировать нужно этнический разрез.", "результаты"), 
+kbEn("Anomalous population growth", "Anomalous growth is a situation where an oblast’s total population grows while its indigenous (Kazakh) population sharply declines. The classic example is Karaganda Oblast (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939): an influx of special settlers, Karlag prisoners, and industrial-construction workers increased the total count. The Kazakh figures for this oblast in the atlas’s working dataset are still being cross-checked; according to A. N. Alekseenko (2003), Kazakh losses in Central Kazakhstan (Karaganda Oblast) were the smallest in the republic: 22.5 thousand people, or 15.6%. So the oblast’s total population on its own says nothing about the fate of its Kazakh population, and one needs to analyze the ethnic breakdown.", "results"), 
+kbKz("Халық санының аномальды өсуі", "Аномальды өсім — облыстың жалпы халқы өсіп жатқанда, сол облыстың байырғы (қазақ) халқы күрт азаятын жағдай. Классикалық мысал — Қарағанды облысы (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %): арнайы қоныс аударушылар, Карлаг тұтқындары және өнеркәсіп құрылысы жұмысшыларының легі жалпы санды арттырды. Атластың жұмыс жиынтығындағы облыстың қазақ халқы туралы деректері әлі салыстырылуда; А. Н. Алексеенконың (2003) бағасы бойынша Орталық Қазақстанда (Қарағанды облысы) қазақ этносының шығыны республикадағы ең аз болды: 22,5 мың адам, немесе 15,6 %. Сондықтан облыстың жалпы халқы өз алдына оның қазақ халқының тағдыры туралы ештеңе айтпайды, этникалық бөліністі талдау керек.", "нәтижелер"), 
 kbRu("Откочёвки: масштаб и направления", "Республику покинули около 1,13 млн человек. Безвозвратно — около 676 тыс.; вернулись впоследствии около 454 тыс.; порядка 200 тыс. остались за границей навсегда. Зарубежные направления: Синьцзян (Китай) — крупнейшее, Монголия (Баян-Улгий), Афганистан, Иран, позже Турция (уже вторичная миграция 1950–60-х из Синьцзяна). Внутрисоюзные направления: Западно-Сибирский край, Средняя Волга и Сталинград, Узбекская ССР, Киргизская АССР, Туркменская ССР, Каракалпакская АССР, Урал и Башкирия. ВАЖНО: разбивка по конкретным направлениям — дискуссионная оценка. Сара Кэмерон прямо называет точный подсчёт по направлениям открытым исследовательским вопросом, требующим работы с архивами других республик и Синьцзяна.", "откочёвки"), 
 kbEn("Migrations: scale and destinations", "About 1.13 million people left the republic. Permanently — about 676,000; about 454,000 later returned; around 200,000 remained abroad for good. Foreign destinations: Xinjiang (China) — the largest, Mongolia (Bayan-Ölgii), Afghanistan, Iran, and later Turkey (a secondary migration of the 1950s–60s from Xinjiang). Destinations within the union: West Siberian Krai, the Middle Volga and Stalingrad, the Uzbek SSR, the Kirghiz ASSR, the Turkmen SSR, the Karakalpak ASSR, the Urals and Bashkiria. IMPORTANT: the breakdown by specific destination is a debated estimate. Sarah Cameron explicitly calls an exact count by destination an open research question requiring work with the archives of other republics and Xinjiang.", "migrations"), 
 kbKz("Көші-қон: ауқымы мен бағыттары", "Республикадан шамамен 1,13 млн адам кетті. Қайтпай кеткендер — шамамен 676 мың; кейін шамамен 454 мың адам оралды; шамамен 200 мың адам шетелде мәңгілікке қалды. Шетелдік бағыттар: Шыңжаң (Қытай) — ең ірісі, Моңғолия (Баян-Өлгий), Ауғанстан, Иран, кейінірек Түркия (1950–60 жж. Шыңжаңнан қайталама көші-қон). Одақ ішіндегі бағыттар: Батыс Сібір өлкесі, Орта Еділ мен Сталинград, Өзбек КСР-і, Қырғыз АКСР-і, Түрікмен КСР-і, Қарақалпақ АКСР-і, Орал мен Башқұртстан. МАҢЫЗДЫ: нақты бағыттар бойынша бөліну — пікірталастық баға. Сара Кэмерон бағыттар бойынша дәл санақты басқа республикалар мен Шыңжаң мұрағаттарымен жұмысты талап ететін ашық зерттеу мәселесі деп тікелей атайды.", "көші-қон"), 
@@ -4090,6 +4096,24 @@ ru: "Итоги переписи 1926 г. по республике (3 627,6 т�
 en: "1926 census totals for the republic (3,627.6 thousand Kazakhs, 58.5% of the population) and oblast population change in 1926–1939.",
 kz: "Республика бойынша 1926 ж. санақ қорытындылары (3 627,6 мың қазақ, халықтың 58,5 %-ы) және 1926–1939 жж. облыстар халқының өзгерісі."
 }
+}, {
+src: "Д3",
+group: "extra",
+type: "article",
+cat: "article",
+lang: "ru",
+authors: [ [ "Алексеенко", "А. Н." ] ],
+year: "2003",
+title: "Демографические последствия голода в Казахстане начала 30-х годов (оценка потерь казахского этноса)",
+tr: "Demographic consequences of the famine in Kazakhstan in the early 1930s (an estimate of the losses of the Kazakh ethnos)",
+container: "Демоскоп Weekly",
+issue: "101–102",
+url: "https://www.demoscope.ru/weekly/2003/0101/analit02.php",
+role: {
+ru: "Региональные оценки потерь казахов: наименьшие — в Центральном Казахстане (Карагандинская область), 22,5 тыс., или 15,6 %.",
+en: "Regional estimates of Kazakh losses: the smallest in Central Kazakhstan (Karaganda Oblast), 22.5 thousand, or 15.6%.",
+kz: "Қазақтар шығынының аймақтық бағалары: ең азы Орталық Қазақстанда (Қарағанды облысы), 22,5 мың, немесе 15,6 %."
+}
 } ];
 
 // APA 7 reference for one entry. Connective words follow the interface: Russian forms for ru and kz
@@ -4435,6 +4459,23 @@ kz: {
 what: "Республика бойынша 1926 ж. санақ қорытындылары: қазақтар үлесі ≈60 % орнына ≈58,5 %, халық ≈6,07 млн орнына ≈6,2 млн (6 198,5 мың); 1926 → 1939 жалпы халық саны іс жүзінде өзгермеді (≈6,2 → 6,15 млн, ≈ −1 %). Карта кеңестері мен шартты белгілерде облыстық және округтік мәндер «алдын ала, салыстыру жүргізілуде» деп белгіленді.",
 why: "58,5 % мәні Асылбек пен Асылбекованың (2014) еңбегінде тікелей көрсетілген; ≈6,07 млн онда жоқ. Екі шама да Демоскоп кестелерімен тексерілді: Қарақалпақ АО-мен бірге Қазақ АКСР-і — 6 503,0 мың, оның ішінде 3 713,4 мың қазақ; Қарақалпақ АО — 304,5 және 85,8 мың; айырмасы — 6 198,5 және 3 627,6 мың (58,5 %).",
 source: "1926 ж. Бүкілодақтық санақ, Демоскоп Weekly: rus_nac_26.php?reg=1476 және reg=1572; Асылбек М. Х., Асылбекова Ж. М. (2014)."
+}
+}, {
+date: "2026-10-23",
+ru: {
+what: "База знаний ИИ-ассистента, фрагмент «Аномальный рост населения»: убрано утверждение, что казахское население Карагандинской области «упало более чем вдвое». Рост общей численности (+41,8 %, Асылбек, Асылбекова, 2014) сохранён; добавлена оценка А. Н. Алексеенко (2003): в Центральном Казахстане (Карагандинская область) потери казахов были наименьшими, 22,5 тыс., или 15,6 %. Алексеенко (2003) добавлен в библиографию.",
+why: "Источника для «более чем вдвое» нет (это следствие несверенных областных данных), а опубликованная оценка Алексеенко говорит о наименьших потерях в этом районе.",
+source: "Алексеенко А. Н. Демографические последствия голода в Казахстане начала 30-х годов // Демоскоп Weekly. 2003. № 101–102."
+},
+en: {
+what: "AI assistant knowledge base, “Anomalous population growth”: the claim that the Kazakh population of Karaganda Oblast “fell by more than half” was removed. The total growth (+41.8%, Asylbek & Asylbekova, 2014) is kept; A. N. Alekseenko’s (2003) estimate was added: Kazakh losses in Central Kazakhstan (Karaganda Oblast) were the smallest, 22.5 thousand, or 15.6%. Alekseenko (2003) was added to the bibliography.",
+why: "There is no source for “more than half” (it came from the unverified oblast data), and Alekseenko’s published estimate gives the smallest losses for this region.",
+source: "Alekseenko, A. N. (2003). Demoscope Weekly, no. 101–102."
+},
+kz: {
+what: "ЖИ-көмекшінің білім қоры, «Халық санының аномальды өсуі» фрагменті: Қарағанды облысының қазақ халқы «екі еседен астам азайды» деген тұжырым алынып тасталды. Жалпы халықтың өсуі (+41,8 %, Асылбек, Асылбекова, 2014) сақталды; А. Н. Алексеенконың (2003) бағасы қосылды: Орталық Қазақстанда (Қарағанды облысы) қазақтардың шығыны ең аз болды, 22,5 мың, немесе 15,6 %. Алексеенко (2003) библиографияға қосылды.",
+why: "«Екі еседен астам» деген тұжырымның дереккөзі жоқ (ол салыстырылмаған облыстық деректерден шыққан), ал Алексеенконың жарияланған бағасы бұл аудандағы шығынды ең аз деп көрсетеді.",
+source: "Алексеенко А. Н. (2003), Демоскоп Weekly, № 101–102."
 }
 } ];
 
@@ -4843,14 +4884,24 @@ loading: !1,
 model: MODELS[0].id,
 busy: !1,
 history: []
-}, stem = w => w.toLowerCase().replace(/[ёë]/g, "е").slice(0, 5), tokens = s => (s.toLowerCase().match(/[a-zа-яёәғқңөұүһі0-9]{3,}/gi) || []).map(stem), STOP_RU = new Set([ "что", "как", "это", "для", "при", "все", "был", "быть", "esc", "ктo", "где", "поче", "какой", "кака", "какие", "скол", "расс", "why", "the" ]), STOP_EN = new Set([ "what", "how", "this", "that", "for", "with", "are", "was", "were", "the", "and", "who", "why", "which", "about", "does", "did", "when", "where" ]), STOP_KZ = new Set([ "деген", "қалай", "үшін", "бірақ", "кезде", "арқылы", "туралы", "барлық", "болды", "және", "немесе", "қанша", "қандай", "неге", "мынау", "сонда", "дейін", "бұл", "сол" ]);
+}, stem = w => w.toLowerCase().replace(/[ёë]/g, "е").slice(0, "kz" === LANG ? 4 : 5), tokens = s => (s.toLowerCase().match(/[a-zа-яёәғқңөұүһі0-9]{3,}/gi) || []).map(stem), STOP_RU = new Set([ "что", "как", "это", "для", "при", "все", "был", "быть", "esc", "ктo", "где", "поче", "какой", "кака", "какие", "скол", "расс", "why", "the" ]), STOP_EN = new Set([ "what", "how", "this", "that", "for", "with", "are", "was", "were", "the", "and", "who", "why", "which", "about", "does", "did", "when", "where" ]), STOP_KZ = new Set([ "деген", "қалай", "үшін", "бірақ", "кезде", "арқылы", "туралы", "барлық", "болды", "және", "немесе", "қанша", "қандай", "неге", "мынау", "сонда", "дейін", "бұл", "сол" ]);
 
+// Nearly every fragment is about Kazakhs, so this stem does not tell fragments apart.
+[ "казах", "kazak", "қазақ" ].forEach(w => [ STOP_RU, STOP_EN, STOP_KZ ].forEach(S => S.add(w)));
+
+[ "қайда", "неге", "кім", "қандай", "қай", "не" ].forEach(w => STOP_KZ.add(w));
+
+const _stopCache = {};
 function stopwords() {
-return "kz" === LANG ? STOP_KZ : "en" === LANG ? STOP_EN : STOP_RU;
+return _stopCache[LANG] || (_stopCache[LANG] = new Set([ ...("kz" === LANG ? STOP_KZ : "en" === LANG ? STOP_EN : STOP_RU) ].map(stem)));
 }
 
-function retrieve(query, k = 4) {
-const KB = KBcur(), stop = stopwords(), q = tokens(query).filter(t => !stop.has(t));
+// Scores every KB fragment: tf-idf over title (x3) and body, plus coverage = share of the query's meaningful words found.
+// A fragment counts as relevant only if it covers at least half of those words or its score passes AI_MIN_SCORE
+// (both tuned on scripts/ai_eval.js); the ranking also rewards coverage, so a fragment matching one common word loses.
+const AI_MIN_COVER = .5, AI_MIN_SCORE = 8, AI_CLOSE = .75;
+function retrieveScored(query) {
+const KB = KBcur(), stop = stopwords(), q = [ ...new Set(tokens(query).filter(t => !stop.has(t))) ];
 if (!q.length) return [];
 const df = {};
 KB.forEach(p => {
@@ -4859,22 +4910,28 @@ q.forEach(t => {
 seen.has(t) && (df[t] = (df[t] || 0) + 1);
 });
 });
-const scored = KB.map(p => {
+return KB.map(p => {
 const tt = tokens(p.title), bt = tokens(p.text);
-let s = 0;
+let s = 0, hit = 0;
 return q.forEach(t => {
 const idf = Math.log(1 + KB.length / (1 + (df[t] || 0))), inT = tt.filter(x => x === t).length, inB = bt.filter(x => x === t).length;
-(inT || inB) && (s += idf * (3 * inT + Math.min(inB, 4)));
+(inT || inB) && (hit++, s += idf * (3 * inT + Math.min(inB, 4)));
 }), {
 p: p,
-s: s
+s: s,
+cover: hit / q.length,
+rank: s * (.5 + hit / q.length)
 };
-}).filter(o => o.s > 0).sort((a, b) => b.s - a.s);
-return scored.slice(0, k).map(o => o.p);
+}).filter(o => o.s > 0 && (o.cover >= AI_MIN_COVER || o.s >= AI_MIN_SCORE)).sort((a, b) => b.rank - a.rank);
 }
 
+function retrieve(query, k = 4) {
+return retrieveScored(query).slice(0, k).map(o => o.p);
+}
+
+// One best fragment; the second and third only if their rank is close to the first.
 function offlineAnswer(query) {
-const hits = retrieve(query, 3);
+const all = retrieveScored(query), hits = all.filter((o, i) => 0 === i || i < 3 && o.rank >= AI_CLOSE * all[0].rank).map(o => o.p);
 return hits.length ? {
 text: hits.map(h => `▸ ${h.title}\n${h.text}`).join("\n\n"),
 src: hits.map(h => h.title)
