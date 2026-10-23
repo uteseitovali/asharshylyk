@@ -1594,23 +1594,23 @@ t: "КСРО халықтары арасында ең үлкен САЛЫСТЫ�
 }, {
 lon: 31,
 lat: 49,
-loss: 12,
+loss: null,
 ru: {
 n: "Украинская ССР",
 deaths: "3,3–3,9 млн",
-pop: "≈31 млн",
+pop: "",
 t: "Голодомор 1932–33. Наибольшее АБСОЛЮТНОЕ число жертв в СССР."
 },
 en: {
 n: "Ukrainian SSR",
 deaths: "3.3–3.9 million",
-pop: "≈31 million",
+pop: "",
 t: "The Holodomor of 1932–33. The largest ABSOLUTE number of victims in the USSR."
 },
 kz: {
 n: "Украин КСР-і",
 deaths: "3,3–3,9 млн",
-pop: "≈31 млн",
+pop: "",
 t: "1932–33 жж. Голодомор. КСРО-дағы ең үлкен АБСОЛЮТТІ құрбандар саны."
 }
 }, {
@@ -3524,11 +3524,11 @@ return t0.textContent = t("kzAssrLabel"), lb.appendChild(t0), pts;
 
 function renderFamines(fl, nd, lb) {
 $("#worldHint").textContent = t("hintFamines");
-const maxL = Math.max(...FAMINES.map(f => f.loss)), pts = [];
+const maxL = Math.max(...FAMINES.filter(f => null != f.loss).map(f => f.loss)), pts = [];
 return FAMINES.forEach(f => {
 const L = tr(f), [x, y] = equalEarth(f.lon, f.lat);
 pts.push([ x, y ]);
-const r = 3 + 13 * Math.sqrt(f.loss / maxL), col = f.hero ? "#c9403f" : f.other ? "#7d8598" : "#d97706", g = el("g", {
+const r = null == f.loss ? 8 : 3 + 13 * Math.sqrt(f.loss / maxL), col = f.hero ? "#c9403f" : f.other ? "#7d8598" : "#d97706", g = el("g", {
 "data-at": `${x},${y}`,
 class: "node",
 "data-nodrag": "1"
@@ -3547,7 +3547,7 @@ stroke: col,
 r: Math.max(r, 11),
 fill: "transparent"
 })), g.addEventListener("mouseenter", e => {
-tipShow(`<b>${esc(L.n)}</b><span class="v">≈ ${f.loss} %</span>\n        <div class="s">${esc(t("famineDeathShare"))}<br>${esc(t("famineVictims"))} ${esc(L.deaths)} · ${esc(t("faminePop"))} ${esc(L.pop)}<br>${esc(L.t)}</div>`), 
+tipShow(`<b>${esc(L.n)}</b>${null == f.loss ? "" : `<span class="v">≈ ${f.loss} %</span>`}\n        <div class="s">${null == f.loss ? "" : esc(t("famineDeathShare")) + "<br>"}${esc(t("famineVictims"))} ${esc(L.deaths)}${L.pop ? ` · ${esc(t("faminePop"))} ${esc(L.pop)}` : ""}<br>${esc(L.t)}</div>`), 
 tipMove(e);
 }), g.addEventListener("mousemove", tipMove), g.addEventListener("mouseleave", tipHide), 
 nd.appendChild(g);
