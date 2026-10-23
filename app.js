@@ -66,7 +66,7 @@ introResultsLabel: "Три главных результата",
 introR1: "Доля казахов в населении республики: ≈60 % по переписи 1926 г. → ≈38 % по переписи 1939 г.",
 introR2: "Убыль казахского населения республики между переписями: ≈36 % (≈3,63 → ≈2,33 млн человек).",
 introR3: "Наложение сеток 1926 и 1939 гг. — матрица 8 × 12: 96 пар «округ — область», из них 37 с ненулевой площадью пересечения: от выбора сетки зависит, где на карте окажется эпицентр катастрофы (MAUP).",
-introSrc: "Республиканские итоги: перепись 1926 г. — Асылбеков, Асылбекова (2014); перепись 1939 г. — Тольц (Демоскоп Weekly, 2006). Областные показатели атласа ещё сверяются с опубликованными итогами.",
+introSrc: "Республиканские итоги: перепись 1926 г. — Асылбек М. Х., Асылбекова Ж. М. (2014); перепись 1939 г. — Тольц (Демоскоп Weekly, 2006). Областные показатели атласа ещё сверяются с опубликованными итогами.",
 introAuthorsLabel: "Авторы",
 introAuthors: "Жагиппаров Ализар, Утесеитов Али · 11F · НИШ Астана",
 introSupLabel: "Научный руководитель",
@@ -86,10 +86,10 @@ info_returned: "454 тыс. вернувшихся из ≈1,13 млн отко�
 info_relLoss: "Оценка историографии: погибло ≈38 % казахов (С. Кэмерон, «The Hungry Steppe», 2018).",
 info_absMax: "Украинская ССР: ≈3,3–3,9 млн погибших («between 3.3 and 3.9 million died in Ukraine») — Wikipedia, «Soviet famine of 1930–1933» (Э15 списка литературы работы).",
 info_deathEst: "Безвозвратные потери казахского населения ≈1,3–2,3 млн — диапазон оценок разных авторов (по тексту работы); А. Н. Алексеенко (2000): 1,5–1,84 млн.",
-info_shareRep: "Перепись 1926 г.: ≈3,63 млн казахов из ≈6,07 млн жителей (Асылбеков, Асылбекова, 2014); перепись 1939 г.: 2,33 млн из 6,15 млн, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
+info_shareRep: "Перепись 1926 г.: ≈3,63 млн казахов из ≈6,07 млн жителей (Асылбек, Асылбекова, 2014); перепись 1939 г.: 2,33 млн из 6,15 млн, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
 kazakhLossRep: "Убыль казахов в республике",
 kazakhLossRepSub: "≈3,63 → ≈2,33 млн · переписи 1926 и 1939 гг.",
-info_kazLossRep: "Перепись 1926 г.: ≈3,63 млн казахов (Асылбеков, Асылбекова, 2014); перепись 1939 г.: 2,33 млн (Тольц, Демоскоп Weekly, 2006). Убыль: (2,33 − 3,63) ÷ 3,63 ≈ −36 %.",
+info_kazLossRep: "Перепись 1926 г.: ≈3,63 млн казахов (Асылбек, Асылбекова, 2014); перепись 1939 г.: 2,33 млн (Тольц, Демоскоп Weekly, 2006). Убыль: (2,33 − 3,63) ÷ 3,63 ≈ −36 %.",
 oblastDataLabel: "Областные показатели",
 oblastDataVal: "сверка ведётся",
 oblastDataSub: "проценты по областям — в карточках областей (рабочий набор атласа)",
@@ -373,7 +373,7 @@ introResultsLabel: "Three main results",
 introR1: "Kazakh share of the republic’s population: ≈60% in the 1926 census → ≈38% in the 1939 census.",
 introR2: "Decline of the republic’s Kazakh population between the censuses: ≈36% (≈3.63 → ≈2.33 million people).",
 introR3: "Overlaying the 1926 and 1939 grids gives an 8 × 12 matrix: 96 okrug–oblast pairs, 37 of them with a non-zero intersection area: the choice of grid determines where the epicenter of the catastrophe appears on the map (MAUP).",
-introSrc: "Republic totals: 1926 census — Asylbekov & Asylbekova (2014); 1939 census — Tolts (Demoscope Weekly, 2006). The atlas’s oblast figures are still being cross-checked against the published results.",
+introSrc: "Republic totals: 1926 census — Asylbek, M. Kh., & Asylbekova, Zh. M. (2014); 1939 census — Tolts (Demoscope Weekly, 2006). The atlas’s oblast figures are still being cross-checked against the published results.",
 introAuthorsLabel: "Authors",
 introAuthors: "Alizar Zhagipparov, Ali Uteseitov · 11F · NIS Astana",
 introSupLabel: "Supervisor",
@@ -393,10 +393,10 @@ info_returned: "454 thousand returnees out of ≈1.13 million who left (archival
 info_relLoss: "Historiographic estimate: ≈38% of Kazakhs died (S. Cameron, “The Hungry Steppe”, 2018).",
 info_absMax: "Ukrainian SSR: ≈3.3–3.9 million deaths (“between 3.3 and 3.9 million died in Ukraine”) — Wikipedia, “Soviet famine of 1930–1933” (E15 in the paper’s reference list).",
 info_deathEst: "Irrecoverable losses of the Kazakh population ≈1.3–2.3 million — the range of estimates by different authors (per the paper); A. N. Alekseenko (2000): 1.5–1.84 million.",
-info_shareRep: "1926 census: ≈3.63 million Kazakhs of ≈6.07 million inhabitants (Asylbekov & Asylbekova, 2014); 1939 census: 2.33 million of 6.15 million, 37.8% (Tolts, Demoscope Weekly, 2006).",
+info_shareRep: "1926 census: ≈3.63 million Kazakhs of ≈6.07 million inhabitants (Asylbek & Asylbekova, 2014); 1939 census: 2.33 million of 6.15 million, 37.8% (Tolts, Demoscope Weekly, 2006).",
 kazakhLossRep: "Kazakh decline in the republic",
 kazakhLossRepSub: "≈3.63 → ≈2.33 million · 1926 and 1939 censuses",
-info_kazLossRep: "1926 census: ≈3.63 million Kazakhs (Asylbekov & Asylbekova, 2014); 1939 census: 2.33 million (Tolts, Demoscope Weekly, 2006). Decline: (2.33 − 3.63) ÷ 3.63 ≈ −36%.",
+info_kazLossRep: "1926 census: ≈3.63 million Kazakhs (Asylbek & Asylbekova, 2014); 1939 census: 2.33 million (Tolts, Demoscope Weekly, 2006). Decline: (2.33 − 3.63) ÷ 3.63 ≈ −36%.",
 oblastDataLabel: "Oblast figures",
 oblastDataVal: "cross-check in progress",
 oblastDataSub: "oblast percentages are in the oblast cards (atlas working dataset)",
@@ -680,7 +680,7 @@ introResultsLabel: "Үш басты нәтиже",
 introR1: "Республика халқындағы қазақтар үлесі: 1926 ж. санақ бойынша ≈60 % → 1939 ж. санақ бойынша ≈38 %.",
 introR2: "Санақтар арасында республикадағы қазақ халқының кемуі: ≈36 % (≈3,63 → ≈2,33 млн адам).",
 introR3: "1926 және 1939 жж. торларын қабаттастыру — 8 × 12 матрицасы: «округ — облыс» 96 жұбы, оның 37-сінде қиылысу ауданы нөлден үлкен: апат эпицентрінің картада қай жерде шығатыны тордың таңдауына байланысты (MAUP).",
-introSrc: "Республикалық қорытындылар: 1926 ж. санақ — Асылбеков, Асылбекова (2014); 1939 ж. санақ — Тольц (Демоскоп Weekly, 2006). Атластың облыстық көрсеткіштері жарияланған қорытындылармен әлі салыстырылуда.",
+introSrc: "Республикалық қорытындылар: 1926 ж. санақ — Асылбек М. Х., Асылбекова Ж. М. (2014); 1939 ж. санақ — Тольц (Демоскоп Weekly, 2006). Атластың облыстық көрсеткіштері жарияланған қорытындылармен әлі салыстырылуда.",
 introAuthorsLabel: "Авторлар",
 introAuthors: "Жагиппаров Ализар, Утесеитов Али · 11F · НЗМ Астана",
 introSupLabel: "Ғылыми жетекші",
@@ -700,10 +700,10 @@ info_returned: "≈1,13 млн көшіп кеткендердің 454 мыңы 
 info_relLoss: "Тарихнамалық баға: қазақтардың ≈38 %-ы қаза тапты (С. Кэмерон, «The Hungry Steppe», 2018).",
 info_absMax: "Украин КСР-і: ≈3,3–3,9 млн қаза тапқан («between 3.3 and 3.9 million died in Ukraine») — Wikipedia, «Soviet famine of 1930–1933» (жұмыстың әдебиеттер тізіміндегі Э15).",
 info_deathEst: "Қазақ халқының қайтарымсыз шығыны ≈1,3–2,3 млн — әртүрлі авторлар бағаларының диапазоны (жұмыс мәтіні бойынша); А. Н. Алексеенко (2000): 1,5–1,84 млн.",
-info_shareRep: "1926 ж. санақ: ≈6,07 млн тұрғынның ≈3,63 млн-ы қазақ (Асылбеков, Асылбекова, 2014); 1939 ж. санақ: 6,15 млн-ның 2,33 млн-ы, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
+info_shareRep: "1926 ж. санақ: ≈6,07 млн тұрғынның ≈3,63 млн-ы қазақ (Асылбек, Асылбекова, 2014); 1939 ж. санақ: 6,15 млн-ның 2,33 млн-ы, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
 kazakhLossRep: "Республикадағы қазақтардың кемуі",
 kazakhLossRepSub: "≈3,63 → ≈2,33 млн · 1926 және 1939 жж. санақтар",
-info_kazLossRep: "1926 ж. санақ: ≈3,63 млн қазақ (Асылбеков, Асылбекова, 2014); 1939 ж. санақ: 2,33 млн (Тольц, Демоскоп Weekly, 2006). Кему: (2,33 − 3,63) ÷ 3,63 ≈ −36 %.",
+info_kazLossRep: "1926 ж. санақ: ≈3,63 млн қазақ (Асылбек, Асылбекова, 2014); 1939 ж. санақ: 2,33 млн (Тольц, Демоскоп Weekly, 2006). Кему: (2,33 − 3,63) ÷ 3,63 ≈ −36 %.",
 oblastDataLabel: "Облыстық көрсеткіштер",
 oblastDataVal: "салыстыру жүргізілуде",
 oblastDataSub: "облыстар бойынша пайыздар — облыс карточкаларында (атластың жұмыс жиынтығы)",
@@ -1036,21 +1036,21 @@ name: "Никколо Пьянчола",
 work: "Работы о колониальной иерархии (2001–2020)",
 thesis: "Голод — следствие имперской иерархии приоритетов: ресурсы изымались с периферии в пользу индустриальных центров.",
 lens: "Смотрит на контраст: районы с ГУЛАГом и промышленным строительством растут по общему населению, теряя коренное.",
-detail: "Пьянчола объясняет «аномальный рост»: Караганда, Балхаш, Риддер получают приток спецпереселенцев и рабочих, и общая численность населения области растёт — при этом казахское население той же области падает вдвое. Административная статистика по общему населению маскирует этнодемографический коллапс."
+detail: "Пьянчола объясняет «аномальный рост»: Караганда, Балхаш, Риддер получают приток спецпереселенцев и рабочих, и общая численность населения области растёт (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939) — при этом казахское население той же области падает вдвое. Административная статистика по общему населению маскирует этнодемографический коллапс."
 },
 en: {
 name: "Niccolò Pianciola",
 work: "Studies on the colonial hierarchy (2001–2020)",
 thesis: "The famine is a consequence of an imperial hierarchy of priorities: resources were extracted from the periphery to benefit industrial centers.",
 lens: "Looks at the contrast: districts with GULAG camps and industrial construction grow in total population while losing their indigenous population.",
-detail: 'Pianciola explains the "anomalous growth": Karaganda, Balkhash, and Ridder receive an influx of special settlers and workers, so the oblast’s total population grows — while its Kazakh population falls by half in the same oblast. Administrative statistics on total population mask the ethno-demographic collapse.'
+detail: 'Pianciola explains the "anomalous growth": Karaganda, Balkhash, and Ridder receive an influx of special settlers and workers, so the oblast’s total population grows (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939) — while its Kazakh population falls by half in the same oblast. Administrative statistics on total population mask the ethno-demographic collapse.'
 },
 kz: {
 name: "Никколо Пьянчола",
 work: "Отарлық иерархия туралы еңбектер (2001–2020)",
 thesis: "Ашаршылық — империялық басымдықтар иерархиясының салдары: ресурстар шет аймақтардан өнеркәсіп орталықтарының пайдасына тартып алынды.",
 lens: "Қарама-қайшылыққа назар аударады: ГУЛАГ пен өнеркәсіп құрылысы бар аудандарда жалпы халық саны өседі, ал байырғы халық азаяды.",
-detail: "Пьянчола «аномальды өсімді» түсіндіреді: Қарағанды, Балқаш, Риддерге арнайы қоныс аударушылар мен жұмысшылар легі келеді, сондықтан облыстың жалпы халық саны өседі — сол уақытта сол облыстағы қазақ халқы екі есе азаяды. Жалпы халық бойынша әкімшілік статистика этнодемографиялық күйреуді жасырады."
+detail: "Пьянчола «аномальды өсімді» түсіндіреді: Қарағанды, Балқаш, Риддерге арнайы қоныс аударушылар мен жұмысшылар легі келеді, сондықтан облыстың жалпы халық саны өседі (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %) — сол уақытта сол облыстағы қазақ халқы екі есе азаяды. Жалпы халық бойынша әкімшілік статистика этнодемографиялық күйреуді жасырады."
 }
 }, {
 id: "omarbekov",
@@ -1767,18 +1767,18 @@ metric: "loss",
 layer: "camps",
 ru: {
 t: "Аномальный рост",
-text: "По опубликованным данным (Асылбеков, Асылбекова, 2014) общая численность Карагандинской области выросла сильнее всех, а казахское население сократилось; в рабочем наборе атласа это ещё не отражено — сверка ведётся.",
-cite: "Асылбеков, Асылбекова (2014); Н. Пьянчола: колониальная иерархия приоритетов"
+text: "По опубликованным данным (Асылбек, Асылбекова, 2014) общая численность Карагандинской области выросла сильнее всех, а казахское население сократилось; в рабочем наборе атласа это ещё не отражено — сверка ведётся.",
+cite: "Асылбек М. Х., Асылбекова Ж. М. (2014); Н. Пьянчола: колониальная иерархия приоритетов"
 },
 en: {
 t: "Anomalous growth",
-text: "According to published data (Asylbekov & Asylbekova, 2014), Karaganda Oblast’s total population grew more than any other oblast’s, while its Kazakh population declined; the atlas’s working dataset does not reflect this yet — cross-checking is in progress.",
-cite: "Asylbekov & Asylbekova (2014); N. Pianciola: an imperial hierarchy of priorities"
+text: "According to published data (Asylbek & Asylbekova, 2014), Karaganda Oblast’s total population grew more than any other oblast’s, while its Kazakh population declined; the atlas’s working dataset does not reflect this yet — cross-checking is in progress.",
+cite: "Asylbek, M. Kh., & Asylbekova, Zh. M. (2014); N. Pianciola: an imperial hierarchy of priorities"
 },
 kz: {
 t: "Аномальды өсім",
-text: "Жарияланған деректер бойынша (Асылбеков, Асылбекова, 2014) Қарағанды облысының жалпы халқы барлық облыстан көп өсті, ал қазақ халқы азайды; атластың жұмыс деректер жиынтығында бұл әлі көрсетілмеген — салыстыру жүргізілуде.",
-cite: "Асылбеков, Асылбекова (2014); Н. Пьянчола: империялық басымдықтар иерархиясы"
+text: "Жарияланған деректер бойынша (Асылбек, Асылбекова, 2014) Қарағанды облысының жалпы халқы барлық облыстан көп өсті, ал қазақ халқы азайды; атластың жұмыс деректер жиынтығында бұл әлі көрсетілмеген — салыстыру жүргізілуде.",
+cite: "Асылбек М. Х., Асылбекова Ж. М. (2014); Н. Пьянчола: империялық басымдықтар иерархиясы"
 }
 }, {
 p: "1939",
@@ -1865,19 +1865,19 @@ c: 1,
 ru: {
 q: "Какой регион в исследовании — главный пример «аномального роста»?",
 a: [ "Кзыл-Ординская область", "Карагандинская область", "Уральский округ", "Южно-Казахстанская область" ],
-e: "В Карагандинской области общее население росло за счёт спецпереселенцев, заключённых Карлага и рабочих индустриальных строек, тогда как казахское население сократилось более чем вдвое. Сводная цифра по области маскирует катастрофу.",
+e: "В Карагандинской области общее население росло (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939) за счёт спецпереселенцев, заключённых Карлага и рабочих индустриальных строек, тогда как казахское население сократилось более чем вдвое. Сводная цифра по области маскирует катастрофу.",
 tag: "Историография"
 },
 en: {
 q: "Which region in the study is the main example of “anomalous growth”?",
 a: [ "Kzyl-Orda Oblast", "Karaganda Oblast", "Uralsk Okrug", "South Kazakhstan Oblast" ],
-e: "In Karaganda Oblast the total population grew due to special settlers, Karlag prisoners, and workers on industrial construction sites, while the Kazakh population fell by more than half. The oblast’s aggregate figure masks the catastrophe.",
+e: "In Karaganda Oblast the total population grew (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939) due to special settlers, Karlag prisoners, and workers on industrial construction sites, while the Kazakh population fell by more than half. The oblast’s aggregate figure masks the catastrophe.",
 tag: "Historiography"
 },
 kz: {
 q: "Зерттеуде қай аймақ «аномальды өсімнің» басты мысалы болып табылады?",
 a: [ "Қызылорда облысы", "Қарағанды облысы", "Орал округі", "Оңтүстік Қазақстан облысы" ],
-e: "Қарағанды облысында жалпы халық саны арнайы қоныс аударушылар, Карлаг тұтқындары және өнеркәсіп құрылысындағы жұмысшылар есебінен өсті, ал қазақ халқы екі еседен астам азайды. Облыс бойынша жиынтық сан апатты жасырады.",
+e: "Қарағанды облысында жалпы халық саны арнайы қоныс аударушылар, Карлаг тұтқындары және өнеркәсіп құрылысындағы жұмысшылар есебінен өсті (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %), ал қазақ халқы екі еседен астам азайды. Облыс бойынша жиынтық сан апатты жасырады.",
 tag: "Тарихнама"
 }
 }, {
@@ -2045,19 +2045,19 @@ c: 1,
 ru: {
 q: "Почему сводная статистика по общему населению области может ввести в заблуждение?",
 a: [ "Переписи вообще не проводились", "Приток спецпереселенцев и рабочих может скрыть убыль коренного населения", "Общее население всегда считали точнее", "Области были слишком маленькими" ],
-e: "Это ключевой тезис Н. Пьянчолы. Общее население Карагандинской области росло, тогда как казахское падало вдвое. Смотреть нужно на этнический разрез, а не на итоговую строку.",
+e: "Это ключевой тезис Н. Пьянчолы. Общее население Карагандинской области росло (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939), тогда как казахское падало вдвое. Смотреть нужно на этнический разрез, а не на итоговую строку.",
 tag: "Историография"
 },
 en: {
 q: "Why can aggregate statistics on an oblast’s total population be misleading?",
 a: [ "No censuses were conducted at all", "An influx of special settlers and workers can conceal the decline of the indigenous population", "Total population was always counted more accurately", "The oblasts were too small" ],
-e: "This is N. Pianciola’s key thesis. Karaganda Oblast’s total population grew while its Kazakh population fell by half. One must look at the ethnic breakdown, not the bottom-line total.",
+e: "This is N. Pianciola’s key thesis. Karaganda Oblast’s total population grew (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939) while its Kazakh population fell by half. One must look at the ethnic breakdown, not the bottom-line total.",
 tag: "Historiography"
 },
 kz: {
 q: "Неге облыстың жалпы халқы бойынша жиынтық статистика адастыруы мүмкін?",
 a: [ "Санақ мүлде жүргізілмеген", "Арнайы қоныс аударушылар мен жұмысшылар легі байырғы халықтың азаюын жасыруы мүмкін", "Жалпы халық әрқашан дәлірек саналған", "Облыстар тым кіші болған" ],
-e: "Бұл Н. Пьянчоланың басты тезисі. Қарағанды облысының жалпы халқы өсті, ал қазақ халқы екі есе азайды. Түпкі жолды емес, этникалық бөліністі қарау керек.",
+e: "Бұл Н. Пьянчоланың басты тезисі. Қарағанды облысының жалпы халқы өсті (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %), ал қазақ халқы екі есе азайды. Түпкі жолды емес, этникалық бөліністі қарау керек.",
 tag: "Тарихнама"
 }
 }, {
@@ -2153,9 +2153,9 @@ kbKz("Ареалдық интерполяция: формула", "1926 жылғ
 kbRu("Главный количественный результат", "При переносе казахского населения 1926 года с сетки 8 округов на сетку 12 областей суммарный сдвиг долей составил 42,46 процентных пункта, индекс несходства (половина суммы модулей сдвигов) — 21,2 %. Это означает, что при смене административной сетки «переезжает» примерно пятая часть всего пространственного распределения населения. Наибольший сдвиг вверх — Восточно-Казахстанская область (+165 % относительно исходной доли), наибольший сдвиг вниз — Акмолинская область (−60 %).", "результаты"), 
 kbEn("The main quantitative result", 'When the 1926 Kazakh population is reallocated from the 8-okrug grid onto the 12-oblast grid, the total share shift is 42.46 percentage points, and the dissimilarity index (half the sum of the absolute shifts) is 21.2%. This means that changing the administrative grid "relocates" roughly a fifth of the entire spatial distribution of the population. The largest upward shift is East Kazakhstan Oblast (+165% relative to its original share); the largest downward shift is Akmola Oblast (−60%).', "results"), 
 kbKz("Басты сандық нәтиже", "1926 жылғы қазақ халқын 8 округтік тордан 12 облыстық торға ауыстырғанда, үлестердің жиынтық ауытқуы 42,46 пайыздық тармақты, ал ұқсамау индексі (ауытқулар модульдерінің қосындысының жартысы) — 21,2 %-ды құрады. Бұл әкімшілік тор өзгергенде халықтың бүкіл кеңістіктік үлестірімінің шамамен бестен бірі «көшетінін» білдіреді. Ең үлкен жоғары ауытқу — Шығыс Қазақстан облысы (бастапқы үлеске қатысты +165 %), ең үлкен төмен ауытқу — Ақмола облысы (−60 %).", "нәтижелер"), 
-kbRu("Аномальный рост населения", "Аномальный рост — ситуация, когда общее население области растёт, а коренное (казахское) население той же области резко сокращается. Классический пример — Карагандинская область: приток спецпереселенцев, заключённых Карлага и рабочих индустриальных строек увеличивал общую численность, тогда как казахское население упало более чем вдвое. Поэтому сводная статистика по общему населению маскирует этнодемографический коллапс, и анализировать нужно этнический разрез.", "результаты"), 
-kbEn("Anomalous population growth", "Anomalous growth is a situation where an oblast’s total population grows while its indigenous (Kazakh) population sharply declines. The classic example is Karaganda Oblast: an influx of special settlers, Karlag prisoners, and industrial-construction workers increased the total count, while the Kazakh population fell by more than half. So aggregate statistics on total population mask the ethno-demographic collapse, and one needs to analyze the ethnic breakdown.", "results"), 
-kbKz("Халық санының аномальды өсуі", "Аномальды өсім — облыстың жалпы халқы өсіп жатқанда, сол облыстың байырғы (қазақ) халқы күрт азаятын жағдай. Классикалық мысал — Қарағанды облысы: арнайы қоныс аударушылар, Карлаг тұтқындары және өнеркәсіп құрылысы жұмысшыларының легі жалпы санды арттырды, ал қазақ халқы екі еседен астам азайды. Сондықтан жалпы халық бойынша жиынтық статистика этнодемографиялық күйреуді жасырады, этникалық бөліністі талдау керек.", "нәтижелер"), 
+kbRu("Аномальный рост населения", "Аномальный рост — ситуация, когда общее население области растёт, а коренное (казахское) население той же области резко сокращается. Классический пример — Карагандинская область (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939): приток спецпереселенцев, заключённых Карлага и рабочих индустриальных строек увеличивал общую численность, тогда как казахское население упало более чем вдвое. Поэтому сводная статистика по общему населению маскирует этнодемографический коллапс, и анализировать нужно этнический разрез.", "результаты"), 
+kbEn("Anomalous population growth", "Anomalous growth is a situation where an oblast’s total population grows while its indigenous (Kazakh) population sharply declines. The classic example is Karaganda Oblast (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939): an influx of special settlers, Karlag prisoners, and industrial-construction workers increased the total count, while the Kazakh population fell by more than half. So aggregate statistics on total population mask the ethno-demographic collapse, and one needs to analyze the ethnic breakdown.", "results"), 
+kbKz("Халық санының аномальды өсуі", "Аномальды өсім — облыстың жалпы халқы өсіп жатқанда, сол облыстың байырғы (қазақ) халқы күрт азаятын жағдай. Классикалық мысал — Қарағанды облысы (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %): арнайы қоныс аударушылар, Карлаг тұтқындары және өнеркәсіп құрылысы жұмысшыларының легі жалпы санды арттырды, ал қазақ халқы екі еседен астам азайды. Сондықтан жалпы халық бойынша жиынтық статистика этнодемографиялық күйреуді жасырады, этникалық бөліністі талдау керек.", "нәтижелер"), 
 kbRu("Откочёвки: масштаб и направления", "Республику покинули около 1,13 млн человек. Безвозвратно — около 676 тыс.; вернулись впоследствии около 454 тыс.; порядка 200 тыс. остались за границей навсегда. Зарубежные направления: Синьцзян (Китай) — крупнейшее, Монголия (Баян-Улгий), Афганистан, Иран, позже Турция (уже вторичная миграция 1950–60-х из Синьцзяна). Внутрисоюзные направления: Западно-Сибирский край, Средняя Волга и Сталинград, Узбекская ССР, Киргизская АССР, Туркменская ССР, Каракалпакская АССР, Урал и Башкирия. ВАЖНО: разбивка по конкретным направлениям — дискуссионная оценка. Сара Кэмерон прямо называет точный подсчёт по направлениям открытым исследовательским вопросом, требующим работы с архивами других республик и Синьцзяна.", "откочёвки"), 
 kbEn("Migrations: scale and destinations", "About 1.13 million people left the republic. Permanently — about 676,000; about 454,000 later returned; around 200,000 remained abroad for good. Foreign destinations: Xinjiang (China) — the largest, Mongolia (Bayan-Ölgii), Afghanistan, Iran, and later Turkey (a secondary migration of the 1950s–60s from Xinjiang). Destinations within the union: West Siberian Krai, the Middle Volga and Stalingrad, the Uzbek SSR, the Kirghiz ASSR, the Turkmen SSR, the Karakalpak ASSR, the Urals and Bashkiria. IMPORTANT: the breakdown by specific destination is a debated estimate. Sarah Cameron explicitly calls an exact count by destination an open research question requiring work with the archives of other republics and Xinjiang.", "migrations"), 
 kbKz("Көші-қон: ауқымы мен бағыттары", "Республикадан шамамен 1,13 млн адам кетті. Қайтпай кеткендер — шамамен 676 мың; кейін шамамен 454 мың адам оралды; шамамен 200 мың адам шетелде мәңгілікке қалды. Шетелдік бағыттар: Шыңжаң (Қытай) — ең ірісі, Моңғолия (Баян-Өлгий), Ауғанстан, Иран, кейінірек Түркия (1950–60 жж. Шыңжаңнан қайталама көші-қон). Одақ ішіндегі бағыттар: Батыс Сібір өлкесі, Орта Еділ мен Сталинград, Өзбек КСР-і, Қырғыз АКСР-і, Түрікмен КСР-і, Қарақалпақ АКСР-і, Орал мен Башқұртстан. МАҢЫЗДЫ: нақты бағыттар бойынша бөліну — пікірталастық баға. Сара Кэмерон бағыттар бойынша дәл санақты басқа республикалар мен Шыңжаң мұрағаттарымен жұмысты талап ететін ашық зерттеу мәселесі деп тікелей атайды.", "көші-қон"), 
@@ -2165,9 +2165,9 @@ kbKz("Мал шығыны", "Мал тауар емес, көшпелі және
 kbRu("Сара Кэмерон: тезис", "Сара Кэмерон, «The Hungry Steppe: Famine, Violence, and the Making of Soviet Kazakhstan» (2018). Тезис: голод — результат насильственной седентаризации и уничтожения кочевого хозяйства как способа жизни, а не только следствие зерновых изъятий. Казахи гибли из-за уничтожения скота. Картографическая линза Кэмерон: максимальные потери там, где доля кочевого и полукочевого скотоводства была наибольшей.", "историография"), 
 kbEn("Sarah Cameron: thesis", 'Sarah Cameron, "The Hungry Steppe: Famine, Violence, and the Making of Soviet Kazakhstan" (2018). Thesis: the famine is the result of violent sedentarization and the destruction of nomadic husbandry as a way of life, not merely a consequence of grain requisitioning. Kazakhs died from the destruction of livestock. Cameron’s cartographic lens: maximum losses where the share of nomadic and semi-nomadic pastoralism was highest.', "historiography"), 
 kbKz("Сара Кэмерон: тезисі", "Сара Кэмерон, «The Hungry Steppe: Famine, Violence, and the Making of Soviet Kazakhstan» (2018). Тезис: ашаршылық — тек астық тәркілеудің салдары ғана емес, көшпелі шаруашылықтың өмір салты ретінде күштеп отырықшыландыру мен құрып кетуінің нәтижесі. Қазақтар малдың жойылуынан қырылды. Кэмеронның картографиялық көзқарасы: ең үлкен шығындар көшпелі және жартылай көшпелі мал шаруашылығының үлесі ең жоғары жерлерде.", "тарихнама"), 
-kbRu("Никколо Пьянчола: тезис", "Никколо Пьянчола объясняет голод через имперскую иерархию приоритетов: ресурсы изымались с периферии в пользу индустриальных центров. Его линза объясняет феномен аномального роста — районы с ГУЛАГом и промышленным строительством (Караганда, Балхаш, Риддер) прибавляют в общем населении, теряя коренное. Административная статистика по общему населению при этом маскирует этнодемографический коллапс.", "историография"), 
-kbEn("Niccolò Pianciola: thesis", "Niccolò Pianciola explains the famine through an imperial hierarchy of priorities: resources were extracted from the periphery to benefit industrial centers. His lens explains the phenomenon of anomalous growth — districts with GULAG camps and industrial construction (Karaganda, Balkhash, Ridder) gain in total population while losing their indigenous population. Administrative statistics on total population mask the ethno-demographic collapse.", "historiography"), 
-kbKz("Никколо Пьянчола: тезисі", "Никколо Пьянчола ашаршылықты империялық басымдықтар иерархиясы арқылы түсіндіреді: ресурстар шет аймақтардан өнеркәсіп орталықтарының пайдасына тартып алынды. Оның көзқарасы аномальды өсім құбылысын түсіндіреді — ГУЛАГ пен өнеркәсіп құрылысы бар аудандар (Қарағанды, Балқаш, Риддер) жалпы халық санында ұтады, ал байырғы халқын жоғалтады. Жалпы халық бойынша әкімшілік статистика бұл кезде этнодемографиялық күйреуді жасырады.", "тарихнама"), 
+kbRu("Никколо Пьянчола: тезис", "Никколо Пьянчола объясняет голод через имперскую иерархию приоритетов: ресурсы изымались с периферии в пользу индустриальных центров. Его линза объясняет феномен аномального роста — районы с ГУЛАГом и промышленным строительством (Караганда, Балхаш, Риддер) прибавляют в общем населении (для Карагандинской области — Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939), теряя коренное. Административная статистика по общему населению при этом маскирует этнодемографический коллапс.", "историография"), 
+kbEn("Niccolò Pianciola: thesis", "Niccolò Pianciola explains the famine through an imperial hierarchy of priorities: resources were extracted from the periphery to benefit industrial centers. His lens explains the phenomenon of anomalous growth — districts with GULAG camps and industrial construction (Karaganda, Balkhash, Ridder) gain in total population (for Karaganda Oblast — Asylbek & Asylbekova, 2014: +41.8% in 1926–1939) while losing their indigenous population. Administrative statistics on total population mask the ethno-demographic collapse.", "historiography"), 
+kbKz("Никколо Пьянчола: тезисі", "Никколо Пьянчола ашаршылықты империялық басымдықтар иерархиясы арқылы түсіндіреді: ресурстар шет аймақтардан өнеркәсіп орталықтарының пайдасына тартып алынды. Оның көзқарасы аномальды өсім құбылысын түсіндіреді — ГУЛАГ пен өнеркәсіп құрылысы бар аудандар (Қарағанды, Балқаш, Риддер) жалпы халық санында ұтады (Қарағанды облысы үшін — Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %), ал байырғы халқын жоғалтады. Жалпы халық бойынша әкімшілік статистика бұл кезде этнодемографиялық күйреуді жасырады.", "тарихнама"), 
 kbRu("Талас Омарбеков: тезис", "Талас Омарбеков и казахстанская национальная историографическая школа ставят в центр субъектность казахов и трактуют голод как целенаправленную политику против народа. Акцент на сопротивлении: более 370 выступлений 1929–1931 гг. (Т. Омарбеков) — Сузакское, Иргизское, Батпаккаринское, Адаевское, Каракумское, Абралинское. Подавление восстаний и заградительные заслоны на путях откочёвок усиливали смертность в тех же районах.", "историография"), 
 kbEn("Talas Omarbekov: thesis", "Talas Omarbekov and the Kazakhstani national historiographic school place Kazakh agency at the center and treat the famine as a deliberate policy against the people. The emphasis is on resistance: more than 370 uprisings in 1929–1931 (T. Omarbekov) — Suzak, Irgiz, Batpakkara, Adai, Karakum, Abralin. The suppression of the uprisings and blocking cordons on migration routes intensified mortality in the same districts.", "historiography"), 
 kbKz("Талас Омарбеков: тезисі", "Талас Омарбеков және қазақстандық ұлттық тарихнамалық мектеп қазақтардың субъектілігін орталыққа қояды және ашаршылықты халыққа қарсы бағытталған мақсатты саясат ретінде түсіндіреді. Басты назар қарсылықта: 1929–1931 жж. 370-тен астам көтеріліс пен толқу болды (Т. Омарбеков) — Созақ, Ырғыз, Батпаққара, Адай, Қарақұм, Абыралы. Көтерілістерді басу және көші-қон жолдарындағы жазалау бекеттері сол аудандардағы өлім-жітімді күшейтті.", "тарихнама"), 
