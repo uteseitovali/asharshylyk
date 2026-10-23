@@ -1048,21 +1048,21 @@ name: "Никколо Пьянчола",
 work: "Работы о колониальной иерархии (2001–2020)",
 thesis: "Голод — следствие имперской иерархии приоритетов: ресурсы изымались с периферии в пользу индустриальных центров.",
 lens: "Смотрит на контраст: районы с ГУЛАГом и промышленным строительством растут по общему населению, теряя коренное.",
-detail: "Пьянчола объясняет «аномальный рост»: Караганда, Балхаш, Риддер получают приток спецпереселенцев и рабочих, и общая численность населения области растёт (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939) — при этом казахское население той же области падает вдвое. Административная статистика по общему населению маскирует этнодемографический коллапс."
+detail: "Пьянчола объясняет «аномальный рост»: Караганда, Балхаш, Риддер получают приток спецпереселенцев и рабочих, и общая численность населения области растёт (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939). Эта цифра не показывает, что происходило с казахским населением: по оценке А. Н. Алексеенко (2003), потери казахов в Центральном Казахстане (Карагандинская область) составили 15,6 %, это наименьшие потери в республике. Административная статистика по общему населению скрывает этнический разрез."
 },
 en: {
 name: "Niccolò Pianciola",
 work: "Studies on the colonial hierarchy (2001–2020)",
 thesis: "The famine is a consequence of an imperial hierarchy of priorities: resources were extracted from the periphery to benefit industrial centers.",
 lens: "Looks at the contrast: districts with GULAG camps and industrial construction grow in total population while losing their indigenous population.",
-detail: 'Pianciola explains the "anomalous growth": Karaganda, Balkhash, and Ridder receive an influx of special settlers and workers, so the oblast’s total population grows (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939) — while its Kazakh population falls by half in the same oblast. Administrative statistics on total population mask the ethno-demographic collapse.'
+detail: 'Pianciola explains the "anomalous growth": Karaganda, Balkhash, and Ridder receive an influx of special settlers and workers, so the oblast’s total population grows (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939). That figure does not show what happened to the Kazakh population: according to A. N. Alekseenko (2003), Kazakh losses in Central Kazakhstan (Karaganda Oblast) were 15.6%, the smallest in the republic. Administrative statistics on total population hide the ethnic breakdown.'
 },
 kz: {
 name: "Никколо Пьянчола",
 work: "Отарлық иерархия туралы еңбектер (2001–2020)",
 thesis: "Ашаршылық — империялық басымдықтар иерархиясының салдары: ресурстар шет аймақтардан өнеркәсіп орталықтарының пайдасына тартып алынды.",
 lens: "Қарама-қайшылыққа назар аударады: ГУЛАГ пен өнеркәсіп құрылысы бар аудандарда жалпы халық саны өседі, ал байырғы халық азаяды.",
-detail: "Пьянчола «аномальды өсімді» түсіндіреді: Қарағанды, Балқаш, Риддерге арнайы қоныс аударушылар мен жұмысшылар легі келеді, сондықтан облыстың жалпы халық саны өседі (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %) — сол уақытта сол облыстағы қазақ халқы екі есе азаяды. Жалпы халық бойынша әкімшілік статистика этнодемографиялық күйреуді жасырады."
+detail: "Пьянчола «аномальды өсімді» түсіндіреді: Қарағанды, Балқаш, Риддерге арнайы қоныс аударушылар мен жұмысшылар легі келеді, сондықтан облыстың жалпы халық саны өседі (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %). Бұл сан қазақ халқымен не болғанын көрсетпейді: А. Н. Алексеенконың (2003) бағасы бойынша Орталық Қазақстанда (Қарағанды облысы) қазақтардың шығыны 15,6 % болды, бұл республикадағы ең аз шығын. Жалпы халық бойынша әкімшілік статистика этникалық бөліністі жасырады."
 }
 }, {
 id: "omarbekov",
@@ -1877,19 +1877,19 @@ c: 1,
 ru: {
 q: "Какой регион в исследовании — главный пример «аномального роста»?",
 a: [ "Кзыл-Ординская область", "Карагандинская область", "Уральский округ", "Южно-Казахстанская область" ],
-e: "В Карагандинской области общее население росло (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939) за счёт спецпереселенцев, заключённых Карлага и рабочих индустриальных строек, тогда как казахское население сократилось более чем вдвое. Сводная цифра по области маскирует катастрофу.",
+e: "В Карагандинской области общее население росло (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939) за счёт спецпереселенцев, заключённых Карлага и рабочих индустриальных строек. Сводная цифра по области ничего не говорит о казахском населении: его нужно смотреть отдельно (по оценке А. Н. Алексеенко, 2003, потери казахов в Центральном Казахстане составили 15,6 %).",
 tag: "Историография"
 },
 en: {
 q: "Which region in the study is the main example of “anomalous growth”?",
 a: [ "Kzyl-Orda Oblast", "Karaganda Oblast", "Uralsk Okrug", "South Kazakhstan Oblast" ],
-e: "In Karaganda Oblast the total population grew (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939) due to special settlers, Karlag prisoners, and workers on industrial construction sites, while the Kazakh population fell by more than half. The oblast’s aggregate figure masks the catastrophe.",
+e: "In Karaganda Oblast the total population grew (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939) due to special settlers, Karlag prisoners, and workers on industrial construction sites. The oblast’s aggregate figure says nothing about the Kazakh population, which has to be examined separately (according to A. N. Alekseenko, 2003, Kazakh losses in Central Kazakhstan were 15.6%).",
 tag: "Historiography"
 },
 kz: {
 q: "Зерттеуде қай аймақ «аномальды өсімнің» басты мысалы болып табылады?",
 a: [ "Қызылорда облысы", "Қарағанды облысы", "Орал округі", "Оңтүстік Қазақстан облысы" ],
-e: "Қарағанды облысында жалпы халық саны арнайы қоныс аударушылар, Карлаг тұтқындары және өнеркәсіп құрылысындағы жұмысшылар есебінен өсті (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %), ал қазақ халқы екі еседен астам азайды. Облыс бойынша жиынтық сан апатты жасырады.",
+e: "Қарағанды облысында жалпы халық саны арнайы қоныс аударушылар, Карлаг тұтқындары және өнеркәсіп құрылысындағы жұмысшылар есебінен өсті (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %). Облыс бойынша жиынтық сан қазақ халқы туралы ештеңе айтпайды, оны бөлек қарау керек (А. Н. Алексеенконың, 2003, бағасы бойынша Орталық Қазақстанда қазақтардың шығыны 15,6 % болды).",
 tag: "Тарихнама"
 }
 }, {
@@ -2057,19 +2057,19 @@ c: 2,
 ru: {
 q: "Почему сводная статистика по общему населению области может ввести в заблуждение?",
 a: [ "Переписи вообще не проводились", "Общее население всегда считали точнее", "Приток спецпереселенцев и рабочих может скрыть убыль коренного населения", "Области были слишком маленькими" ],
-e: "Это ключевой тезис Н. Пьянчолы. Общее население Карагандинской области росло (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939), тогда как казахское падало вдвое. Смотреть нужно на этнический разрез, а не на итоговую строку.",
+e: "Это ключевой тезис Н. Пьянчолы. Общее население Карагандинской области росло (Асылбек, Асылбекова, 2014: +41,8 % за 1926–1939) за счёт приезжих, и эта цифра ничего не говорит о казахском населении. Смотреть нужно на этнический разрез, а не на итоговую строку.",
 tag: "Историография"
 },
 en: {
 q: "Why can aggregate statistics on an oblast’s total population be misleading?",
 a: [ "No censuses were conducted at all", "Total population was always counted more accurately", "An influx of special settlers and workers can conceal the decline of the indigenous population", "The oblasts were too small" ],
-e: "This is N. Pianciola’s key thesis. Karaganda Oblast’s total population grew (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939) while its Kazakh population fell by half. One must look at the ethnic breakdown, not the bottom-line total.",
+e: "This is N. Pianciola’s key thesis. Karaganda Oblast’s total population grew (Asylbek & Asylbekova, 2014: +41.8% in 1926–1939) through newcomers, and that figure says nothing about the Kazakh population. One must look at the ethnic breakdown, not the bottom-line total.",
 tag: "Historiography"
 },
 kz: {
 q: "Неге облыстың жалпы халқы бойынша жиынтық статистика адастыруы мүмкін?",
 a: [ "Санақ мүлде жүргізілмеген", "Жалпы халық әрқашан дәлірек саналған", "Арнайы қоныс аударушылар мен жұмысшылар легі байырғы халықтың азаюын жасыруы мүмкін", "Облыстар тым кіші болған" ],
-e: "Бұл Н. Пьянчоланың басты тезисі. Қарағанды облысының жалпы халқы өсті (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %), ал қазақ халқы екі есе азайды. Түпкі жолды емес, этникалық бөліністі қарау керек.",
+e: "Бұл Н. Пьянчоланың басты тезисі. Қарағанды облысының жалпы халқы өсті (Асылбек, Асылбекова, 2014: 1926–1939 жж. +41,8 %) келгендер есебінен өсті, және бұл сан қазақ халқы туралы ештеңе айтпайды. Түпкі жолды емес, этникалық бөліністі қарау керек.",
 tag: "Тарихнама"
 }
 }, {
@@ -4463,17 +4463,17 @@ source: "1926 ж. Бүкілодақтық санақ, Демоскоп Weekly: 
 }, {
 date: "2026-10-23",
 ru: {
-what: "База знаний ИИ-ассистента, фрагмент «Аномальный рост населения»: убрано утверждение, что казахское население Карагандинской области «упало более чем вдвое». Рост общей численности (+41,8 %, Асылбек, Асылбекова, 2014) сохранён; добавлена оценка А. Н. Алексеенко (2003): в Центральном Казахстане (Карагандинская область) потери казахов были наименьшими, 22,5 тыс., или 15,6 %. Алексеенко (2003) добавлен в библиографию.",
+what: "База знаний ИИ-ассистента, фрагмент «Аномальный рост населения»: убрано утверждение, что казахское население Карагандинской области «упало более чем вдвое». Рост общей численности (+41,8 %, Асылбек, Асылбекова, 2014) сохранён; добавлена оценка А. Н. Алексеенко (2003): в Центральном Казахстане (Карагандинская область) потери казахов были наименьшими, 22,5 тыс., или 15,6 %. Алексеенко (2003) добавлен в библиографию. Та же правка внесена в описание линзы Пьянчолы и в пояснения двух вопросов квиза.",
 why: "Источника для «более чем вдвое» нет (это следствие несверенных областных данных), а опубликованная оценка Алексеенко говорит о наименьших потерях в этом районе.",
 source: "Алексеенко А. Н. Демографические последствия голода в Казахстане начала 30-х годов // Демоскоп Weekly. 2003. № 101–102."
 },
 en: {
-what: "AI assistant knowledge base, “Anomalous population growth”: the claim that the Kazakh population of Karaganda Oblast “fell by more than half” was removed. The total growth (+41.8%, Asylbek & Asylbekova, 2014) is kept; A. N. Alekseenko’s (2003) estimate was added: Kazakh losses in Central Kazakhstan (Karaganda Oblast) were the smallest, 22.5 thousand, or 15.6%. Alekseenko (2003) was added to the bibliography.",
+what: "AI assistant knowledge base, “Anomalous population growth”: the claim that the Kazakh population of Karaganda Oblast “fell by more than half” was removed. The total growth (+41.8%, Asylbek & Asylbekova, 2014) is kept; A. N. Alekseenko’s (2003) estimate was added: Kazakh losses in Central Kazakhstan (Karaganda Oblast) were the smallest, 22.5 thousand, or 15.6%. Alekseenko (2003) was added to the bibliography. The same correction was made in Pianciola’s lens description and in the explanations of two quiz questions.",
 why: "There is no source for “more than half” (it came from the unverified oblast data), and Alekseenko’s published estimate gives the smallest losses for this region.",
 source: "Alekseenko, A. N. (2003). Demoscope Weekly, no. 101–102."
 },
 kz: {
-what: "ЖИ-көмекшінің білім қоры, «Халық санының аномальды өсуі» фрагменті: Қарағанды облысының қазақ халқы «екі еседен астам азайды» деген тұжырым алынып тасталды. Жалпы халықтың өсуі (+41,8 %, Асылбек, Асылбекова, 2014) сақталды; А. Н. Алексеенконың (2003) бағасы қосылды: Орталық Қазақстанда (Қарағанды облысы) қазақтардың шығыны ең аз болды, 22,5 мың, немесе 15,6 %. Алексеенко (2003) библиографияға қосылды.",
+what: "ЖИ-көмекшінің білім қоры, «Халық санының аномальды өсуі» фрагменті: Қарағанды облысының қазақ халқы «екі еседен астам азайды» деген тұжырым алынып тасталды. Жалпы халықтың өсуі (+41,8 %, Асылбек, Асылбекова, 2014) сақталды; А. Н. Алексеенконың (2003) бағасы қосылды: Орталық Қазақстанда (Қарағанды облысы) қазақтардың шығыны ең аз болды, 22,5 мың, немесе 15,6 %. Алексеенко (2003) библиографияға қосылды. Дәл осы түзету Пьянчола көзқарасының сипаттамасына және викторинаның екі сұрағының түсіндірмесіне енгізілді.",
 why: "«Екі еседен астам» деген тұжырымның дереккөзі жоқ (ол салыстырылмаған облыстық деректерден шыққан), ал Алексеенконың жарияланған бағасы бұл аудандағы шығынды ең аз деп көрсетеді.",
 source: "Алексеенко А. Н. (2003), Демоскоп Weekly, № 101–102."
 }
