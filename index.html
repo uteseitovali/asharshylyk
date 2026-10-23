@@ -185,6 +185,9 @@ section.view.on{display:block}
 .flow{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .flowhit{fill:none;stroke:transparent;stroke-width:9;cursor:pointer;vector-effect:non-scaling-stroke}
 .node{cursor:pointer}
+.node:focus{outline:none}
+.node:focus-visible circle:last-child{stroke:var(--gold2);stroke-width:2.5;vector-effect:non-scaling-stroke}
+.bib-entry.bib-flash{background:color-mix(in srgb,var(--gold2) 18%,transparent);transition:background .3s}
 
 .bar{
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:9px 13px;
@@ -799,7 +802,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
-<script src="/data.js?v=42"></script>
-<script src="/app.js?v=42"></script>
+<script src="/data.js?v=43"></script>
+<script src="/app.js?v=43"></script>
 </body>
 </html>

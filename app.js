@@ -100,6 +100,14 @@ oblastDataSub: "проценты по областям — в карточках
 regionCheckTag: "сверка ведётся",
 regionCheckTip: "Значение из рабочего набора атласа; сверка с опубликованными итогами переписей по областям ведётся.",
 prelimNote: "предв., сверка ведётся",
+markTypeCamp: "Лагерь",
+markTypeSite: "Стройка, промышленный объект",
+markTypeRevolt: "Восстание",
+markYear: "Год",
+markSource: "Источник",
+markSrcPending: "источник уточняется",
+markNoDesc: "Подробное описание пока не добавлено.",
+markOpenHint: "Открыть карточку",
 info_maupCalc: "Собственный расчёт: ареальная интерполяция казахского населения 1926 г. с сетки 8 округов на сетку 12 областей; индекс несходства — половина суммы модулей сдвигов долей.",
 info_inter96: "Собственный расчёт: матрица 8 × 12: 96 пар «округ — область», из них 37 с ненулевой площадью пересечения. Для каждой пары «округ 1926 г. — область 1939 г.» вычислена площадь пересечения в GeoPandas/Shapely.",
 info_coverage: "Сумма площадей 8 округов совпадает с суммой площадей 12 областей (расхождение 0,05 %): обе сетки описывают одну территорию.",
@@ -411,6 +419,14 @@ oblastDataSub: "oblast percentages are in the oblast cards (atlas working datase
 regionCheckTag: "cross-check in progress",
 regionCheckTip: "A value from the atlas’s working dataset; cross-checking against the published oblast census results is in progress.",
 prelimNote: "prelim., cross-check in progress",
+markTypeCamp: "Camp",
+markTypeSite: "Construction site, industrial facility",
+markTypeRevolt: "Uprising",
+markYear: "Year",
+markSource: "Source",
+markSrcPending: "source to be specified",
+markNoDesc: "A detailed description has not been added yet.",
+markOpenHint: "Open the card",
 info_maupCalc: "Own calculation: areal interpolation of the 1926 Kazakh population from the 8-okrug grid to the 12-oblast grid; the dissimilarity index is half the sum of absolute share shifts.",
 info_inter96: "Own calculation: an 8 × 12 matrix: 96 okrug–oblast pairs, 37 of them with a non-zero intersection area. The intersection area is computed for each “1926 okrug — 1939 oblast” pair in GeoPandas/Shapely.",
 info_coverage: "The total area of the 8 okrugs equals that of the 12 oblasts (0.05% difference): both grids describe the same territory.",
@@ -722,6 +738,14 @@ oblastDataSub: "облыстар бойынша пайыздар — облыс 
 regionCheckTag: "салыстыру жүргізілуде",
 regionCheckTip: "Атластың жұмыс деректер жиынтығындағы мән; облыстар бойынша жарияланған санақ қорытындыларымен салыстыру жүргізілуде.",
 prelimNote: "алдын ала, салыстыру жүргізілуде",
+markTypeCamp: "Лагерь",
+markTypeSite: "Құрылыс, өнеркәсіп нысаны",
+markTypeRevolt: "Көтеріліс",
+markYear: "Жыл",
+markSource: "Дереккөз",
+markSrcPending: "дереккөзі нақтылануда",
+markNoDesc: "Толық сипаттама әлі қосылмаған.",
+markOpenHint: "Карточканы ашу",
 info_maupCalc: "Меншікті есептеу: 1926 ж. қазақ халқын 8 округ торынан 12 облыс торына ареалдық интерполяциялау; ұқсамау индексі — үлес ығысулары модульдерінің жартысы.",
 info_inter96: "Меншікті есептеу: 8 × 12 матрицасы: «округ — облыс» 96 жұбы, оның 37-сінде қиылысу ауданы нөлден үлкен. Әр «1926 ж. округ — 1939 ж. облыс» жұбы үшін қиылысу ауданы GeoPandas/Shapely-де есептелген.",
 info_coverage: "8 округтің аудандарының қосындысы 12 облыстың аудандарының қосындысына тең (айырмашылық 0,05 %): екі тор бір аумақты сипаттайды.",
@@ -1153,6 +1177,7 @@ unrest: 0
 }, CAMPS = [ {
 lon: 72.9,
 lat: 49.4,
+kind: "camp",
 ru: {
 n: "Карлаг",
 t: "Карагандинский ИТЛ, один из крупнейших в СССР"
@@ -1168,6 +1193,7 @@ t: "Қарағанды түзеу-еңбек лагері, КСРО-дағы е�
 }, {
 lon: 67.7,
 lat: 47.8,
+kind: "camp",
 ru: {
 n: "Степлаг",
 t: "Особый лагерь, Джезказган"
@@ -1183,6 +1209,7 @@ t: "Арнайы лагерь, Жезқазған"
 }, {
 lon: 71,
 lat: 51.1,
+kind: "camp",
 ru: {
 n: "АЛЖИР",
 t: "Акмолинский лагерь жён «изменников родины»"
@@ -1198,6 +1225,7 @@ t: "«Отан сатқындарының» әйелдеріне арналға�
 }, {
 lon: 74.9,
 lat: 46.8,
+kind: "site",
 ru: {
 n: "Балхашстрой",
 t: "Медеплавильный комбинат, труд спецпереселенцев"
@@ -1213,6 +1241,7 @@ t: "Мыс қорыту комбинаты, арнайы қоныс аудару
 }, {
 lon: 83.5,
 lat: 50.3,
+kind: "site",
 ru: {
 n: "Риддер",
 t: "Полиметаллический комбинат, Рудный Алтай"
@@ -2633,7 +2662,10 @@ $("#" + id).classList.remove("on");
 }
 
 function drawerOpen(html) {
-$("#drawerBody").innerHTML = html, $("#drawer").classList.add("on"), $("#ov").classList.add("on");
+// the header is taller than 60px when it wraps to two rows (phones): start the drawer right below it
+const h = $(".hdr");
+h && ($("#drawer").style.top = Math.max(0, Math.round(h.getBoundingClientRect().bottom)) + "px"),
+$("#drawerBody").innerHTML = html, $("#drawer").classList.add("on"), $("#ov").classList.add("on"), $("#drawer").scrollTop = 0;
 }
 
 function drawerClose() {
@@ -2903,7 +2935,7 @@ const ms = 1 / u;
 $$("#lCamps g,#lRevolts g").forEach(n => {
 const [x, y] = n.dataset.at.split(",");
 n.setAttribute("transform", `translate(${x} ${y}) scale(${ms})`);
-}), S.split && $("#clipRect") && setSplit(splitPos);
+}), fitHits("#svgKz", "#lCamps .mhit,#lRevolts .mhit"), S.split && $("#clipRect") && setSplit(splitPos);
 }
 
 function periodName(p) {
@@ -3010,6 +3042,49 @@ box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12
 }
 }
 
+// ---------- cards for camps, construction sites and uprisings (both maps) ----------
+// Uprisings: the site cites T. Omarbekov for this layer (bibliography no. 8). Camps and sites: no source yet.
+const MARK_HIT_R = 11;
+// On touch screens the invisible hit circle is 22 screen px (a 44 px target). Called from the zoom handlers,
+// which already run at start-up before this point, so no module-level constants are used inside.
+function fitHits(svgSel, sel) {
+const m = matchMedia("(pointer: coarse)").matches && $(svgSel).getScreenCTM();
+m && m.a && $$(sel).forEach(c => c.setAttribute("r", Math.max(11, 22 / m.a)));
+}
+function markCardHTML(kind, item) {
+const L = tr(item), isRevolt = "revolt" === kind, type = t(isRevolt ? "markTypeRevolt" : "site" === item.kind ? "markTypeSite" : "markTypeCamp"), title = isRevolt ? `${L.n} ${t("tipUprising")}` : L.n, desc = isRevolt ? t("tipUprisingYear").replace(/^[^.]*\.\s*/, "") : L.t || t("markNoDesc"), bib = isRevolt ? BIBLIOGRAPHY.find(b => "8" === b.src) : null;
+return `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+    <div><p class="sec-t" style="margin:0 0 4px">${esc(type)}</p><h3 style="font-size:18px">${esc(title)}</h3></div>
+    <button class="btn ico ghost" onclick="drawerClose()" aria-label="${esc(t("introClose"))}">✕</button></div>
+    ${isRevolt ? `<div class="kv" style="margin-top:12px"><span>${esc(t("markYear"))}</span><b>${item.y}</b></div>` : ""}
+    <p class="prose" style="margin-top:12px">${esc(desc)}</p>
+    <p class="hint" style="margin-top:12px"><b>${esc(t("markSource"))}:</b> ${bib ? `<a href="#" data-bib="${bib.src}">${esc(bib.authors.map(a => a[0] + " " + a[1]).join(", "))} (${bib.year})</a>` : esc(t("markSrcPending"))}</p>`;
+}
+function openMarkCard(kind, item) {
+tipHide(), drawerOpen(markCardHTML(kind, item));
+const x = $("#drawer .btn.ico");
+x && x.focus();
+}
+// Makes a marker group clickable, tappable and keyboard-accessible.
+function wireMark(g, kind, item, label) {
+g.setAttribute("tabindex", "0"), g.setAttribute("role", "button"), g.setAttribute("aria-label", `${label} · ${t("markOpenHint")}`), 
+g.addEventListener("click", e => {
+e.stopPropagation(), openMarkCard(kind, item);
+}), g.addEventListener("keydown", e => {
+"Enter" !== e.key && " " !== e.key || (e.preventDefault(), openMarkCard(kind, item));
+});
+}
+// Link from a card to the bibliography entry.
+document.addEventListener("click", e => {
+const a = e.target.closest("[data-bib]");
+if (!a) return;
+e.preventDefault(), drawerClose(), showView("biblio");
+const n = $(`#bib-${a.dataset.bib}`);
+n && (n.scrollIntoView({
+block: "center"
+}), n.classList.add("bib-flash"), setTimeout(() => n.classList.remove("bib-flash"), 1800));
+});
+
 function renderMarks() {
 const cg = $("#lCamps"), rg = $("#lRevolts");
 cg.innerHTML = "", rg.innerHTML = "", CAMPS.forEach(c => {
@@ -3028,7 +3103,8 @@ cx: 0,
 cy: 0
 }));
 const hit = el("circle", {
-r: 9,
+r: MARK_HIT_R,
+class: "mhit",
 cx: 0,
 cy: 0,
 fill: "transparent"
@@ -3036,7 +3112,7 @@ fill: "transparent"
 g.appendChild(hit), g.addEventListener("mouseenter", e => {
 tipShow(`<b>${esc(L.n)}</b><div class="s">${esc(L.t)}</div>`), tipMove(e);
 }), g.addEventListener("mousemove", tipMove), g.addEventListener("mouseleave", tipHide), 
-cg.appendChild(g);
+wireMark(g, "camp", c, L.n), cg.appendChild(g);
 }), REVOLTS.forEach(r => {
 const L = tr(r), [x, y] = albers(r.lon, r.lat), g = el("g", {
 "data-at": `${x},${y}`,
@@ -3047,16 +3123,17 @@ g.appendChild(el("path", {
 class: "revolt",
 d: star(6.5, 2.9, 5)
 })), g.appendChild(el("circle", {
-r: 8,
+r: MARK_HIT_R,
+class: "mhit",
 cx: 0,
 cy: 0,
 fill: "transparent"
 })), g.addEventListener("mouseenter", e => {
-tipShow(`<b>${esc(L.n)} ${esc(t("tipUprising"))}</b><div class="s">${r.y} ${esc(t("tipUprisingYear"))}</div>`), 
+tipShow(`<b>${esc(L.n)} ${esc(t("tipUprising"))}</b><div class="s">${r.y} ${esc(t("tipUprisingYear"))}</div>`),
 tipMove(e);
 }), g.addEventListener("mousemove", tipMove), g.addEventListener("mouseleave", tipHide), 
-rg.appendChild(g);
-});
+wireMark(g, "revolt", r, `${L.n} ${t("tipUprising")}`), rg.appendChild(g);
+}), "undefined" != typeof zKz && syncKzScale();
 }
 
 function star(R, r, n) {
@@ -3623,7 +3700,7 @@ const u = zS.base.s * zS.state.k;
 fitLabels(zS, "#svgS", $$("#sLbl text"), 11), $$("#sMark g").forEach(n => {
 const [x, y] = n.dataset.at.split(",");
 n.setAttribute("transform", `translate(${x} ${y}) scale(${1 / u})`);
-});
+}), fitHits("#svgS", "#sMark .mhit");
 }
 
 function renderSchoolCards() {
@@ -3684,15 +3761,15 @@ class: "lbl",
 t2.textContent = shortName(f), lbl.appendChild(t2);
 }), s && "anomaly" === s.metric && CAMPS.forEach(c => {
 const L = tr(c);
-addSMark(mark, c.lon, c.lat, "#f0b429", L.n, L.t, "camp");
+addSMark(mark, c.lon, c.lat, "#f0b429", L.n, L.t, "camp", c);
 }), s && "unrest" === s.metric && REVOLTS.forEach(r => {
 const L = tr(r);
-addSMark(mark, r.lon, r.lat, "#e34948", L.n + " " + t("tipUprising"), r.y + " " + t("tipUprisingYear").split(".")[0], "star");
+addSMark(mark, r.lon, r.lat, "#e34948", L.n + " " + t("tipUprising"), r.y + " " + t("tipUprisingYear").split(".")[0], "star", r);
 }), $("#sCaption").textContent = s ? `${tr(s).name}: ${m.label.toLowerCase()} · ${t("focusRegions").toLowerCase()}` : t("schoolCaptionDefault"), 
 syncSScale();
 }
 
-function addSMark(g, lon, lat, col, title, sub, kind) {
+function addSMark(g, lon, lat, col, title, sub, kind, item) {
 const [x, y] = albers(lon, lat), n = el("g", {
 "data-at": `${x},${y}`,
 class: "node",
@@ -3714,12 +3791,13 @@ stroke: col,
 "stroke-width": 1.4,
 fill: "none"
 }))), n.appendChild(el("circle", {
-r: 10,
+r: MARK_HIT_R,
+class: "mhit",
 fill: "transparent"
 })), n.addEventListener("mouseenter", e => {
 tipShow(`<b>${esc(title)}</b><div class="s">${esc(sub)}</div>`), tipMove(e);
 }), n.addEventListener("mousemove", tipMove), n.addEventListener("mouseleave", tipHide), 
-g.appendChild(n);
+item && wireMark(n, "star" === kind ? "revolt" : "camp", item, title), g.appendChild(n);
 }
 
 // Bibliography of the research paper (docs/bibliography-source.md), stored as structured fields; apa() builds APA 7 strings.
@@ -4190,7 +4268,7 @@ box.innerHTML = groups.map(g => {
 const items = BIBLIOGRAPHY.filter(e => e.group === g).sort(cmp);
 return `<section class="card pad bib-group">\n      <h3>${esc(t("biblioGroup_" + g))} <span class="bib-count">${items.length}</span></h3>\n      ${items.map(e => {
 const r = apa(e), C = BIB_CAT[e.cat];
-return `<div class="bib-entry">\n        <p class="apa" lang="${"kk" === e.lang ? "kk" : e.lang}">${r.html}</p>\n        <div class="bib-meta"><span class="bib-cat">${esc(C[LANG] || C.ru)}</span><span>${esc(e.role[LANG] || e.role.ru)}</span>${r.link ? "" : `<span class="bib-print">${esc(t("biblioPrint"))}</span>`}\n        <button class="btn sm bib-copy" data-src="${esc(e.src)}">${esc(t("biblioCopy"))}</button></div>\n      </div>`;
+return `<div class="bib-entry" id="bib-${esc(e.src)}">\n        <p class="apa" lang="${"kk" === e.lang ? "kk" : e.lang}">${r.html}</p>\n        <div class="bib-meta"><span class="bib-cat">${esc(C[LANG] || C.ru)}</span><span>${esc(e.role[LANG] || e.role.ru)}</span>${r.link ? "" : `<span class="bib-print">${esc(t("biblioPrint"))}</span>`}\n        <button class="btn sm bib-copy" data-src="${esc(e.src)}">${esc(t("biblioCopy"))}</button></div>\n      </div>`;
 }).join("")}\n    </section>`;
 }).join("") + `<p class="hint bib-note">${esc(t("biblioApaNote"))}</p>`;
 }
