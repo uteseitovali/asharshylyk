@@ -63,7 +63,7 @@ introQ: "Насколько выводы о географии катастро�
 introHLabel: "Гипотеза",
 introH: "Гипотеза состоит в том, что наиболее тяжелые потери приходились на районы традиционного скотоводства, тогда как статистический прирост в промышленных центрах мог быть следствием принудительной и организованной миграции.",
 introResultsLabel: "Три главных результата",
-introR1: "Доля казахов в населении республики: ≈60 % по переписи 1926 г. → ≈38 % по переписи 1939 г.",
+introR1: "Доля казахов в населении республики: ≈58,5 % по переписи 1926 г. → ≈38 % по переписи 1939 г.",
 introR2: "Убыль казахского населения республики между переписями: ≈36 % (≈3,63 → ≈2,33 млн человек).",
 introR3: "Наложение сеток 1926 и 1939 гг. — матрица 8 × 12: 96 пар «округ — область», из них 37 с ненулевой площадью пересечения: от выбора сетки зависит, где на карте окажется эпицентр катастрофы (MAUP).",
 introSrc: "Республиканские итоги: перепись 1926 г. — Асылбек М. Х., Асылбекова Ж. М. (2014); перепись 1939 г. — Тольц (Демоскоп Weekly, 2006). Областные показатели атласа ещё сверяются с опубликованными итогами.",
@@ -84,21 +84,22 @@ info_returned: "454 тыс. вернувшихся из ≈1,13 млн отко�
 info_relLoss: "Оценка историографии: погибло ≈38 % казахов (С. Кэмерон, «The Hungry Steppe», 2018).",
 info_absMax: "Украинская ССР: ≈3,3–3,9 млн погибших («between 3.3 and 3.9 million died in Ukraine») — Wikipedia, «Soviet famine of 1930–1933» (Э15 списка литературы работы).",
 info_deathEst: "Безвозвратные потери казахского населения ≈1,3–2,3 млн — диапазон оценок разных авторов (по тексту работы); А. Н. Алексеенко (2000): 1,5–1,84 млн.",
-info_shareRep: "Перепись 1926 г.: ≈3,63 млн казахов из ≈6,07 млн жителей (Асылбек, Асылбекова, 2014); перепись 1939 г.: 2,33 млн из 6,15 млн, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
+info_shareRep: "Перепись 1926 г.: 3 627,6 тыс. казахов из 6 198,5 тыс. жителей, 58,5 % (Демоскоп: Казакская АССР за вычетом Каракалпакской АО; Асылбек, Асылбекова, 2014); перепись 1939 г.: 2,33 млн из 6,15 млн, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
 kazakhLossRep: "Убыль казахов в республике",
 kazakhLossRepSub: "≈3,63 → ≈2,33 млн · переписи 1926 и 1939 гг.",
 info_kazLossRep: "Перепись 1926 г.: ≈3,63 млн казахов (Асылбек, Асылбекова, 2014); перепись 1939 г.: 2,33 млн (Тольц, Демоскоп Weekly, 2006). Убыль: (2,33 − 3,63) ÷ 3,63 ≈ −36 %.",
 popRep1926: "Население республики",
 popRep1926Sub: "перепись 1926 г.",
 kazRep1926: "Казахов в республике",
-kazRep1926Sub: "≈60 % населения",
-info_popRep1926: "Перепись 1926 г., Казакская АССР: ≈6,07 млн жителей (Асылбек М. Х., Асылбекова Ж. М., 2014). Суммы по 8 округам рабочего набора атласа — в таблице и карточках округов (сверка ведётся).",
-info_kazRep1926: "Перепись 1926 г.: ≈3,63 млн казахов, ≈60 % населения республики (Асылбек М. Х., Асылбекова Ж. М., 2014).",
+kazRep1926Sub: "≈58,5 % населения",
+info_popRep1926: "Перепись 1926 г.: ≈6,2 млн жителей — 6 198,5 тыс. (Демоскоп: Казакская АССР за вычетом Каракалпакской АО; совпадает с 6,198 млн в Wikipedia). Суммы по 8 округам рабочего набора атласа — в таблице и карточках округов (сверка ведётся).",
+info_kazRep1926: "Перепись 1926 г.: 3 627,6 тыс. казахов, 58,5 % населения республики (Демоскоп: Казакская АССР за вычетом Каракалпакской АО; Асылбек М. Х., Асылбекова Ж. М., 2014).",
 oblastDataLabel: "Областные показатели",
 oblastDataVal: "сверка ведётся",
 oblastDataSub: "проценты по областям — в карточках областей (рабочий набор атласа)",
 regionCheckTag: "сверка ведётся",
 regionCheckTip: "Значение из рабочего набора атласа; сверка с опубликованными итогами переписей по областям ведётся.",
+prelimNote: "предв., сверка ведётся",
 info_maupCalc: "Собственный расчёт: ареальная интерполяция казахского населения 1926 г. с сетки 8 округов на сетку 12 областей; индекс несходства — половина суммы модулей сдвигов долей.",
 info_inter96: "Собственный расчёт: матрица 8 × 12: 96 пар «округ — область», из них 37 с ненулевой площадью пересечения. Для каждой пары «округ 1926 г. — область 1939 г.» вычислена площадь пересечения в GeoPandas/Shapely.",
 info_coverage: "Сумма площадей 8 округов совпадает с суммой площадей 12 областей (расхождение 0,05 %): обе сетки описывают одну территорию.",
@@ -373,7 +374,7 @@ introQ: "How far do conclusions about the geography of the catastrophe depend on
 introHLabel: "Hypothesis",
 introH: "The hypothesis is that the heaviest losses fell on areas of traditional pastoralism, while the statistical growth of industrial centres may have resulted from forced and organised migration.",
 introResultsLabel: "Three main results",
-introR1: "Kazakh share of the republic’s population: ≈60% in the 1926 census → ≈38% in the 1939 census.",
+introR1: "Kazakh share of the republic’s population: ≈58.5% in the 1926 census → ≈38% in the 1939 census.",
 introR2: "Decline of the republic’s Kazakh population between the censuses: ≈36% (≈3.63 → ≈2.33 million people).",
 introR3: "Overlaying the 1926 and 1939 grids gives an 8 × 12 matrix: 96 okrug–oblast pairs, 37 of them with a non-zero intersection area: the choice of grid determines where the epicenter of the catastrophe appears on the map (MAUP).",
 introSrc: "Republic totals: 1926 census — Asylbek, M. Kh., & Asylbekova, Zh. M. (2014); 1939 census — Tolts (Demoscope Weekly, 2006). The atlas’s oblast figures are still being cross-checked against the published results.",
@@ -394,21 +395,22 @@ info_returned: "454 thousand returnees out of ≈1.13 million who left (archival
 info_relLoss: "Historiographic estimate: ≈38% of Kazakhs died (S. Cameron, “The Hungry Steppe”, 2018).",
 info_absMax: "Ukrainian SSR: ≈3.3–3.9 million deaths (“between 3.3 and 3.9 million died in Ukraine”) — Wikipedia, “Soviet famine of 1930–1933” (E15 in the paper’s reference list).",
 info_deathEst: "Irrecoverable losses of the Kazakh population ≈1.3–2.3 million — the range of estimates by different authors (per the paper); A. N. Alekseenko (2000): 1.5–1.84 million.",
-info_shareRep: "1926 census: ≈3.63 million Kazakhs of ≈6.07 million inhabitants (Asylbek & Asylbekova, 2014); 1939 census: 2.33 million of 6.15 million, 37.8% (Tolts, Demoscope Weekly, 2006).",
+info_shareRep: "1926 census: 3,627.6 thousand Kazakhs of 6,198.5 thousand inhabitants, 58.5% (Demoscope: Kazak ASSR minus the Kara-Kalpak AO; Asylbek & Asylbekova, 2014); 1939 census: 2.33 million of 6.15 million, 37.8% (Tolts, Demoscope Weekly, 2006).",
 kazakhLossRep: "Kazakh decline in the republic",
 kazakhLossRepSub: "≈3.63 → ≈2.33 million · 1926 and 1939 censuses",
 info_kazLossRep: "1926 census: ≈3.63 million Kazakhs (Asylbek & Asylbekova, 2014); 1939 census: 2.33 million (Tolts, Demoscope Weekly, 2006). Decline: (2.33 − 3.63) ÷ 3.63 ≈ −36%.",
 popRep1926: "Population of the republic",
 popRep1926Sub: "1926 census",
 kazRep1926: "Kazakhs in the republic",
-kazRep1926Sub: "≈60% of the population",
-info_popRep1926: "1926 census, Kazak ASSR: ≈6.07 million inhabitants (Asylbek, M. Kh., & Asylbekova, Zh. M., 2014). Sums over the 8 okrugs of the atlas’s working dataset are in the table and okrug cards (cross-check in progress).",
-info_kazRep1926: "1926 census: ≈3.63 million Kazakhs, ≈60% of the republic’s population (Asylbek, M. Kh., & Asylbekova, Zh. M., 2014).",
+kazRep1926Sub: "≈58.5% of the population",
+info_popRep1926: "1926 census: ≈6.2 million inhabitants — 6,198.5 thousand (Demoscope: Kazak ASSR minus the Kara-Kalpak AO; matches Wikipedia’s 6.198 million). Sums over the 8 okrugs of the atlas’s working dataset are in the table and okrug cards (cross-check in progress).",
+info_kazRep1926: "1926 census: 3,627.6 thousand Kazakhs, 58.5% of the republic’s population (Demoscope: Kazak ASSR minus the Kara-Kalpak AO; Asylbek, M. Kh., & Asylbekova, Zh. M., 2014).",
 oblastDataLabel: "Oblast figures",
 oblastDataVal: "cross-check in progress",
 oblastDataSub: "oblast percentages are in the oblast cards (atlas working dataset)",
 regionCheckTag: "cross-check in progress",
 regionCheckTip: "A value from the atlas’s working dataset; cross-checking against the published oblast census results is in progress.",
+prelimNote: "prelim., cross-check in progress",
 info_maupCalc: "Own calculation: areal interpolation of the 1926 Kazakh population from the 8-okrug grid to the 12-oblast grid; the dissimilarity index is half the sum of absolute share shifts.",
 info_inter96: "Own calculation: an 8 × 12 matrix: 96 okrug–oblast pairs, 37 of them with a non-zero intersection area. The intersection area is computed for each “1926 okrug — 1939 oblast” pair in GeoPandas/Shapely.",
 info_coverage: "The total area of the 8 okrugs equals that of the 12 oblasts (0.05% difference): both grids describe the same territory.",
@@ -683,7 +685,7 @@ introQ: "Апат географиясы туралы қорытындылар �
 introHLabel: "Гипотеза",
 introH: "Гипотеза бойынша ең ауыр шығындар дәстүрлі мал шаруашылығы аудандарына келді, ал өнеркәсіп орталықтарындағы статистикалық өсім мәжбүрлі және ұйымдастырылған көші-қонның салдары болуы мүмкін.",
 introResultsLabel: "Үш басты нәтиже",
-introR1: "Республика халқындағы қазақтар үлесі: 1926 ж. санақ бойынша ≈60 % → 1939 ж. санақ бойынша ≈38 %.",
+introR1: "Республика халқындағы қазақтар үлесі: 1926 ж. санақ бойынша ≈58,5 % → 1939 ж. санақ бойынша ≈38 %.",
 introR2: "Санақтар арасында республикадағы қазақ халқының кемуі: ≈36 % (≈3,63 → ≈2,33 млн адам).",
 introR3: "1926 және 1939 жж. торларын қабаттастыру — 8 × 12 матрицасы: «округ — облыс» 96 жұбы, оның 37-сінде қиылысу ауданы нөлден үлкен: апат эпицентрінің картада қай жерде шығатыны тордың таңдауына байланысты (MAUP).",
 introSrc: "Республикалық қорытындылар: 1926 ж. санақ — Асылбек М. Х., Асылбекова Ж. М. (2014); 1939 ж. санақ — Тольц (Демоскоп Weekly, 2006). Атластың облыстық көрсеткіштері жарияланған қорытындылармен әлі салыстырылуда.",
@@ -704,21 +706,22 @@ info_returned: "≈1,13 млн көшіп кеткендердің 454 мыңы 
 info_relLoss: "Тарихнамалық баға: қазақтардың ≈38 %-ы қаза тапты (С. Кэмерон, «The Hungry Steppe», 2018).",
 info_absMax: "Украин КСР-і: ≈3,3–3,9 млн қаза тапқан («between 3.3 and 3.9 million died in Ukraine») — Wikipedia, «Soviet famine of 1930–1933» (жұмыстың әдебиеттер тізіміндегі Э15).",
 info_deathEst: "Қазақ халқының қайтарымсыз шығыны ≈1,3–2,3 млн — әртүрлі авторлар бағаларының диапазоны (жұмыс мәтіні бойынша); А. Н. Алексеенко (2000): 1,5–1,84 млн.",
-info_shareRep: "1926 ж. санақ: ≈6,07 млн тұрғынның ≈3,63 млн-ы қазақ (Асылбек, Асылбекова, 2014); 1939 ж. санақ: 6,15 млн-ның 2,33 млн-ы, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
+info_shareRep: "1926 ж. санақ: 6 198,5 мың тұрғынның 3 627,6 мыңы қазақ, 58,5 % (Демоскоп: Қарақалпақ АО-сыз Қазақ АКСР-і; Асылбек, Асылбекова, 2014); 1939 ж. санақ: 6,15 млн-ның 2,33 млн-ы, 37,8 % (Тольц, Демоскоп Weekly, 2006).",
 kazakhLossRep: "Республикадағы қазақтардың кемуі",
 kazakhLossRepSub: "≈3,63 → ≈2,33 млн · 1926 және 1939 жж. санақтар",
 info_kazLossRep: "1926 ж. санақ: ≈3,63 млн қазақ (Асылбек, Асылбекова, 2014); 1939 ж. санақ: 2,33 млн (Тольц, Демоскоп Weekly, 2006). Кему: (2,33 − 3,63) ÷ 3,63 ≈ −36 %.",
 popRep1926: "Республика халқы",
 popRep1926Sub: "1926 ж. санақ",
 kazRep1926: "Республикадағы қазақтар",
-kazRep1926Sub: "халықтың ≈60 %-ы",
-info_popRep1926: "1926 ж. санақ, Қазақ АКСР-і: ≈6,07 млн тұрғын (Асылбек М. Х., Асылбекова Ж. М., 2014). Атлас жұмыс жиынтығының 8 округі бойынша қосындылар — кестеде және округ карточкаларында (салыстыру жүргізілуде).",
-info_kazRep1926: "1926 ж. санақ: ≈3,63 млн қазақ, республика халқының ≈60 %-ы (Асылбек М. Х., Асылбекова Ж. М., 2014).",
+kazRep1926Sub: "халықтың ≈58,5 %-ы",
+info_popRep1926: "1926 ж. санақ: ≈6,2 млн тұрғын — 6 198,5 мың (Демоскоп: Қарақалпақ АО-сыз Қазақ АКСР-і; Wikipedia-дағы 6,198 млн-мен сәйкес). Атлас жұмыс жиынтығының 8 округі бойынша қосындылар — кестеде және округ карточкаларында (салыстыру жүргізілуде).",
+info_kazRep1926: "1926 ж. санақ: 3 627,6 мың қазақ, республика халқының 58,5 %-ы (Демоскоп: Қарақалпақ АО-сыз Қазақ АКСР-і; Асылбек М. Х., Асылбекова Ж. М., 2014).",
 oblastDataLabel: "Облыстық көрсеткіштер",
 oblastDataVal: "салыстыру жүргізілуде",
 oblastDataSub: "облыстар бойынша пайыздар — облыс карточкаларында (атластың жұмыс жиынтығы)",
 regionCheckTag: "салыстыру жүргізілуде",
 regionCheckTip: "Атластың жұмыс деректер жиынтығындағы мән; облыстар бойынша жарияланған санақ қорытындыларымен салыстыру жүргізілуде.",
+prelimNote: "алдын ала, салыстыру жүргізілуде",
 info_maupCalc: "Меншікті есептеу: 1926 ж. қазақ халқын 8 округ торынан 12 облыс торына ареалдық интерполяциялау; ұқсамау индексі — үлес ығысулары модульдерінің жартысы.",
 info_inter96: "Меншікті есептеу: 8 × 12 матрицасы: «округ — облыс» 96 жұбы, оның 37-сінде қиылысу ауданы нөлден үлкен. Әр «1926 ж. округ — 1939 ж. облыс» жұбы үшін қиылысу ауданы GeoPandas/Shapely-де есептелген.",
 info_coverage: "8 округтің аудандарының қосындысы 12 облыстың аудандарының қосындысына тең (айырмашылық 0,05 %): екі тор бір аумақты сипаттайды.",
@@ -2953,7 +2956,7 @@ fill: metricColor(per, m, f.p),
 "data-nodrag": "1"
 });
 p.addEventListener("mouseenter", e => {
-tipShow(`<b>${esc(pName(f.p))}</b><span class="v">${m.fmt(m.get(f.p))}</span>\n        <div class="s">${esc(m.label)}<br>${esc(t("chartHint"))}</div>`), 
+tipShow(`<b>${esc(pName(f.p))}</b><span class="v">${m.fmt(m.get(f.p))}</span><span class="prelim">${esc(t("prelimNote"))}</span>\n        <div class="s">${esc(m.label)}<br>${esc(t("chartHint"))}</div>`), 
 tipMove(e);
 }), p.addEventListener("mousemove", tipMove), p.addEventListener("mouseleave", tipHide), 
 p.addEventListener("click", () => {
@@ -2982,7 +2985,7 @@ const vals = KZ[per].map(f => m.get(f.p));
 quantileBreaks(vals, RAMPS[m.ramp].length), add(`<b>${m.fmt(Math.min(...vals))}</b>`), 
 RAMPS[m.ramp].forEach(c => add(`<i style="background:${c}"></i>`)), add(`<b>${m.fmt(Math.max(...vals))}</b>`);
 }
-add(`<b style="margin-left:12px;color:var(--ink-soft)">${esc(m.label)}, ${esc(m.unit)}</b>`);
+add(`<b style="margin-left:12px;color:var(--ink-soft)">${esc(m.label)}, ${esc(m.unit)}</b>`), add(`<b class="legend-prelim">(${esc(t("prelimNote"))})</b>`);
 const ti = $("#kzTitle"), sr = $("#kzSrc");
 ti && (ti.innerHTML = `<b>${esc(m.label)}</b> · ${esc(t("mapBasis_" + m.basis))} · ${esc(t("mapUnits" + per))}`), sr && (sr.textContent = t("model" === m.basis ? "mapSrcModel" : "mapSrcData"));
 }
@@ -2994,10 +2997,10 @@ function renderStats(per, m) {
 const box = $("#statsKz");
 if ("1926" === per) {
 // Republic-level 1926 census totals; okrug sums of the working dataset stay in the table and okrug cards.
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("popRep1926"))}${lvl("census")}${info("info_popRep1926")}</u><b>≈${fmtD(6.07, 2)} ${"en" === LANG ? "million" : "млн"}</b><s>${esc(t("popRep1926Sub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazRep1926"))}${lvl("census")}${info("info_kazRep1926")}</u><b>≈${fmtD(3.63, 2)} ${"en" === LANG ? "million" : "млн"}</b><s>${esc(t("kazRep1926Sub"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}${lvl("hist")}${info("info_livestock")}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("popRep1926"))}${lvl("census")}${info("info_popRep1926")}</u><b>≈${fmtD(6.2, 1)} ${"en" === LANG ? "million" : "млн"}</b><s>${esc(t("popRep1926Sub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazRep1926"))}${lvl("census")}${info("info_kazRep1926")}</u><b>≈${fmtD(3.63, 2)} ${"en" === LANG ? "million" : "млн"}</b><s>${esc(t("kazRep1926Sub"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}${lvl("hist")}${info("info_livestock")}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
 } else {
 // Republic-level census totals only: the oblast figures of the working dataset are not verified yet.
-box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLossRep"))}${lvl("census")}${info("info_kazLossRep")}</u><b style="color:var(--carmine2)">≈ −${fmtD(36, 0)} %</b><s>${esc(t("kazakhLossRepSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}${lvl("census")}${info("info_shareRep")}</u><b>≈60 % → ≈38 %</b><s>1926 → 1939</s></div>\n      <div class="stat"><u>${esc(t("oblastDataLabel"))}</u><b style="font-size:15px">${esc(t("oblastDataVal"))}</b><s>${esc(t("oblastDataSub"))}</s></div>`;
+box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12</b><s>${esc(t("byOblastsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhLossRep"))}${lvl("census")}${info("info_kazLossRep")}</u><b style="color:var(--carmine2)">≈ −${fmtD(36, 0)} %</b><s>${esc(t("kazakhLossRepSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}${lvl("census")}${info("info_shareRep")}</u><b>≈${fmtD(58.5)} % → ≈38 %</b><s>1926 → 1939</s></div>\n      <div class="stat"><u>${esc(t("oblastDataLabel"))}</u><b style="font-size:15px">${esc(t("oblastDataVal"))}</b><s>${esc(t("oblastDataSub"))}</s></div>`;
 }
 }
 
@@ -3091,7 +3094,7 @@ fill: metricColor("1939", m, f.p),
 "data-nodrag": "1"
 });
 p.addEventListener("mouseenter", e => {
-tipShow(`<b>${esc(pName(f.p))}</b><span class="v">${m.fmt(m.get(f.p))}</span>\n        <div class="s">${esc(m.label)} · ${"kz" === LANG ? "1939 ж. торы" : "en" === LANG ? "1939 grid" : "сетка 1939 г."}</div>`),
+tipShow(`<b>${esc(pName(f.p))}</b><span class="v">${m.fmt(m.get(f.p))}</span><span class="prelim">${esc(t("prelimNote"))}</span>\n        <div class="s">${esc(m.label)} · ${"kz" === LANG ? "1939 ж. торы" : "en" === LANG ? "1939 grid" : "сетка 1939 г."}</div>`),
 tipMove(e);
 }), p.addEventListener("mousemove", tipMove), p.addEventListener("mouseleave", tipHide), 
 p.addEventListener("click", () => {
@@ -3579,7 +3582,7 @@ const box = $("#statsW");
 if ("flows" === WS.layer) {
 const ab = FLOWS.filter(f => "abroad" === f.kind), sv = FLOWS.filter(f => "soviet" === f.kind), rng = a => `${a.reduce((s, f) => s + f.lo, 0)}–${a.reduce((s, f) => s + f.hi, 0)} ${t("flowRange")}`;
 box.innerHTML = `\n      <div class="stat"><u>${esc(t("abroadDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b>${ab.length}</b><s>≈${rng(ab)}</s></div>\n      <div class="stat"><u>${esc(t("sovietDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b>${sv.length}</b><s>≈${rng(sv)}</s></div>\n      <div class="stat"><u>${esc(t("biggestDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b style="font-size:15px">${esc(tr(FLOWS[0]).short)}</b><s>≈100–200 ${t("flowRange")}</s></div>\n      <div class="stat"><u>${esc(t("returnedShare"))}${lvl("hist")}${info("info_returned")}</u><b>≈40 %</b><s>454 / 1130 ${t("flowRange")}</s></div>`;
-} else box.innerHTML = `\n      <div class="stat"><u>${esc(t("relLoss"))}${lvl("hist")}${info("info_relLoss")}</u><b style="color:var(--carmine2)">≈38 %</b><s>${esc(tr(FAMINES[0]).n)}</s></div>\n      <div class="stat"><u>${esc(t("absMax"))}${lvl("hist")}${info("info_absMax")}</u><b style="font-size:15px">${esc(tr(FAMINES[1]).n)}</b><s>≈${esc(tr(FAMINES[1]).deaths)}</s></div>\n      <div class="stat"><u>${esc(t("deathEstimates"))}${lvl("hist")}${info("info_deathEst")}</u><b>≈${"en" === LANG ? "1.3–2.3 million" : "1,3–2,3 млн"}</b><s>${esc(t("deathEstimatesSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}${lvl("census")}${info("info_shareRep")}</u><b>≈60 % → ≈38 %</b><s>1926 → 1939</s></div>`;
+} else box.innerHTML = `\n      <div class="stat"><u>${esc(t("relLoss"))}${lvl("hist")}${info("info_relLoss")}</u><b style="color:var(--carmine2)">≈38 %</b><s>${esc(tr(FAMINES[0]).n)}</s></div>\n      <div class="stat"><u>${esc(t("absMax"))}${lvl("hist")}${info("info_absMax")}</u><b style="font-size:15px">${esc(tr(FAMINES[1]).n)}</b><s>≈${esc(tr(FAMINES[1]).deaths)}</s></div>\n      <div class="stat"><u>${esc(t("deathEstimates"))}${lvl("hist")}${info("info_deathEst")}</u><b>≈${"en" === LANG ? "1.3–2.3 million" : "1,3–2,3 млн"}</b><s>${esc(t("deathEstimatesSub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazakhShareRepublic"))}${lvl("census")}${info("info_shareRep")}</u><b>≈${fmtD(58.5)} % → ≈38 %</b><s>1926 → 1939</s></div>`;
 }
 
 $("#segWorld").addEventListener("click", e => {
@@ -3659,7 +3662,7 @@ fill: metricColor("1939", m, f.p),
 "data-nodrag": "1"
 });
 p.addEventListener("mouseenter", e => {
-tipShow(`<b>${esc(pName(f.p))}</b><span class="v">${m.fmt(m.get(f.p))}</span>\n        <div class="s">${esc(m.label)}</div>`), 
+tipShow(`<b>${esc(pName(f.p))}</b><span class="v">${m.fmt(m.get(f.p))}</span><span class="prelim">${esc(t("prelimNote"))}</span>\n        <div class="s">${esc(m.label)}</div>`), 
 tipMove(e);
 }), p.addEventListener("mousemove", tipMove), p.addEventListener("mouseleave", tipHide), 
 p.addEventListener("click", () => {
@@ -4083,9 +4086,9 @@ tr: "The population of Kazakhstan between the All-Union population censuses of 1
 site: "Институт истории и этнологии им. Ч. Ч. Валиханова",
 url: "https://iie.kz/?p=4615",
 role: {
-ru: "Итоги переписи 1926 г. по республике (≈3,63 млн казахов из ≈6,07 млн жителей) и изменения численности областей 1926–1939 гг.",
-en: "1926 census totals for the republic (≈3.63 million Kazakhs of ≈6.07 million inhabitants) and oblast population change in 1926–1939.",
-kz: "Республика бойынша 1926 ж. санақ қорытындылары (≈6,07 млн тұрғынның ≈3,63 млн-ы қазақ) және 1926–1939 жж. облыстар халқының өзгерісі."
+ru: "Итоги переписи 1926 г. по республике (3 627,6 тыс. казахов, 58,5 % населения) и изменения численности областей 1926–1939 гг.",
+en: "1926 census totals for the republic (3,627.6 thousand Kazakhs, 58.5% of the population) and oblast population change in 1926–1939.",
+kz: "Республика бойынша 1926 ж. санақ қорытындылары (3 627,6 мың қазақ, халықтың 58,5 %-ы) және 1926–1939 жж. облыстар халқының өзгерісі."
 }
 } ];
 
@@ -4415,6 +4418,23 @@ kz: {
 what: "1926 ж. тақташалары: жұмыс жиынтығының 8 округі бойынша қосындылардың (3 880 000 тұрғын, 2 666 640 қазақ) орнына — республика бойынша санақ қорытындылары: ≈6,07 млн тұрғын, ≈3,63 млн қазақ (≈60 %). Округтер бойынша қосындылар кестеде және карточкаларда «салыстыру жүргізілуде» белгісімен қалды. Украин КСР-і үшін дереккөзі жоқ қаза болғандар үлесі мен ≈31 млн халық алынып тасталды.",
 why: "Жұмыс жиынтығының округтік мәндері 1926 ж. санақтың жарияланған қорытындыларымен әлі салыстырылған жоқ.",
 source: "Асылбек М. Х., Асылбекова Ж. М. (2014)."
+}
+}, {
+date: "2026-10-23",
+ru: {
+what: "Итоги переписи 1926 г. по республике: доля казахов ≈58,5 % вместо ≈60 %, население ≈6,2 млн (6 198,5 тыс.) вместо ≈6,07 млн; 1926 → 1939 общая численность почти не изменилась (≈6,2 → 6,15 млн, ≈ −1 %). В подсказках карт и в легенде областные и окружные значения помечены «предв., сверка ведётся».",
+why: "Значение 58,5 % прямо указано у Асылбек и Асылбековой (2014); ≈6,07 млн в источнике не напечатано. Обе величины сверены по таблицам Демоскопа: Казакская АССР с Каракалпакской АО — 6 503,0 тыс., в т. ч. 3 713,4 тыс. казахов; Каракалпакская АО — 304,5 тыс. и 85,8 тыс.; разность — 6 198,5 тыс. и 3 627,6 тыс. (58,5 %).",
+source: "Всесоюзная перепись населения 1926 г., Демоскоп Weekly: rus_nac_26.php?reg=1476 и reg=1572; Асылбек М. Х., Асылбекова Ж. М. (2014)."
+},
+en: {
+what: "1926 republic totals: Kazakh share ≈58.5% instead of ≈60%, population ≈6.2 million (6,198.5 thousand) instead of ≈6.07 million; between 1926 and 1939 the total barely changed (≈6.2 → 6.15 million, ≈ −1%). Oblast and okrug values in map tooltips and the legend are marked “prelim., cross-check in progress”.",
+why: "The 58.5% figure is stated by Asylbek & Asylbekova (2014); ≈6.07 million is not printed there. Both values were checked against the Demoscope tables: Kazak ASSR incl. the Kara-Kalpak AO — 6,503.0 thousand, of whom 3,713.4 thousand Kazakhs; Kara-Kalpak AO — 304.5 and 85.8 thousand; difference — 6,198.5 and 3,627.6 thousand (58.5%).",
+source: "All-Union census of 1926, Demoscope Weekly: rus_nac_26.php?reg=1476 and reg=1572; Asylbek, M. Kh., & Asylbekova, Zh. M. (2014)."
+},
+kz: {
+what: "Республика бойынша 1926 ж. санақ қорытындылары: қазақтар үлесі ≈60 % орнына ≈58,5 %, халық ≈6,07 млн орнына ≈6,2 млн (6 198,5 мың); 1926 → 1939 жалпы халық саны іс жүзінде өзгермеді (≈6,2 → 6,15 млн, ≈ −1 %). Карта кеңестері мен шартты белгілерде облыстық және округтік мәндер «алдын ала, салыстыру жүргізілуде» деп белгіленді.",
+why: "58,5 % мәні Асылбек пен Асылбекованың (2014) еңбегінде тікелей көрсетілген; ≈6,07 млн онда жоқ. Екі шама да Демоскоп кестелерімен тексерілді: Қарақалпақ АО-мен бірге Қазақ АКСР-і — 6 503,0 мың, оның ішінде 3 713,4 мың қазақ; Қарақалпақ АО — 304,5 және 85,8 мың; айырмасы — 6 198,5 және 3 627,6 мың (58,5 %).",
+source: "1926 ж. Бүкілодақтық санақ, Демоскоп Weekly: rus_nac_26.php?reg=1476 және reg=1572; Асылбек М. Х., Асылбекова Ж. М. (2014)."
 }
 } ];
 
