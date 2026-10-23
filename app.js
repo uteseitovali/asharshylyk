@@ -2684,7 +2684,19 @@ k: 1,
 x: 0,
 y: 0
 }, K_MIN = 1, K_MAX = 8, DRAG_PX = 4, box = [ base.tx + x0 * s, base.ty + y0 * s, base.tx + x1 * s, base.ty + y1 * s ];
-let onChange = null;
+let onChange = null, live = !1, raf = 0, settle = null;
+const stage = svg.closest(".stage") || svg.parentNode;
+// A gesture step (wheel, drag, pinch) only moves the group; the change handler then runs at most once per frame
+// in "live" mode (label and marker size only, no layout reads), and the full refit (label collisions, hit areas)
+// runs once, 150 ms after the last step. While the gesture lasts (CSS .gesturing) the map does not take pointer
+// events (no hit-testing, no hover, no tooltips), and transitions, hover filters and blur over it are off.
+function gesture() {
+live || (live = !0, "function" == typeof tipHide && tipHide(), stage.classList.add("gesturing"), document.documentElement.classList.add("map-gesture")),
+clearTimeout(settle), settle = setTimeout(() => {
+live = !1, cancelAnimationFrame(raf), raf = 0, stage.classList.remove("gesturing"), document.documentElement.classList.remove("map-gesture"),
+onChange && onChange(st.k, base.s);
+}, 150);
+}
 // Keep at least half of the map (or half of the view, when zoomed in) inside the viewBox.
 function clampPan() {
 const fit = (lo, hi, view, k, off) => {
@@ -2696,13 +2708,21 @@ st.x = fit(box[0], box[2], vbW, st.k, st.x), st.y = fit(box[1], box[3], vbH, st.
 function apply(anim) {
 clampPan(), g.style.transition = anim ? `transform ${!0 === anim ? ".55s" : anim} cubic-bezier(.4,0,.2,1)` : "none",
 g.setAttribute("transform", `translate(${st.x} ${st.y}) scale(${st.k}) translate(${base.tx} ${base.ty}) scale(${base.s})`),
-onChange && onChange(st.k, base.s);
+live ? raf || (raf = requestAnimationFrame(() => {
+raf = 0, onChange && onChange(st.k, base.s, !0);
+})) : onChange && onChange(st.k, base.s);
 }
 // Client (screen) point -> viewBox coordinates, respecting preserveAspectRatio letterboxing.
+// During a gesture the page does not scroll and the SVG box does not move, so the inverse matrix is read once
+// (reading it after each transform change would force a layout on every step).
+let inv = null;
 function toVb(cx, cy) {
+if (!live || !inv) {
 const m = svg.getScreenCTM();
 if (!m) return [ vbW / 2, vbH / 2 ];
-const p = new DOMPoint(cx, cy).matrixTransform(m.inverse());
+inv = m.inverse();
+}
+const p = new DOMPoint(cx, cy).matrixTransform(inv);
 return [ p.x, p.y ];
 }
 // Scale to k around viewBox point (px, py): the map point under it stays put.
@@ -2751,14 +2771,18 @@ const showHint = (key = "mapWheelHint") => {
 hint.textContent = t(key), hint.classList.add("on"), clearTimeout(hintTimer),
 hintTimer = setTimeout(() => hint.classList.remove("on"), 1200);
 };
-svg.addEventListener("wheel", e => {
+// Listened on the map's wrapper, not the SVG: in compare mode the divider and the side labels lie over the map,
+// and a pinch (Ctrl+wheel) starting on them used to zoom the whole page instead of the map.
+const wrap = svg.parentNode;
+wrap.addEventListener("wheel", e => {
 if (!(e.ctrlKey || e.metaKey || armed)) return void showHint("mapWheelHint");
 e.preventDefault();
 const dy = e.deltaY * (1 === e.deltaMode ? 16 : 2 === e.deltaMode ? vbH : 1), [px, py] = toVb(e.clientX, e.clientY);
-zoomAt(st.k * Math.max(.5, Math.min(2, Math.exp(-dy * .002))), px, py);
+gesture(), zoomAt(st.k * Math.max(.5, Math.min(2, Math.exp(-dy * .002))), px, py);
 }, {
 passive: !1
-}), svg.addEventListener("pointerleave", e => {
+}), [ "gesturestart", "gesturechange" ].forEach(ty => wrap.addEventListener(ty, e => e.preventDefault())), // Safari trackpad pinch
+svg.addEventListener("pointerleave", e => {
 "mouse" === e.pointerType && (armed = !1);
 }), document.addEventListener("pointerdown", e => {
 svg.contains(e.target) || (armed = !1);
@@ -2784,7 +2808,7 @@ if (Math.hypot(e.clientX - drag.cx, e.clientY - drag.cy) < DRAG_PX) return;
 drag.on = !0, moved = !0, svg.setPointerCapture(e.pointerId), svg.style.cursor = "grabbing";
 }
 const [px, py] = toVb(e.clientX, e.clientY);
-st.x = drag.sx + px - drag.p[0], st.y = drag.sy + py - drag.p[1], apply();
+st.x = drag.sx + px - drag.p[0], st.y = drag.sy + py - drag.p[1], gesture(), apply();
 });
 const up = e => {
 drag && drag.id === e.pointerId && (drag = null), svg.style.cursor = "";
@@ -2812,7 +2836,7 @@ passive: !1
 if (pinch && e.touches.length >= 2) {
 e.preventDefault();
 const [mx, my] = mid(e.touches), k = Math.max(K_MIN, Math.min(K_MAX, pinch.k * dist(e.touches) / pinch.d));
-return st.k = k, st.x = mx - pinch.cx * k, st.y = my - pinch.cy * k, void apply();
+return st.k = k, st.x = mx - pinch.cx * k, st.y = my - pinch.cy * k, gesture(), void apply();
 }
 swipe && !swipe.shown && 1 === e.touches.length && Math.hypot(e.touches[0].clientX - swipe.x, e.touches[0].clientY - swipe.y) > 12 && (swipe.shown = !0,
 showHint("mapTouchHint"));
@@ -2910,7 +2934,7 @@ selected: null
 function fitLabels(z, svgSel, nodes, px, collide = !0) {
 const svg = $(svgSel), m = svg && svg.getScreenCTM();
 if (!m || !m.a) return;
-const ppu = m.a, scale = z.base.s * z.state.k * ppu, fs = px / scale, sw = .3 * px / scale, kept = [];
+const ppu = z.ppu = m.a, scale = z.base.s * z.state.k * ppu, fs = px / scale, sw = .3 * px / scale, kept = [];
 nodes.forEach(n => {
 n.style.fontSize = fs + "px", n.style.strokeWidth = sw + "px";
 }), collide && nodes.map((n, i) => ({
@@ -2928,21 +2952,36 @@ kept.some(q => r.x0 < q.x1 + 2 && q.x0 < r.x1 + 2 && r.y0 < q.y1 && q.y0 < r.y1)
 });
 }
 
-function syncKzScale() {
+// During a gesture (live): label size only, from the screen scale cached by the last fitLabels. No layout reads.
+// Keeping the labels' on-screen size constant is also what keeps layout cheap: measured with CPU ×4, hiding the
+// labels instead (no resize) made layout ~7× more expensive (1.9 s vs 0.24 s per 60-step wheel gesture).
+function sizeLabels(z, nodes, px) {
+if (!z.ppu) return;
+const scale = z.base.s * z.state.k * z.ppu, fs = px / scale + "px", sw = .3 * px / scale + "px";
+nodes.forEach(n => {
+n.style.fontSize = fs, n.style.strokeWidth = sw;
+});
+}
+
+function syncKzScale(live) {
+// pan without zoom: labels and markers keep their size, only the split clip follows
+if (live && zKz.liveK === zKz.state.k) return void (S.split && $("#clipRect") && setSplit(splitPos));
+zKz.liveK = live ? zKz.state.k : null;
 const u = zKz.base.s * zKz.state.k;
-fitLabels(zKz, "#svgKz", $$("#lLabels text"), 11.5), fitLabels(zKz, "#svgKz", $$("#lSplit text"), 11.5, !1);
+live ? sizeLabels(zKz, $$("#lLabels text,#lSplit text"), 11.5) : (fitLabels(zKz, "#svgKz", $$("#lLabels text"), 11.5),
+fitLabels(zKz, "#svgKz", $$("#lSplit text"), 11.5, !1));
 const ms = 1 / u;
 $$("#lCamps g,#lRevolts g").forEach(n => {
 const [x, y] = n.dataset.at.split(",");
 n.setAttribute("transform", `translate(${x} ${y}) scale(${ms})`);
-}), fitHits("#svgKz", "#lCamps .mhit,#lRevolts .mhit"), S.split && $("#clipRect") && setSplit(splitPos);
+}), live || fitHits("#svgKz", "#lCamps .mhit,#lRevolts .mhit"), S.split && $("#clipRect") && setSplit(splitPos);
 }
 
 function periodName(p) {
 return t("1926" === p ? "gridUnitOkrug" : "gridUnitOblast");
 }
 
-zKz.setOnChange(() => syncKzScale());
+zKz.setOnChange((k, b, live) => syncKzScale(live));
 
 // Refit labels whenever a map changes size: window resize, or a hidden tab becoming visible.
 "function" == typeof ResizeObserver && [ [ "#svgKz", () => syncKzScale() ], [ "#svgW", () => worldMap.ready && syncWScale() ], [ "#svgS", () => schoolsMap.ready && syncSScale() ] ].forEach(([sel, f]) => {
@@ -3453,7 +3492,7 @@ if (this.ready) return;
 this.ready = !0;
 const M = WORLD.meta;
 zW = makeZoom("#svgW", "#gW", [ M.minx, M.miny, M.maxx, M.maxy ], VBW.w, VBW.h, 12), 
-zW.setOnChange(() => syncWScale()), drawWorldBase(), renderWorld(), $("#wIn").addEventListener("click", () => zW.zoom(1.25)), 
+zW.setOnChange((k, b, live) => syncWScale(live)), drawWorldBase(), renderWorld(), $("#wIn").addEventListener("click", () => zW.zoom(1.25)), 
 $("#wOut").addEventListener("click", () => zW.zoom(1 / 1.25)), $("#wRst").addEventListener("click", () => {
 WS.scope = "region" === WS.scope ? "world" : "region", $("#wRst").textContent = "region" === WS.scope ? t("worldWhole") : t("worldToRegion"), 
 renderWorld();
@@ -3461,7 +3500,9 @@ renderWorld();
 }
 };
 
-function syncWScale() {
+function syncWScale(live) {
+if (live && zW.liveK === zW.state.k) return;
+zW.liveK = live ? zW.state.k : null;
 const u = zW.base.s * zW.state.k;
 $$("#wNode g").forEach(n => {
 const [x, y] = n.dataset.at.split(",");
@@ -3470,7 +3511,7 @@ n.setAttribute("transform", `translate(${x} ${y}) scale(${1 / u})`);
 const hideLbl = "flows" === WS.layer && "world" === WS.scope;
 $$("#wLbl text").forEach(t => {
 t.style.display = hideLbl && "1" !== t.dataset.keep ? "none" : "", "1" === t.dataset.keep && (t.dataset.pri = 1e9);
-}), fitLabels(zW, "#svgW", $$("#wLbl text"), 10.5);
+}), live ? sizeLabels(zW, $$("#wLbl text"), 10.5) : fitLabels(zW, "#svgW", $$("#wLbl text"), 10.5);
 }
 
 function drawWorldBase() {
@@ -3691,16 +3732,18 @@ const schoolsMap = {
 ready: !1,
 ensure() {
 this.ready || (this.ready = !0, zS = makeZoom("#svgS", "#gS", KZ_BBOX, VBS.w, VBS.h), 
-zS.setOnChange(() => syncSScale()), $("#sIn").addEventListener("click", () => zS.zoom(1.25)), $("#sOut").addEventListener("click", () => zS.zoom(1 / 1.25)), $("#sRst").addEventListener("click", () => zS.reset()), renderSchoolCards(), renderSchoolMap());
+zS.setOnChange((k, b, live) => syncSScale(live)), $("#sIn").addEventListener("click", () => zS.zoom(1.25)), $("#sOut").addEventListener("click", () => zS.zoom(1 / 1.25)), $("#sRst").addEventListener("click", () => zS.reset()), renderSchoolCards(), renderSchoolMap());
 }
 };
 
-function syncSScale() {
+function syncSScale(live) {
+if (live && zS.liveK === zS.state.k) return;
+zS.liveK = live ? zS.state.k : null;
 const u = zS.base.s * zS.state.k;
-fitLabels(zS, "#svgS", $$("#sLbl text"), 11), $$("#sMark g").forEach(n => {
+live ? sizeLabels(zS, $$("#sLbl text"), 11) : fitLabels(zS, "#svgS", $$("#sLbl text"), 11), $$("#sMark g").forEach(n => {
 const [x, y] = n.dataset.at.split(",");
 n.setAttribute("transform", `translate(${x} ${y}) scale(${1 / u})`);
-}), fitHits("#svgS", "#sMark .mhit");
+}), live || fitHits("#svgS", "#sMark .mhit");
 }
 
 function renderSchoolCards() {

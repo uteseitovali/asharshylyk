@@ -173,6 +173,12 @@ section.view.on{display:block}
 .region.dim{opacity:.2}
 .region.hi{stroke:var(--gold2);stroke-width:2.2}
 .region.sel{stroke:var(--gold2);stroke-width:2.6}
+/* while the map is being zoomed or dragged: no hover filter, no transitions, no blur or glow over it */
+.gesturing svg>g{pointer-events:none}
+.gesturing .region,.gesturing .ctry{transition:none}
+.gesturing .region:hover{filter:none}
+.gesturing .divider,.gesturing .divider::after{box-shadow:none}
+.map-gesture .hdr{backdrop-filter:none}
 .lbl{font-size:8px;fill:#fff;paint-order:stroke;stroke:rgba(8,12,22,.88);stroke-width:2.4px;stroke-linejoin:round;pointer-events:none;text-anchor:middle;font-weight:600}
 .lbl.lbl-hide{display:none}
 .off{display:none}
@@ -802,7 +808,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
-<script src="/data.js?v=43"></script>
-<script src="/app.js?v=43"></script>
+<script src="/data.js?v=47"></script>
+<script src="/app.js?v=47"></script>
 </body>
 </html>
