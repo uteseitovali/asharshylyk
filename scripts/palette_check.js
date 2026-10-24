@@ -4,7 +4,8 @@
 //  2. region border vs every fill (border colour = map background, so the same number), reported;
 //  3. neighbouring classes stay distinguishable for normal vision, protanopia and deuteranopia:
 //     CIE76 dE >= 8 (Machado, Oliveira & Fernandes 2009, severity 1.0, applied in linear RGB);
-//  4. marks (camps, uprisings, labels) differ from every scale colour (dE >= 10, all three visions).
+//  4. marks (camps, uprisings, labels) differ from every scale colour (dE >= 10, all three visions);
+//  5. world map: land lighter than sea; flows, famine marks and the Kazakhstan outline >= 3:1 on land, sea and the KZ fill.
 // --gen prints proposed ramps generated in OKLCH (used once to build PALETTE; kept for reproducibility).
 const fs = require("fs");
 const path = require("path");
@@ -107,6 +108,18 @@ for (const theme of ["light", "dark"]) {
     const ok = m >= 10; ok || fails++;
     console.log(`mark ${mk} ${c}: min dE to any scale colour (3 visions) = ${m.toFixed(1)}${ok ? "" : " ✗"}`);
   }
+  // world map: land lighter than sea; flows, famine marks and the Kazakhstan outline readable on land, sea and the KZ fill
+  const Wd = T.world, lighter = lum(Wd.land) > lum(Wd.sea);
+  lighter || fails++;
+  console.log(`world: land ${Wd.land} vs sea ${Wd.sea}: contrast ${contrast(Wd.land, Wd.sea).toFixed(2)}, land lighter: ${lighter ? "yes" : "no ✗"}`);
+  for (const k of ["abroad", "soviet", "famineKz", "famineOther", "famineNon", "kzLine"]) {
+    const m = Math.min(...[Wd.land, Wd.sea, Wd.kzFill].map(b => contrast(Wd[k], b))), ok = m >= 3;
+    ok || fails++;
+    console.log(`world ${k} ${Wd[k]}: min contrast with land / sea / KZ fill = ${m.toFixed(2)}${ok ? "" : " ✗"}`);
+  }
+  const fl = Math.min(...["normal", "protan", "deutan"].map(k => dE(Wd.abroad, Wd.soviet, k))), kzf = dE(Wd.kzFill, Wd.land, "normal");
+  (fl >= 10 && kzf >= 5) || fails++;
+  console.log(`world flows abroad vs soviet: min dE (3 visions) = ${fl.toFixed(1)}; KZ fill vs land dE = ${kzf.toFixed(1)}${fl >= 10 && kzf >= 5 ? "" : " ✗"}`);
   console.log(`no data: hatch pattern (${T.noData.line} lines on ${T.noData.bg}); contrast of lines with background ${contrast(T.noData.line, bg).toFixed(2)}`);
 }
 console.log(fails ? `\nFAIL: ${fails} check(s)` : "\nOK: all palette checks pass");

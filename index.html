@@ -15,7 +15,6 @@
   --neon:#38bdf8; --violet:#8b7cf0; --good:#1baf7a;
   --no-data:#39415a;
   --s26:#2a78d6; --s39:#eb6834;
-  --land:#243252; --land-line:#3c4d72; --ocean:#0c1424;
   --shadow:0 20px 60px rgba(0,0,0,.5);
   --r:12px;
   color-scheme:dark;
@@ -27,7 +26,6 @@
   --carmine:#a5211f; --carmine2:#c9433f; --gold:#a3620a; --gold2:#c9860f;
   --neon:#0d7ba4; --violet:#6a58c9; --good:#12764f;
   --no-data:#d8d2c2;
-  --land:#e3dcc9; --land-line:#b9ae91; --ocean:#f7f4ec;
   --shadow:0 16px 44px rgba(60,45,10,.16);
   color-scheme:light;
 }
@@ -185,8 +183,12 @@ section.view.on{display:block}
 .camp{fill:none;stroke:var(--mark-camp);stroke-width:1.3;vector-effect:non-scaling-stroke}
 .campdot{fill:var(--mark-camp);stroke:#3a2400;stroke-width:.4}
 .revolt{fill:var(--mark-revolt);stroke:#fff;stroke-width:.35;opacity:.92}
-.grat{fill:none;stroke:var(--line);stroke-width:.5;vector-effect:non-scaling-stroke}
-.ctry{fill:var(--land);stroke:var(--land-line);stroke-width:.7;vector-effect:non-scaling-stroke;transition:fill .2s}
+.grat{fill:none;stroke:var(--grat);stroke-width:.6;vector-effect:non-scaling-stroke}
+.ctry{fill:var(--land);stroke:var(--land-line);stroke-width:.6;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.kzassr{fill:var(--kz-fill);stroke:var(--kz-line);stroke-width:1.5;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.lake{fill:var(--ocean);stroke:var(--land-line);stroke-width:.5;vector-effect:non-scaling-stroke}
+.kkalp{fill:none;stroke:var(--kz-line);stroke-width:1.1;stroke-dasharray:4 3;vector-effect:non-scaling-stroke}
+.flowhalo{fill:none;stroke:var(--land);stroke-opacity:.9;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .ocean{fill:var(--ocean)}
 .flow{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .flowhit{fill:none;stroke:transparent;stroke-width:9;cursor:pointer;vector-effect:non-scaling-stroke}
@@ -582,6 +584,8 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
             <rect id="wOcean" class="ocean" x="-3" y="-1.6" width="6" height="3.2"></rect>
             <g id="wGrat"></g>
             <g id="wCtry"></g>
+            <g id="wKz"></g>
+            <g id="wLake"></g>
             <g id="wFlow"></g>
             <g id="wNode"></g>
             <g id="wLbl"></g>
@@ -600,7 +604,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
     </div>
     <div class="stats" id="statsW" style="margin-top:12px"></div>
     <div class="card pad" style="margin-top:12px">
-      <p class="note" data-i18n="noteProjection">Проекция Equal Earth (равновеликая), центральный меридиан 65° в.д. Равновеликая проекция выбрана намеренно: она не искажает соотношение площадей, поэтому сравнение территорий на карте корректно. Границы стран — современные (Natural Earth, 110 м), приведены как географическая привязка, а не как политическая карта 1930-х годов.</p>
+      <p class="note" data-i18n="noteProjection">Региональный вид: равновеликая коническая проекция Альберса, центральный меридиан 65° в. д., стандартные параллели 28° и 58° с. ш. Вид «Весь мир»: равновеликая проекция Equal Earth с тем же центральным меридианом. Обе проекции сохраняют соотношение площадей, поэтому территории на карте можно сравнивать. Границы стран современные (Natural Earth 1:50m, для всего мира 1:110m) и служат географической привязкой, а не политической картой 1930-х годов. Контур Казахстана (Казахская АССР, с 1936 г. Казахская ССР) получен объединением 12 областей нашей сетки 1939 г. и, как и сама сетка, является реконструкцией. Пунктиром обведена Республика Каракалпакстан в современных границах (geoBoundaries): это приблизительная привязка. Арал показан в границах до 1960-х гг.</p>
     </div>
   </div>
 </div></section>
@@ -807,7 +811,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
-<script src="/data.js?v=49"></script>
-<script src="/app.js?v=49"></script>
+<script src="/data.js?v=50"></script>
+<script src="/app.js?v=50"></script>
 </body>
 </html>

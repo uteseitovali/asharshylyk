@@ -23,6 +23,20 @@ diverge: {
 neg: [ "#502b01", "#744207", "#985b1a" ],
 mid: "#868686",
 pos: [ "#476e9f", "#184f90", "#033469" ]
+},
+// world map: basemap (land lighter than sea), Kazakhstan outline, flows and famine marks
+world: {
+sea: "#d9e3e8",
+land: "#fbf8f1",
+landLine: "#b3a98f",
+grat: "#c3cfd5",
+kzFill: "#f3dcd4",
+kzLine: "#9b2f2f",
+abroad: "#c2410c",
+soviet: "#0369a1",
+famineKz: "#b91c1c",
+famineOther: "#a35208",
+famineNon: "#5f6878"
 }
 },
 dark: {
@@ -42,6 +56,19 @@ diverge: {
 neg: [ "#facea9", "#eba25f", "#ca7e31" ],
 mid: "#747474",
 pos: [ "#6795cf", "#89b7f3", "#c0dafc" ]
+},
+world: {
+sea: "#0a1120",
+land: "#1e2a42",
+landLine: "#3d4c6c",
+grat: "#18233a",
+kzFill: "#3d2834",
+kzLine: "#ec7373",
+abroad: "#f07a45",
+soviet: "#38bdf8",
+famineKz: "#f05a5a",
+famineOther: "#f59e0b",
+famineNon: "#a3adbf"
 }
 },
 marks: {
@@ -49,14 +76,7 @@ camp: "#f0b429",
 revolt: "#a8283a",
 outline: "#ffffff"
 },
-// world map (not scale colours) and the three historians' lenses
-world: {
-abroad: "#eb6834",
-soviet: "#38bdf8",
-famineKz: "#c9403f",
-famineOther: "#d97706",
-famineNon: "#7d8598"
-},
+// the three historians' lenses
 lens: {
 cameron: "#e05252",
 pianciola: "#8b7cf0",
@@ -216,7 +236,7 @@ kvReturned: "Вернулись позднее",
 kvPermanent: "Безвозвратно",
 kvAbroadStayed: "Остались за границей",
 noteFlowsDiscuss: "Разбивка по конкретным направлениям — дискуссионная оценка. С. Кэмерон прямо называет точный подсчёт по странам открытым исследовательским вопросом.",
-noteProjection: "Проекция Equal Earth (равновеликая), центральный меридиан 65° в.д. Равновеликая проекция выбрана намеренно: она не искажает соотношение площадей, поэтому сравнение территорий на карте корректно. Границы стран — современные (Natural Earth, 110 м), приведены как географическая привязка, а не как политическая карта 1930-х годов.",
+noteProjection: "Региональный вид: равновеликая коническая проекция Альберса, центральный меридиан 65° в. д., стандартные параллели 28° и 58° с. ш. Вид «Весь мир»: равновеликая проекция Equal Earth с тем же центральным меридианом. Обе проекции сохраняют соотношение площадей, поэтому территории на карте можно сравнивать. Границы стран современные (Natural Earth 1:50m, для всего мира 1:110m) и служат географической привязкой, а не политической картой 1930-х годов. Контур Казахстана (Казахская АССР, с 1936 г. Казахская ССР) получен объединением 12 областей нашей сетки 1939 г. и, как и сама сетка, является реконструкцией. Пунктиром обведена Республика Каракалпакстан в современных границах (geoBoundaries): это приблизительная привязка. Арал показан в границах до 1960-х гг.",
 schoolsHeading: "Три линзы на одну катастрофу",
 schoolsIntro: "Историки расходятся не в том, был ли голод, а в том, что считать его механизмом. Выберите школу, и карта подсветит регионы, которые оказываются в центре именно её объяснения. Это и есть смысл историографического раздела: одни и те же данные, разные вопросы к ним, разная география ответа.",
 chooseSchool: "Выберите школу",
@@ -292,7 +312,8 @@ aiSub: "Модель работает прямо в браузере: данны
 aiOffline: "Офлайн-режим",
 exportPngTitle: "Скачать карту (PNG)",
 pngCredit: "Картография коллапса · HGIS-атлас Ашаршылыка, 1926–1939",
-pngSrcWorld: "Карта мира, проекция Equal Earth. Направления и масштабы откочёвок — оценки историографии (дискуссионные); масштабы голодов — оценки разных авторов.",
+pngSrcWorld: "Карта региона, проекция Альберса (равновеликая коническая), центральный меридиан 65° в. д. Подложка: Natural Earth 1:50m; Арал в границах до 1960-х гг.; контур Казахстана по 12 областям 1939 г. Направления и масштабы откочёвок: оценки историографии (дискуссионные); масштабы голодов: оценки разных авторов.",
+pngSrcWorldWhole: "Карта мира, проекция Equal Earth, центральный меридиан 65° в. д. Подложка: Natural Earth 1:110m; контур Казахстана по 12 областям 1939 г. Направления и масштабы откочёвок: оценки историографии (дискуссионные); масштабы голодов: оценки разных авторов.",
 toastPngFailed: "Не удалось сохранить карту в PNG",
 mapPhoneHint: "Для полной работы с картой удобнее ноутбук или планшет",
 aiDisclaimer: "Ответы справочные, основаны на материалах атласа; сверяйтесь с первоисточниками.",
@@ -388,6 +409,9 @@ famineDeathShare: "погибших от населения региона",
 famineVictims: "Жертвы:",
 faminePop: "население",
 kzAssrLabel: "Казахская АССР",
+legendKzOutline: "Казахстан: контур 12 областей 1939 г.",
+legendKarakalpak: "Каракалпакстан (совр. границы, приблизительно)",
+legendAral: "Арал в границах до 1960-х гг.",
 tipUprising: "восстание",
 tipUprisingYear: "год. Одно из более чем 370 выступлений 1929–1931 гг. (Т. Омарбеков).",
 worldToRegion: "К региону",
@@ -538,7 +562,7 @@ kvReturned: "Returned later",
 kvPermanent: "Never returned",
 kvAbroadStayed: "Stayed abroad",
 noteFlowsDiscuss: "The breakdown by specific destination is a debated estimate. S. Cameron explicitly calls an exact count by country an open research question.",
-noteProjection: "Equal Earth projection (equal-area), central meridian 65°E. An equal-area projection was chosen deliberately: it does not distort area ratios, so comparing territories on the map is valid. Country borders are modern (Natural Earth, 110m) and serve as geographic reference, not a political map of the 1930s.",
+noteProjection: "Regional view: Albers equal-area conic projection, central meridian 65°E, standard parallels 28°N and 58°N. Whole-world view: Equal Earth equal-area projection with the same central meridian. Both projections preserve area ratios, so territories on the map can be compared. Country borders are modern (Natural Earth 1:50m; 1:110m for the whole world) and serve as a geographic reference, not as a political map of the 1930s. The outline of Kazakhstan (the Kazak ASSR, the Kazakh SSR from 1936) is the union of the 12 oblasts of our 1939 grid and, like the grid itself, is a reconstruction. The dashed line marks the Republic of Karakalpakstan within its modern borders (geoBoundaries), as an approximate reference. The Aral Sea is shown within its shoreline before the 1960s.",
 schoolsHeading: "Three lenses on one catastrophe",
 schoolsIntro: "Historians disagree not about whether the famine happened, but about what should count as its mechanism. Choose a school, and the map will highlight the regions central to that particular explanation. That is the point of this section: the same data, different questions asked of it, a different geography of the answer.",
 chooseSchool: "Choose a school",
@@ -614,7 +638,8 @@ aiSub: "The model runs right in your browser: nothing is sent anywhere",
 aiOffline: "Offline mode",
 exportPngTitle: "Download map (PNG)",
 pngCredit: "Cartography of Collapse · an HGIS atlas of Asharshylyk, 1926–1939",
-pngSrcWorld: "World map, Equal Earth projection. Migration destinations and sizes are historiographic estimates (debated); famine figures are estimates by different authors.",
+pngSrcWorld: "Regional map, Albers equal-area conic projection, central meridian 65°E. Basemap: Natural Earth 1:50m; the Aral Sea within its shoreline before the 1960s; the outline of Kazakhstan from the 12 oblasts of 1939. Migration destinations and sizes are historiographic estimates (debated); famine figures are estimates by different authors.",
+pngSrcWorldWhole: "World map, Equal Earth projection, central meridian 65°E. Basemap: Natural Earth 1:110m; the outline of Kazakhstan from the 12 oblasts of 1939. Migration destinations and sizes are historiographic estimates (debated); famine figures are estimates by different authors.",
 toastPngFailed: "Could not save the map as PNG",
 mapPhoneHint: "The map is easier to work with on a laptop or tablet",
 aiDisclaimer: "Answers are for reference, based on the atlas materials; check them against the primary sources.",
@@ -710,6 +735,9 @@ famineDeathShare: "of the region’s population died",
 famineVictims: "Deaths:",
 faminePop: "population",
 kzAssrLabel: "Kazak ASSR",
+legendKzOutline: "Kazakhstan: outline of the 12 oblasts of 1939",
+legendKarakalpak: "Karakalpakstan (modern borders, approximate)",
+legendAral: "Aral Sea before the 1960s",
 tipUprising: "uprising",
 tipUprisingYear: ". One of more than 370 uprisings of 1929–1931 (T. Omarbekov).",
 worldToRegion: "To region",
@@ -860,7 +888,7 @@ kvReturned: "Кейін оралғандар",
 kvPermanent: "Қайтпай кеткендер",
 kvAbroadStayed: "Шетелде қалғандар",
 noteFlowsDiscuss: "Нақты бағыттар бойынша бөліну — пікірталастық баға. С. Кэмерон елдер бойынша дәл санақты ашық зерттеу мәселесі деп тікелей атайды.",
-noteProjection: "Equal Earth проекциясы (тең аумақты), орталық меридиан 65° ш.б. Тең аумақты проекция әдейі таңдалды: ол аудандар арақатынасын бұрмаламайды, сондықтан картадағы аумақтарды салыстыру дұрыс болады. Мемлекет шекаралары — қазіргі заманғы (Natural Earth, 110 м), олар саяси карта емес, тек географиялық бағдар ретінде берілген.",
+noteProjection: "Аймақтық көрініс: Альберстің тең аумақты конустық проекциясы, орталық меридиан 65° ш. б., стандартты параллельдер 28° және 58° с. е. «Бүкіл әлем» көрінісі: орталық меридианы сондай Equal Earth тең аумақты проекциясы. Екі проекция да аудандар арақатынасын сақтайды, сондықтан картадағы аумақтарды салыстыруға болады. Мемлекет шекаралары қазіргі (Natural Earth 1:50m, бүкіл әлем үшін 1:110m), олар 1930-жылдардың саяси картасы емес, географиялық бағдар ғана. Қазақстан контуры (Қазақ АКСР-і, 1936 жылдан Қазақ КСР-і) біздің 1939 жылғы торымыздағы 12 облысты біріктіру арқылы алынды және тордың өзі сияқты реконструкция болып табылады. Пунктирмен Қарақалпақстан Республикасы қазіргі шекарасында (geoBoundaries) белгіленген: бұл шамамен алынған бағдар. Арал теңізі 1960-жылдарға дейінгі шекарасында көрсетілген.",
 schoolsHeading: "Бір апатқа үш көзқарас",
 schoolsIntro: "Тарихшылардың пікірі ашаршылық болды ма деген мәселеде емес, оның механизмі не деген мәселеде алшақтайды. Мектепті таңдаңыз, карта сол түсініктеменің орталығындағы аймақтарды бөліп көрсетеді. Тарихнама бөлімінің мәні осында: бірдей деректер, оларға қойылған әртүрлі сұрақтар, жауаптың әртүрлі географиясы.",
 chooseSchool: "Мектепті таңдаңыз",
@@ -936,7 +964,8 @@ aiSub: "Модель тікелей браузерде жұмыс істейді
 aiOffline: "Офлайн режим",
 exportPngTitle: "Картаны жүктеу (PNG)",
 pngCredit: "Күйреу картографиясы · Ашаршылықтың HGIS-атласы, 1926–1939",
-pngSrcWorld: "Әлем картасы, Equal Earth проекциясы. Көші-қон бағыттары мен ауқымы — тарихнамалық бағалар (пікірталастық); ашаршылықтар ауқымы — әртүрлі авторлардың бағалары.",
+pngSrcWorld: "Аймақ картасы, Альберс проекциясы (тең аумақты конустық), орталық меридиан 65° ш. б. Негіз: Natural Earth 1:50m; Арал 1960-жылдарға дейінгі шекарасында; Қазақстан контуры 1939 жылғы 12 облыс бойынша. Көші-қон бағыттары мен ауқымы: тарихнамалық бағалар (пікірталастық); ашаршылықтар ауқымы: әртүрлі авторлардың бағалары.",
+pngSrcWorldWhole: "Әлем картасы, Equal Earth проекциясы, орталық меридиан 65° ш. б. Негіз: Natural Earth 1:110m; Қазақстан контуры 1939 жылғы 12 облыс бойынша. Көші-қон бағыттары мен ауқымы: тарихнамалық бағалар (пікірталастық); ашаршылықтар ауқымы: әртүрлі авторлардың бағалары.",
 toastPngFailed: "Картаны PNG ретінде сақтау мүмкін болмады",
 mapPhoneHint: "Картамен толық жұмыс істеу үшін ноутбук немесе планшет ыңғайлырақ",
 aiDisclaimer: "Жауаптар анықтамалық, атлас материалдарына негізделген; бастапқы дереккөздермен салыстырыңыз.",
@@ -1032,6 +1061,9 @@ famineDeathShare: "аймақ халқынан қаза болғандар",
 famineVictims: "Құрбандар:",
 faminePop: "халық",
 kzAssrLabel: "Қазақ АКСР-і",
+legendKzOutline: "Қазақстан: 1939 жылғы 12 облыс контуры",
+legendKarakalpak: "Қарақалпақстан (қазіргі шекара, шамамен)",
+legendAral: "Арал 1960-жылдарға дейін",
 tipUprising: "көтеріліс",
 tipUprisingYear: " жыл. 1929–1931 жж. 370-тен астам толқулардың бірі (Т. Омарбеков).",
 worldToRegion: "Аймаққа",
@@ -2331,6 +2363,18 @@ l0: l0
 };
 })();
 
+// Albers equal-area conic for given parameters (degrees); the world map's regional view uses the parameters
+// stored with its basemap (scripts/build_world.js projects the basemap with the same formula).
+function albersFor({lon0: lon0, p1: p1, p2: p2, p0: p0}) {
+const n = (Math.sin(p1 * D2R) + Math.sin(p2 * D2R)) / 2, C = Math.cos(p1 * D2R) ** 2 + 2 * n * Math.sin(p1 * D2R), r0 = Math.sqrt(C - 2 * n * Math.sin(p0 * D2R)) / n;
+return (lon, lat) => {
+const r = Math.sqrt(Math.max(0, C - 2 * n * Math.sin(lat * D2R))) / n, th = n * (lon - lon0) * D2R;
+return [ r * Math.sin(th), -(r0 - r * Math.cos(th)) ];
+};
+}
+
+const ALBW = albersFor(WORLD.region.proj);
+
 function albers(lon, lat) {
 const {n: n, C: C, r0: r0, l0: l0} = ALB, r = Math.sqrt(Math.max(0, C - 2 * n * Math.sin(lat * D2R))) / n, th = n * (lon * D2R - l0);
 return [ r * Math.sin(th), -(r0 - r * Math.cos(th)) ];
@@ -2367,15 +2411,6 @@ d += (i ? "L" : "M") + x.toFixed(4) + " " + y.toFixed(4);
 }
 d += "Z";
 }), d;
-}
-
-function ringsToPath(rings) {
-let d = "";
-for (const ring of rings) {
-for (let i = 0; i < ring.length; i++) d += (i ? "L" : "M") + ring[i][0] + " " + ring[i][1];
-d += "Z";
-}
-return d;
 }
 
 function polyArea(ring) {
@@ -2475,10 +2510,13 @@ defs || (defs = el("defs"), svg.insertBefore(defs, svg.firstChild)), defs.append
 // Marker colours as CSS variables, so CSS rules, legend dots and SVG marks read the same PALETTE values.
 function applyPaletteVars() {
 const r = document.documentElement.style;
-r.setProperty("--mark-camp", PALETTE.marks.camp), r.setProperty("--mark-revolt", PALETTE.marks.revolt),
-r.setProperty("--flow-abroad", PALETTE.world.abroad), r.setProperty("--flow-soviet", PALETTE.world.soviet),
-r.setProperty("--famine-kz", PALETTE.world.famineKz), r.setProperty("--famine-other", PALETTE.world.famineOther),
-r.setProperty("--famine-non", PALETTE.world.famineNon), r.setProperty("--nodata-line", pal().noData.line);
+r.setProperty("--mark-camp", PALETTE.marks.camp), r.setProperty("--mark-revolt", PALETTE.marks.revolt);
+const w = pal().world;
+r.setProperty("--flow-abroad", w.abroad), r.setProperty("--flow-soviet", w.soviet),
+r.setProperty("--famine-kz", w.famineKz), r.setProperty("--famine-other", w.famineOther),
+r.setProperty("--famine-non", w.famineNon), r.setProperty("--nodata-line", pal().noData.line),
+r.setProperty("--ocean", w.sea), r.setProperty("--land", w.land), r.setProperty("--land-line", w.landLine),
+r.setProperty("--grat", w.grat), r.setProperty("--kz-fill", w.kzFill), r.setProperty("--kz-line", w.kzLine);
 }
 
 // "no data" is a hatch pattern (defs from ensureNoData), never a scale or background colour
@@ -2743,7 +2781,8 @@ document.documentElement.setAttribute("data-theme", light ? "dark" : "light"), s
 
 // Scales are per theme: re-colour the maps (and the hatch pattern) after a theme change.
 function applyTheme() {
-applyPaletteVars(), renderKz(), S.split && renderSplit(), "undefined" != typeof zS && zS && renderSchoolMap();
+applyPaletteVars(), renderKz(), S.split && renderSplit(), "undefined" != typeof zS && zS && renderSchoolMap(),
+worldMap.ready && (drawWorldBase(), renderWorld(!0));
 }
 
 const tipEl = $("#tip");
@@ -2785,15 +2824,18 @@ $("#drawer").classList.remove("on"), $("#ov").classList.remove("on");
 const NARROW = matchMedia("(max-width:700px)");
 
 function makeZoom(svgSel, gSel, fitBox, vbW, vbH, pad = 26) {
-const svg = $(svgSel), g = $(gSel), [x0, y0, x1, y1] = fitBox, s = Math.min((vbW - 2 * pad) / (x1 - x0), (vbH - 2 * pad) / (y1 - y0)), base = {
-s: s,
-tx: (vbW - (x1 - x0) * s) / 2 - x0 * s,
-ty: (vbH - (y1 - y0) * s) / 2 - y0 * s
-}, st = {
+const svg = $(svgSel), g = $(gSel), base = {}, box = [], st = {
 k: 1,
 x: 0,
 y: 0
-}, K_MIN = 1, K_MAX = 8, DRAG_PX = 4, box = [ base.tx + x0 * s, base.ty + y0 * s, base.tx + x1 * s, base.ty + y1 * s ];
+}, K_MIN = 1, K_MAX = 8, DRAG_PX = 4;
+// fit a map bbox into the viewBox (also when the world map switches between its two projections)
+function fit([x0, y0, x1, y1]) {
+const s = Math.min((vbW - 2 * pad) / (x1 - x0), (vbH - 2 * pad) / (y1 - y0));
+base.s = s, base.tx = (vbW - (x1 - x0) * s) / 2 - x0 * s, base.ty = (vbH - (y1 - y0) * s) / 2 - y0 * s,
+box.splice(0, 4, base.tx + x0 * s, base.ty + y0 * s, base.tx + x1 * s, base.ty + y1 * s);
+}
+fit(fitBox);
 let onChange = null, live = !1, raf = 0, settle = null;
 const stage = svg.closest(".stage") || svg.parentNode;
 // A gesture step (wheel, drag, pinch) only moves the group; the change handler then runs at most once per frame
@@ -2844,7 +2886,7 @@ st.x = px - (px - st.x) * r, st.y = py - (py - st.y) * r, st.k = k, apply(anim);
 apply();
 // Narrow screens: the SVG box takes exactly the aspect ratio of the map's own bbox plus padding, so at the
 // initial view the map fills the width with no empty bands ("slice" only trims the empty viewBox margins).
-const AR = (box[2] - box[0] + 2 * pad) / (box[3] - box[1] + 2 * pad);
+let AR = (box[2] - box[0] + 2 * pad) / (box[3] - box[1] + 2 * pad);
 function fitSvgBox() {
 NARROW.matches ? (svg.style.height = "auto", svg.style.aspectRatio = String(AR), svg.setAttribute("preserveAspectRatio", "xMidYMid slice")) : (svg.style.height = svg.style.aspectRatio = "",
 svg.removeAttribute("preserveAspectRatio"));
@@ -2858,6 +2900,9 @@ aspect: AR,
 onReset: null,
 setOnChange(f) {
 onChange = f, f(st.k, base.s);
+},
+refit(b) {
+fit(b), AR = api.aspect = (box[2] - box[0] + 2 * pad) / (box[3] - box[1] + 2 * pad), fitSvgBox(), st.k = 1, st.x = 0, st.y = 0, apply();
 },
 proj: (x, y) => [ base.tx + x * base.s, base.ty + y * base.s ],
 reset(anim = !0) {
@@ -3619,18 +3664,19 @@ soviet: !0
 
 let zW = null;
 
+// Two views, each with its own basemap and projection (scripts/build_world.js): the region in Albers (1:50m) and
+// the whole world in Equal Earth (1:110m). wProj() puts flow and famine points into the current view.
+const wView = () => WORLD[WS.scope], wProj = (lon, lat) => "world" === WS.scope ? equalEarth(lon, lat) : ALBW(lon, lat);
+
 const worldMap = {
 ready: !1,
 ensure() {
-if (this.ready) return;
-this.ready = !0;
-const M = WORLD.meta;
-zW = makeZoom("#svgW", "#gW", [ M.minx, M.miny, M.maxx, M.maxy ], VBW.w, VBW.h, 12), 
+this.ready || (this.ready = !0, zW = makeZoom("#svgW", "#gW", wView().bbox, VBW.w, VBW.h, 12), 
 zW.setOnChange((k, b, live) => syncWScale(live)), drawWorldBase(), renderWorld(), $("#wIn").addEventListener("click", () => zW.zoom(1.25)), 
 $("#wOut").addEventListener("click", () => zW.zoom(1 / 1.25)), $("#wRst").addEventListener("click", () => {
 WS.scope = "region" === WS.scope ? "world" : "region", $("#wRst").textContent = "region" === WS.scope ? t("worldWhole") : t("worldToRegion"), 
-renderWorld();
-}), $("#wRst").textContent = t("worldWhole");
+zW.refit(wView().bbox), drawWorldBase(), renderWorld();
+}), $("#wRst").textContent = t("worldWhole"));
 }
 };
 
@@ -3648,18 +3694,23 @@ t.style.display = hideLbl && "1" !== t.dataset.keep ? "none" : "", "1" === t.dat
 }), live ? sizeLabels(zW, $$("#wLbl text"), 10.5) : fitLabels(zW, "#svgW", $$("#wLbl text"), 10.5);
 }
 
+// Basemap paths are relative integer coordinates (q units per projection unit), drawn in groups scaled by 1/q.
 function drawWorldBase() {
-const gr = $("#wGrat"), ct = $("#wCtry");
-gr.innerHTML = "", ct.innerHTML = "";
-const defs = el("defs");
-[ [ "arrA", PALETTE.world.abroad ], [ "arrS", PALETTE.world.soviet ] ].forEach(([id, col]) => {
+const V = wView(), w = pal().world, gr = $("#wGrat"), ct = $("#wCtry"), kz = $("#wKz"), lk = $("#wLake");
+[ gr, ct, kz, lk ].forEach(g => {
+g.innerHTML = "", g.setAttribute("transform", `scale(${1 / V.q})`);
+}), $("#wDefs") && $("#wDefs").remove();
+const defs = el("defs", {
+id: "wDefs"
+});
+[ [ "arrA", w.abroad ], [ "arrS", w.soviet ] ].forEach(([id, col]) => {
 const mk = el("marker", {
 id: id,
 viewBox: "0 0 10 10",
 refX: 8,
 refY: 5,
-markerWidth: 4.2,
-markerHeight: 4.2,
+markerWidth: NARROW.matches ? 3 : 4.2,
+markerHeight: NARROW.matches ? 3 : 4.2,
 orient: "auto-start-reverse",
 markerUnits: "strokeWidth"
 });
@@ -3667,58 +3718,48 @@ mk.appendChild(el("path", {
 d: "M0 1 L9 5 L0 9 Z",
 fill: col
 })), defs.appendChild(mk);
-}), $("#svgW").appendChild(defs), WORLD.graticule.forEach(line => {
-let d = "";
-line.forEach((p, i) => d += (i ? "L" : "M") + p[0] + " " + p[1]), gr.appendChild(el("path", {
-d: d,
+}), $("#svgW").appendChild(defs), $("#wOcean").style.display = V.sphere ? "none" : "", V.sphere && gr.appendChild(el("path", {
+d: V.sphere,
+class: "ocean"
+})), gr.appendChild(el("path", {
+d: V.grat,
 class: "grat"
-}));
-}), WORLD.countries.forEach(c => {
-const p = el("path", {
-d: ringsToPath(c.r),
+})), V.countries.forEach(c => ct.appendChild(el("path", {
+d: c.d,
 class: "ctry",
 "data-n": c.n,
 "data-nodrag": "1"
-});
-ct.appendChild(p);
-});
+}))), kz.appendChild(el("path", {
+d: V.kz,
+class: "kzassr",
+"data-nodrag": "1"
+})), V.lakes.forEach(l => lk.appendChild(el("path", {
+d: l.d,
+class: "lake",
+"data-n": l.n
+}))), V.kk && lk.appendChild(el("path", {
+d: V.kk,
+class: "kkalp"
+}));
 }
 
-const CTRY_ALIAS = {
-xinjiang: "China",
-mongolia: "Mongolia",
-afghanistan: "Afghanistan",
-iran: "Iran",
-turkey: "Turkey",
-uzbek: "Uzbekistan",
-kirghiz: "Kyrgyzstan",
-turkmen: "Turkmenistan",
-karakalpak: "Uzbekistan",
-westsib: "Russia",
-volga: "Russia",
-urals: "Russia"
-};
-
-function renderWorld() {
+function renderWorld(keepView) {
 const fl = $("#wFlow"), nd = $("#wNode"), lb = $("#wLbl");
-fl.innerHTML = "", nd.innerHTML = "", lb.innerHTML = "", $$("#wCtry .ctry").forEach(p => p.style.fill = ""), 
-$("#worldCtl").style.display = "flows" === WS.layer ? "" : "none";
+fl.innerHTML = "", nd.innerHTML = "", lb.innerHTML = "", $("#worldCtl").style.display = "flows" === WS.layer ? "" : "none";
 const pts = "flows" === WS.layer ? renderFlows(fl, nd, lb) : renderFamines(fl, nd, lb);
-if (syncWScale(), renderWorldLegend(), renderWorldStats(), "region" === WS.scope && pts && pts.length) {
+if (syncWScale(), renderWorldLegend(), renderWorldStats(), !keepView) if ("region" === WS.scope && pts && pts.length) {
 const b = pts.reduce((a, p) => [ Math.min(a[0], p[0]), Math.min(a[1], p[1]), Math.max(a[2], p[0]), Math.max(a[3], p[1]) ], [ 1 / 0, 1 / 0, -1 / 0, -1 / 0 ]);
-zW.focus(b, !0, 1.5);
+zW.focus(b, !0, NARROW.matches ? 1.75 : 1.5);
 } else zW.reset();
 }
 
 function renderFlows(fl, nd, lb) {
 $("#worldHint").textContent = t("hintFlows");
-const kzC = equalEarth(68, 48), pts = [ kzC ], kzPath = $$("#wCtry .ctry").find(p => "Kazakhstan" === p.dataset.n);
-kzPath && (kzPath.style.fill = "var(--carmine)");
-const shown = FLOWS.filter(f => WS.kinds[f.kind]), maxV = Math.max(...FLOWS.map(f => f.hi));
+const kzC = wProj(68, 48), pts = [ kzC ], wc = pal().world, shown = FLOWS.filter(f => WS.kinds[f.kind]), maxV = Math.max(...FLOWS.map(f => f.hi));
 shown.forEach((f, i) => {
-const L = tr(f), a = equalEarth(f.from[0], f.from[1]), b = equalEarth(f.lon, f.lat);
+const L = tr(f), a = wProj(f.from[0], f.from[1]), b = wProj(f.lon, f.lat);
 pts.push(a, b);
-const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, cx = mx - dy / len * len * .18, cy = my + dx / len * len * .18, d = `M${a[0].toFixed(4)} ${a[1].toFixed(4)} Q${cx.toFixed(4)} ${cy.toFixed(4)} ${b[0].toFixed(4)} ${b[1].toFixed(4)}`, col = "abroad" === f.kind ? PALETTE.world.abroad : PALETTE.world.soviet, w = 1.6 + f.hi / maxV * 6.4, path = el("path", {
+const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, cx = mx - dy / len * len * .18, cy = my + dx / len * len * .18, d = `M${a[0].toFixed(4)} ${a[1].toFixed(4)} Q${cx.toFixed(4)} ${cy.toFixed(4)} ${b[0].toFixed(4)} ${b[1].toFixed(4)}`, col = "abroad" === f.kind ? wc.abroad : wc.soviet, w = 1.6 + f.hi / maxV * 6.4, path = el("path", {
 d: d,
 class: "flow",
 stroke: col,
@@ -3728,7 +3769,12 @@ stroke: col,
 "marker-end": `url(#${"abroad" === f.kind ? "arrA" : "arrS"})`,
 "stroke-dasharray": f.dashed ? "6 5" : null
 });
-fl.appendChild(path);
+fl.appendChild(el("path", {
+d: d,
+class: "flowhalo",
+"stroke-width": w + 3,
+"stroke-dasharray": f.dashed ? "6 5" : null
+})), fl.appendChild(path);
 const hit = el("path", {
 d: d,
 class: "flowhit",
@@ -3796,9 +3842,9 @@ function renderFamines(fl, nd, lb) {
 $("#worldHint").textContent = t("hintFamines");
 const maxL = Math.max(...FAMINES.filter(f => null != f.loss).map(f => f.loss)), pts = [];
 return FAMINES.forEach(f => {
-const L = tr(f), [x, y] = equalEarth(f.lon, f.lat);
+const L = tr(f), [x, y] = wProj(f.lon, f.lat);
 pts.push([ x, y ]);
-const r = null == f.loss ? 8 : 3 + 13 * Math.sqrt(f.loss / maxL), col = f.hero ? PALETTE.world.famineKz : f.other ? PALETTE.world.famineNon : PALETTE.world.famineOther, g = el("g", {
+const r = null == f.loss ? 8 : 3 + 13 * Math.sqrt(f.loss / maxL), col = f.hero ? pal().world.famineKz : f.other ? pal().world.famineNon : pal().world.famineOther, g = el("g", {
 "data-at": `${x},${y}`,
 class: "node",
 "data-nodrag": "1"
@@ -3832,7 +3878,8 @@ lb.appendChild(t2);
 }
 
 function renderWorldLegend() {
-$("#wLegend").innerHTML = "flows" === WS.layer ? `<span style="display:inline-flex;align-items:center;gap:6px"><i style="width:22px;height:3px;background:var(--flow-abroad);border-radius:2px"></i>${esc(t("legendFlowsAbroad"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:22px;height:3px;background:var(--flow-soviet);border-radius:2px"></i>${esc(t("legendFlowsSoviet"))}</span>\n       <span style="margin-left:14px;color:var(--ink-mute)">${esc(t("legendFlowsThickness"))}</span>` : `<span style="display:inline-flex;align-items:center;gap:6px"><i style="width:11px;height:11px;border-radius:50%;background:var(--famine-kz)"></i>${esc(t("legendFamineKz"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:11px;height:11px;border-radius:50%;background:var(--famine-other)"></i>${esc(t("legendFamineOther"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:11px;height:11px;border-radius:50%;background:var(--famine-non)"></i>${esc(t("legendFamineNon"))}</span>`;
+const base = `<span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:16px;height:11px;background:var(--kz-fill);border:1.5px solid var(--kz-line);border-radius:2px"></i>${esc(t("legendKzOutline"))}</span>` + ("region" === WS.scope ? `\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:16px;height:0;border-top:1.5px dashed var(--kz-line)"></i>${esc(t("legendKarakalpak"))}</span>\n       <span style="margin-left:14px;color:var(--ink-mute)">${esc(t("legendAral"))}</span>` : "");
+$("#wLegend").innerHTML = ("flows" === WS.layer ? `<span style="display:inline-flex;align-items:center;gap:6px"><i style="width:22px;height:3px;background:var(--flow-abroad);border-radius:2px"></i>${esc(t("legendFlowsAbroad"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:22px;height:3px;background:var(--flow-soviet);border-radius:2px"></i>${esc(t("legendFlowsSoviet"))}</span>\n       <span style="margin-left:14px;color:var(--ink-mute)">${esc(t("legendFlowsThickness"))}</span>` : `<span style="display:inline-flex;align-items:center;gap:6px"><i style="width:11px;height:11px;border-radius:50%;background:var(--famine-kz)"></i>${esc(t("legendFamineKz"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:11px;height:11px;border-radius:50%;background:var(--famine-other)"></i>${esc(t("legendFamineOther"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:11px;height:11px;border-radius:50%;background:var(--famine-non)"></i>${esc(t("legendFamineNon"))}</span>`) + base;
 }
 
 function renderWorldStats() {
@@ -4838,6 +4885,15 @@ if (bg && "rgba(0, 0, 0, 0)" !== bg && "transparent" !== bg) {
 const b = n.getBoundingClientRect();
 ctx.fillStyle = bg, ctx.fillRect(ox + b.left - base.left, oy + b.top - base.top, b.width, b.height);
 }
+// borders of legend swatches (outlined area, dashed line)
+if ("I" === n.tagName) {
+const b = n.getBoundingClientRect(), x = ox + b.left - base.left, y = oy + b.top - base.top, X = x + b.width, Y = y + b.height;
+[ [ "Top", x, y, X, y ], [ "Bottom", x, Y, X, Y ], [ "Left", x, y, x, Y ], [ "Right", X, y, X, Y ] ].forEach(([side, x1, y1, x2, y2]) => {
+const w = parseFloat(cs[`border${side}Width`]), st = cs[`border${side}Style`];
+!w || "none" === st || (ctx.strokeStyle = cs[`border${side}Color`], ctx.lineWidth = w, ctx.setLineDash("dashed" === st ? [ 4, 3 ] : []),
+ctx.beginPath(), ctx.moveTo(x1, y1), ctx.lineTo(x2, y2), ctx.stroke());
+}), ctx.setLineDash([]);
+}
 } else if (n.textContent.trim()) {
 const p = n.parentElement, cs = getComputedStyle(p), rg = document.createRange();
 rg.selectNodeContents(n);
@@ -4848,7 +4904,7 @@ ctx.fillText(n.textContent.replace(/\s+/g, " ").trim(), ox + b.left - base.left,
 }
 async function exportMapPng(kind) {
 try {
-const isKz = "kz" === kind, svg = $(isKz ? "#svgKz" : "#svgW"), legend = $(isKz ? "#legend" : "#wLegend"), stage = svg.closest(".stage"), sc = getComputedStyle(stage), body = getComputedStyle(document.body), m = svgWithInlineStyles(svg), W = Math.round(m.w), pad = 14, scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1)), font = body.fontFamily, title = isKz ? $("#kzTitle").textContent.trim() : `${t("tabWorld")} · ${($("#segWorld .on") || {}).textContent || ""}`.trim(), source = isKz ? $("#kzSrc").textContent.trim() : t("pngSrcWorld"), meas = document.createElement("canvas").getContext("2d");
+const isKz = "kz" === kind, svg = $(isKz ? "#svgKz" : "#svgW"), legend = $(isKz ? "#legend" : "#wLegend"), stage = svg.closest(".stage"), sc = getComputedStyle(stage), body = getComputedStyle(document.body), m = svgWithInlineStyles(svg), W = Math.round(m.w), pad = 14, scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1)), font = body.fontFamily, title = isKz ? $("#kzTitle").textContent.trim() : `${t("tabWorld")} · ${($("#segWorld .on") || {}).textContent || ""}`.trim(), source = isKz ? $("#kzSrc").textContent.trim() : t("world" === WS.scope ? "pngSrcWorldWhole" : "pngSrcWorld"), meas = document.createElement("canvas").getContext("2d");
 meas.font = `12px ${font}`;
 const srcLines = wrapText(meas, source, W - 2 * pad), lb = legend.getBoundingClientRect(), titleH = 34, legendH = Math.ceil(lb.height) + 16, srcH = 16 * srcLines.length + 8, creditH = 22, H = titleH + Math.round(m.h) + legendH + srcH + creditH, cv = document.createElement("canvas");
 cv.width = W * scale, cv.height = H * scale;
