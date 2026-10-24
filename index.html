@@ -482,8 +482,8 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
     <div class="card pad">
       <p class="sec-t" data-i18n="secGrid">Административная сетка</p>
       <div class="seg" id="segPeriod">
-        <button data-p="1926" class="on" data-i18n="seg1926">1926 — 8 округов</button>
-        <button data-p="1939" data-i18n="seg1939">1939 — 12 областей</button>
+        <button data-p="1926" class="on" data-i18n="seg1926">1926 · 8 округов</button>
+        <button data-p="1939" data-i18n="seg1939">1939 · 12 областей</button>
       </div>
       <p class="hint" id="periodHint"></p>
     </div>
@@ -509,13 +509,13 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
         <button class="btn gold" id="bStory" style="justify-content:center" data-i18n="btnStoryStart">▶ Режим защиты: 6 шагов исследования</button>
         <button class="btn" id="bSplit" style="justify-content:center" data-i18n="btnSplit">⇔ Сплит 1926 / 1939</button>
       </div>
-      <p class="hint" data-i18n="hintStory">StoryMap ведёт по шести шагам исследования — от степи 1926 года до методологического вывода о MAUP.</p>
+      <p class="hint" data-i18n="hintStory">StoryMap проводит через шесть шагов исследования: от степи 1926 года до методологического вывода о MAUP.</p>
     </div>
   </aside>
 
   <div>
     <div class="stage">
-      <details class="methnote"><summary data-i18n="methNote">Методологическая помета: границы — опорная реконструкция на современной геометрии; карта для сравнительного анализа, не архивный кадастр</summary><p data-i18n="methNoteMore">Контуры округов 1926 г. и областей 1939 г. собраны из современной административной геометрии (geoBoundaries) под исторические единицы; реальные границы отличались. Демографические показатели хранятся отдельно от геометрии; областные значения — рабочий набор атласа, сверка с опубликованными итогами переписей ведётся.</p></details>
+      <details class="methnote"><summary data-i18n="methNote">Методологическая помета: границы представляют опорную реконструкцию на современной геометрии; карта служит для сравнительного анализа и не является архивным кадастром</summary><p data-i18n="methNoteMore">Контуры округов 1926 г. и областей 1939 г. собраны из современной административной геометрии (geoBoundaries) под исторические единицы; реальные границы отличались. Демографические показатели хранятся отдельно от геометрии; областные значения взяты из рабочего набора атласа, сверка с опубликованными итогами переписей ведётся.</p></details>
       <div class="maptitle"><span id="kzTitle"></span><button class="btn sm gold" id="bDefense" data-i18n="btnDefenseShort">▶ Режим защиты</button></div>
       <div class="mapwrap" id="wrapKz">
         <div class="splitbar" id="splitBar"><div class="sidelbl" id="lblL" data-i18n="sidelblL">1926 · округа</div><div class="sidelbl" id="lblR" data-i18n="sidelblR">1939 · области</div></div>
@@ -565,7 +565,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
         <label class="chip on" data-f="abroad"><input type="checkbox" checked><span class="dot" style="background:var(--flow-abroad)"></span><span data-i18n="dirAbroad">За границу</span></label>
         <label class="chip on" data-f="soviet"><input type="checkbox" checked><span class="dot" style="background:var(--flow-soviet)"></span><span data-i18n="dirSoviet">В республики СССР</span></label>
       </div>
-      <p class="hint" data-i18n="hintFlows">Толщина линии — оценочный масштаб потока. Наведите на линию или точку, чтобы увидеть диапазон и пояснение.</p>
+      <p class="hint" data-i18n="hintFlows">Толщина линии показывает оценочный масштаб потока. Наведите на линию или точку, чтобы увидеть диапазон и пояснение.</p>
     </div>
     <div class="card pad">
       <p class="sec-t" data-i18n="secFlowSummary">Итог откочёвок</p>
@@ -573,7 +573,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
       <div class="kv"><span data-i18n="kvReturned">Вернулись позднее</span><b>≈ 454 000</b></div>
       <div class="kv"><span data-i18n="kvPermanent">Безвозвратно</span><b>≈ 676 000</b></div>
       <div class="kv"><span data-i18n="kvAbroadStayed">Остались за границей</span><b>≈ 200 000</b></div>
-      <p class="note" style="margin-top:10px" data-i18n="noteFlowsDiscuss">Разбивка по конкретным направлениям — дискуссионная оценка. С. Кэмерон прямо называет точный подсчёт по странам открытым исследовательским вопросом.</p>
+      <p class="note" style="margin-top:10px" data-i18n="noteFlowsDiscuss">Разбивка по конкретным направлениям остаётся дискуссионной оценкой. С. Кэмерон прямо называет точный подсчёт по странам открытым исследовательским вопросом.</p>
     </div>
   </aside>
   <div>
@@ -613,7 +613,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <section class="view" id="v-schools">
   <div class="card pad" style="margin-bottom:14px">
     <h3 data-i18n="schoolsHeading">Три линзы на одну катастрофу</h3>
-    <p class="prose" style="margin:8px 0 0" data-i18n="schoolsIntro">Историки расходятся не в том, был ли голод, а в том, что считать его механизмом. Выберите школу — карта подсветит регионы, которые оказываются в центре именно её объяснения. Это и есть смысл историографического раздела: одни и те же данные, разные вопросы к ним, разная география ответа.</p>
+    <p class="prose" style="margin:8px 0 0" data-i18n="schoolsIntro">Историки расходятся не в том, был ли голод, а в том, что считать его механизмом. Выберите школу, и карта подсветит регионы, которые оказываются в центре именно её объяснения. Это и есть смысл историографического раздела: одни и те же данные, разные вопросы к ним, разная география ответа.</p>
   </div>
   <div class="schools" id="schools"></div>
   <div class="split">
@@ -654,12 +654,12 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
   <div class="card pad" style="margin-bottom:14px">
     <h3 data-i18n="dataHeading">Главный результат: сетка меняет вывод</h3>
     <div class="stats" style="margin-top:11px">
-      <div class="stat"><u><span data-i18n="statShiftSum">Суммарный сдвиг долей</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_maupCalc" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b style="color:var(--gold2)" data-num="42.46" data-dec="2">42,46</b><s data-i18n="statShiftUnit">процентных пункта</s></div>
-      <div class="stat"><u><span data-i18n="statDissim">Индекс несходства</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_maupCalc" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b style="color:var(--carmine2)" data-num="21.2" data-dec="1" data-suffix=" %">21,2 %</b><s data-i18n="statDissimSub">пятая часть распределения</s></div>
-      <div class="stat"><u><span data-i18n="statIntersections">Пары «округ — область» (8 × 12)</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_inter96" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b>96</b><s data-i18n="statIntersectionsSub">из них 37 с ненулевой площадью пересечения</s></div>
-      <div class="stat"><u><span data-i18n="statCoverage">Сетки покрывают одну и ту же территорию</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели — площадная интерполяция между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_coverage" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b style="color:var(--good)">100 %</b><s data-i18n="statCoverageSub">площадь 8 округов = площадь 12 областей</s></div>
+      <div class="stat"><u><span data-i18n="statShiftSum">Суммарный сдвиг долей</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели, полученное площадной интерполяцией между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_maupCalc" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b style="color:var(--gold2)" data-num="42.46" data-dec="2">42,46</b><s data-i18n="statShiftUnit">процентных пункта</s></div>
+      <div class="stat"><u><span data-i18n="statDissim">Индекс несходства</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели, полученное площадной интерполяцией между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_maupCalc" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b style="color:var(--carmine2)" data-num="21.2" data-dec="1" data-suffix=" %">21,2 %</b><s data-i18n="statDissimSub">пятая часть распределения</s></div>
+      <div class="stat"><u><span data-i18n="statIntersections">Пары «округ — область» (8 × 12)</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели, полученное площадной интерполяцией между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_inter96" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b>96</b><s data-i18n="statIntersectionsSub">из них 37 с ненулевой площадью пересечения</s></div>
+      <div class="stat"><u><span data-i18n="statCoverage">Сетки покрывают одну и ту же территорию</span><span class="lvl lvl-model" tabindex="0" data-i18n="lvl_model" data-i18n-title="lvlTip_model" title="Уровень: расчётное значение модели, полученное площадной интерполяцией между сетками 1926 и 1939 гг.">модель</span><button class="info-i" type="button" data-info="info_coverage" data-i18n-aria="infoLabel" data-i18n-title="infoLabel" aria-label="Источник и способ расчёта" title="Источник и способ расчёта">i</button></u><b style="color:var(--good)">100 %</b><s data-i18n="statCoverageSub">площадь 8 округов = площадь 12 областей</s></div>
     </div>
-    <p class="prose" style="margin:13px 0 0" data-i18n="dataIntro">Одна территория, одни люди, две административные сетки. При переносе казахского населения 1926 года с сетки 8 округов на сетку 12 областей суммарный сдвиг долей составляет 42,46 п.п., а индекс несходства — 21,2 %. Практический смысл: если бы исследователь работал только с сеткой 1939 года, он получил бы другую карту эпицентра катастрофы, чем работая с сеткой 1926 года. Граница определяет вывод — это и есть Modifiable Areal Unit Problem.</p>
+    <p class="prose" style="margin:13px 0 0" data-i18n="dataIntro">Одна территория, одни люди, две административные сетки. При переносе казахского населения 1926 года с сетки 8 округов на сетку 12 областей суммарный сдвиг долей составляет 42,46 п.п., а индекс несходства равен 21,2 %. Практический смысл: если бы исследователь работал только с сеткой 1939 года, он получил бы другую карту эпицентра катастрофы, чем работая с сеткой 1926 года. Граница определяет вывод: это и есть Modifiable Areal Unit Problem.</p>
   </div>
 
   <div class="split">
@@ -676,9 +676,9 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
       <div class="card pad">
         <p class="sec-t" data-i18n="exportHeading">Экспорт данных</p>
         <div style="display:flex;flex-direction:column;gap:6px">
-          <button class="btn sm" id="eCsv" data-i18n="exportCsv">CSV — таблица показателей</button>
-          <button class="btn sm" id="eGeo" data-i18n="exportGeo">GeoJSON — границы и атрибуты</button>
-          <button class="btn sm" id="eMaup" data-i18n="exportMaup">CSV — матрица пересечений</button>
+          <button class="btn sm" id="eCsv" data-i18n="exportCsv">CSV · таблица показателей</button>
+          <button class="btn sm" id="eGeo" data-i18n="exportGeo">GeoJSON · границы и атрибуты</button>
+          <button class="btn sm" id="eMaup" data-i18n="exportMaup">CSV · матрица пересечений</button>
         </div>
         <p class="hint" data-i18n="exportHint">Все данные открыты. GeoJSON открывается в QGIS, ArcGIS и geojson.io.</p>
       </div>
@@ -693,7 +693,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
           </div>
         </div>
         <div class="tw"><table id="tbl"><thead></thead><tbody></tbody></table></div>
-        <p class="hint" data-i18n="tableHint">Нажмите на заголовок столбца для сортировки, на строку — чтобы открыть карточку региона.</p>
+        <p class="hint" data-i18n="tableHint">Нажмите на заголовок столбца для сортировки, на строку, чтобы открыть карточку региона.</p>
       </div>
       <div class="card pad" style="margin-top:14px">
         <h3 style="margin:0 0 6px" data-i18n="logHeading">Журнал изменений данных</h3>
@@ -710,7 +710,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
   <div class="card qcard" id="qStart">
     <div class="qtag" data-i18n="quizTag">Для школьников</div>
     <h3 style="font-size:20px;margin-bottom:8px" data-i18n="quizHeading">Проверьте, что вы поняли</h3>
-    <p class="prose" data-i18n="quizIntro">Квиз по материалам сайта: карта, данные переписей, историография и методология HGIS. После каждого ответа — объяснение со ссылкой на источник. В конце — разбор ошибок.</p>
+    <p class="prose" data-i18n="quizIntro">Квиз по материалам сайта: карта, данные переписей, историография и методология HGIS. После каждого ответа даётся объяснение со ссылкой на источник, а в конце показан разбор ошибок.</p>
     <div class="stats" style="margin:15px 0">
       <div class="stat"><u data-i18n="quizStatQuestions">Вопросов</u><b id="qCount">0</b></div>
       <div class="stat"><u data-i18n="quizStatFormat">Формат</u><b style="font-size:15px" data-i18n="quizStatFormatVal">4 варианта</b><s data-i18n="quizStatFormatSub">один верный</s></div>
@@ -753,7 +753,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
     <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
       <div>
         <h3 style="margin-bottom:3px" data-i18n="aiHeading">ИИ-ассистент по материалам сайта</h3>
-        <p style="margin:0;font-size:12.3px;color:var(--ink-mute)" data-i18n="aiSub">Модель работает прямо в браузере — данные никуда не отправляются</p>
+        <p style="margin:0;font-size:12.3px;color:var(--ink-mute)" data-i18n="aiSub">Модель работает прямо в браузере: данные никуда не отправляются</p>
       </div>
       <div class="pill" id="aiPill"><i></i><span id="aiState" data-i18n="aiOffline">Офлайн-режим</span></div>
     </div>
@@ -811,7 +811,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
-<script src="/data.js?v=50"></script>
-<script src="/app.js?v=50"></script>
+<script src="/data.js?v=51"></script>
+<script src="/app.js?v=51"></script>
 </body>
 </html>

@@ -20,6 +20,11 @@ function extractQuiz(src) {
 const now = extractQuiz(fs.readFileSync(path.join(root, "app.js"), "utf8"));
 const old = extractQuiz(execSync(`git show ${ref}:app.js`, { cwd: root, encoding: "utf8", maxBuffer: 64 << 20 }));
 
+// Correct answers reworded later on purpose (Block G, fewer em dashes): reference text -> current text.
+const REWORDED = {
+  "В Казахстане была наибольшая ОТНОСИТЕЛЬНАЯ потеря — доля погибших от численности народа": "В Казахстане была наибольшая ОТНОСИТЕЛЬНАЯ потеря, то есть доля погибших от численности народа",
+  "Kazakhstan had the largest RELATIVE loss — the share of deaths relative to the size of the people": "Kazakhstan had the largest RELATIVE loss, that is, the share of deaths relative to the size of the people"
+};
 const problems = [];
 const num = s => { const m = String(s).replace(",", ".").match(/[\d.]+/); if (!m) return NaN; let v = parseFloat(m[0]); if (/тысяч|thousand|мың/.test(s)) v *= 1e3; if (/миллион|million/.test(s)) v *= 1e6; return v; };
 if (now.length !== old.length) problems.push(`question count ${old.length} -> ${now.length}`);
@@ -28,7 +33,7 @@ now.forEach((q, k) => {
   for (const l of LANGS) {
     if (!q[l] || q[l].a.length !== 4) { problems.push(`q${k + 1} ${l}: options`); continue; }
     const want = old[k][l].a[old[k].c], got = q[l].a[q.c];
-    if (want !== got) problems.push(`q${k + 1} ${l}: correct was «${want}», now «${got}»`);
+    if (want !== got && REWORDED[want] !== got) problems.push(`q${k + 1} ${l}: correct was «${want}», now «${got}»`);
     const nums = q[l].a.map(num);
     if (nums.every(v => !isNaN(v)) && nums.some((v, i) => i && v <= nums[i - 1])) problems.push(`q${k + 1} ${l}: numeric options not ascending`);
   }
