@@ -133,6 +133,7 @@ mapBasis_c2: "переписи 1926 и 1939 гг.",
 mapBasis_model: "модель: площадная интерполяция",
 mapUnits1926: "8 единиц",
 mapUnits1939: "12 единиц",
+mapProjKz: "Проекция: равновеликая коническая Альберса, центральный меридиан 68° в. д., стандартные параллели 45° и 53° с. ш.",
 mapSrcData: "Данные: рабочий набор атласа по переписям 1926 и 1939 гг., сверка с опубликованными итогами ведётся. Границы: реконструкция на геометрии geoBoundaries.",
 mapSrcModel: "Расчёт: площадная интерполяция по сеткам 1926 и 1939 гг., матрица 8 × 12: 96 пар «округ — область», из них 37 с ненулевой площадью пересечения. Границы: реконструкция на геометрии geoBoundaries.",
 lvl_census: "перепись",
@@ -459,6 +460,7 @@ mapBasis_c2: "1926 and 1939 censuses",
 mapBasis_model: "model: areal interpolation",
 mapUnits1926: "8 units",
 mapUnits1939: "12 units",
+mapProjKz: "Projection: Albers equal-area conic, central meridian 68°E, standard parallels 45°N and 53°N.",
 mapSrcData: "Data: the atlas’s working dataset based on the 1926 and 1939 censuses; cross-checking against the published results is in progress. Boundaries: reconstruction on geoBoundaries geometry.",
 mapSrcModel: "Calculation: areal interpolation between the 1926 and 1939 grids, an 8 × 12 matrix: 96 okrug–oblast pairs, 37 of them with a non-zero intersection area. Boundaries: reconstruction on geoBoundaries geometry.",
 lvl_census: "census",
@@ -785,6 +787,7 @@ mapBasis_c2: "1926 және 1939 жж. санақтар",
 mapBasis_model: "модель: ареалдық интерполяция",
 mapUnits1926: "8 бірлік",
 mapUnits1939: "12 бірлік",
+mapProjKz: "Проекция: Альберстің тең аумақты конустық проекциясы, орталық меридиан 68° ш. б., стандартты параллельдер 45° және 53° с. е.",
 mapSrcData: "Деректер: 1926 және 1939 жж. санақтар бойынша атластың жұмыс деректер жиынтығы, жарияланған қорытындылармен салыстыру жүргізілуде. Шекаралар: geoBoundaries геометриясына негізделген реконструкция.",
 mapSrcModel: "Есептеу: 1926 және 1939 жж. торлары бойынша ареалдық интерполяция, 8 × 12 матрицасы: «округ — облыс» 96 жұбы, оның 37-сінде қиылысу ауданы нөлден үлкен. Шекаралар: geoBoundaries геометриясына негізделген реконструкция.",
 lvl_census: "санақ",
@@ -2775,7 +2778,11 @@ const t = e.target.closest(".tab");
 t && showView(t.dataset.v);
 }), $("#bTheme").addEventListener("click", () => {
 const light = "light" === document.documentElement.getAttribute("data-theme");
-document.documentElement.setAttribute("data-theme", light ? "dark" : "light"), syncThemeBtn(), toast(t(light ? "toastThemeDark" : "toastThemeLight")), 
+document.documentElement.setAttribute("data-theme", light ? "dark" : "light"), syncThemeBtn(), toast(t(light ? "toastThemeDark" : "toastThemeLight"));
+try {
+localStorage.setItem("agln_theme", light ? "dark" : "light");
+} catch (e) {}
+
 "function" == typeof refreshCharts && refreshCharts(), applyTheme();
 });
 
@@ -3226,14 +3233,25 @@ const v = m.get(f.p);
 return null == v || isNaN(v);
 }) && add(`<i class="nodata-sw"></i><b>${esc(t("noDataLegend"))}</b>`), add(`<b style="margin-left:12px;color:var(--ink-soft)">${esc(m.label)}, ${esc(m.unit)}</b>`), add(`<b class="legend-prelim">(${esc(t("prelimNote"))})</b>`);
 const ti = $("#kzTitle"), sr = $("#kzSrc");
-ti && (ti.innerHTML = `<b>${esc(m.label)}</b> · ${esc(t("mapBasis_" + m.basis))} · ${esc(t("mapUnits" + per))}`), sr && (sr.textContent = t("model" === m.basis ? "mapSrcModel" : "mapSrcData"));
+ti && (ti.innerHTML = `<b>${esc(m.label)}</b> · ${esc(t("mapBasis_" + m.basis))} · ${esc(t("mapUnits" + per))}`), sr && (sr.textContent = t("model" === m.basis ? "mapSrcModel" : "mapSrcData") + " " + t("mapProjKz"));
 }
 
 // Evidence level of a figure, as in the paper: census fact / model value / historiographic estimate.
+// When every badge in a group of plaques has the same level, it is shown once, as a caption over the group.
+function groupLvl(box) {
+const b = [ ...box.querySelectorAll(":scope > .stat .lvl") ];
+if (b.length < 2 || new Set(b.map(x => x.className)).size > 1) return;
+const cap = document.createElement("p");
+cap.className = "stats-lvl", cap.appendChild(b[0].cloneNode(!0)), b.forEach(x => x.remove()), box.prepend(cap);
+}
 const lvl = kind => `<span class="lvl lvl-${kind}" tabindex="0" title="${esc(t("lvlTip_" + kind))}">${esc(t("lvl_" + kind))}</span>`, info = key => `<button class="info-i" type="button" data-info="${key}" aria-label="${esc(t("infoLabel"))}" title="${esc(t("infoLabel"))}">i</button>`;
 
 function renderStats(per, m) {
 const box = $("#statsKz");
+renderStatsHtml(box, per), groupLvl(box);
+}
+
+function renderStatsHtml(box, per) {
 if ("1926" === per) {
 // Republic-level 1926 census totals; okrug sums of the working dataset stay in the table and okrug cards.
 box.innerHTML = `\n      <div class="stat"><u>${esc(t("okrugsCount"))}</u><b>8</b><s>${esc(t("byOkrugsGrid"))}</s></div>\n      <div class="stat"><u>${esc(t("popRep1926"))}${lvl("census")}${info("info_popRep1926")}</u><b>≈${fmtD(6.2, 1)} ${"en" === LANG ? "million" : "млн"}</b><s>${esc(t("popRep1926Sub"))}</s></div>\n      <div class="stat"><u>${esc(t("kazRep1926"))}${lvl("census")}${info("info_kazRep1926")}</u><b>≈${fmtD(3.63, 2)} ${"en" === LANG ? "million" : "млн"}</b><s>${esc(t("kazRep1926Sub"))}</s></div>\n      <div class="stat"><u>${esc(t("livestockCount"))}${lvl("hist")}${info("info_livestock")}</u><b>≈ 40 ${"kz" === LANG ? "млн" : "en" === LANG ? "million" : "млн"}</b><s>${esc(t("toThousandKm"))}</s></div>`;
@@ -3500,7 +3518,7 @@ data: [ p.kazAbs, p.pop - p.kazAbs ],
 backgroundColor: [ css("--s26"), css("--no-data") ]
 } ]
 };
-rChart = new Chart(cv.getContext("2d"), {
+Chart.defaults.font.family = '"PT Sans", system-ui, sans-serif', rChart = new Chart(cv.getContext("2d"), {
 type: "bar",
 data: {
 labels: cfg.labels,
@@ -3747,6 +3765,8 @@ function renderWorld(keepView) {
 const fl = $("#wFlow"), nd = $("#wNode"), lb = $("#wLbl");
 fl.innerHTML = "", nd.innerHTML = "", lb.innerHTML = "", $("#worldCtl").style.display = "flows" === WS.layer ? "" : "none";
 const pts = "flows" === WS.layer ? renderFlows(fl, nd, lb) : renderFamines(fl, nd, lb);
+$("#wTitle").innerHTML = `<b>${esc(t("flows" === WS.layer ? "segFlows" : "segFamines"))}</b> · ${esc(t("lvl_hist"))}`,
+$("#wSrc").textContent = t("world" === WS.scope ? "pngSrcWorldWhole" : "pngSrcWorld");
 if (syncWScale(), renderWorldLegend(), renderWorldStats(), !keepView) if ("region" === WS.scope && pts && pts.length) {
 const b = pts.reduce((a, p) => [ Math.min(a[0], p[0]), Math.min(a[1], p[1]), Math.max(a[2], p[0]), Math.max(a[3], p[1]) ], [ 1 / 0, 1 / 0, -1 / 0, -1 / 0 ]);
 zW.focus(b, !0, NARROW.matches ? 1.75 : 1.5);
@@ -3884,6 +3904,10 @@ $("#wLegend").innerHTML = ("flows" === WS.layer ? `<span style="display:inline-f
 
 function renderWorldStats() {
 const box = $("#statsW");
+renderWorldStatsHtml(box), groupLvl(box);
+}
+
+function renderWorldStatsHtml(box) {
 if ("flows" === WS.layer) {
 const ab = FLOWS.filter(f => "abroad" === f.kind), sv = FLOWS.filter(f => "soviet" === f.kind), rng = a => `${a.reduce((s, f) => s + f.lo, 0)}–${a.reduce((s, f) => s + f.hi, 0)} ${t("flowRange")}`;
 box.innerHTML = `\n      <div class="stat"><u>${esc(t("abroadDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b>${ab.length}</b><s>≈${rng(ab)}</s></div>\n      <div class="stat"><u>${esc(t("sovietDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b>${sv.length}</b><s>≈${rng(sv)}</s></div>\n      <div class="stat"><u>${esc(t("biggestDest"))}${lvl("hist")}${info("info_flowsDest")}</u><b style="font-size:15px">${esc(tr(FLOWS[0]).short)}</b><s>≈100–200 ${t("flowRange")}</s></div>\n      <div class="stat"><u>${esc(t("returnedShare"))}${lvl("hist")}${info("info_returned")}</u><b>≈40 %</b><s>454 / 1130 ${t("flowRange")}</s></div>`;
@@ -4902,6 +4926,25 @@ ctx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`, c
 ctx.fillText(n.textContent.replace(/\s+/g, " ").trim(), ox + b.left - base.left, oy + b.top - base.top + b.height / 2);
 }
 }
+const PNG_FONTS = {};
+
+async function svgFontStyle() {
+const out = [];
+for (const w of [ 400, 700 ]) for (const sub of [ "latin", "cyrillic", "cyrillic-ext" ]) {
+const url = `/fonts/pt-sans-${sub}-${w}-normal.woff2`;
+if (!PNG_FONTS[url]) try {
+const b = new Uint8Array(await (await fetch(url)).arrayBuffer());
+let bin = "";
+for (let i = 0; i < b.length; i += 32768) bin += String.fromCharCode.apply(null, b.subarray(i, i + 32768));
+PNG_FONTS[url] = btoa(bin);
+} catch (e) {
+continue;
+}
+out.push(`@font-face{font-family:"PT Sans";font-weight:${w};src:url(data:font/woff2;base64,${PNG_FONTS[url]}) format("woff2")}`);
+}
+return out.join("");
+}
+
 async function exportMapPng(kind) {
 try {
 const isKz = "kz" === kind, svg = $(isKz ? "#svgKz" : "#svgW"), legend = $(isKz ? "#legend" : "#wLegend"), stage = svg.closest(".stage"), sc = getComputedStyle(stage), body = getComputedStyle(document.body), m = svgWithInlineStyles(svg), W = Math.round(m.w), pad = 14, scale = Math.min(2, Math.max(1, window.devicePixelRatio || 1)), font = body.fontFamily, title = isKz ? $("#kzTitle").textContent.trim() : `${t("tabWorld")} · ${($("#segWorld .on") || {}).textContent || ""}`.trim(), source = isKz ? $("#kzSrc").textContent.trim() : t("world" === WS.scope ? "pngSrcWorldWhole" : "pngSrcWorld"), meas = document.createElement("canvas").getContext("2d");
@@ -4912,9 +4955,9 @@ const ctx = cv.getContext("2d");
 ctx.scale(scale, scale), ctx.fillStyle = sc.backgroundColor || body.backgroundColor, ctx.fillRect(0, 0, W, H),
 ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--ink").trim() || "#000", ctx.font = `600 14px ${font}`, ctx.textBaseline = "middle",
 ctx.fillText(title, pad, titleH / 2);
-const img = new Image();
+const img = new Image(), fontCss = await svgFontStyle();
 await new Promise((ok, fail) => {
-img.onload = ok, img.onerror = fail, img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(m.text);
+img.onload = ok, img.onerror = fail, img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(m.text.replace(/^(<svg[^>]*>)/, `$1<style>${fontCss}</style>`));
 }), ctx.drawImage(img, 0, titleH, m.w, m.h), drawHtmlBlock(ctx, legend, pad, titleH + m.h + 8);
 const mute = getComputedStyle(document.documentElement).getPropertyValue("--ink-mute").trim() || "#777";
 ctx.fillStyle = mute, ctx.font = `12px ${font}`, ctx.textBaseline = "top", srcLines.forEach((l, i) => ctx.fillText(l, pad, titleH + m.h + legendH + 16 * i)),
