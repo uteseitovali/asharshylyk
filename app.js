@@ -1,5 +1,71 @@
 let LANG = "ru";
 
+// All map colours in one place: scales per theme, marks, world map, historians' lenses. Ramps were generated in
+// OKLCH (scripts/palette_check.js --gen) and are checked by the same script: every scale colour has contrast
+// >= 3:1 with the map background, neighbouring classes differ by dE >= 8 also under protanopia/deuteranopia,
+// marks and labels differ from every scale colour. Light theme: low = lighter, high = darker. Dark theme: low =
+// muted, high = light and saturated. Diverging scales: two hues around a neutral grey.
+const PALETTE = {
+light: {
+mapBg: "#fffdf8",
+border: "#fffdf8",
+label: "#ffffff",
+noData: {
+bg: "#fffdf8",
+line: "#867c62"
+},
+ramps: {
+blue: [ "#6693cd", "#457dc3", "#2667b4", "#0b529d", "#043f7c", "#032d5c" ],
+orange: [ "#c37d59", "#b56233", "#a34804", "#853a04", "#682c03", "#4c1e01" ],
+violet: [ "#9a82c5", "#8769b9", "#7451a9", "#603c93", "#4b2b76", "#361e57" ]
+},
+diverge: {
+neg: [ "#502b01", "#744207", "#985b1a" ],
+mid: "#868686",
+pos: [ "#476e9f", "#184f90", "#033469" ]
+}
+},
+dark: {
+mapBg: "#111a2d",
+border: "#111a2d",
+label: "#ffffff",
+noData: {
+bg: "#111a2d",
+line: "#7d8598"
+},
+ramps: {
+blue: [ "#63768f", "#718caf", "#7ea2d1", "#8cb9f3", "#add0fd", "#d4e6fe" ],
+orange: [ "#8b6d5e", "#aa7f69", "#c99175", "#e9a480", "#febc9b", "#feddcd" ],
+violet: [ "#786f8b", "#8f82aa", "#a795ca", "#bfa8eb", "#d6c1ff", "#e8dffd" ]
+},
+diverge: {
+neg: [ "#facea9", "#eba25f", "#ca7e31" ],
+mid: "#747474",
+pos: [ "#6795cf", "#89b7f3", "#c0dafc" ]
+}
+},
+marks: {
+camp: "#f0b429",
+revolt: "#a8283a",
+outline: "#ffffff"
+},
+// world map (not scale colours) and the three historians' lenses
+world: {
+abroad: "#eb6834",
+soviet: "#38bdf8",
+famineKz: "#c9403f",
+famineOther: "#d97706",
+famineNon: "#7d8598"
+},
+lens: {
+cameron: "#e05252",
+pianciola: "#8b7cf0",
+omarbekov: "#d97706"
+}
+};
+
+const RAMPS = PALETTE.light.ramps, RAMPS_DARK = PALETTE.dark.ramps, themeName = () => "light" === document.documentElement.getAttribute("data-theme") ? "light" : "dark", pal = () => PALETTE[themeName()], ramp = name => pal().ramps[name], diverge = () => pal().diverge;
+
 try {
 LANG = localStorage.getItem("agln_lang") || "ru";
 } catch (e) {}
@@ -128,6 +194,9 @@ contribNameAlizar: "Жагиппаров Ализар",
 contribNameAli: "Утесеитов Али",
 sidelblL: "1926 · округа",
 sidelblR: "1939 · области",
+splitTitle: "Доля казахов · 1926 (округа) и 1939 (области)",
+splitLegend: "Доля казахов, %: одна шкала для 1926 и 1939 гг.",
+noDataLegend: "нет данных",
 ariaMapKz: "Карта Казахстана",
 ariaMapWorld: "Карта мира",
 ariaMapSchools: "Карта историографических линз",
@@ -252,7 +321,7 @@ storyFinish: "Завершить",
 storyExit: "Выйти",
 storyStep: "Шаг",
 storyOf: "из",
-toastSplitHint: "Слева — сетка 8 округов 1926 г., справа — 12 областей 1939 г. Тяните разделитель.",
+toastSplitHint: "Доля казахов на одной шкале: слева — 8 округов 1926 г., справа — 12 областей 1939 г. Тяните разделитель.",
 toastThemeDark: "Тёмная тема",
 toastThemeLight: "Светлая тема",
 toastDownloaded: "Файл {n} сохранён",
@@ -447,6 +516,9 @@ contribNameAlizar: "Alizar Zhagipparov",
 contribNameAli: "Ali Uteseitov",
 sidelblL: "1926 · okrugs",
 sidelblR: "1939 · oblasts",
+splitTitle: "Kazakh share · 1926 (okrugs) and 1939 (oblasts)",
+splitLegend: "Kazakh share, %: one scale for 1926 and 1939",
+noDataLegend: "no data",
 ariaMapKz: "Map of Kazakhstan",
 ariaMapWorld: "World map",
 ariaMapSchools: "Map of historiographic lenses",
@@ -571,7 +643,7 @@ storyFinish: "Finish",
 storyExit: "Exit",
 storyStep: "Step",
 storyOf: "of",
-toastSplitHint: "Left — the 1926 grid of 8 okrugs, right — the 1939 grid of 12 oblasts. Drag the divider.",
+toastSplitHint: "Kazakh share on one scale: left — the 1926 grid of 8 okrugs, right — the 1939 grid of 12 oblasts. Drag the divider.",
 toastThemeDark: "Dark theme",
 toastThemeLight: "Light theme",
 toastDownloaded: "File {n} saved",
@@ -766,6 +838,9 @@ contribNameAlizar: "Жагиппаров Ализар",
 contribNameAli: "Утесеитов Али",
 sidelblL: "1926 · округтер",
 sidelblR: "1939 · облыстар",
+splitTitle: "Қазақтар үлесі · 1926 (округтер) және 1939 (облыстар)",
+splitLegend: "Қазақтар үлесі, %: 1926 және 1939 жж. үшін бір шкала",
+noDataLegend: "дерек жоқ",
 ariaMapKz: "Қазақстан картасы",
 ariaMapWorld: "Әлем картасы",
 ariaMapSchools: "Тарихнамалық көзқарастар картасы",
@@ -890,7 +965,7 @@ storyFinish: "Аяқтау",
 storyExit: "Шығу",
 storyStep: "Қадам",
 storyOf: "/",
-toastSplitHint: "Сол жақта — 1926 ж. 8 округтік тор, оң жақта — 1939 ж. 12 облыс. Бөлгішті сүйреңіз.",
+toastSplitHint: "Қазақтар үлесі бір шкалада: сол жақта — 1926 ж. 8 округтік тор, оң жақта — 1939 ж. 12 облыс. Бөлгішті сүйреңіз.",
 toastThemeDark: "Қараңғы тақырып",
 toastThemeLight: "Ашық тақырып",
 toastDownloaded: "{n} файлы сақталды",
@@ -1041,7 +1116,7 @@ toast(t("toastLangChanged"));
 const KZ = window.__KZ_HIST__, WORLD = window.__WORLD__, MAUP = window.__MAUP__, SCHOOLS = [ {
 id: "cameron",
 metric: "nomadic",
-color: "#e05252",
+color: PALETTE.lens.cameron,
 ru: {
 name: "Сара Кэмерон",
 work: "«The Hungry Steppe» (2018)",
@@ -1066,7 +1141,7 @@ detail: "Кэмерон қазақтардың астық тапшылығына
 }, {
 id: "pianciola",
 metric: "anomaly",
-color: "#8b7cf0",
+color: PALETTE.lens.pianciola,
 ru: {
 name: "Никколо Пьянчола",
 work: "Работы о колониальной иерархии (2001–2020)",
@@ -1091,7 +1166,7 @@ detail: "Пьянчола «аномальды өсімді» түсіндіре
 }, {
 id: "omarbekov",
 metric: "unrest",
-color: "#d97706",
+color: PALETTE.lens.omarbekov,
 ru: {
 name: "Талас Омарбеков",
 work: "Казахстанская национальная школа",
@@ -2362,15 +2437,6 @@ p.kazShare = p.kazakh_percent, p.pop = p.population_total, p.kazAbs = Math.round
 p.idx = i;
 });
 
-const RAMPS = {
-blue: [ "#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b" ],
-orange: [ "#fde3d4", "#f8bb9a", "#f28c5e", "#eb6834", "#d95926", "#a34018", "#6b290f" ],
-violet: [ "#e6e2fa", "#c7bff2", "#a89ae9", "#8b7cf0", "#6a58c9", "#4a3aa7", "#332878" ]
-}, DIVERGE = {
-neg: [ "#8c1f1f", "#b53232", "#d03b3b", "#e58080", "#f2c0c0" ],
-mid: "#e9e7e2",
-pos: [ "#c9dff8", "#9ec5f4", "#5598e7", "#2a78d6", "#184f95" ]
-};
 
 function quantileBreaks(vals, k) {
 const s = vals.slice().sort((a, b) => a - b), br = [];
@@ -2378,18 +2444,56 @@ for (let i = 1; i < k; i++) br.push(s[Math.floor(i * s.length / k)]);
 return br;
 }
 
+// Hatch pattern for "no data" in a map's <defs> (recreated on theme change: the line colour is per theme).
+function ensureNoData(svg) {
+if (!svg) return;
+const old = svg.querySelector("#noData");
+old && old.remove();
+const N = pal().noData, p = el("pattern", {
+id: "noData",
+patternUnits: "userSpaceOnUse",
+width: 6,
+height: 6,
+patternTransform: "rotate(45)"
+});
+p.appendChild(el("rect", {
+width: 6,
+height: 6,
+fill: N.bg
+})), p.appendChild(el("line", {
+x1: 0,
+y1: 0,
+x2: 0,
+y2: 6,
+stroke: N.line,
+"stroke-width": 2
+}));
+let defs = svg.querySelector("defs");
+defs || (defs = el("defs"), svg.insertBefore(defs, svg.firstChild)), defs.appendChild(p);
+}
+
+// Marker colours as CSS variables, so CSS rules, legend dots and SVG marks read the same PALETTE values.
+function applyPaletteVars() {
+const r = document.documentElement.style;
+r.setProperty("--mark-camp", PALETTE.marks.camp), r.setProperty("--mark-revolt", PALETTE.marks.revolt),
+r.setProperty("--flow-abroad", PALETTE.world.abroad), r.setProperty("--flow-soviet", PALETTE.world.soviet),
+r.setProperty("--famine-kz", PALETTE.world.famineKz), r.setProperty("--famine-other", PALETTE.world.famineOther),
+r.setProperty("--famine-non", PALETTE.world.famineNon), r.setProperty("--nodata-line", pal().noData.line);
+}
+
+// "no data" is a hatch pattern (defs from ensureNoData), never a scale or background colour
 function rampColor(v, breaks, ramp) {
-if (null == v || isNaN(v)) return "var(--no-data)";
+if (null == v || isNaN(v)) return "url(#noData)";
 let i = 0;
 for (;i < breaks.length && v >= breaks[i]; ) i++;
 return ramp[Math.min(i, ramp.length - 1)];
 }
 
 function divergeColor(v, max) {
-if (null == v || isNaN(v)) return "var(--no-data)";
-const t = Math.max(-1, Math.min(1, v / max));
-if (Math.abs(t) < .06) return DIVERGE.mid;
-const arr = t < 0 ? DIVERGE.neg : DIVERGE.pos, i = Math.min(arr.length - 1, Math.floor(Math.abs(t) * arr.length));
+if (null == v || isNaN(v)) return "url(#noData)";
+const t = Math.max(-1, Math.min(1, v / max)), D = diverge();
+if (Math.abs(t) < .06) return D.mid;
+const arr = t < 0 ? D.neg : D.pos, i = Math.min(arr.length - 1, Math.floor(Math.abs(t) * arr.length));
 return t < 0 ? arr[arr.length - 1 - i] : arr[i];
 }
 
@@ -2579,9 +2683,10 @@ hint: L.hint
 };
 }
 
-function metricColor(period, m, p) {
+// breaks: optional shared class breaks (compare mode uses one scale for 1926 and 1939)
+function metricColor(period, m, p, breaks) {
 const v = m.get(p);
-return m.diverge ? divergeColor(v, m.diverge) : rampColor(v, quantileBreaks(KZ[period].map(f => m.get(f.p)), RAMPS[m.ramp].length), RAMPS[m.ramp]);
+return m.diverge ? divergeColor(v, m.diverge) : rampColor(v, breaks || quantileBreaks(KZ[period].map(f => m.get(f.p)), ramp(m.ramp).length), ramp(m.ramp));
 }
 
 const $ = s => document.querySelector(s), $$ = s => Array.from(document.querySelectorAll(s)), SVG_TAGS = new Set([ "svg", "g", "path", "circle", "ellipse", "text", "tspan", "line", "rect", "polygon", "polyline", "defs", "clipPath", "marker", "use", "linearGradient", "radialGradient", "stop", "pattern", "mask", "filter", "image", "foreignObject" ]), el = (t, a = {}, kids = []) => {
@@ -2633,8 +2738,13 @@ t && showView(t.dataset.v);
 }), $("#bTheme").addEventListener("click", () => {
 const light = "light" === document.documentElement.getAttribute("data-theme");
 document.documentElement.setAttribute("data-theme", light ? "dark" : "light"), syncThemeBtn(), toast(t(light ? "toastThemeDark" : "toastThemeLight")), 
-"function" == typeof refreshCharts && refreshCharts();
+"function" == typeof refreshCharts && refreshCharts(), applyTheme();
 });
+
+// Scales are per theme: re-colour the maps (and the hatch pattern) after a theme change.
+function applyTheme() {
+applyPaletteVars(), renderKz(), S.split && renderSplit(), "undefined" != typeof zS && zS && renderSchoolMap();
+}
 
 const tipEl = $("#tip");
 
@@ -2942,7 +3052,9 @@ n: n,
 pri: +(n.dataset.pri || 0) - 1e-6 * i
 })).sort((a, b) => b.pri - a.pri).forEach(({n: n}) => {
 if (n.classList.remove("lbl-hide"), "none" === n.style.display || n.closest(".off")) return;
-const bb = n.getBBox(), sx = v => (z.state.x + z.state.k * (z.base.tx + z.base.s * v)) * ppu, sy = v => (z.state.y + z.state.k * (z.base.ty + z.base.s * v)) * ppu, r = {
+const bb = n.getBBox();
+n._hw = bb.width / 2;
+const sx = v => (z.state.x + z.state.k * (z.base.tx + z.base.s * v)) * ppu, sy = v => (z.state.y + z.state.k * (z.base.ty + z.base.s * v)) * ppu, r = {
 x0: sx(bb.x),
 x1: sx(bb.x + bb.width),
 y0: sy(bb.y),
@@ -2969,7 +3081,7 @@ if (live && zKz.liveK === zKz.state.k) return void (S.split && $("#clipRect") &&
 zKz.liveK = live ? zKz.state.k : null;
 const u = zKz.base.s * zKz.state.k;
 live ? sizeLabels(zKz, $$("#lLabels text,#lSplit text"), 11.5) : (fitLabels(zKz, "#svgKz", $$("#lLabels text"), 11.5),
-fitLabels(zKz, "#svgKz", $$("#lSplit text"), 11.5, !1));
+fitLabels(zKz, "#svgKz", $$("#lSplit text"), 11.5));
 const ms = 1 / u;
 $$("#lCamps g,#lRevolts g").forEach(n => {
 const [x, y] = n.dataset.at.split(",");
@@ -3023,12 +3135,14 @@ return "kz" === LANG ? SHORT_KZ_KZ[f.p.id] || pName(f.p).replace(/\s*(округ
 }
 
 function renderKz() {
+ensureNoData($("#svgKz"));
 const per = S.period, m = metricDef(per, S.metric), base = $("#lBase"), lbl = $("#lLabels");
+const br = S.split ? splitBreaks() : null;
 base.innerHTML = "", lbl.innerHTML = "", KZ[per].forEach(f => {
 const p = el("path", {
 d: f.d,
 class: "region",
-fill: metricColor(per, m, f.p),
+fill: metricColor(per, m, f.p, br),
 "data-id": f.p.id,
 "data-nodrag": "1"
 });
@@ -3047,7 +3161,7 @@ class: "lbl",
 "data-pri": ((f.b[2] - f.b[0]) * (f.b[3] - f.b[1])).toFixed(1)
 });
 t2.textContent = shortName(f), lbl.appendChild(t2);
-}), lbl.classList.toggle("off", !S.layers.labels), renderLegend(per, m), renderStats(per, m), 
+}), lbl.classList.toggle("off", !S.layers.labels), S.split ? renderSplitLegend() : renderLegend(per, m), renderStats(per, m), 
 $("#metricHint").textContent = m.hint, syncKzScale();
 }
 
@@ -3055,14 +3169,17 @@ function renderLegend(per, m) {
 const L = $("#legend");
 L.innerHTML = "";
 const add = h => L.insertAdjacentHTML("beforeend", h);
-if (m.diverge) add(`<b>−${m.diverge}</b>`), [ ...DIVERGE.neg ].reverse().forEach(c => add(`<i style="background:${c}"></i>`)), 
-add(`<i style="background:${DIVERGE.mid}"></i>`), DIVERGE.pos.forEach(c => add(`<i style="background:${c}"></i>`)), 
+if (m.diverge) add(`<b>−${m.diverge}</b>`), diverge().neg.forEach(c => add(`<i style="background:${c}"></i>`)), 
+add(`<i style="background:${diverge().mid}"></i>`), diverge().pos.forEach(c => add(`<i style="background:${c}"></i>`)), 
 add(`<b>+${m.diverge} ${m.unit}</b>`); else {
 const vals = KZ[per].map(f => m.get(f.p));
-quantileBreaks(vals, RAMPS[m.ramp].length), add(`<b>${m.fmt(Math.min(...vals))}</b>`), 
-RAMPS[m.ramp].forEach(c => add(`<i style="background:${c}"></i>`)), add(`<b>${m.fmt(Math.max(...vals))}</b>`);
+add(`<b>${m.fmt(Math.min(...vals))}</b>`), 
+ramp(m.ramp).forEach(c => add(`<i style="background:${c}"></i>`)), add(`<b>${m.fmt(Math.max(...vals))}</b>`);
 }
-add(`<b style="margin-left:12px;color:var(--ink-soft)">${esc(m.label)}, ${esc(m.unit)}</b>`), add(`<b class="legend-prelim">(${esc(t("prelimNote"))})</b>`);
+KZ[per].some(f => {
+const v = m.get(f.p);
+return null == v || isNaN(v);
+}) && add(`<i class="nodata-sw"></i><b>${esc(t("noDataLegend"))}</b>`), add(`<b style="margin-left:12px;color:var(--ink-soft)">${esc(m.label)}, ${esc(m.unit)}</b>`), add(`<b class="legend-prelim">(${esc(t("prelimNote"))})</b>`);
 const ti = $("#kzTitle"), sr = $("#kzSrc");
 ti && (ti.innerHTML = `<b>${esc(m.label)}</b> · ${esc(t("mapBasis_" + m.basis))} · ${esc(t("mapUnits" + per))}`), sr && (sr.textContent = t("model" === m.basis ? "mapSrcModel" : "mapSrcData"));
 }
@@ -3205,14 +3322,14 @@ width: 0,
 height: 3 * H
 })), defs.appendChild(cp), $("#svgKz").appendChild(defs);
 }
-const m = metricDef("1939", "loss"), g = el("g", {
+const m = metricDef("1939", "share1939"), br = splitBreaks(), g = el("g", {
 "clip-path": "url(#clipSplit)"
 });
 KZ[1939].forEach(f => {
 const p = el("path", {
 d: f.d,
 class: "region",
-fill: metricColor("1939", m, f.p),
+fill: metricColor("1939", m, f.p, br),
 "data-nodrag": "1"
 });
 p.addEventListener("mouseenter", e => {
@@ -3229,9 +3346,30 @@ y: f.c[1].toFixed(2),
 class: "lbl split-lbl"
 });
 t2.textContent = shortName(f), g.appendChild(t2);
-}), sp.appendChild(g), syncKzScale(), setSplit(splitPos);
-const ramp = r => RAMPS[r].map(c => `<i style="background:${c}"></i>`).join("");
-$("#legend").innerHTML = `<b>1926 · ${esc(metricDef("1926", "kazShare").label.toLowerCase())}</b>${ramp("blue")}\n    <b style="margin-left:16px">1939 · ${esc(metricDef("1939", "loss").label.toLowerCase())}</b>${ramp("orange")}`;
+}), sp.appendChild(g), syncKzScale(), setSplit(splitPos), renderSplitLegend();
+}
+
+// one legend for both halves: the same indicator, the same classes
+function renderSplitLegend() {
+const vals = splitValues(), m26 = metricDef("1926", "kazShare");
+$("#legend").innerHTML = `<b>${m26.fmt(Math.min(...vals))}</b>${ramp("blue").map(c => `<i style="background:${c}"></i>`).join("")}<b>${m26.fmt(Math.max(...vals))}</b>
+    <b style="margin-left:12px;color:var(--ink-soft)">${esc(t("splitLegend"))}</b><b class="legend-prelim">(${esc(t("prelimNote"))})</b>`;
+const ti = $("#kzTitle");
+ti && (ti.innerHTML = `<b>${esc(t("splitTitle"))}</b>`);
+}
+
+// Compare mode: Kazakh share in 1926 (okrugs, left) and 1939 (oblasts, right) on one scale, so the halves compare.
+function splitValues() {
+return [ ...KZ[1926].map(f => f.p.kazShare), ...KZ[1939].map(f => f.p.share1939) ].filter(v => null != v && !isNaN(v));
+}
+
+function splitBreaks() {
+return quantileBreaks(splitValues(), ramp("blue").length);
+}
+
+function setSplitMode(on) {
+S.split = on, $("#bSplit").classList.toggle("gold", on), $("#divider").classList.toggle("on", on), $("#splitBar").classList.toggle("on", on),
+on && (S.period = "1926", S.metric = "kazShare", syncPeriodUI(), toast(t("toastSplitHint"))), renderKz(), renderSplit();
 }
 
 function setSplit(frac) {
@@ -3240,10 +3378,11 @@ const r = $("#clipRect");
 if (r) {
 const st = zKz.state, b = zKz.base, local = ((splitPos * VB.w - st.x) / st.k - b.tx) / b.s, W = KZ_BBOX[2] - KZ_BBOX[0];
 r.setAttribute("x", local), r.setAttribute("width", Math.max(0, KZ_BBOX[2] + W - local)), 
+// a label shows only if it fits entirely on its own side of the divider (half-width cached by fitLabels)
 $$("#lLabels text").forEach(t => {
-t.style.opacity = +t.getAttribute("x") > local - .012 ? 0 : 1;
+t.style.opacity = +t.getAttribute("x") + (t._hw || 0) > local - .012 ? 0 : 1;
 }), $$("#lSplit text").forEach(t => {
-t.style.opacity = +t.getAttribute("x") < local + .012 ? 0 : 1;
+t.style.opacity = +t.getAttribute("x") - (t._hw || 0) < local + .012 ? 0 : 1;
 });
 }
 }
@@ -3276,12 +3415,7 @@ html += `<div style="margin-top:17px;display:flex;gap:7px;flex-wrap:wrap">\n    
 drawerOpen(html), drawChart(per, p);
 }
 
-$("#bSplit").addEventListener("click", () => {
-S.split = !S.split, $("#bSplit").classList.toggle("gold", S.split), $("#divider").classList.toggle("on", S.split), 
-$("#lblL").classList.toggle("on", S.split), $("#lblR").classList.toggle("on", S.split), 
-S.split ? (S.period = "1926", S.metric = "kazShare", syncPeriodUI(), renderKz(), 
-toast(t("toastSplitHint"))) : renderKz(), renderSplit();
-}), (() => {
+$("#bSplit").addEventListener("click", () => setSplitMode(!S.split)), (() => {
 const d = $("#divider");
 let dragging = !1;
 d.addEventListener("pointerdown", e => {
@@ -3403,13 +3537,13 @@ $("#disclaimer").textContent = "1926" === S.period ? t("disclaimer1926") : t("di
 $("#segPeriod").addEventListener("click", e => {
 const b = e.target.closest("button[data-p]");
 b && (S.period = b.dataset.p, S.metric = METRICS_DEF[S.period][0].id, syncPeriodUI(), 
-renderKz());
+S.split ? setSplitMode(!1) : renderKz());
 }), $("#metrics").addEventListener("click", e => {
 const c = e.target.closest(".chip[data-m]");
 c && (S.metric = c.dataset.m, $$("#metrics .chip").forEach(x => {
 const on = x === c;
 x.classList.toggle("on", on), x.querySelector("input").checked = on;
-}), renderKz());
+}), S.split ? setSplitMode(!1) : renderKz());
 }), $$(".chip[data-l] input").forEach(inp => {
 inp.addEventListener("change", () => {
 const chip = inp.closest(".chip"), k = chip.dataset.l;
@@ -3518,7 +3652,7 @@ function drawWorldBase() {
 const gr = $("#wGrat"), ct = $("#wCtry");
 gr.innerHTML = "", ct.innerHTML = "";
 const defs = el("defs");
-[ [ "arrA", "#eb6834" ], [ "arrS", "#38bdf8" ] ].forEach(([id, col]) => {
+[ [ "arrA", PALETTE.world.abroad ], [ "arrS", PALETTE.world.soviet ] ].forEach(([id, col]) => {
 const mk = el("marker", {
 id: id,
 viewBox: "0 0 10 10",
@@ -3584,7 +3718,7 @@ const shown = FLOWS.filter(f => WS.kinds[f.kind]), maxV = Math.max(...FLOWS.map(
 shown.forEach((f, i) => {
 const L = tr(f), a = equalEarth(f.from[0], f.from[1]), b = equalEarth(f.lon, f.lat);
 pts.push(a, b);
-const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, cx = mx - dy / len * len * .18, cy = my + dx / len * len * .18, d = `M${a[0].toFixed(4)} ${a[1].toFixed(4)} Q${cx.toFixed(4)} ${cy.toFixed(4)} ${b[0].toFixed(4)} ${b[1].toFixed(4)}`, col = "abroad" === f.kind ? "#eb6834" : "#38bdf8", w = 1.6 + f.hi / maxV * 6.4, path = el("path", {
+const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, cx = mx - dy / len * len * .18, cy = my + dx / len * len * .18, d = `M${a[0].toFixed(4)} ${a[1].toFixed(4)} Q${cx.toFixed(4)} ${cy.toFixed(4)} ${b[0].toFixed(4)} ${b[1].toFixed(4)}`, col = "abroad" === f.kind ? PALETTE.world.abroad : PALETTE.world.soviet, w = 1.6 + f.hi / maxV * 6.4, path = el("path", {
 d: d,
 class: "flow",
 stroke: col,
@@ -3646,7 +3780,7 @@ fill: "var(--carmine2)",
 })), g0.appendChild(el("circle", {
 r: 4,
 fill: "var(--carmine2)",
-stroke: "#fff",
+stroke: PALETTE.marks.outline,
 "stroke-width": 1
 })), nd.appendChild(g0);
 const t0 = el("text", {
@@ -3664,7 +3798,7 @@ const maxL = Math.max(...FAMINES.filter(f => null != f.loss).map(f => f.loss)), 
 return FAMINES.forEach(f => {
 const L = tr(f), [x, y] = equalEarth(f.lon, f.lat);
 pts.push([ x, y ]);
-const r = null == f.loss ? 8 : 3 + 13 * Math.sqrt(f.loss / maxL), col = f.hero ? "#c9403f" : f.other ? "#7d8598" : "#d97706", g = el("g", {
+const r = null == f.loss ? 8 : 3 + 13 * Math.sqrt(f.loss / maxL), col = f.hero ? PALETTE.world.famineKz : f.other ? PALETTE.world.famineNon : PALETTE.world.famineOther, g = el("g", {
 "data-at": `${x},${y}`,
 class: "node",
 "data-nodrag": "1"
@@ -3698,7 +3832,7 @@ lb.appendChild(t2);
 }
 
 function renderWorldLegend() {
-$("#wLegend").innerHTML = "flows" === WS.layer ? `<span style="display:inline-flex;align-items:center;gap:6px"><i style="width:22px;height:3px;background:#eb6834;border-radius:2px"></i>${esc(t("legendFlowsAbroad"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:22px;height:3px;background:#38bdf8;border-radius:2px"></i>${esc(t("legendFlowsSoviet"))}</span>\n       <span style="margin-left:14px;color:var(--ink-mute)">${esc(t("legendFlowsThickness"))}</span>` : `<span style="display:inline-flex;align-items:center;gap:6px"><i style="width:11px;height:11px;border-radius:50%;background:#c9403f"></i>${esc(t("legendFamineKz"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:11px;height:11px;border-radius:50%;background:#d97706"></i>${esc(t("legendFamineOther"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:11px;height:11px;border-radius:50%;background:#7d8598"></i>${esc(t("legendFamineNon"))}</span>`;
+$("#wLegend").innerHTML = "flows" === WS.layer ? `<span style="display:inline-flex;align-items:center;gap:6px"><i style="width:22px;height:3px;background:var(--flow-abroad);border-radius:2px"></i>${esc(t("legendFlowsAbroad"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:22px;height:3px;background:var(--flow-soviet);border-radius:2px"></i>${esc(t("legendFlowsSoviet"))}</span>\n       <span style="margin-left:14px;color:var(--ink-mute)">${esc(t("legendFlowsThickness"))}</span>` : `<span style="display:inline-flex;align-items:center;gap:6px"><i style="width:11px;height:11px;border-radius:50%;background:var(--famine-kz)"></i>${esc(t("legendFamineKz"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:11px;height:11px;border-radius:50%;background:var(--famine-other)"></i>${esc(t("legendFamineOther"))}</span>\n       <span style="display:inline-flex;align-items:center;gap:6px;margin-left:14px"><i style="width:11px;height:11px;border-radius:50%;background:var(--famine-non)"></i>${esc(t("legendFamineNon"))}</span>`;
 }
 
 function renderWorldStats() {
@@ -3777,6 +3911,7 @@ return "nomadic" === metric ? Object.keys(LENS_TAGS).filter(k => LENS_TAGS[k].no
 }
 
 function renderSchoolMap() {
+ensureNoData($("#svgS"));
 const base = $("#sBase"), mark = $("#sMark"), lbl = $("#sLbl");
 base.innerHTML = "", mark.innerHTML = "", lbl.innerHTML = "";
 const s = SCHOOLS.find(x => x.id === S.school), keys = s ? lensKeys(s.metric) : [], m = metricDef("1939", s && "anomaly" === s.metric ? "gap" : "loss");
@@ -3804,10 +3939,10 @@ class: "lbl",
 t2.textContent = shortName(f), lbl.appendChild(t2);
 }), s && "anomaly" === s.metric && CAMPS.forEach(c => {
 const L = tr(c);
-addSMark(mark, c.lon, c.lat, "#f0b429", L.n, L.t, "camp", c);
+addSMark(mark, c.lon, c.lat, PALETTE.marks.camp, L.n, L.t, "camp", c);
 }), s && "unrest" === s.metric && REVOLTS.forEach(r => {
 const L = tr(r);
-addSMark(mark, r.lon, r.lat, "#e34948", L.n + " " + t("tipUprising"), r.y + " " + t("tipUprisingYear").split(".")[0], "star", r);
+addSMark(mark, r.lon, r.lat, PALETTE.marks.revolt, L.n + " " + t("tipUprising"), r.y + " " + t("tipUprisingYear").split(".")[0], "star", r);
 }), $("#sCaption").textContent = s ? `${tr(s).name}: ${m.label.toLowerCase()} · ${t("focusRegions").toLowerCase()}` : t("schoolCaptionDefault"), 
 syncSScale();
 }
@@ -3821,7 +3956,7 @@ class: "node",
 "star" === kind ? n.appendChild(el("path", {
 d: star(6.5, 2.9, 5),
 fill: col,
-stroke: "#fff",
+stroke: PALETTE.marks.outline,
 "stroke-width": .4
 })) : (n.appendChild(el("circle", {
 r: 6.5,
@@ -4728,7 +4863,7 @@ img.onload = ok, img.onerror = fail, img.src = "data:image/svg+xml;charset=utf-8
 const mute = getComputedStyle(document.documentElement).getPropertyValue("--ink-mute").trim() || "#777";
 ctx.fillStyle = mute, ctx.font = `12px ${font}`, ctx.textBaseline = "top", srcLines.forEach((l, i) => ctx.fillText(l, pad, titleH + m.h + legendH + 16 * i)),
 ctx.font = `11px ${font}`, ctx.fillText(t("pngCredit") + " · asharshylyk-full.vercel.app", pad, H - creditH + 4);
-const blob = await new Promise(ok => cv.toBlob(ok, "image/png")), name = isKz ? `map-kazakhstan-${S.period}-${S.metric}.png` : `map-world-${WS.layer}.png`;
+const blob = await new Promise(ok => cv.toBlob(ok, "image/png")), name = isKz ? `map-kazakhstan-${S.split ? "compare-1926-1939-kazShare" : S.period + "-" + S.metric}.png` : `map-world-${WS.layer}.png`;
 await download(name, blob, "image/png");
 } catch (err) {
 toast(t("toastPngFailed"));
@@ -5191,7 +5326,7 @@ b && (setLang(b.dataset.lang), $("#langMenu").classList.remove("on"));
 e.stopPropagation(), $("#langMenu").classList.toggle("on");
 }), document.addEventListener("click", e => {
 e.target.closest(".langwrap") || $("#langMenu").classList.remove("on");
-}), applyStaticI18n(), syncPeriodUI(), renderMarks(), renderKz();
+}), applyPaletteVars(), applyStaticI18n(), syncPeriodUI(), renderMarks(), renderKz();
 
 // First visit: show the jury entry overlay once.
 (() => {

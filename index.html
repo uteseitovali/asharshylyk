@@ -168,9 +168,9 @@ section.view.on{display:block}
 .maphint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:7px 13px;border-radius:8px;background:var(--panel);border:1px solid var(--line);color:var(--ink);font-size:12.5px;box-shadow:var(--shadow);pointer-events:none;opacity:0;transition:opacity .2s;z-index:3}
 .maphint.on{opacity:.95}
 .stage svg:focus-visible{outline:2px solid var(--gold2);outline-offset:-2px}
-.region{cursor:pointer;transition:filter .15s, opacity .2s;stroke:var(--bg);stroke-width:.55;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.region{cursor:pointer;transition:filter .15s, opacity .2s;stroke:var(--panel);stroke-width:.55;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .region:hover{filter:brightness(1.22)}
-.region.dim{opacity:.2}
+.region.dim{opacity:.45}
 .region.hi{stroke:var(--gold2);stroke-width:2.2}
 .region.sel{stroke:var(--gold2);stroke-width:2.6}
 /* while the map is being zoomed or dragged: no hover filter, no transitions, no blur or glow over it */
@@ -182,9 +182,9 @@ section.view.on{display:block}
 .lbl{font-size:8px;fill:#fff;paint-order:stroke;stroke:rgba(8,12,22,.88);stroke-width:2.4px;stroke-linejoin:round;pointer-events:none;text-anchor:middle;font-weight:600}
 .lbl.lbl-hide{display:none}
 .off{display:none}
-.camp{fill:none;stroke:#f0b429;stroke-width:1.3;vector-effect:non-scaling-stroke}
-.campdot{fill:#f0b429;stroke:#3a2400;stroke-width:.4}
-.revolt{fill:#e34948;stroke:#fff;stroke-width:.35;opacity:.92}
+.camp{fill:none;stroke:var(--mark-camp);stroke-width:1.3;vector-effect:non-scaling-stroke}
+.campdot{fill:var(--mark-camp);stroke:#3a2400;stroke-width:.4}
+.revolt{fill:var(--mark-revolt);stroke:#fff;stroke-width:.35;opacity:.92}
 .grat{fill:none;stroke:var(--line);stroke-width:.5;vector-effect:non-scaling-stroke}
 .ctry{fill:var(--land);stroke:var(--land-line);stroke-width:.7;vector-effect:non-scaling-stroke;transition:fill .2s}
 .ocean{fill:var(--ocean)}
@@ -248,12 +248,12 @@ section.view.on{display:block}
   width:32px;height:32px;border-radius:50%;background:var(--gold2);color:#2a1900;
   display:grid;place-items:center;font-size:15px;font-weight:700;box-shadow:0 3px 12px rgba(0,0,0,.4);
 }
-.sidelbl{
-  position:absolute;top:12px;z-index:16;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
-  background:color-mix(in srgb,var(--panel) 92%,transparent);border:1px solid var(--line2);
-  padding:4px 9px;border-radius:20px;display:none;font-weight:600;
-}
-.sidelbl.on{display:block}
+/* compare mode: captions in a strip above the map, so they never cover region labels */
+.splitbar{display:none;justify-content:space-between;align-items:center;gap:12px;padding:9px 16px;border-bottom:1px solid var(--line)}
+.splitbar.on{display:flex}
+.nodata-sw{background:repeating-linear-gradient(45deg,var(--nodata-line) 0 2px,transparent 2px 5px)!important;margin-left:10px}
+.sidelbl{font-size:14px;font-weight:700;letter-spacing:.04em;line-height:1.25}
+.sidelbl:last-child{text-align:right}
 
 /* ══ СТАТИСТИКА ══ */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:9px}
@@ -495,8 +495,8 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
     <div class="card pad">
       <p class="sec-t" data-i18n="secLayers">Дополнительные слои</p>
       <div class="chips">
-        <label class="chip" data-l="camps"><input type="checkbox"><span class="dot" style="background:#f0b429"></span><span data-i18n="layerCamps">Лагеря и стройки</span></label>
-        <label class="chip" data-l="revolts"><input type="checkbox"><span class="dot" style="background:#e34948"></span><span data-i18n="layerRevolts">Восстания 1929–1931</span></label>
+        <label class="chip" data-l="camps"><input type="checkbox"><span class="dot" style="background:var(--mark-camp)"></span><span data-i18n="layerCamps">Лагеря и стройки</span></label>
+        <label class="chip" data-l="revolts"><input type="checkbox"><span class="dot" style="background:var(--mark-revolt)"></span><span data-i18n="layerRevolts">Восстания 1929–1931</span></label>
         <label class="chip on" data-l="labels"><input type="checkbox" checked><span class="dot" style="background:var(--ink-mute)"></span><span data-i18n="layerLabels">Подписи регионов</span></label>
       </div>
     </div>
@@ -516,6 +516,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
       <details class="methnote"><summary data-i18n="methNote">Методологическая помета: границы — опорная реконструкция на современной геометрии; карта для сравнительного анализа, не архивный кадастр</summary><p data-i18n="methNoteMore">Контуры округов 1926 г. и областей 1939 г. собраны из современной административной геометрии (geoBoundaries) под исторические единицы; реальные границы отличались. Демографические показатели хранятся отдельно от геометрии; областные значения — рабочий набор атласа, сверка с опубликованными итогами переписей ведётся.</p></details>
       <div class="maptitle"><span id="kzTitle"></span><button class="btn sm gold" id="bDefense" data-i18n="btnDefenseShort">▶ Режим защиты</button></div>
       <div class="mapwrap" id="wrapKz">
+        <div class="splitbar" id="splitBar"><div class="sidelbl" id="lblL" data-i18n="sidelblL">1926 · округа</div><div class="sidelbl" id="lblR" data-i18n="sidelblR">1939 · области</div></div>
         <svg id="svgKz" viewBox="0 0 1000 560" role="img" aria-label="Карта Казахстана" data-i18n-aria="ariaMapKz">
           <g id="gKz">
             <g id="lBase"></g>
@@ -525,8 +526,6 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
             <g id="lRevolts" class="off"></g>
           </g>
         </svg>
-        <div class="sidelbl" id="lblL" style="left:14px" data-i18n="sidelblL">1926 · округа</div>
-        <div class="sidelbl" id="lblR" style="right:14px" data-i18n="sidelblR">1939 · области</div>
         <div class="divider" id="divider"></div>
       </div>
       <div class="bar">
@@ -561,8 +560,8 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
     <div class="card pad" id="worldCtl">
       <p class="sec-t" data-i18n="secDirections">Направления</p>
       <div class="chips">
-        <label class="chip on" data-f="abroad"><input type="checkbox" checked><span class="dot" style="background:#eb6834"></span><span data-i18n="dirAbroad">За границу</span></label>
-        <label class="chip on" data-f="soviet"><input type="checkbox" checked><span class="dot" style="background:#38bdf8"></span><span data-i18n="dirSoviet">В республики СССР</span></label>
+        <label class="chip on" data-f="abroad"><input type="checkbox" checked><span class="dot" style="background:var(--flow-abroad)"></span><span data-i18n="dirAbroad">За границу</span></label>
+        <label class="chip on" data-f="soviet"><input type="checkbox" checked><span class="dot" style="background:var(--flow-soviet)"></span><span data-i18n="dirSoviet">В республики СССР</span></label>
       </div>
       <p class="hint" data-i18n="hintFlows">Толщина линии — оценочный масштаб потока. Наведите на линию или точку, чтобы увидеть диапазон и пояснение.</p>
     </div>
@@ -808,7 +807,7 @@ select{background:var(--panel2);border:1px solid var(--line);border-radius:8px;p
 <div class="toast" id="toast"></div>
 <div id="print"></div>
 
-<script src="/data.js?v=47"></script>
-<script src="/app.js?v=47"></script>
+<script src="/data.js?v=49"></script>
+<script src="/app.js?v=49"></script>
 </body>
 </html>

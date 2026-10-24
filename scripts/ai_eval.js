@@ -17,6 +17,7 @@ vm.runInContext([
   "let LANG = 'ru';",
   cut("const I18N = {", "\nfunction t("),
   "const t = k => (I18N[LANG] && I18N[LANG][k]) || I18N.ru[k] || k;",
+  cut("const PALETTE = {", "\nconst RAMPS"),
   cut("const KZ = window.__KZ_HIST__", "\nconst D2R"),
   cut("const MODELS = [", "\nfunction chatAdd("),
   "globalThis.__ask = (lang, q) => { LANG = lang; return offlineAnswer(q); };"
