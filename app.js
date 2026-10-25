@@ -1203,7 +1203,10 @@ schoolsMap.ready && (renderSchoolCards(), selectSchool(S.school)), renderBiblio(
 "function" == typeof renderAbout && renderAbout(), buildTable(), renderDataLog(), renderAprob(), function() {
 const i = $("#mSrc"), j = $("#mTgt");
 i && j && (populateMaupSelects(), calcMaup());
-}(), rebuildAiModels(), void 0 !== AI && setAiState(AI.engine ? t("aiReady") : t("aiOffline"), AI.engine ? "ok" : ""), 
+}(), rebuildAiModels(), void 0 !== AI && (setAiState(AI.engine ? t("aiReady") : t("aiOffline"), AI.engine ? "ok" : ""), AI.engine && ($("#aiProgTxt").textContent = t("aiLoadedNote")));
+// panels that hold text from the moment they were opened: rebuild them in the new language
+const ip = $(".info-pop.on");
+tipHide(), drawerRefresh(), S.story >= 0 && storyText(S.story), ip && ip.dataset.key && (ip.textContent = t(ip.dataset.key)),
 toast(t("toastLangChanged"));
 }
 }
@@ -2979,11 +2982,23 @@ function modalClose(id) {
 $("#" + id).classList.remove("on");
 }
 
-function drawerOpen(html) {
+// The side panel keeps the function that built it, so a language switch can rebuild the same object in place.
+let drawerRender = null;
+
+function drawerOpen(html, render = null) {
 // the header is taller than 60px when it wraps to two rows (phones): start the drawer right below it
 const h = $(".hdr");
 h && ($("#drawer").style.top = Math.max(0, Math.round(h.getBoundingClientRect().bottom)) + "px"),
-$("#drawerBody").innerHTML = html, $("#drawer").classList.add("on"), $("#ov").classList.add("on"), $("#drawer").scrollTop = 0;
+$("#drawerBody").innerHTML = html, $("#drawer").classList.add("on"), $("#ov").classList.add("on"), $("#drawer").scrollTop = 0,
+drawerRender = render;
+}
+
+// Rebuild the open panel (language switch): same object, same scroll position.
+function drawerRefresh() {
+const d = $("#drawer");
+if (!drawerRender || !d.classList.contains("on")) return;
+const y = d.scrollTop;
+drawerRender(), d.scrollTop = y;
 }
 
 function drawerClose() {
@@ -3452,10 +3467,10 @@ return `<div style="display:flex;justify-content:space-between;align-items:flex-
     ${blk("markDisputed", isRevolt ? [ L.disputed, t("revoltDisputed") ].filter(Boolean).join(" ") : L.disputed)}
     ${srcs.length ? `<h4 class="mc-h">${esc(t("markSources"))}</h4><ul class="mc-src">${markSrcList(srcs)}</ul>` : ""}`;
 }
-function openMarkCard(kind, item) {
-tipHide(), drawerOpen(markCardHTML(kind, item));
+function openMarkCard(kind, item, quiet) {
+tipHide(), drawerOpen(markCardHTML(kind, item), () => openMarkCard(kind, item, !0));
 const x = $("#drawer .btn.ico");
-x && x.focus();
+quiet || x && x.focus();
 }
 // Makes a marker group clickable, tappable and keyboard-accessible.
 function wireMark(g, kind, item, label) {
@@ -3648,7 +3663,7 @@ c: fmtP(p.resid)
 }))}</p>`);
 }
 html += `<div style="margin-top:17px;display:flex;gap:7px;flex-wrap:wrap">\n    <button class="btn sm" onclick="printRegion('${per}','${p.id}')">${esc(t("savePdf"))}</button>\n    <button class="btn sm" onclick="askAbout('${esc(pName(p)).replace(/'/g, "")}')">${esc(t("askAssistant"))}</button></div>`, 
-drawerOpen(html), drawChart(per, p);
+drawerOpen(html, () => openRegion(per, f)), drawChart(per, p);
 }
 
 $("#bSplit").addEventListener("click", () => setSplitMode(!S.split)), (() => {
@@ -3804,14 +3819,20 @@ S.story = -1, clearTimeout(storyTimer), $("#story").classList.remove("on"), $("#
 $$(".region").forEach(p => p.classList.remove("dim", "hi")), zKz.reset();
 }
 
+// Texts of the defense-mode panel (also refilled on a language switch, without restarting the step).
+function storyText(i) {
+const L = tr(STORY[i]);
+$("#stN").textContent = `${t("storyStep")} ${i + 1} ${t("storyOf")} ${STORY.length}`,
+$("#stT").textContent = L.t, $("#stP").textContent = L.text, $("#stC").textContent = L.cite,
+$("#stPrev").disabled = 0 === i, $("#stPrev").textContent = t("storyPrev"), $("#stNext").textContent = i === STORY.length - 1 ? t("storyFinish") : t("storyNext"),
+$("#stStop").textContent = t("storyExit"), $("#bStory").textContent = t("btnStoryStop");
+}
+
 function storyStep(i) {
 if (i < 0 || i >= STORY.length) return storyStop();
 S.story = i;
-const s = STORY[i], L = tr(s);
-clearTimeout(storyTimer), $("#stN").textContent = `${t("storyStep")} ${i + 1} ${t("storyOf")} ${STORY.length}`, 
-$("#stT").textContent = L.t, $("#stP").textContent = L.text, $("#stC").textContent = L.cite, 
-$("#stPrev").disabled = 0 === i, $("#stPrev").textContent = t("storyPrev"), $("#stNext").textContent = i === STORY.length - 1 ? t("storyFinish") : t("storyNext"), 
-$("#stStop").textContent = t("storyExit");
+const s = STORY[i];
+clearTimeout(storyTimer), storyText(i);
 const bar = $("#stBar");
 if (bar.style.transition = "none", bar.style.width = "0%", requestAnimationFrame(() => {
 bar.style.transition = "width 11000ms linear", bar.style.width = "100%";
