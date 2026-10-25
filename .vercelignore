@@ -1,0 +1,7 @@
+# Служебные файлы не публикуются на сайте
+CLAUDE.md
+PROMPTS.md
+docs/
+scripts/
+.gitignore
+*.patch
