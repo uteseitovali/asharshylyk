@@ -8,9 +8,9 @@
 
 Статический сайт без сборки, без npm, без env-переменных. Три файла:
 
-- `index.html` — разметка, весь CSS, подключение скриптов (`/data.js?v=N`, `/app.js?v=N`, Chart.js и canvas-confetti с jsDelivr).
+- `index.html` — разметка, весь CSS, подключение скриптов (`/data.js?v=N`, `/app.js?v=N`, Chart.js 4.4.4 и canvas-confetti 1.9.3 локально из `libs/`).
 - `data.js` — данные как JS-присваивания: `window.__KZ_HIST__` (`"1926"`: 8 округов, `"1939"`: 12 областей; каждый элемент `{p: свойства, g: GeoJSON-геометрия}`), `window.__WORLD__` (подложка карты мира; генерируется `scripts/build_world.js`, не править вручную), `window.__MAUP__` (матрица 8×12: `m`, `a26`, `a39`, `interpKaz`, `interpTot`, `resid`, `shareShift`).
-- `app.js` (~260 КБ, плотный «минифицированный» стиль: цепочки через запятую, `!1`/`!0`, `1 / 0`). Основные блоки по порядку: `I18N` (ru/en/kz) → `t()/tf()/tr()/pName()/pDesc()/pType()` → `setLang()` → `SCHOOLS`, `CAMPS`, `REVOLTS`, `FLOWS`, `FAMINES`, `STORY`, `QUIZ` → база знаний ИИ (`kbRu/kbEn/kbKz`) → проекции (`albers`, `equalEarth`) → карта Казахстана (`renderKz`, `metricDef`, `renderStats`, `openRegion`, `drawChart`) → StoryMap (`storyStart/storyStep`) → карта мира → историография → `BIBLIOGRAPHY` → таблица и MAUP-калькулятор (`buildTable`, `calcMaup`) → квиз → ИИ-ассистент (WebLLM в браузере, `SYS_RU/SYS_EN/SYS_KZ`, `retrieve`, `ask`) → `renderAbout`.
+- `app.js` (~260 КБ, плотный «минифицированный» стиль: цепочки через запятую, `!1`/`!0`, `1 / 0`). Основные блоки по порядку: `I18N` (ru/en/kz) → `t()/tf()/tr()/pName()/pDesc()/pType()` → `setLang()` → `SCHOOLS`, `CAMPS`, `REVOLTS`, `FLOWS`, `FAMINES`, `STORY`, `QUIZ` → база знаний ИИ (`kbRu/kbEn/kbKz`) → проекции (`albers`, `equalEarth`) → карта Казахстана (`renderKz`, `metricDef`, `renderStats`, `openRegion`, `drawChart`) → StoryMap (`storyStart/storyStep`) → карта мира → историография → `BIBLIOGRAPHY` → таблица и MAUP-калькулятор (`buildTable`, `calcMaup`) → квиз → ИИ-ассистент (WebLLM в браузере, загружается с esm.run только по кнопке «Загрузить модель», `SYS_RU/SYS_EN/SYS_KZ`, `retrieve`, `ask`) → `renderAbout`.
 - Вкладки в `index.html`: `#v-kz`, `#v-world`, `#v-schools`, `#v-biblio`, `#v-data`, `#v-quiz`, `#v-ai`.
 
 ## Правила работы

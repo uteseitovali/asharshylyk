@@ -237,7 +237,7 @@ kvReturned: "Вернулись позднее",
 kvPermanent: "Безвозвратно",
 kvAbroadStayed: "Остались за границей",
 noteFlowsDiscuss: "Разбивка по конкретным направлениям остаётся дискуссионной оценкой. С. Кэмерон прямо называет точный подсчёт по странам открытым исследовательским вопросом.",
-noteProjection: "Региональный вид: равновеликая коническая проекция Альберса, центральный меридиан 65° в. д., стандартные параллели 28° и 58° с. ш. Вид «Весь мир»: равновеликая проекция Equal Earth с тем же центральным меридианом. Обе проекции сохраняют соотношение площадей, поэтому территории на карте можно сравнивать. Границы стран современные (Natural Earth 1:50m, для всего мира 1:110m) и служат географической привязкой, а не политической картой 1930-х годов. Контур Казахстана (Казахская АССР, с 1936 г. Казахская ССР) получен объединением 12 областей нашей сетки 1939 г. и, как и сама сетка, является реконструкцией. Пунктиром обведена Республика Каракалпакстан в современных границах (geoBoundaries): это приблизительная привязка. Арал показан в границах до 1960-х гг.",
+noteProjection: "Региональный вид: равновеликая коническая проекция Альберса, центральный меридиан 65° в. д., стандартные параллели 28° и 58° с. ш. Вид «Весь мир»: равновеликая проекция Equal Earth с тем же центральным меридианом. Обе проекции сохраняют соотношение площадей, поэтому территории на карте можно сравнивать. Границы стран современные (Natural Earth 1:50m, для всего мира 1:110m) и служат географической привязкой, а не политической картой 1930-х годов. Контур Казахстана (Казахская АССР, с 1936 г. Казахская ССР) получен объединением 12 областей нашей сетки 1939 г. и, как и сама сетка, является реконструкцией. Пунктиром обведена Республика Каракалпакстан в современных границах (geoBoundaries): это приблизительная привязка. Арал показан в границах до 1960-х гг., Каспий в современных границах.",
 schoolsHeading: "Три линзы на одну катастрофу",
 schoolsIntro: "Историки расходятся не в том, был ли голод, а в том, что считать его механизмом. Выберите школу, и карта подсветит регионы, которые оказываются в центре именно её объяснения. Это и есть смысл историографического раздела: одни и те же данные, разные вопросы к ним, разная география ответа.",
 chooseSchool: "Выберите школу",
@@ -313,8 +313,8 @@ aiSub: "Модель работает прямо в браузере: данны
 aiOffline: "Офлайн-режим",
 exportPngTitle: "Скачать карту (PNG)",
 pngCredit: "Картография коллапса · HGIS-атлас Ашаршылыка, 1926–1939",
-pngSrcWorld: "Карта региона, проекция Альберса (равновеликая коническая), центральный меридиан 65° в. д. Подложка: Natural Earth 1:50m; Арал в границах до 1960-х гг.; контур Казахстана по 12 областям 1939 г. Направления и масштабы откочёвок: оценки историографии (дискуссионные); масштабы голодов: оценки разных авторов.",
-pngSrcWorldWhole: "Карта мира, проекция Equal Earth, центральный меридиан 65° в. д. Подложка: Natural Earth 1:110m; контур Казахстана по 12 областям 1939 г. Направления и масштабы откочёвок: оценки историографии (дискуссионные); масштабы голодов: оценки разных авторов.",
+pngSrcWorld: "Карта региона, проекция Альберса (равновеликая коническая), центральный меридиан 65° в. д. Подложка: Natural Earth 1:50m; Арал в границах до 1960-х гг., Каспий в современных границах; контур Казахстана по 12 областям 1939 г. Направления и масштабы откочёвок: оценки историографии (дискуссионные); масштабы голодов: оценки разных авторов.",
+pngSrcWorldWhole: "Карта мира, проекция Equal Earth, центральный меридиан 65° в. д. Подложка: Natural Earth 1:110m; Каспий в современных границах; контур Казахстана по 12 областям 1939 г. Направления и масштабы откочёвок: оценки историографии (дискуссионные); масштабы голодов: оценки разных авторов.",
 toastPngFailed: "Не удалось сохранить карту в PNG",
 mapPhoneHint: "Для полной работы с картой удобнее ноутбук или планшет",
 aiDisclaimer: "Ответы справочные, основаны на материалах атласа; сверяйтесь с первоисточниками.",
@@ -564,7 +564,7 @@ kvReturned: "Returned later",
 kvPermanent: "Never returned",
 kvAbroadStayed: "Stayed abroad",
 noteFlowsDiscuss: "The breakdown by specific destination is a debated estimate. S. Cameron explicitly calls an exact count by country an open research question.",
-noteProjection: "Regional view: Albers equal-area conic projection, central meridian 65°E, standard parallels 28°N and 58°N. Whole-world view: Equal Earth equal-area projection with the same central meridian. Both projections preserve area ratios, so territories on the map can be compared. Country borders are modern (Natural Earth 1:50m; 1:110m for the whole world) and serve as a geographic reference, not as a political map of the 1930s. The outline of Kazakhstan (the Kazak ASSR, the Kazakh SSR from 1936) is the union of the 12 oblasts of our 1939 grid and, like the grid itself, is a reconstruction. The dashed line marks the Republic of Karakalpakstan within its modern borders (geoBoundaries), as an approximate reference. The Aral Sea is shown within its shoreline before the 1960s.",
+noteProjection: "Regional view: Albers equal-area conic projection, central meridian 65°E, standard parallels 28°N and 58°N. Whole-world view: Equal Earth equal-area projection with the same central meridian. Both projections preserve area ratios, so territories on the map can be compared. Country borders are modern (Natural Earth 1:50m; 1:110m for the whole world) and serve as a geographic reference, not as a political map of the 1930s. The outline of Kazakhstan (the Kazak ASSR, the Kazakh SSR from 1936) is the union of the 12 oblasts of our 1939 grid and, like the grid itself, is a reconstruction. The dashed line marks the Republic of Karakalpakstan within its modern borders (geoBoundaries), as an approximate reference. The Aral Sea is shown within its shoreline before the 1960s; the Caspian Sea is shown with its modern shoreline.",
 schoolsHeading: "Three lenses on one catastrophe",
 schoolsIntro: "Historians disagree not about whether the famine happened, but about what should count as its mechanism. Choose a school, and the map will highlight the regions central to that particular explanation. That is the point of this section: the same data, different questions asked of it, a different geography of the answer.",
 chooseSchool: "Choose a school",
@@ -640,8 +640,8 @@ aiSub: "The model runs right in your browser: nothing is sent anywhere",
 aiOffline: "Offline mode",
 exportPngTitle: "Download map (PNG)",
 pngCredit: "Cartography of Collapse · an HGIS atlas of Asharshylyk, 1926–1939",
-pngSrcWorld: "Regional map, Albers equal-area conic projection, central meridian 65°E. Basemap: Natural Earth 1:50m; the Aral Sea within its shoreline before the 1960s; the outline of Kazakhstan from the 12 oblasts of 1939. Migration destinations and sizes are historiographic estimates (debated); famine figures are estimates by different authors.",
-pngSrcWorldWhole: "World map, Equal Earth projection, central meridian 65°E. Basemap: Natural Earth 1:110m; the outline of Kazakhstan from the 12 oblasts of 1939. Migration destinations and sizes are historiographic estimates (debated); famine figures are estimates by different authors.",
+pngSrcWorld: "Regional map, Albers equal-area conic projection, central meridian 65°E. Basemap: Natural Earth 1:50m; the Aral Sea within its shoreline before the 1960s, the Caspian Sea with its modern shoreline; the outline of Kazakhstan from the 12 oblasts of 1939. Migration destinations and sizes are historiographic estimates (debated); famine figures are estimates by different authors.",
+pngSrcWorldWhole: "World map, Equal Earth projection, central meridian 65°E. Basemap: Natural Earth 1:110m; the Caspian Sea with its modern shoreline; the outline of Kazakhstan from the 12 oblasts of 1939. Migration destinations and sizes are historiographic estimates (debated); famine figures are estimates by different authors.",
 toastPngFailed: "Could not save the map as PNG",
 mapPhoneHint: "The map is easier to work with on a laptop or tablet",
 aiDisclaimer: "Answers are for reference, based on the atlas materials; check them against the primary sources.",
@@ -891,7 +891,7 @@ kvReturned: "Кейін оралғандар",
 kvPermanent: "Қайтпай кеткендер",
 kvAbroadStayed: "Шетелде қалғандар",
 noteFlowsDiscuss: "Нақты бағыттар бойынша бөліну пікірталастық баға болып қала береді. С. Кэмерон елдер бойынша дәл санақты ашық зерттеу мәселесі деп тікелей атайды.",
-noteProjection: "Аймақтық көрініс: Альберстің тең аумақты конустық проекциясы, орталық меридиан 65° ш. б., стандартты параллельдер 28° және 58° с. е. «Бүкіл әлем» көрінісі: орталық меридианы сондай Equal Earth тең аумақты проекциясы. Екі проекция да аудандар арақатынасын сақтайды, сондықтан картадағы аумақтарды салыстыруға болады. Мемлекет шекаралары қазіргі (Natural Earth 1:50m, бүкіл әлем үшін 1:110m), олар 1930-жылдардың саяси картасы емес, географиялық бағдар ғана. Қазақстан контуры (Қазақ АКСР-і, 1936 жылдан Қазақ КСР-і) біздің 1939 жылғы торымыздағы 12 облысты біріктіру арқылы алынды және тордың өзі сияқты реконструкция болып табылады. Пунктирмен Қарақалпақстан Республикасы қазіргі шекарасында (geoBoundaries) белгіленген: бұл шамамен алынған бағдар. Арал теңізі 1960-жылдарға дейінгі шекарасында көрсетілген.",
+noteProjection: "Аймақтық көрініс: Альберстің тең аумақты конустық проекциясы, орталық меридиан 65° ш. б., стандартты параллельдер 28° және 58° с. е. «Бүкіл әлем» көрінісі: орталық меридианы сондай Equal Earth тең аумақты проекциясы. Екі проекция да аудандар арақатынасын сақтайды, сондықтан картадағы аумақтарды салыстыруға болады. Мемлекет шекаралары қазіргі (Natural Earth 1:50m, бүкіл әлем үшін 1:110m), олар 1930-жылдардың саяси картасы емес, географиялық бағдар ғана. Қазақстан контуры (Қазақ АКСР-і, 1936 жылдан Қазақ КСР-і) біздің 1939 жылғы торымыздағы 12 облысты біріктіру арқылы алынды және тордың өзі сияқты реконструкция болып табылады. Пунктирмен Қарақалпақстан Республикасы қазіргі шекарасында (geoBoundaries) белгіленген: бұл шамамен алынған бағдар. Арал теңізі 1960-жылдарға дейінгі шекарасында, Каспий теңізі қазіргі шекарасында көрсетілген.",
 schoolsHeading: "Бір апатқа үш көзқарас",
 schoolsIntro: "Тарихшылардың пікірі ашаршылық болды ма деген мәселеде емес, оның механизмі не деген мәселеде алшақтайды. Мектепті таңдаңыз, карта сол түсініктеменің орталығындағы аймақтарды бөліп көрсетеді. Тарихнама бөлімінің мәні осында: бірдей деректер, оларға қойылған әртүрлі сұрақтар, жауаптың әртүрлі географиясы.",
 chooseSchool: "Мектепті таңдаңыз",
@@ -967,8 +967,8 @@ aiSub: "Модель тікелей браузерде жұмыс істейді
 aiOffline: "Офлайн режим",
 exportPngTitle: "Картаны жүктеу (PNG)",
 pngCredit: "Күйреу картографиясы · Ашаршылықтың HGIS-атласы, 1926–1939",
-pngSrcWorld: "Аймақ картасы, Альберс проекциясы (тең аумақты конустық), орталық меридиан 65° ш. б. Негіз: Natural Earth 1:50m; Арал 1960-жылдарға дейінгі шекарасында; Қазақстан контуры 1939 жылғы 12 облыс бойынша. Көші-қон бағыттары мен ауқымы: тарихнамалық бағалар (пікірталастық); ашаршылықтар ауқымы: әртүрлі авторлардың бағалары.",
-pngSrcWorldWhole: "Әлем картасы, Equal Earth проекциясы, орталық меридиан 65° ш. б. Негіз: Natural Earth 1:110m; Қазақстан контуры 1939 жылғы 12 облыс бойынша. Көші-қон бағыттары мен ауқымы: тарихнамалық бағалар (пікірталастық); ашаршылықтар ауқымы: әртүрлі авторлардың бағалары.",
+pngSrcWorld: "Аймақ картасы, Альберс проекциясы (тең аумақты конустық), орталық меридиан 65° ш. б. Негіз: Natural Earth 1:50m; Арал 1960-жылдарға дейінгі шекарасында, Каспий қазіргі шекарасында; Қазақстан контуры 1939 жылғы 12 облыс бойынша. Көші-қон бағыттары мен ауқымы: тарихнамалық бағалар (пікірталастық); ашаршылықтар ауқымы: әртүрлі авторлардың бағалары.",
+pngSrcWorldWhole: "Әлем картасы, Equal Earth проекциясы, орталық меридиан 65° ш. б. Негіз: Natural Earth 1:110m; Каспий қазіргі шекарасында; Қазақстан контуры 1939 жылғы 12 облыс бойынша. Көші-қон бағыттары мен ауқымы: тарихнамалық бағалар (пікірталастық); ашаршылықтар ауқымы: әртүрлі авторлардың бағалары.",
 toastPngFailed: "Картаны PNG ретінде сақтау мүмкін болмады",
 mapPhoneHint: "Картамен толық жұмыс істеу үшін ноутбук немесе планшет ыңғайлырақ",
 aiDisclaimer: "Жауаптар анықтамалық, атлас материалдарына негізделген; бастапқы дереккөздермен салыстырыңыз.",
@@ -3092,11 +3092,12 @@ selected: null
 }, zKz = makeZoom("#svgKz", "#gKz", KZ_BBOX, VB.w, VB.h);
 
 // Labels live inside the zoom group, so their size is set in inner units: px / (zoom scale × base scale × screen px per viewBox unit).
-// Greedy collision pass in screen space: labels with higher data-pri win, the rest get .lbl-hide.
-function fitLabels(z, svgSel, nodes, px, collide = !0) {
+// Greedy collision pass in screen space: labels with higher data-pri win, the rest get .lbl-hide
+// (world map: foreign destinations before within-USSR ones, then by flow size; famines in list order).
+function fitLabels(z, svgSel, nodes, px, collide = !0, halo = .3) {
 const svg = $(svgSel), m = svg && svg.getScreenCTM();
 if (!m || !m.a) return;
-const ppu = z.ppu = m.a, scale = z.base.s * z.state.k * ppu, fs = px / scale, sw = .3 * px / scale, kept = [];
+const ppu = z.ppu = m.a, scale = z.base.s * z.state.k * ppu, fs = px / scale, sw = halo * px / scale, kept = [];
 nodes.forEach(n => {
 n.style.fontSize = fs + "px", n.style.strokeWidth = sw + "px";
 }), collide && nodes.map((n, i) => ({
@@ -3112,16 +3113,16 @@ x1: sx(bb.x + bb.width),
 y0: sy(bb.y),
 y1: sy(bb.y + bb.height)
 };
-kept.some(q => r.x0 < q.x1 + 2 && q.x0 < r.x1 + 2 && r.y0 < q.y1 && q.y0 < r.y1) ? n.classList.add("lbl-hide") : kept.push(r);
+kept.some(q => r.x0 < q.x1 + 3 && q.x0 < r.x1 + 3 && r.y0 < q.y1 + 1 && q.y0 < r.y1 + 1) ? n.classList.add("lbl-hide") : kept.push(r);
 });
 }
 
 // During a gesture (live): label size only, from the screen scale cached by the last fitLabels. No layout reads.
 // Keeping the labels' on-screen size constant is also what keeps layout cheap: measured with CPU ×4, hiding the
 // labels instead (no resize) made layout ~7× more expensive (1.9 s vs 0.24 s per 60-step wheel gesture).
-function sizeLabels(z, nodes, px) {
+function sizeLabels(z, nodes, px, halo = .3) {
 if (!z.ppu) return;
-const scale = z.base.s * z.state.k * z.ppu, fs = px / scale + "px", sw = .3 * px / scale + "px";
+const scale = z.base.s * z.state.k * z.ppu, fs = px / scale + "px", sw = halo * px / scale + "px";
 nodes.forEach(n => {
 n.style.fontSize = fs, n.style.strokeWidth = sw;
 });
@@ -3709,7 +3710,7 @@ n.setAttribute("transform", `translate(${x} ${y}) scale(${1 / u})`);
 const hideLbl = "flows" === WS.layer && "world" === WS.scope;
 $$("#wLbl text").forEach(t => {
 t.style.display = hideLbl && "1" !== t.dataset.keep ? "none" : "", "1" === t.dataset.keep && (t.dataset.pri = 1e9);
-}), live ? sizeLabels(zW, $$("#wLbl text"), 10.5) : fitLabels(zW, "#svgW", $$("#wLbl text"), 10.5);
+}), live ? sizeLabels(zW, $$("#wLbl text"), 9, .2) : fitLabels(zW, "#svgW", $$("#wLbl text"), 9, !0, .2);
 }
 
 // Basemap paths are relative integer coordinates (q units per projection unit), drawn in groups scaled by 1/q.
@@ -3830,6 +3831,7 @@ const vx = b[0] - kzC[0], vy = b[1] - kzC[1], vl = Math.hypot(vx, vy) || 1, off 
 x: (b[0] + vx / vl * off).toFixed(4),
 y: (b[1] + vy / vl * off + .012).toFixed(4),
 class: "lbl",
+"data-pri": ("abroad" === f.kind ? 1e3 : 0) + f.hi,
 "text-anchor": Math.abs(vx / vl) < .35 ? "middle" : vx > 0 ? "start" : "end"
 });
 tt.textContent = L.short || L.to, lb.appendChild(tt);
@@ -3861,7 +3863,7 @@ return t0.textContent = t("kzAssrLabel"), lb.appendChild(t0), pts;
 function renderFamines(fl, nd, lb) {
 $("#worldHint").textContent = t("hintFamines");
 const maxL = Math.max(...FAMINES.filter(f => null != f.loss).map(f => f.loss)), pts = [];
-return FAMINES.forEach(f => {
+return FAMINES.forEach((f, i) => {
 const L = tr(f), [x, y] = wProj(f.lon, f.lat);
 pts.push([ x, y ]);
 const r = null == f.loss ? 8 : 3 + 13 * Math.sqrt(f.loss / maxL), col = f.hero ? pal().world.famineKz : f.other ? pal().world.famineNon : pal().world.famineOther, g = el("g", {
@@ -3890,7 +3892,8 @@ nd.appendChild(g);
 const t2 = el("text", {
 x: x,
 y: y - r / 60 - .04,
-class: "lbl"
+class: "lbl",
+"data-pri": FAMINES.length - i
 });
 t2.textContent = L.n.replace(" (РСФСР)", "").replace(" (RSFSR)", "").replace("Китай: Ганьсу, Шэньси", "Китай").replace("China: Gansu, Shaanxi", "China"), 
 lb.appendChild(t2);
