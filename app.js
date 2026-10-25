@@ -194,6 +194,26 @@ markYear: "Год",
 markSource: "Источник",
 markSrcPending: "источник уточняется",
 markNoDesc: "Подробное описание пока не добавлено.",
+markLayerCoercion: "слой: контекст системы принуждения",
+markLayerResistance: "слой: сопротивление",
+markYears: "Годы",
+markWhere: "Где",
+markAbout: "Коротко",
+markScale: "Масштаб",
+markEstimate: "оценка",
+markLink: "Связь с темой атласа",
+markDisputed: "Что спорно или неизвестно",
+markKnown: "Что известно об этом восстании",
+markCount: "Как считают",
+markSources: "Источники",
+srcTier_science: "научный источник",
+srcTier_encyclopedia: "энциклопедия",
+srcTier_media: "СМИ",
+revoltBody: "Одно из вооружённых выступлений и протестов против коллективизации и заготовок скота и зерна в 1929–1931 гг. Год указан по базе атласа.",
+revoltCount: "Т. Омарбеков насчитывает «более 370 выступлений» и связывает их с традицией восстания 1916 г. Т. Алланиязов (2025) за 1928–1932 гг. насчитывает 545 выступлений и протестов, из них 26 вооружённых восстаний (более 100 000 участников); невооружённых протестов в 1929–1931 гг., по его данным, было 399. Все вооружённые восстания были подавлены. Цифры не противоречат друг другу: считают разное (все выступления или только вооружённые восстания).",
+revoltLink: "Восстания показывают сопротивление коллективизации и заготовкам, которые предшествовали голоду. Связь очагов восстаний с глубиной потерь относится к линзе Т. Омарбекова и остаётся гипотезой.",
+revoltDisputed: "Единая политическая цель у восстаний разных областей не просматривается; для выводов нужны микроистории отдельных эпизодов по материалам политической полиции (ОГПУ) и местным архивам (Pianciola, Zharassov, 2020).",
+revoltNotFound: "Подробности по этому восстанию в проверенных источниках не найдены; они уточняются по документам ОГПУ и местным архивам.",
 markOpenHint: "Открыть карточку",
 info_maupCalc: "Собственный расчёт: ареальная интерполяция казахского населения 1926 г. с сетки 8 округов на сетку 12 областей; индекс несходства равен половине суммы модулей сдвигов долей.",
 info_inter96: "Собственный расчёт: матрица 8 × 12: 96 пар «округ — область», из них 37 с ненулевой площадью пересечения. Для каждой пары «округ 1926 г. — область 1939 г.» вычислена площадь пересечения в GeoPandas/Shapely.",
@@ -246,7 +266,7 @@ focusRegions: "Регионы в фокусе этой линзы",
 askAssistantSchool: "Спросить ассистента об этой школе",
 schoolCaptionDefault: "Карта потерь казахского населения по областям 1939 года. Выберите школу выше.",
 biblioHeading: "Библиография и источники",
-biblioIntro: "Список литературы научной работы «Картография распада»: 15 основных и 35 электронных источников, оформленных по APA 7, и отдельно 3 источника, привлечённых после подачи работы. Названия даны на языке оригинала.",
+biblioIntro: "Список литературы научной работы «Картография распада»: 15 основных и 35 электронных источников, оформленных по APA 7, и отдельно источники, привлечённые после подачи работы. Названия даны на языке оригинала.",
 biblioCopy: "Скопировать ссылку APA",
 biblioCopied: "Ссылка APA скопирована",
 biblioCopyFail: "Не удалось скопировать. Выделите ссылку вручную",
@@ -254,7 +274,7 @@ biblioGroup_primary: "Первичные источники и статисти�
 biblioGroup_works: "Монографии и статьи",
 biblioGroup_geo: "Геоданные и методы",
 biblioGroup_extra: "Дополнительные источники (после подачи работы)",
-biblioApaNote: "Список оформлен по APA 7th edition. Внутри разделов: сначала источники на кириллице, затем на латинице, по алфавиту фамилии первого автора (или названия, если автора нет). Дата обращения к электронным ресурсам: 4 мая 2026 г.",
+biblioApaNote: "Список оформлен по APA 7th edition. Внутри разделов: сначала источники на кириллице, затем на латинице, по алфавиту фамилии первого автора (или названия, если автора нет). Дата обращения к электронным ресурсам: 4 мая 2026 г.; источники к карточкам слоёв на карте: 25 октября 2026 г.",
 biblioPrint: "Печатное издание",
 dataHeading: "Главный результат: сетка меняет вывод",
 statShiftSum: "Суммарный сдвиг долей",
@@ -521,6 +541,26 @@ markYear: "Year",
 markSource: "Source",
 markSrcPending: "source to be specified",
 markNoDesc: "A detailed description has not been added yet.",
+markLayerCoercion: "layer: context of the system of coercion",
+markLayerResistance: "layer: resistance",
+markYears: "Years",
+markWhere: "Where",
+markAbout: "In brief",
+markScale: "Scale",
+markEstimate: "estimate",
+markLink: "Link to the atlas topic",
+markDisputed: "Disputed or unknown",
+markKnown: "What is known about this uprising",
+markCount: "How they are counted",
+markSources: "Sources",
+srcTier_science: "scholarly source",
+srcTier_encyclopedia: "encyclopedia",
+srcTier_media: "press",
+revoltBody: "One of the armed uprisings and protests against collectivization and the procurement of livestock and grain in 1929–1931. The year is taken from the atlas data.",
+revoltCount: "T. Omarbekov counts \"more than 370 uprisings\" and links them with the tradition of the 1916 revolt. T. Allaniyazov (2025) counts 545 uprisings and protests in 1928–1932, including 26 armed uprisings (more than 100,000 participants); by his data there were 399 unarmed protests in 1929–1931. All armed uprisings were suppressed. The figures do not contradict each other: they count different things (all actions or armed uprisings only).",
+revoltLink: "The uprisings show resistance to the collectivization and procurements that preceded the famine. A link between the centers of the uprisings and the depth of the losses belongs to T. Omarbekov's lens and remains a hypothesis.",
+revoltDisputed: "No single political goal is visible across the uprisings of different regions; conclusions need microhistories of individual episodes based on political police (OGPU) materials and local archives (Pianciola & Zharassov, 2020).",
+revoltNotFound: "Details of this uprising are not found in the verified sources; they are being clarified from OGPU documents and local archives.",
 markOpenHint: "Open the card",
 info_maupCalc: "Own calculation: areal interpolation of the 1926 Kazakh population from the 8-okrug grid to the 12-oblast grid; the dissimilarity index is half the sum of absolute share shifts.",
 info_inter96: "Own calculation: an 8 × 12 matrix: 96 okrug–oblast pairs, 37 of them with a non-zero intersection area. The intersection area is computed for each pair of a 1926 okrug and a 1939 oblast in GeoPandas/Shapely.",
@@ -573,7 +613,7 @@ focusRegions: "Regions in focus for this lens",
 askAssistantSchool: "Ask the assistant about this school",
 schoolCaptionDefault: "Map of Kazakh population loss by 1939 oblast. Choose a school above.",
 biblioHeading: "Bibliography and sources",
-biblioIntro: "The bibliography of the research paper “Cartography of Collapse”: 15 main and 35 electronic sources in APA 7 style, plus 3 sources added after the paper was submitted, listed separately. Cyrillic-script titles and names are transliterated, with English translations of titles in square brackets.",
+biblioIntro: "The bibliography of the research paper “Cartography of Collapse”: 15 main and 35 electronic sources in APA 7 style, plus the sources added after the paper was submitted, listed separately. Cyrillic-script titles and names are transliterated, with English translations of titles in square brackets.",
 biblioCopy: "Copy APA reference",
 biblioCopied: "APA reference copied",
 biblioCopyFail: "Could not copy. Select the reference manually",
@@ -581,7 +621,7 @@ biblioGroup_primary: "Primary sources and statistics",
 biblioGroup_works: "Monographs and articles",
 biblioGroup_geo: "Geodata and methods",
 biblioGroup_extra: "Additional sources (after the paper was submitted)",
-biblioApaNote: "References follow APA 7th edition. Cyrillic-script references are transliterated (Russian: simplified BGN/PCGN; Kazakh letters ә ғ қ ң ө ұ ү һ і as a, gh, q, ng, o, u, u, h, i), with English translations of titles in square brackets. Within each section, entries are alphabetical by the first author’s surname, or by title when there is no author. Online sources were accessed on 4 May 2026.",
+biblioApaNote: "References follow APA 7th edition. Cyrillic-script references are transliterated (Russian: simplified BGN/PCGN; Kazakh letters ә ғ қ ң ө ұ ү һ і as a, gh, q, ng, o, u, u, h, i), with English translations of titles in square brackets. Within each section, entries are alphabetical by the first author’s surname, or by title when there is no author. Online sources were accessed on 4 May 2026; sources for the map layer cards, on 25 October 2026.",
 biblioPrint: "Print publication",
 dataHeading: "The main result: the grid changes the conclusion",
 statShiftSum: "Total share shift",
@@ -848,6 +888,26 @@ markYear: "Жыл",
 markSource: "Дереккөз",
 markSrcPending: "дереккөзі нақтылануда",
 markNoDesc: "Толық сипаттама әлі қосылмаған.",
+markLayerCoercion: "қабат: мәжбүрлеу жүйесінің контексі",
+markLayerResistance: "қабат: қарсылық",
+markYears: "Жылдары",
+markWhere: "Қайда",
+markAbout: "Қысқаша",
+markScale: "Ауқымы",
+markEstimate: "бағалау",
+markLink: "Атлас тақырыбымен байланысы",
+markDisputed: "Даулы немесе белгісіз",
+markKnown: "Бұл көтеріліс туралы не белгілі",
+markCount: "Қалай есептейді",
+markSources: "Дереккөздер",
+srcTier_science: "ғылыми дереккөз",
+srcTier_encyclopedia: "энциклопедия",
+srcTier_media: "БАҚ",
+revoltBody: "1929–1931 жылдары ұжымдастыруға және мал мен астық дайындауға қарсы болған қарулы көтерілістер мен наразылықтардың бірі. Жылы атлас деректері бойынша көрсетілген.",
+revoltCount: "Т. Омарбеков «370-тен астам толқуды» санайды және оларды 1916 жылғы көтеріліс дәстүрімен байланыстырады. Т. Алланиязов (2025) 1928–1932 жылдары 545 көтеріліс пен наразылықты санайды, оның 26-сы қарулы көтеріліс (100 000-нан астам қатысушы). Оның деректері бойынша 1929–1931 жылдары қарусыз наразылық 399 болған. Барлық қарулы көтерілістер басылды. Сандар бір-біріне қайшы келмейді: олар әртүрлі нәрсені санайды (барлық толқулар немесе тек қарулы көтерілістер).",
+revoltLink: "Көтерілістер ашаршылықтың алдындағы ұжымдастыру мен дайындауға қарсылықты көрсетеді. Көтеріліс ошақтары мен шығын тереңдігінің байланысы Т. Омарбековтың көзқарасына жатады және гипотеза болып қалады.",
+revoltDisputed: "Әр облыстағы көтерілістердің ортақ саяси мақсаты көрінбейді. Қорытынды жасау үшін саяси полиция (ОГПУ) материалдары мен жергілікті мұрағаттар бойынша жеке оқиғалардың микротарихы керек (Pianciola, Zharassov, 2020).",
+revoltNotFound: "Бұл көтеріліс туралы толық мәлімет тексерілген дереккөздерде табылмады. Ол ОГПУ құжаттары мен жергілікті мұрағаттар бойынша нақтыланады.",
 markOpenHint: "Карточканы ашу",
 info_maupCalc: "Меншікті есептеу: 1926 ж. қазақ халқын 8 округ торынан 12 облыс торына ареалдық интерполяциялау; ұқсамау индексі үлес ығысулары модульдерінің жартысына тең.",
 info_inter96: "Меншікті есептеу: 8 × 12 матрицасы: «округ — облыс» 96 жұбы, оның 37-сінде қиылысу ауданы нөлден үлкен. 1926 ж. әр округ пен 1939 ж. әр облыс жұбы үшін қиылысу ауданы GeoPandas/Shapely-де есептелген.",
@@ -900,7 +960,7 @@ focusRegions: "Осы көзқарас назардағы аймақтар",
 askAssistantSchool: "Осы мектеп туралы көмекшіден сұрау",
 schoolCaptionDefault: "1939 жылғы облыстар бойынша қазақ халқының шығын картасы. Жоғарыдан мектепті таңдаңыз.",
 biblioHeading: "Библиография және дереккөздер",
-biblioIntro: "«Күйреу картографиясы» ғылыми жұмысының әдебиеттер тізімі: APA 7 бойынша рәсімделген 15 негізгі және 35 электрондық дереккөз, сондай-ақ жұмыс тапсырылғаннан кейін тартылған 3 дереккөз бөлек берілген. Атаулар түпнұсқа тілінде берілген.",
+biblioIntro: "«Күйреу картографиясы» ғылыми жұмысының әдебиеттер тізімі: APA 7 бойынша рәсімделген 15 негізгі және 35 электрондық дереккөз, сондай-ақ жұмыс тапсырылғаннан кейін тартылған дереккөздер бөлек берілген. Атаулар түпнұсқа тілінде берілген.",
 biblioCopy: "APA сілтемесін көшіру",
 biblioCopied: "APA сілтемесі көшірілді",
 biblioCopyFail: "Көшіру мүмкін болмады. Сілтемені қолмен белгілеңіз",
@@ -908,7 +968,7 @@ biblioGroup_primary: "Бастапқы дереккөздер мен стати�
 biblioGroup_works: "Монографиялар мен мақалалар",
 biblioGroup_geo: "Геодеректер мен әдістер",
 biblioGroup_extra: "Қосымша дереккөздер (жұмыс тапсырылғаннан кейін)",
-biblioApaNote: "Тізім APA 7th edition бойынша рәсімделген. Бөлімдер ішінде алдымен кириллицадағы, содан кейін латиницадағы дереккөздер бірінші автордың тегі (автор болмаса, атауы) бойынша әліпби ретімен берілген. Электрондық ресурстарға жүгінген күн: 2026 ж. 4 мамыр.",
+biblioApaNote: "Тізім APA 7th edition бойынша рәсімделген. Бөлімдер ішінде алдымен кириллицадағы, содан кейін латиницадағы дереккөздер бірінші автордың тегі (автор болмаса, атауы) бойынша әліпби ретімен берілген. Электрондық ресурстарға жүгінген күн: 2026 ж. 4 мамыр; картадағы қабат карточкаларының дереккөздері: 2026 ж. 25 қазан.",
 biblioPrint: "Баспа басылымы",
 dataHeading: "Басты нәтиже: тор қорытындыны өзгертеді",
 statShiftSum: "Үлестердің жиынтық ауытқуы",
@@ -1067,7 +1127,7 @@ kzAssrLabel: "Қазақ АКСР-і",
 legendKzOutline: "Қазақстан: 1939 жылғы 12 облыс контуры",
 legendKarakalpak: "Қарақалпақстан (қазіргі шекара, шамамен)",
 legendAral: "Арал 1960-жылдарға дейін",
-tipUprising: "көтеріліс",
+tipUprising: "көтерілісі",
 tipUprisingYear: " жыл. 1929–1931 жж. 370-тен астам толқулардың бірі (Т. Омарбеков).",
 worldToRegion: "Аймаққа",
 worldWhole: "Бүкіл әлем"
@@ -1285,97 +1345,196 @@ gulag: 0,
 unrest: 0
 }
 }, CAMPS = [ {
+src: [ "Д7", "Д2" ],
 lon: 72.9,
 lat: 49.4,
 kind: "camp",
 ru: {
 n: "Карлаг",
-t: "Карагандинский ИТЛ, один из крупнейших в СССР"
+t: "Карагандинский ИТЛ, один из крупнейших в СССР",
+years: "1930–1959 (как лагерь с 1931 г.; в источнике указаны обе даты)",
+where: "Карагандинская область, Карагандинский угольный бассейн",
+body: "Карагандинский исправительно-трудовой лагерь подчинялся напрямую ГУЛАГу НКВД в Москве. Заключённые работали в мясном и кожевенном производстве, на угольном бассейне Караганды, строили дороги и жильё. Среди заключённых были А. Солженицын, А. Чижевский и Маргарет Бубер-Нойман.",
+scale: "Территория около 1 780 650 га, из них 77 700 га пашни, остальное пастбища. Через лагерь за всё время прошло более 1 млн человек.",
+link: "Это отдельный слой: след системы принуждения, а не часть голода 1930–1933 гг. По источнику, лагерь использовал землю и изъятый скот коренного населения. Он находится в области, где позже отмечен «аномальный рост» общей численности (+41,8 %, Асылбек, Асылбекова, 2014); связь лагеря с этим ростом остаётся гипотезой авторов атласа.",
+disputed: "Год создания в источнике указан по-разному (1930 и 1931). Сведения взяты из энциклопедии и требуют сверки с академическим источником."
 },
 en: {
 n: "Karlag",
-t: "Karaganda corrective labor camp, one of the largest in the USSR"
+t: "Karaganda corrective labor camp, one of the largest in the USSR",
+years: "1930–1959 (a camp from 1931; the source gives both dates)",
+where: "Karaganda Oblast, Karaganda coal basin",
+body: "The Karaganda corrective labor camp reported directly to the GULAG of the NKVD in Moscow. Prisoners worked in meat and leather production and in the Karaganda coal basin, and built roads and housing. Its prisoners included A. Solzhenitsyn, A. Chizhevsky and Margarete Buber-Neumann.",
+scale: "Territory of about 1,780,650 ha, of which 77,700 ha arable land and the rest pasture. More than 1 million people passed through the camp over its history.",
+link: "This is a separate layer: a trace of the system of coercion, not part of the 1930–1933 famine. According to the source, the camp used the land and confiscated livestock of the indigenous population. It lies in the oblast where an \"anomalous growth\" of the total population was later recorded (+41.8%, Asylbek & Asylbekova, 2014); a link between the camp and that growth remains a hypothesis of the atlas authors.",
+disputed: "The source gives two founding years (1930 and 1931). The information comes from an encyclopedia and needs checking against an academic source."
 },
 kz: {
 n: "Карлаг",
-t: "Қарағанды түзеу-еңбек лагері, КСРО-дағы ең ірілерінің бірі"
+t: "Қарағанды түзеу-еңбек лагері, КСРО-дағы ең ірілерінің бірі",
+years: "1930–1959 (лагерь ретінде 1931 жылдан; дереккөзде екі күн де бар)",
+where: "Қарағанды облысы, Қарағанды көмір бассейні",
+body: "Қарағанды түзеу-еңбек лагері тікелей Мәскеудегі НКВД ГУЛАГ-ына бағынды. Тұтқындар ет және тері өндірісінде, Қарағанды көмір бассейнінде жұмыс істеді, жол мен тұрғын үй салды. Тұтқындардың арасында А. Солженицын, А. Чижевский және Маргарет Бубер-Нойман болды.",
+scale: "Аумағы шамамен 1 780 650 га, оның 77 700 га егістік, қалғаны жайылым. Лагерьден барлығы 1 млн-нан астам адам өтті.",
+link: "Бұл бөлек қабат: мәжбүрлеу жүйесінің ізі, 1930–1933 жылдардағы ашаршылықтың бөлігі емес. Дереккөз бойынша лагерь жергілікті халықтың жерін және тәркіленген малын пайдаланды. Лагерь кейін жалпы халық санының «аномальды өсімі» байқалған облыста орналасқан (+41,8 %, Асылбек, Асылбекова, 2014); лагерь мен бұл өсімнің байланысы атлас авторларының гипотезасы ғана.",
+disputed: "Дереккөзде құрылған жылы екі түрлі берілген (1930 және 1931). Мәліметтер энциклопедиядан алынған, оларды ғылыми дереккөзбен салыстыру керек."
 }
 }, {
+src: [ "Д8", "Д10" ],
 lon: 67.7,
 lat: 47.8,
 kind: "camp",
 ru: {
 n: "Степлаг",
-t: "Особый лагерь, Джезказган"
+t: "Особый лагерь, Джезказган",
+years: "28 февраля 1948 – 1956",
+where: "Штаб в Кенгире / Джезказгане",
+body: "Особый лагерь № 4. Заключённые работали на строительстве, на добыче меди и угля. 16 мая 1954 г. в Кенгире началось восстание заключённых; оно длилось 40 суток и было подавлено силой с применением танков. По журналистской публикации, в первый день погибли 18 человек, около 70 были ранены; руководитель восстания Е. Кузнецов был приговорён к 25 годам и амнистирован в 1960 г.",
+scale: "Около 28 000 заключённых в 1950 г. (пик численности).",
+link: "Это послевоенный лагерь (1948–1956), к голоду 1930–1933 гг. он отношения не имеет. На карте он показан как след лагерной системы в регионе.",
+disputed: "Сведения о Кенгирском восстании взяты из одной журналистской статьи; число погибших и раненых требует сверки по архивам."
 },
 en: {
 n: "Steplag",
-t: "Special camp, Dzhezkazgan"
+t: "Special camp, Dzhezkazgan",
+years: "28 February 1948 – 1956",
+where: "Headquarters in Kengir / Dzhezkazgan",
+body: "Special camp No. 4. Prisoners worked in construction and in copper and coal mining. On 16 May 1954 a prisoners' uprising began in Kengir; it lasted 40 days and was suppressed by force, with tanks. According to a press article, 18 people were killed on the first day and about 70 were wounded; the leader of the uprising, Ye. Kuznetsov, was sentenced to 25 years and amnestied in 1960.",
+scale: "About 28,000 prisoners in 1950 (the peak).",
+link: "This is a postwar camp (1948–1956) and has nothing to do with the 1930–1933 famine. The map shows it as a trace of the camp system in the region.",
+disputed: "The account of the Kengir uprising comes from a single press article; the numbers of dead and wounded need checking in archives."
 },
 kz: {
 n: "Степлаг",
-t: "Арнайы лагерь, Жезқазған"
+t: "Арнайы лагерь, Жезқазған",
+years: "1948 жылғы 28 ақпан – 1956",
+where: "Штабы Кеңгірде / Жезқазғанда",
+body: "№ 4 арнайы лагерь. Тұтқындар құрылыста, мыс пен көмір өндіруде жұмыс істеді. 1954 жылғы 16 мамырда Кеңгірде тұтқындардың көтерілісі басталды. Ол 40 тәулікке созылды және танкпен күшпен басылды. Бір журналистік мақала бойынша бірінші күні 18 адам қаза тапты, 70-ке жуық адам жараланды. Көтеріліс басшысы Е. Кузнецов 25 жылға сотталды, 1960 жылы рақымшылық алды.",
+scale: "1950 жылы шамамен 28 000 тұтқын (ең көп саны).",
+link: "Бұл соғыстан кейінгі лагерь (1948–1956), 1930–1933 жылдардағы ашаршылыққа қатысы жоқ. Картада ол аймақтағы лагерь жүйесінің ізі ретінде көрсетілген.",
+disputed: "Кеңгір көтерілісі туралы мәлімет бір журналистік мақаладан алынған. Қаза тапқандар мен жараланғандар санын мұрағат бойынша тексеру керек."
 }
 }, {
+src: [ "Д9", "Д11" ],
 lon: 71,
 lat: 51.1,
 kind: "camp",
 ru: {
 n: "АЛЖИР",
-t: "Акмолинский лагерь жён «изменников родины»"
+t: "Акмолинский лагерь жён «изменников родины»",
+years: "1938–1953 (по данным СМИ, nur.kz; в англ. Википедии август 1937 – начало 1950)",
+where: "Посёлок Малиновка (ныне Акмол), к юго-западу от Астаны",
+body: "Акмолинский лагерь жён изменников Родины был 17-м женским лагерным отделением Карлага. По nur.kz, лагерь создан по приказу НКВД № 00486 от 15 августа 1937 г., первый этап прибыл 10 января 1938 г. С 31 мая 2007 г. на месте лагеря работает музейно-мемориальный комплекс.",
+scale: "Более 18 000 женщин за всё время (Википедия и nur.kz совпадают).",
+link: "Это отдельный слой: след системы принуждения конца 1930-х гг., а не часть голода 1930–1933 гг.",
+disputed: "Годы работы лагеря в источниках расходятся. Цифры о смертности в доступных публикациях приводятся без ссылки на архив, поэтому на сайте не используются."
 },
 en: {
 n: "ALZHIR",
-t: 'Akmola camp for wives of "traitors to the motherland"'
+t: 'Akmola camp for wives of "traitors to the motherland"',
+years: "1938–1953 (according to the press, nur.kz; English Wikipedia gives August 1937 – early 1950)",
+where: "Malinovka village (now Akmol), southwest of Astana",
+body: "The Akmola camp for wives of traitors to the motherland was the 17th women's section of Karlag. According to nur.kz, it was set up under NKVD order No. 00486 of 15 August 1937, and the first group of prisoners arrived on 10 January 1938. Since 31 May 2007 a museum and memorial complex has stood on the site.",
+scale: "More than 18,000 women over its history (Wikipedia and nur.kz agree).",
+link: "This is a separate layer: a trace of the system of coercion in the late 1930s, not part of the 1930–1933 famine.",
+disputed: "The sources disagree on the years of the camp. Death figures in the available publications are not referenced to archives, so the site does not use them."
 },
 kz: {
 n: "АЛЖИР",
-t: "«Отан сатқындарының» әйелдеріне арналған Ақмола лагері"
+t: "«Отан сатқындарының» әйелдеріне арналған Ақмола лагері",
+years: "1938–1953 (БАҚ бойынша, nur.kz; ағылшын Уикипедиясында 1937 жылғы тамыз – 1950 жылдың басы)",
+where: "Малиновка кенті (қазір Ақмол), Астанадан оңтүстік-батысқа қарай",
+body: "Отанын сатқандардың әйелдеріне арналған Ақмола лагері Карлагтың 17-ші әйелдер бөлімшесі болды. nur.kz бойынша лагерь НКВД-ның 1937 жылғы 15 тамыздағы № 00486 бұйрығымен құрылды, алғашқы топ 1938 жылғы 10 қаңтарда келді. 2007 жылғы 31 мамырдан бастап лагерь орнында мұражай-мемориалдық кешен жұмыс істейді.",
+scale: "Барлығы 18 000-нан астам әйел (Уикипедия мен nur.kz бірдей айтады).",
+link: "Бұл бөлек қабат: 1930-жылдардың соңындағы мәжбүрлеу жүйесінің ізі, 1930–1933 жылдардағы ашаршылықтың бөлігі емес.",
+disputed: "Лагерьдің жұмыс жылдары дереккөздерде әртүрлі. Өлім саны туралы сандар мұрағатқа сілтемесіз беріледі, сондықтан сайтта қолданылмайды."
 }
 }, {
+src: [ "Д12" ],
 lon: 74.9,
 lat: 46.8,
 kind: "site",
 ru: {
 n: "Балхашстрой",
-t: "Медеплавильный комбинат, труд спецпереселенцев"
+t: "Медеплавильный комбинат",
+years: "строительство с 1930 г.; первая медь 24 ноября 1938 г.",
+where: "Город Балхаш, месторождение у холмов Коунрад",
+body: "Месторождение меди у холмов Коунрад открыл в 1928 г. геолог М. Русаков. Строительство шло с 1930 г. В 1936 г. на стройку прибыли 500 коммунистов и 1500 комсомольцев. В 1937 г. пришёл первый поезд из Караганды, и посёлок получил статус города Балхаш. Первая медь получена 24 ноября 1938 г.",
+link: "Промышленная стройка 1930-х гг. в зоне притока населения, о котором говорит линза Н. Пьянчолы. Кто работал на стройке, по проверенным источникам не установлено.",
+disputed: "Прежняя подпись «труд спецпереселенцев» не подтверждена проверенными источниками и снята. Вернуть её можно только с источником (например, по архивным работам о спецпереселенцах в Казахстане, ГАРФ, ф. 9479)."
 },
 en: {
 n: "Balkhashstroy",
-t: "Copper-smelting plant, built with special-settler labor"
+t: "Copper-smelting plant",
+years: "construction from 1930; first copper on 24 November 1938",
+where: "Balkhash town, deposit at the Kounrad hills",
+body: "The copper deposit at the Kounrad hills was discovered in 1928 by the geologist M. Rusakov. Construction went on from 1930. In 1936, 500 Communists and 1,500 Komsomol members arrived at the site. In 1937 the first train came from Karaganda and the settlement became the town of Balkhash. The first copper was produced on 24 November 1938.",
+link: "An industrial construction site of the 1930s in the area of population inflow that N. Pianciola's lens discusses. The verified sources do not say who worked on the site.",
+disputed: "The earlier caption \"built with special-settler labor\" is not supported by the verified sources and was removed. It can return only with a source (for example, archival studies of special settlers in Kazakhstan, GARF, fond 9479)."
 },
 kz: {
 n: "Балқашстрой",
-t: "Мыс қорыту комбинаты, арнайы қоныс аударушылардың еңбегімен салынған"
+t: "Мыс қорыту комбинаты",
+years: "құрылыс 1930 жылдан; алғашқы мыс 1938 жылғы 24 қарашада",
+where: "Балқаш қаласы, Қоңырат төбелері маңындағы кен орны",
+body: "Қоңырат төбелері маңындағы мыс кен орнын 1928 жылы геолог М. Русаков ашты. Құрылыс 1930 жылдан жүрді. 1936 жылы құрылысқа 500 коммунист және 1500 комсомол мүшесі келді. 1937 жылы Қарағандыдан алғашқы пойыз келді, кент Балқаш қаласы мәртебесін алды. Алғашқы мыс 1938 жылғы 24 қарашада алынды.",
+link: "1930-жылдардағы өнеркәсіп құрылысы, Н. Пьянчоланың көзқарасы айтатын халық ағыны аймағында. Құрылыста кім жұмыс істегені тексерілген дереккөздерде көрсетілмеген.",
+disputed: "Бұрынғы «арнайы қоныс аударушылардың еңбегі» деген жазу тексерілген дереккөздермен расталмады, сондықтан алынып тасталды. Оны тек дереккөзбен қайтаруға болады (мысалы, Қазақстандағы арнайы қоныс аударушылар туралы мұрағаттық еңбектер, ГАРФ, 9479-қор)."
 }
 }, {
+src: [ "Д13" ],
 lon: 83.5,
 lat: 50.3,
 kind: "site",
 ru: {
 n: "Риддер",
-t: "Полиметаллический комбинат, Рудный Алтай"
+t: "Полиметаллический комбинат, Рудный Алтай",
+years: "основан в 1786 г.; город с 10 февраля 1934 г.; в 1941–2002 гг. Лениногорск",
+where: "Рудный Алтай, Восточный Казахстан",
+body: "Месторождение нашёл Ф. Ридер 31 мая 1786 г. Статус города получен 10 февраля 1934 г., с 1941 по 2002 г. город назывался Лениногорском. Во время Великой Отечественной войны он давал около половины свинца СССР.",
+link: "Горнопромышленный центр Рудного Алтая. Связь с репрессиями и спецпереселенцами проверенными источниками не подтверждена.",
+disputed: "Оставлять ли объект в слое «контекст системы принуждения», решают авторы атласа."
 },
 en: {
 n: "Ridder",
-t: "Polymetallic plant, Rudny Altai"
+t: "Polymetallic plant, Rudny Altai",
+years: "founded in 1786; a town from 10 February 1934; Leninogorsk in 1941–2002",
+where: "Rudny Altai, East Kazakhstan",
+body: "The deposit was found by F. Ridder on 31 May 1786. The settlement became a town on 10 February 1934 and was called Leninogorsk from 1941 to 2002. During the Second World War it produced about half of the USSR's lead.",
+link: "A mining center of Rudny Altai. A link with repression or special settlers is not supported by the verified sources.",
+disputed: "Whether the object stays in the \"system of coercion\" layer is for the atlas authors to decide."
 },
 kz: {
 n: "Риддер",
-t: "Полиметалл комбинаты, Кенді Алтай"
+t: "Полиметалл комбинаты, Кенді Алтай",
+years: "1786 жылы негізі қаланды; 1934 жылғы 10 ақпаннан қала; 1941–2002 жылдары Лениногорск",
+where: "Кенді Алтай, Шығыс Қазақстан",
+body: "Кен орнын 1786 жылғы 31 мамырда Ф. Риддер тапты. 1934 жылғы 10 ақпанда қала мәртебесін алды, 1941–2002 жылдары Лениногорск деп аталды. Соғыс жылдары КСРО қорғасынының жартысына жуығын берді.",
+link: "Кенді Алтайдың тау-кен өнеркәсібі орталығы. Қуғын-сүргінмен немесе арнайы қоныс аударушылармен байланысы тексерілген дереккөздерде расталмады.",
+disputed: "Нысанды «мәжбүрлеу жүйесі» қабатында қалдыру керек пе, оны атлас авторлары шешеді."
 }
 } ], REVOLTS = [ {
+src: [ "Д5" ],
 lon: 68.6,
 lat: 44.2,
 y: 1930,
 ru: {
-n: "Сузакское"
+n: "Сузакское",
+where: "Юг Казахстана, район Сузака",
+known: "Февраль 1930 г. История восстания изучена по документам ОГПУ (Н. Пьянчола, 2013); исследование показывает роль исламского авторитета в действиях повстанцев.",
+disputed: "Число участников, потери и итог восстания в проверенных источниках не найдены."
 },
 en: {
-n: "Suzak"
+n: "Suzak",
+where: "South Kazakhstan, Suzak district",
+known: "February 1930. The uprising has been studied from OGPU documents (N. Pianciola, 2013); the study shows the role of an Islamic authority in the rebels' actions.",
+disputed: "The number of participants, the losses and the outcome are not found in the verified sources."
 },
 kz: {
-n: "Созақ"
+n: "Созақ",
+where: "Қазақстанның оңтүстігі, Созақ ауданы",
+known: "1930 жылғы ақпан. Көтеріліс тарихы ОГПУ құжаттары бойынша зерттелген (Н. Пьянчола, 2013). Зерттеу көтерілісшілердің әрекетіндегі ислам беделді тұлғасының рөлін көрсетеді.",
+disputed: "Қатысушылар саны, шығын және көтерілістің нәтижесі тексерілген дереккөздерде табылмады."
 }
 }, {
 lon: 61.3,
@@ -1408,13 +1567,16 @@ lon: 54,
 lat: 44,
 y: 1931,
 ru: {
-n: "Адаевское"
+n: "Адаевское",
+disputed: "Не путать с крупным Адаевским восстанием 1870 г.: к событиям 1931 г. оно отношения не имеет."
 },
 en: {
-n: "Adai"
+n: "Adai",
+disputed: "Not to be confused with the large Adai uprising of 1870, which has nothing to do with the events of 1931."
 },
 kz: {
-n: "Адай"
+n: "Адай",
+disputed: "1870 жылғы ірі Адай көтерілісімен шатастырмау керек: оның 1931 жылғы оқиғаларға қатысы жоқ."
 }
 }, {
 lon: 65.5,
@@ -3263,7 +3425,9 @@ box.innerHTML = `\n      <div class="stat"><u>${esc(t("oblastsCount"))}</u><b>12
 }
 
 // ---------- cards for camps, construction sites and uprisings (both maps) ----------
-// Uprisings: the site cites T. Omarbekov for this layer (bibliography no. 8). Camps and sites: no source yet.
+// Each object: type, name, layer, years, place, short text, scale (estimate), link to the atlas topic, what is
+// disputed, sources with their tier. Blocks without data are not drawn. Uprisings share the frame texts
+// (I18N revolt*) and cite T. Omarbekov (no. 8), Pianciola & Zharassov (Д4) and Allaniyazov (Д6).
 const MARK_HIT_R = 11;
 // On touch screens the invisible hit circle is 22 screen px (a 44 px target). Called from the zoom handlers,
 // which already run at start-up before this point, so no module-level constants are used inside.
@@ -3271,14 +3435,22 @@ function fitHits(svgSel, sel) {
 const m = matchMedia("(pointer: coarse)").matches && $(svgSel).getScreenCTM();
 m && m.a && $$(sel).forEach(c => c.setAttribute("r", Math.max(11, 22 / m.a)));
 }
+function markSrcList(ids) {
+return ids.map(id => BIBLIOGRAPHY.find(b => b.src === id)).filter(Boolean).map(b => {
+const en = "en" === LANG, who = b.authors ? b.authors.map(a => en ? translit(a[0]) : a[0]).join(", ") : en ? translit(b.title) : b.title;
+return `<li><a href="#" data-bib="${esc(b.src)}">${esc(who)}${b.year ? ` (${esc(b.year)})` : ""}</a>${b.tier ? ` <small class="src-tier">${esc(t("srcTier_" + b.tier))}</small>` : ""}</li>`;
+}).join("");
+}
 function markCardHTML(kind, item) {
-const L = tr(item), isRevolt = "revolt" === kind, type = t(isRevolt ? "markTypeRevolt" : "site" === item.kind ? "markTypeSite" : "markTypeCamp"), title = isRevolt ? `${L.n} ${t("tipUprising")}` : L.n, desc = isRevolt ? t("tipUprisingYear").replace(/^[^.]*\.\s*/, "") : L.t || t("markNoDesc"), bib = isRevolt ? BIBLIOGRAPHY.find(b => "8" === b.src) : null;
+const L = tr(item), isRevolt = "revolt" === kind, type = t(isRevolt ? "markTypeRevolt" : "site" === item.kind ? "markTypeSite" : "markTypeCamp"), title = isRevolt ? `${L.n} ${t("tipUprising")}` : L.n, est = ` <span class="lvl lvl-hist">${esc(t("markEstimate"))}</span>`, blk = (key, txt, badge = "") => txt ? `<h4 class="mc-h">${esc(t(key))}${badge}</h4><p class="mc-p">${esc(txt)}</p>` : "", kv = (key, v) => v ? `<div class="kv"><span>${esc(t(key))}</span><b>${esc(v)}</b></div>` : "", srcs = isRevolt ? [ "8", "Д4", "Д6", ...item.src || [] ] : item.src || [];
 return `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
-    <div><p class="sec-t" style="margin:0 0 4px">${esc(type)}</p><h3 style="font-size:18px">${esc(title)}</h3></div>
+    <div><p class="sec-t" style="margin:0 0 4px">${esc(type)}</p><h3 style="font-size:19px">${esc(title)}</h3><span class="mc-layer">${esc(t(isRevolt ? "markLayerResistance" : "markLayerCoercion"))}</span></div>
     <button class="btn ico ghost" onclick="drawerClose()" aria-label="${esc(t("introClose"))}">✕</button></div>
-    ${isRevolt ? `<div class="kv" style="margin-top:12px"><span>${esc(t("markYear"))}</span><b>${item.y}</b></div>` : ""}
-    <p class="prose" style="margin-top:12px">${esc(desc)}</p>
-    <p class="hint" style="margin-top:12px"><b>${esc(t("markSource"))}:</b> ${bib ? `<a href="#" data-bib="${bib.src}">${esc(bib.authors.map(a => ("en" === LANG ? a.map(translit) : a).join(" ")).join(", "))} (${bib.year})</a>` : esc(t("markSrcPending"))}</p>`;
+    <div style="margin-top:12px">${isRevolt ? kv("markYear", String(item.y)) : kv("markYears", L.years)}${kv("markWhere", L.where)}</div>
+    ${isRevolt ? blk("markAbout", t("revoltBody")) + blk("markKnown", L.known || t("revoltNotFound")) + blk("markCount", t("revoltCount"), est) : blk("markAbout", L.body || L.t) + blk("markScale", L.scale, est)}
+    ${blk("markLink", isRevolt ? t("revoltLink") : L.link)}
+    ${blk("markDisputed", isRevolt ? [ L.disputed, t("revoltDisputed") ].filter(Boolean).join(" ") : L.disputed)}
+    ${srcs.length ? `<h4 class="mc-h">${esc(t("markSources"))}</h4><ul class="mc-src">${markSrcList(srcs)}</ul>` : ""}`;
 }
 function openMarkCard(kind, item) {
 tipHide(), drawerOpen(markCardHTML(kind, item));
@@ -4218,6 +4390,7 @@ kz: "1928–1945 жж. қазақтарды отырықшыландыру ме�
 }, {
 src: "8",
 group: "works",
+tier: "science",
 type: "book",
 cat: "monograph",
 lang: "kk",
@@ -4408,6 +4581,7 @@ kz: "Қазақ КСР-і бойынша 1939 ж. санақтың жариял�
 }, {
 src: "Д2",
 group: "extra",
+tier: "science",
 type: "web",
 cat: "webpage",
 lang: "ru",
@@ -4444,6 +4618,142 @@ ru: "Региональные оценки потерь казахов: наим
 en: "Regional estimates of Kazakh losses: the smallest in Central Kazakhstan (Karaganda Oblast), 22.5 thousand, or 15.6%.",
 kz: "Қазақтар шығынының аймақтық бағалары: ең азы Орталық Қазақстанда (Қарағанды облысы), 22,5 мың, немесе 15,6 %."
 }
+}, {
+src: "Д4",
+group: "extra",
+type: "article",
+cat: "article",
+lang: "ru",
+tier: "science",
+authors: [ [ "Pianciola", "N." ], [ "Zharassov", "A." ] ],
+year: "2020",
+title: "Неуловимые мятежники: исследование восстаний накануне Великого голода в Казахстане (1929–1931 гг.)",
+tr: "Elusive rebels: Researching the uprisings on the eve of the Great Famine in Kazakhstan (1929–1931)",
+container: "Вестник КазНУ. Серия историческая",
+volume: "97",
+issue: "2",
+pages: "34–43",
+doi: "10.26577/JH.2020.v97.i2.04",
+role: {"ru":"Обзор изучения восстаний 1929–1931 гг.: связь с традицией 1916 г. у Т. Омарбекова, отсутствие единого политического проекта, нужда в микроисториях по материалам ОГПУ.","en":"A review of research on the uprisings of 1929–1931: T. Omarbekov's link with the 1916 tradition, no single political project, the need for microhistories from OGPU materials.","kz":"1929–1931 жылдардағы көтерілістерді зерттеуге шолу: Т. Омарбековтағы 1916 жылғы дәстүрмен байланыс, ортақ саяси жобаның жоқтығы, ОГПУ материалдары бойынша микротарихтың қажеттігі."}
+}, {
+src: "Д5",
+group: "extra",
+type: "chapter",
+cat: "chapter",
+lang: "en",
+tier: "science",
+authors: [ [ "Pianciola", "N." ] ],
+year: "2013",
+title: "Interpreting an insurgency in Soviet Kazakhstan: The OGPU, Islam and Qazaq “clans” in Suzak, 1930",
+editors: [ [ "Pianciola", "N." ], [ "Sartori", "P." ] ],
+container: "Islam, society and states across the Qazaq steppe",
+pages: "297–340",
+publisher: "Verlag der Österreichischen Akademie der Wissenschaften",
+url: "https://commons.ln.edu.hk/sw_master/549",
+role: {"ru":"Сузакское восстание 1930 г. по документам ОГПУ, роль исламского авторитета.","en":"The Suzak uprising of 1930 from OGPU documents; the role of an Islamic authority.","kz":"1930 жылғы Созақ көтерілісі ОГПУ құжаттары бойынша, ислам беделді тұлғасының рөлі."}
+}, {
+src: "Д6",
+group: "extra",
+type: "article",
+cat: "article",
+lang: "en",
+tier: "science",
+authors: [ [ "Allaniyazov", "T." ] ],
+year: "2025",
+title: "Uprisings and protests of people in 1928–1932 in Kazakhstan",
+container: "Gumilyov Journal of History",
+volume: "153",
+issue: "4",
+pages: "91–110",
+doi: "10.32523/3080-129X-2025-153-4-91-110",
+role: {"ru":"Подсчёт выступлений 1928–1932 гг.: 545, из них 26 вооружённых (более 100 000 участников); 399 невооружённых протестов 1929–1931 гг. Статья на русском языке, название и журнал даны по англоязычным данным журнала.","en":"A count of the actions of 1928–1932: 545, including 26 armed (more than 100,000 participants); 399 unarmed protests in 1929–1931. The article is in Russian; title and journal as in the journal's English metadata.","kz":"1928–1932 жылдардағы толқулар саны: 545, оның 26-сы қарулы (100 000-нан астам қатысушы); 1929–1931 жылдары 399 қарусыз наразылық. Мақала орыс тілінде, атауы мен журнал журналдың ағылшынша деректері бойынша берілген."}
+}, {
+src: "Д7",
+group: "extra",
+type: "web",
+cat: "webpage",
+lang: "en",
+tier: "encyclopedia",
+accessed: "2026-10-25",
+title: "Karlag",
+site: "Wikipedia",
+url: "https://en.wikipedia.org/wiki/Karlag",
+role: {"ru":"Карточка Карлага: годы, территория, работы, подчинение, известные заключённые.","en":"Karlag card: years, territory, work, subordination, notable prisoners.","kz":"Карлаг карточкасы: жылдары, аумағы, жұмыстары, бағыныстылығы, белгілі тұтқындар."}
+}, {
+src: "Д8",
+group: "extra",
+type: "web",
+cat: "webpage",
+lang: "en",
+tier: "encyclopedia",
+accessed: "2026-10-25",
+title: "Steplag",
+site: "Wikipedia",
+url: "https://en.wikipedia.org/wiki/Steplag",
+role: {"ru":"Карточка Степлага: годы, штаб, пик численности, работы.","en":"Steplag card: years, headquarters, peak numbers, work.","kz":"Степлаг карточкасы: жылдары, штабы, ең көп саны, жұмыстары."}
+}, {
+src: "Д9",
+group: "extra",
+type: "web",
+cat: "webpage",
+lang: "en",
+tier: "encyclopedia",
+accessed: "2026-10-25",
+title: "ALZhIR",
+site: "Wikipedia",
+url: "https://en.wikipedia.org/wiki/ALZhIR",
+role: {"ru":"Карточка АЛЖИРа: место, подчинение Карлагу, число узниц, мемориал; годы 1937–1950.","en":"ALZhIR card: location, part of Karlag, number of prisoners, memorial; years 1937–1950.","kz":"АЛЖИР карточкасы: орны, Карлагқа бағыныстылығы, тұтқын әйелдер саны, мемориал; жылдары 1937–1950."}
+}, {
+src: "Д13",
+group: "extra",
+type: "web",
+cat: "webpage",
+lang: "en",
+tier: "encyclopedia",
+accessed: "2026-10-25",
+title: "Ridder, Kazakhstan",
+site: "Wikipedia",
+url: "https://en.wikipedia.org/wiki/Ridder,_Kazakhstan",
+role: {"ru":"Карточка Риддера: основание, статус города, Лениногорск, свинец в годы войны.","en":"Ridder card: founding, town status, Leninogorsk, lead during the war.","kz":"Риддер карточкасы: негізі қаланғаны, қала мәртебесі, Лениногорск, соғыс жылдарындағы қорғасын."}
+}, {
+src: "Д10",
+group: "extra",
+type: "web",
+cat: "webpage",
+lang: "ru",
+tier: "media",
+accessed: "2026-10-25",
+title: "История Кенгирского восстания",
+tr: "The history of the Kengir uprising",
+site: "Караван",
+url: "https://www.caravan.kz/?p=73429",
+role: {"ru":"Кенгирское восстание 1954 г. в Степлаге (журналистская публикация).","en":"The 1954 Kengir uprising in Steplag (a press article).","kz":"1954 жылғы Кеңгір көтерілісі, Степлаг (журналистік мақала)."}
+}, {
+src: "Д11",
+group: "extra",
+type: "web",
+cat: "webpage",
+lang: "ru",
+tier: "media",
+accessed: "2026-10-25",
+title: "История АЛЖИРа: как жили жёны изменников",
+tr: "The history of ALZhIR: how the wives of traitors lived",
+site: "nur.kz",
+url: "https://www.nur.kz/society/1498500-istoriya-alzhira-kak-zhili-zheny-izmennik/",
+role: {"ru":"АЛЖИР: годы 1938–1953, приказ НКВД № 00486, первый этап, число узниц (журналистская публикация).","en":"ALZhIR: years 1938–1953, NKVD order No. 00486, first arrivals, number of prisoners (a press article).","kz":"АЛЖИР: 1938–1953 жылдар, НКВД-ның № 00486 бұйрығы, алғашқы топ, тұтқын әйелдер саны (журналистік мақала)."}
+}, {
+src: "Д12",
+group: "extra",
+type: "web",
+cat: "webpage",
+lang: "ru",
+tier: "media",
+accessed: "2026-10-25",
+title: "Как начиналась история Балхашского медеплавильного завода",
+tr: "How the history of the Balkhash copper smelter began",
+site: "zakon.kz",
+url: "https://www.zakon.kz/tekhno/6000368-kak-nachinalas-istoriia-balkhashskogo-medeplavilnogo-zavoda.html",
+role: {"ru":"Балхашстрой: месторождение 1928 г., стройка с 1930 г., город Балхаш, первая медь 1938 г. (журналистская публикация).","en":"Balkhashstroy: deposit found in 1928, construction from 1930, Balkhash town, first copper in 1938 (a press article).","kz":"Балқашстрой: кен орны 1928 ж., құрылыс 1930 жылдан, Балқаш қаласы, алғашқы мыс 1938 ж. (журналистік мақала)."}
 } ];
 
 // English version (APA 7): Cyrillic references are transliterated. Russian: simplified BGN/PCGN (ъ and ь dropped);
@@ -4481,7 +4791,7 @@ eds: "Eds.",
 pp: "pp.",
 dataset: "Data set",
 video: "Video",
-retrieved: u => `Retrieved May 4, 2026, from ${u}`
+retrieved: (u, d) => `Retrieved ${new Date(d + "T00:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}, from ${u}`
 } : {
 nd: "б. д.",
 in: "В",
@@ -4490,13 +4800,13 @@ eds: "Ред.",
 pp: "с.",
 dataset: "Набор данных",
 video: "Видео",
-retrieved: u => `Получено 4 мая 2026 г. с ${u}`
+retrieved: (u, d) => `Получено ${new Date(d + "T00:00:00").toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" })} с ${u}`
 }, names = list => {
 const n = list.map(bibAuthor);
 return n.length < 2 ? n.join("") : n.slice(0, -1).join(", ") + ", & " + n[n.length - 1];
 }, edNames = list => {
 const n = list.map(([f, g]) => `${g} ${f}`);
-return n.length < 2 ? n.join("") : n.slice(0, -1).join(", ") + ", & " + n[n.length - 1];
+return n.length < 3 ? n.join(" & ") : n.slice(0, -1).join(", ") + ", & " + n[n.length - 1];
 }, tr = en && e.tr ? ` [${e.tr}]` : "", link = e.doi ? "https://doi.org/" + e.doi : e.url || "", dot = s => /[.!?…]$/.test(s) ? s : s + ".", I = s => `<i>${esc(s)}</i>`;
 let h;
 if ("web" === e.type && e.authors) {
@@ -4511,7 +4821,7 @@ if ("web" === e.type) {
 const desc = e.format ? ` [${"video" === e.format ? W.video : W.dataset}]` : "";
 const sep = /[?!]$/.test(e.title) && !tr && !desc ? "" : ".";
 // a DOI is a stable link: no retrieval date
-h = `${I(e.title)}${esc(tr)}${desc}${sep} (${W.nd}). ${esc(dot(e.site))} ${esc(/^https:\/\/doi\.org\//.test(link) ? link : W.retrieved(link))}`;
+h = `${I(e.title)}${esc(tr)}${desc}${sep} (${W.nd}). ${esc(dot(e.site))} ${esc(/^https:\/\/doi\.org\//.test(link) ? link : W.retrieved(link, e.accessed || ACCESSED))}`;
 return {
 html: h.replace(esc(link), `<a href="${esc(link)}" target="_blank" rel="noopener noreferrer">${esc(link)}</a>`),
 link: link
@@ -4544,8 +4854,8 @@ return x[0] - y[0] || x[1].localeCompare(y[1], 0 === x[0] ? "ru" : "en") || x[2]
 box.innerHTML = groups.map(g => {
 const items = BIBLIOGRAPHY.filter(e => e.group === g).sort(cmp);
 return `<section class="card pad bib-group">\n      <h3>${esc(t("biblioGroup_" + g))} <span class="bib-count">${items.length}</span></h3>\n      ${items.map(e => {
-const r = apa(e), C = BIB_CAT[e.cat];
-return `<div class="bib-entry" id="bib-${esc(e.src)}">\n        <p class="apa" lang="${"kk" === e.lang ? "kk" : e.lang}">${r.html}</p>\n        <div class="bib-meta"><span class="bib-cat">${esc(C[LANG] || C.ru)}</span><span>${esc(e.role[LANG] || e.role.ru)}</span>${r.link ? "" : `<span class="bib-print">${esc(t("biblioPrint"))}</span>`}\n        <button class="btn sm bib-copy" data-src="${esc(e.src)}">${esc(t("biblioCopy"))}</button></div>\n      </div>`;
+const r = apa(e), C = BIB_CAT[e.cat], tierTxt = e.tier ? ` · ${t("srcTier_" + e.tier)}` : "";
+return `<div class="bib-entry" id="bib-${esc(e.src)}">\n        <p class="apa" lang="${"kk" === e.lang ? "kk" : e.lang}">${r.html}</p>\n        <div class="bib-meta"><span class="bib-cat">${esc((C[LANG] || C.ru) + tierTxt)}</span><span>${esc(e.role[LANG] || e.role.ru)}</span>${r.link ? "" : `<span class="bib-print">${esc(t("biblioPrint"))}</span>`}\n        <button class="btn sm bib-copy" data-src="${esc(e.src)}">${esc(t("biblioCopy"))}</button></div>\n      </div>`;
 }).join("")}\n    </section>`;
 }).join("") + `<p class="hint bib-note">${esc(t("biblioApaNote"))}</p>`;
 }
@@ -4865,6 +5175,23 @@ kz: {
 what: "APA 7 бойынша библиография: 1926 ж. санақтың топтық авторы ретінде КСРО ОСБ (ЦСУ СССР) көрсетілді; Демоскоп пен тағы екі сайттың сілтемелері https-ке ауыстырылды; DOI бар мақалалар үшін сілтеме https://doi.org/… түрінде берілді; жүгінген күн: «Получено 4 мая 2026 г. с URL». Ағылшын нұсқасында кирилл жазуындағы сілтемелер транслитерацияланды (көтерілістер қабатының дереккөзі де: Omarbekov, T. O., 1997).",
 why: "APA 7 бойынша бірыңғай рәсімдеу және бір протокол; барлық жаңа мекенжайлар тексерілді, олар ашылады.",
 source: "APA Publication Manual, 7th ed."
+}
+}, {
+date: "2026-10-25",
+ru: {
+what: "Подробные карточки 11 объектов слоёв «Лагеря и стройки» и «Восстания 1929–1931»: годы, место, описание, масштаб (с меткой «оценка»), связь с темой, спорные места, источники с уровнем (научный / энциклопедия / СМИ). У Балхашстроя снята подпись «труд спецпереселенцев»: проверенные источники её не подтверждают. Координаты и годы маркеров не менялись. Казахские тексты карточек требуют проверки носителем языка.",
+why: "В карточках была одна фраза без источника; связь лагерей 1940-х гг. с голодом 1930–1933 гг. не должна подразумеваться.",
+source: "Wikipedia (Karlag, Steplag, ALZhIR, Ridder); Караван; nur.kz; zakon.kz; Pianciola, Zharassov (2020); Pianciola (2013); Allaniyazov (2025)."
+},
+en: {
+what: "Detailed cards for the 11 objects of the \"Camps and construction sites\" and \"Uprisings 1929–1931\" layers: years, place, description, scale (marked \"estimate\"), link to the topic, disputed points, sources with their tier (scholarly / encyclopedia / press). The Balkhashstroy caption \"built with special-settler labor\" was removed: the verified sources do not support it. Marker coordinates and years were not changed. The Kazakh card texts need checking by a native speaker.",
+why: "The cards had one unsourced sentence each; a link between the camps of the 1940s and the 1930–1933 famine must not be implied.",
+source: "Wikipedia (Karlag, Steplag, ALZhIR, Ridder); Caravan; nur.kz; zakon.kz; Pianciola & Zharassov (2020); Pianciola (2013); Allaniyazov (2025)."
+},
+kz: {
+what: "«Лагерьлер мен құрылыстар» және «1929–1931 көтерілістері» қабаттарындағы 11 нысанның толық карточкалары: жылдары, орны, сипаттамасы, ауқымы («бағалау» белгісімен), тақырыппен байланысы, даулы жерлері, деңгейі көрсетілген дереккөздер (ғылыми / энциклопедия / БАҚ). Балқашстройдағы «арнайы қоныс аударушылардың еңбегі» деген жазу алынды: тексерілген дереккөздер оны растамайды. Маркерлердің координаттары мен жылдары өзгерген жоқ. Карточкалардың қазақша мәтіндерін ана тілі қазақ тілі болатын адам тексеруі керек.",
+why: "Карточкаларда дереккөзсіз бір ғана сөйлем болды; 1940-жылдардағы лагерьлердің 1930–1933 жылдардағы ашаршылықпен байланысы бар деп ойлатпау керек.",
+source: "Wikipedia (Karlag, Steplag, ALZhIR, Ridder); Караван; nur.kz; zakon.kz; Pianciola, Zharassov (2020); Pianciola (2013); Allaniyazov (2025)."
 }
 } ];
 
